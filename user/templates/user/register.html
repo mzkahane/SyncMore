@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User register</title>
+</head>
+<body>
+
+<div style="position:relative;width:600px;height:650px;top:350px;left:40%;background-color: white;border-radius: 25px;opacity: 0.9;">
+    <form action="/user/register" method="post"
+          style="position:absolute;top:40px;color:black;font-size:35px;left: 15%">
+        {% csrf_token %}
+        <p>
+            Username:
+        </p>
+        <p>
+            <input type="text" name="username">
+        </p>
+        <p>
+            password:
+        </p>
+        <p>
+            <input type="password" name="password_1">
+        </p>
+        <P>
+            please enter password again:
+        </P>
+        <P>
+            <input type="password" name="password_2">
+        </P>
+        <P style="text-align: center">
+            Have an account already> Redirect to:
+            <a href="/user/login">login</a>
+        </P>
+        <div style="position:relative;width: 400px;text-align: center">
+            <input style="width: 450px;border-radius: 25px;" type="submit" value="sign up">
+        </div>
+    </form>
+
+    <button class="myBut" id="myBtn"></button>
+
+</div>
+</body>
+</html>

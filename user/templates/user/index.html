@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+    <li class="nav-item" style="font-size: 22px">
+        <p class="nav-link"> Welcome  {{ request.session.username }}！</p>
+    </li>
+    <li class="nav-item" style="font-size: 22px">
+        <a class="nav-link" href="/">Back to main page</a>
+    </li>
+    <li class="nav-item" style="font-size: 22px">
+        <a class="nav-link" href="/user/logout">logout</a>
+    </li>
+</div>
+</body>
+</html>
