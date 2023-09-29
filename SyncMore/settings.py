@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "index",
     "resources",
+    "user",
 ]
 
 MIDDLEWARE = [
@@ -75,8 +76,12 @@ WSGI_APPLICATION = "SyncMore.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": 'django.db.backends.mysql',
+        'NAME': 'syncmore',
+        'USER': 'syncmore',
+        'PASSWORD': 'syncmore',
+        'HOST': '149.28.36.162',
+        'PORT': '3306',
     }
 }
 
