@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/resources/modify/{{ resource.id }}" class="form" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md-6 ">
+            <p>
+                category
+            </p>
+            <p>
+                <input type="text" value="{{ resource.category }}" name="category">
+            </p>
+            <P>
+                name
+            </P>
+            <p>
+                <input type="text" value="{{ resource.name }}" name="name">
+            </p>
+        </div>
+    </div>
+    <p>
+
+    </p>
+    <p>
+        <textarea cols="30" rows="10" name="description">{{ resource.description }}</textarea>
+    </p>
+    <P>
+        address
+    </P>
+    <p>
+        <input type="text" value="{{ resource.address }}" name="address">
+    </p>
+    <P>
+        phone
+    </P>
+    <p>
+        <input type="text" value="{{ resource.phone }}" name="phone">
+    </p>
+    <P>
+        email
+    </P>
+    <p>
+        <input type="text" value="{{ resource.email }}" name="email">
+    </p>
+    <P>
+        website
+    </P>
+    <p>
+        <input type="text" value="{{ resource.website }}" name="website">
+    </p>
+    <p>
+        website_nickname
+    </p>
+    <p>
+        <input type="text" value="{{ resource.website_nickname }}" name="website_nickname">
+    </p>
+    <p>
+        <input style="position:absolute;left: 30%;width: 200px;text-align: center" class="but" type="submit"
+               value="Update">
+    </p>
+
+</form>
+</body>
+</html>

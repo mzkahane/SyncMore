@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/resources/add">Add</a>
+<div>
+    <section class="content">
+        {% for p in resources %}
+            <h2><u>{{ p.category }}</u></h2>
+            <h3>{{ p.name }}</h3>
+            <p>{{ p.description }}</p>
+            <ul>
+                <li>{{ p.address }}</li>
+                <li>{{ p.phone }}</li>
+                <li>{{ p.email }}</li>
+                <li><a href="{{ p.website }}">{{ p.website_nickname }}</a></li>
+            </ul>
+            <form action="/resources/delete/{{ p.id }}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="operation" value="delete">
+                <input type="submit" value="Delete">
+            </form>
+            <a href="/resources/modify/{{ p.id }}">Modify</a>
+        {% endfor %}
+    </section>
+</div>
+</body>
+</html>
