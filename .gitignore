@@ -7,4 +7,5 @@
 /dataSources/
 /dataSources.local.xml
 # Compiled Python
-*.pyc
+__pycache__/
+*.py[cod]
