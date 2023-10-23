@@ -5,9 +5,10 @@
     <title>Title</title>
 </head>
 <body>
+{% csrf_token %}
 <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
     <li class="nav-item" style="font-size: 22px">
-        <p class="nav-link"> Welcome  {{ request.session.username }}！</p>
+        <p class="nav-link"> Welcome {{ request.session.username }}！</p>
     </li>
     <li class="nav-item" style="font-size: 22px">
         <a class="nav-link" href="/">Back to main page</a>
@@ -15,6 +16,66 @@
     <li class="nav-item" style="font-size: 22px">
         <a class="nav-link" href="/user/logout">logout</a>
     </li>
+</div>
+
+<div>
+    <a href="/user/add_phone">Add phone</a>
+    {% for phone in phones %}
+        <li>{{ phone.phone }}</li>
+        <form action="/user/delete_phone/{{ phone.id }}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="operation" value="delete">
+            <input type="submit" value="Delete">
+        </form>
+        <a href="/user/modify_phone/{{ phone.id }}">Modify</a>
+    {% endfor %}
+</div>
+
+<div>
+    <a href="/user/add_email">Add email</a>
+    {% for email in emails %}
+        <li>{{ email.email }}</li>
+        <form action="/user/delete_email/{{ email.id }}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="operation" value="delete">
+            <input type="submit" value="Delete">
+        </form>
+        <a href="/user/modify_email/{{ email.id }}">Modify</a>
+    {% endfor %}
+</div>
+
+<div>
+    <p>Supervisor</p>
+    <li>{{ supervisor.name }}</li>
+</div>
+
+<div>
+    <a href="/user/add_note">Add Note</a>
+    {% for note in notes %}
+        <h1>{{ note.title }}</h1>
+        <p>{{ note.content }}</p>
+        <form action="/user/delete_note/{{ note.id }}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="operation" value="delete">
+            <input type="submit" value="Delete">
+        </form>
+        <a href="/user/modify_note/{{ note.id }}">Modify</a>
+    {% endfor %}
+</div>
+
+<div>
+    <a href="/user/add_document">Add document</a>
+    {% for document in documents %}
+        <p>{{ document.title }}</p>
+        {#            <img src="/media/{{ document.document }}">#}
+        <img src="{{ document.document.url }}" alt="Your File">
+        <form action="/user/delete_document/{{ document.id }}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="operation" value="delete">
+            <input type="submit" value="Delete">
+        </form>
+        <a href="/user/modify_document/{{ document.id }}">Modify</a>
+    {% endfor %}
 </div>
 </body>
 </html>
