@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os, sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -119,7 +120,23 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+STATICFILES_DIRS = (
+    # os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, 'static').replace('\\', '/'),
+)
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_STORAGE_BUCKET_NAME = 'testforsyncmore'
+AWS_S3_ENDPOINT_URL = 'https://410c407b35453e7b55084a1f482705db.r2.cloudflarestorage.com'
+AWS_ACCESS_KEY_ID = 'cbe6a47ab0166c624467dd34f6a4b5c4'
+AWS_SECRET_ACCESS_KEY = 'a5403fc3ee55591f65d0e8203d4ef22157cacf0566eeaf674614f62bfe890952'
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+R2_TOKEN='TB_5HNUNb32WHtubka201BsSFwrazG7Q5veqCf9p'

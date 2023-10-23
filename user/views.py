@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from .models import User
+from .models import User, Phone, Document, Note, Email, Supervisor
 # Create your views here.
 import hashlib
 import sys
 import re
+from .forms import DocumentForm
+from SyncMore import settings
+import requests
 
 sys.path.append('..')
 
@@ -120,4 +123,149 @@ def index_view(request):
         if c_uid is None:
             c_uid = request.session['uid']
     user = User.objects.filter(id=c_uid)
+    phones = Phone.objects.filter(phone_user_id=c_uid)
+    emails = Email.objects.filter(email_user_id=c_uid)
+    supervisor = Supervisor.objects.get(supervisor_user_id=c_uid)
+    notes = Note.objects.filter(note_user_id=c_uid)
+    documents = Document.objects.filter(document_user_id=c_uid)
     return render(request, 'user/index.html', locals())
+
+
+def add_phone(request):
+    c_uid = request.COOKIES.get('uid')
+    if c_uid is None:
+        c_uid = request.session['uid']
+    if request.method == "GET":
+        return render(request, 'user/add_phone.html', locals())
+    elif request.method == "POST":
+        phone = request.POST.get('phone', "")
+        Phone.objects.create(phone_user_id=c_uid, phone=phone)
+        return HttpResponseRedirect('/user/index')
+
+
+def add_email(request):
+    c_uid = request.COOKIES.get('uid')
+    if c_uid is None:
+        c_uid = request.session['uid']
+    if request.method == "GET":
+        return render(request, 'user/add_email.html', locals())
+    elif request.method == "POST":
+        email = request.POST.get('email', "")
+        Email.objects.create(email_user_id=c_uid, email=email)
+        return HttpResponseRedirect('/user/index')
+
+
+def add_note(request):
+    c_uid = request.COOKIES.get('uid')
+    if c_uid is None:
+        c_uid = request.session['uid']
+    if request.method == "GET":
+        return render(request, 'user/add_note.html', locals())
+    elif request.method == "POST":
+        title = request.POST.get('title', "")
+        content = request.POST.get('content', "")
+        Note.objects.create(note_user_id=c_uid, title=title, content=content)
+        return HttpResponseRedirect('/user/index')
+
+
+def add_document(request):
+    c_uid = request.COOKIES.get('uid')
+    if c_uid is None:
+        c_uid = request.session['uid']
+    if request.method == "GET":
+        form = DocumentForm()
+        return render(request, 'user/add_document.html', locals())
+    elif request.method == "POST":
+        title = request.POST.get('title', "")
+        document = request.FILES.get('document', "")
+        Document.objects.create(document_user_id=c_uid, title=title, document=document)
+        return HttpResponseRedirect('/user/index')
+
+
+def delete_phone(request, phone_id):
+    if request.method == "POST":
+        phone = Phone.objects.get(id=phone_id)
+        phone.delete()
+    return HttpResponseRedirect('/user/index')
+
+
+def modify_phone(request, phone_id):
+    phone = Phone.objects.get(id=phone_id)
+    if request.method == "GET":
+        return render(request, 'user/modify_phone.html', locals())
+    elif request.method == "POST":
+        phonee = request.POST.get('phone', "")
+        phone.phone = phonee
+        phone.save()
+        return HttpResponseRedirect('/user/index')
+
+
+def delete_email(request, email_id):
+    if request.method == "POST":
+        email = Email.objects.get(id=email_id)
+        email.delete()
+    return HttpResponseRedirect('/user/index')
+
+
+def modify_email(request, email_id):
+    email = Email.objects.get(id=email_id)
+    if request.method == "GET":
+        return render(request, 'user/modify_email.html', locals())
+    elif request.method == "POST":
+        emaill = request.POST.get('email', "")
+        email.email = emaill
+        email.save()
+        return HttpResponseRedirect('/user/index')
+
+
+def delete_note(request, note_id):
+    if request.method == "POST":
+        note = Note.objects.get(id=note_id)
+        note.delete()
+    return HttpResponseRedirect('/user/index')
+
+
+def modify_note(request, note_id):
+    note = Note.objects.get(id=note_id)
+    if request.method == "GET":
+        return render(request, 'user/modify_note.html', locals())
+    elif request.method == "POST":
+        title = request.POST.get('title', "")
+        content = request.POST.get('content', "")
+        note.title = title
+        note.content = content
+        note.save()
+        return HttpResponseRedirect('/user/index')
+
+
+def delete_object_from_r2(object_name):
+    delete_url = f"{settings.AWS_S3_ENDPOINT_URL}/{settings.AWS_STORAGE_BUCKET_NAME}/{object_name}"
+    headers = {
+        "Authorization": f"Bearer {settings.R2_TOKEN}",
+    }
+
+    response = requests.delete(delete_url, headers=headers)
+    return response.status_code == 200
+
+
+def delete_document(request, document_id):
+    if request.method == "POST":
+        document = Document.objects.get(id=document_id)
+        object_name = document.document.name
+        print(object_name)
+        delete_object_from_r2(object_name)
+        document.delete()
+    return HttpResponseRedirect('/user/index')
+
+
+def modify_document(request, document_id):
+    document = Document.objects.get(id=document_id)
+    if request.method == "GET":
+        return render(request, 'user/modify_document.html', locals())
+    elif request.method == "POST":
+        title = request.POST.get('title', "")
+        documentt = request.FILES.get('document', "")
+        document.title = title
+        document.document = documentt
+        document.save()
+        return HttpResponseRedirect('/user/index')

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="/user/add_phone" class="form" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md-6 ">
+            <p>
+                Phone
+            </p>
+            <p>
+                <input type="number" name="phone">
+            </p>
+        </div>
+    </div>
+    <p>
+        <input style="position:absolute;left: 30%;width: 200px;text-align: center" class="but" type="submit"
+               value="Add">
+    </p>
+
+</form>
+
+</body>
+</html>
