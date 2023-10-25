@@ -4,35 +4,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>SyncMore</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: calibri, sans-serif;
             margin: 0;
             padding: 0;
-        }
-        header {
-            background-color: #ccc;
-            color: white;
-            text-align: center;
-            padding: 1em 0;
+            {% comment %} webpage background-color {% endcomment %}
+            background-color: #F1F0E8;
         }
         nav {
             display: flex;
-            justify-content: center;
             list-style-type: none;
             padding: 0;
+            {% comment %} background-color: oxford blue {% endcomment %}
+            background-color: #002147;
+        }
+        {% comment %} navbar hyperlinks text color {% endcomment %}
+        nav a {
+            {% comment %} color: timberwolf {% endcomment %}
+            font: 17px calibri, sans-serif;
+            color: #F1F0E8;
+        }
+        nav a:hover {
+            {% comment %} color: turquoise {% endcomment %}
+            color: #0DCBAB;
         }
         nav li {
-            margin: 0 15px;
+            margin: 0 5px;
         }
         .hero {
-            background-color: #eee;
+            background-color: #E9EAF2;
             padding: 5em 0;
             text-align: center;
         }
         .content {
             padding: 2em;
+        }
+        {% comment %} Latest Tweets scroll container {% endcomment %}
+        div.scroll {
+            background-color: #E9EAF2;
+            width: 500px;
+            height: 500px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            text-align: center;
+            padding: 20px;
         }
         footer {
             background-color: #333;
@@ -44,42 +64,95 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1>SyncMore</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- START: navigation bar -->
+    <nav class="navbar navbar-expand-md">
+        <!-- website brand name -->
+        <a class="navbar-brand" href="/">HomeMore</a>
 
+        <!-- START: toggle button for mobile navigation bar links -->
+        <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
+        aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- END: toggle button for mobile navigation bar links -->
+        
+        <!-- START: navigation bar links -->
+        <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+            <!-- left hand side links: Resources and Contact Us -->
+            <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+                <li class="navbar-item">
+                    <a class="nav-link" href="/resources/index">Resources</a>
+                </li>
+                <li class="navbar-item">
+                    <a class="nav-link" href="#">Contact Us</a>
+                </li>
+            </ul>
+            <!-- right hand side links: Sign Up and Log In -->
+            <ul class="navbar-nav justify-content-end align-right">
+                <li class="navbar-item">
+                    <a class="nav-link" href="/user/register">Sign Up</a>
+                </li>
+                <li class="navbar-item">
+                    <a class="nav-link" href="/user/login">Login</a>
+            </ul>
+            </li>
+        </div>
+        <!-- END: navigation bar links -->
+    </nav>
+    <!-- END: navigation bar -->
+    
+    <!-- BEGIN: jumbo header -->
     <section class="hero">
         <h2>Welcome to SyncMore</h2>
         <p>Description</p>
         <a href="#">Learn More</a>
     </section>
+    <!-- END: jumbo header -->
 
-    <section class="content">
-        <h2>About Us</h2>
-        <p>SyncMore</p>
+    <!-- BEGIN: SyncMore description -->
+    <div class="container justify-content-md-center">
+        <h2>What is this for?</h2>
+        <p>SyncMore is a <b>cloud storage service</b> managed under the HomeMore project. SyncMore offers:
+            <br>1) A cloud storage service: Users can store and digitize important personal information
+            as backups for physical copies in private personal drives.
+            <br>2) Centralized resources: A collection of resources and support for unhoused individuals.
+        </p>
+    </div>
+    <!-- END: SyncMore description -->
 
-        <h2>Our Services</h2>
-        <ul>
-            <li>Service 1</li>
-            <li>Service 2</li>
-            <li>Service 3</li>
-        </ul>
+    <!-- BEGIN: Announcements and Latest Tweets columns -->
+    <div class="container">
+        <div class="container row justify-content-md-evenly">
+            <div class="col col-lg-6">
+                <h2>Announcements</h2>
+                <p>Email us at: contact@name.com</p>
+                <p>Phone: (123) 456-7890</p>
+            </div>
 
-        <h2>Contact Us</h2>
-        <p>Email us at: contact@name.com</p>
-        <p>Phone: (123) 456-7890</p>
-    </section>
+            <div class="col col-lg-6 justify-content-md-evenly">
+                <h2>Latest Tweets</h2>
+                <div class="scroll">
+                    <a class="twitter-timeline" href="https://twitter.com/HomemoreProject?ref_src=twsrc%5Etfw">
+                        Tweets by HomemoreProject
+                    </a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Announcements and Latest Tweets columns -->
 
+    <!-- footer -->
     <footer>
         &copy; 2023 SyncMore. All Rights Reserved.
     </footer>
+
+    <!-- Javascript: jQuery, Popper.js, Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -18,6 +18,8 @@ from django.urls import path
 from index import views as index_views
 from resources import views as resources_view
 from django.urls import include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -25,3 +27,6 @@ urlpatterns = [
     path("resources/", include('resources.urls')),
     path('user/', include('user.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

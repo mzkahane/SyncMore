@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/user/modify_document/{{ document.id }}" class="form" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <P>
+        title
+    </P>
+    <p>
+        <input type="text" value="{{ document.title }}" name="title">
+    </p>
+    <p>
+        <input type="file" name="document">
+    </p>
+    <p>Current document:</p>
+    <img src="{{ document.document.url }}" alt="Your File">
+    <p>
+        <input style="position:absolute;left: 30%;width: 200px;text-align: center" class="but" type="submit"
+               value="Update">
+    </p>
+</form>
+</body>
+</html>
