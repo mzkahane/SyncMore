@@ -39,11 +39,17 @@
             padding: 1em 0;
             margin-top: 2em;
         }
-        .btn-turq {
-            background-color: #0DCBAB;
+        .btn-primary {
+            --bs-btn-bg: #0dcbab;
+            --bs-btn-border-color:var(--bs-btn-bg);
+            --bs-btn-hover-bg: #0db195;
+            --bs-btn-hover-border-color:var(--bs-btn-hover-bg);
         }
-        .btn-SB {
-            background-color: #6A5ACD;
+        .btn-secondary {
+            --bs-btn-bg: #6A5ACD;
+            --bs-btn-border-color:var(--bs-btn-bg);
+            --bs-btn-hover-bg: #5549a5;
+            --bs-btn-hover-border-color:var(--bs-btn-hover-bg);
         }
         .bg-timberwolf {
             background-color: #D2D3D3;
@@ -98,12 +104,12 @@
                 <form>
                     <div class="form-floating mx-3 my-4">
                         <input type="username" class="form-control" id="floatingInput" placeholder="username">
-                        <label for="floatingInput">Email</label>
+                        <label for="floatingInput">Username</label>
                     </div>
                     <div class="d-grid gap-2 m-3 mb-5">
-                        <a href="/resources/index" class="btn btn-turq text-light">Log in</a>
+                        <a href="/resources/index" class="btn btn-primary text-light">Log in</a>
                         <div class="row justify-content-center">Or</div>
-                        <a href="/user/register" class="btn btn-SB text-light">Sign up</a>
+                        <a href="/user/register" class="btn btn-secondary text-light">Sign up</a>
                     </div>
                 </form>
             </div>
