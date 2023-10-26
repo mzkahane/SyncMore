@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
+/* FOR TESTING: add a red border around every element */
+/* * {
+    border: 2px solid red;
+} */
+
+/* color variables */
+:root {
+    --webpage-white: #F1F0E8;
+    --light-gray: #E9EAF2;
+    --turquoise: #0DCBAB;
+    --oxford-blue: #002147;
+    --timberwolf: #D2D3D3;
+}
+
+body {
+    font-family: calibri, sans-serif;
+    margin: 0;
+    padding: 0;
+    /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+    background-color: var(--webpage-white) !important;
+}
+
+/* navigation bar element */
+nav {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    background-color: var(--oxford-blue);
+}
+/* navigation bar image logo */
+#navbar-logo {
+    max-width: 80px;
+    height: auto;
+    margin-right: 10px;
+}
+/* navigation bar links */
+.navbar-brand, .nav-link {
+    font: 17px calibri, sans-serif;
+    color: var(--webpage-white);
+    margin: 0 5px;
+}
+/* navigation bar links on hover */
+nav a:hover {
+    color: var(--turquoise);
+}
+
+/* jumbo header */
+.hero {
+    background-color: var(--timberwolf);
+    padding: 5em 15em;
+    text-align: center;
+}
+#navbar-jumbo-header {
+    width: 500px;
+    height: auto;
+}
+
+.content {
+    padding: 2em;
+}
+
+/* home page latest tweets scroll container */
+div.scroll {
+    background-color: var(--timberwolf);
+    width: 500px;
+    height: 500px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: center;
+    padding: 20px;
+}
+
+/* register page create user account form  */
+#register {
+    background-color: white;
+    /* border-radius: 25px; */
+    opacity: 0.9;
+    padding-top: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-left: 100px;
+    
+    width: 500px;
+    height: 500px;
+}
+
+/* footer at the bottom of the webpage */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+    margin-top: 2em;
+}
+
+.btn-primary {
+    --bs-btn-bg: #0dcbab;
+    --bs-btn-border-color: var(--bs-btn-bg);
+    --bs-btn-hover-bg: #0db195;
+    --bs-btn-hover-border-color: var(--bs-btn-hover-bg);
+}
+
+.btn-secondary {
+    --bs-btn-bg: #6A5ACD;
+    --bs-btn-border-color: var(--bs-btn-bg);
+    --bs-btn-hover-bg: #5549a5;
+    --bs-btn-hover-border-color: var(--bs-btn-hover-bg);
+}
+
+.bg-timberwolf {
+    background-color: #D2D3D3;
+}

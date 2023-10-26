@@ -1,84 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Title</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-</head>
-<body>
-{% csrf_token %}
-<div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
-    <li class="nav-item" style="font-size: 22px">
-        <p class="nav-link"> Welcome {{ request.session.username }}!</p>
-    </li>
-    <li class="nav-item" style="font-size: 22px">
-        <a class="nav-link" href="/">Back to main page</a>
-    </li>
-    <li class="nav-item" style="font-size: 22px">
-        <a class="nav-link" href="/user/logout">logout</a>
-    </li>
-</div>
+    <head>
+        <meta charset="UTF-8">
+        <title>User Home Page</title>
+        <!-- link to styles -->
+        <link rel="stylesheet" href="../../../static/Syncmore/styles.css" />
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <body>
+        <!-- START: user navigation bar -->
+        <nav class="navbar navbar-expand-md">
+            <!-- website logo -->
+            <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
+            <!-- website brand name -->
+            <a class="navbar-brand" href="/">SyncMore</a>
 
-<div>
-    <a href="/user/add_phone">Add phone</a>
-    {% for phone in phones %}
-        <li>{{ phone.phone }}</li>
-        <form action="/user/delete_phone/{{ phone.id }}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="operation" value="delete">
-            <input type="submit" value="Delete">
-        </form>
-        <a href="/user/modify_phone/{{ phone.id }}">Modify</a>
-    {% endfor %}
-</div>
+            <!-- START: toggle button for mobile navigation bar links -->
+            <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
+            aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- END: toggle button for mobile navigation bar links -->
+            
+            <!-- START: navigation bar links -->
+            <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+                <!-- left hand side links: Resources and Contact Us -->
+                <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+                    <li class="navbar-item">
+                        <a class="nav-link" href="/resources/index">Resources</a>
+                    </li>
+                    <li class="navbar-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                </ul>
+                <!-- right hand side links: Account Settings and Log Out -->
+                <ul class="navbar-nav justify-content-end align-right">
+                    <li class="navbar-item">
+                        <!-- TOOD: add user account settings page -->
+                        <a class="nav-link" href="#">Account Settings</a>
+                    </li>
+                    <li class="navbar-item">
+                        <a class="nav-link" href="/user/logout">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- END: navigation bar links -->
+        </nav>
+        <!-- END: user navigation bar -->
 
-<div>
-    <a href="/user/add_email">Add email</a>
-    {% for email in emails %}
-        <li>{{ email.email }}</li>
-        <form action="/user/delete_email/{{ email.id }}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="operation" value="delete">
-            <input type="submit" value="Delete">
-        </form>
-        <a href="/user/modify_email/{{ email.id }}">Modify</a>
-    {% endfor %}
-</div>
+        {% csrf_token %}
 
-<div>
-    <p>Supervisor</p>
-    <li>{{ supervisor.name }}</li>
-</div>
+        <div>
+            <a href="/user/add_phone">Add phone</a>
+            {% for phone in phones %}
+                <li>{{ phone.phone }}</li>
+                <form action="/user/delete_phone/{{ phone.id }}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="operation" value="delete">
+                    <input type="submit" value="Delete">
+                </form>
+                <a href="/user/modify_phone/{{ phone.id }}">Modify</a>
+            {% endfor %}
+        </div>
 
-<div>
-    <a href="/user/add_note">Add Note</a>
-    {% for note in notes %}
-        <h1>{{ note.title }}</h1>
-        <p>{{ note.content }}</p>
-        <form action="/user/delete_note/{{ note.id }}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="operation" value="delete">
-            <input type="submit" value="Delete">
-        </form>
-        <a href="/user/modify_note/{{ note.id }}">Modify</a>
-    {% endfor %}
-</div>
+        <div>
+            <a href="/user/add_email">Add email</a>
+            {% for email in emails %}
+                <li>{{ email.email }}</li>
+                <form action="/user/delete_email/{{ email.id }}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="operation" value="delete">
+                    <input type="submit" value="Delete">
+                </form>
+                <a href="/user/modify_email/{{ email.id }}">Modify</a>
+            {% endfor %}
+        </div>
 
-<div>
-    <a href="/user/add_document">Add document</a>
-    {% for document in documents %}
-        <p>{{ document.title }}</p>
-        {#            <img src="/media/{{ document.document }}">#}
-        <img src="{{ document.document.url }}" alt="Your File">
-        <form action="/user/delete_document/{{ document.id }}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="operation" value="delete">
-            <input type="submit" value="Delete">
-        </form>
-        <a href="/user/modify_document/{{ document.id }}">Modify</a>
-    {% endfor %}
-</div>
-</body>
+        <div>
+            <p>Supervisor</p>
+            <li>{{ supervisor.name }}</li>
+        </div>
+
+        <div>
+            <a href="/user/add_note">Add Note</a>
+            {% for note in notes %}
+                <h1>{{ note.title }}</h1>
+                <p>{{ note.content }}</p>
+                <form action="/user/delete_note/{{ note.id }}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="operation" value="delete">
+                    <input type="submit" value="Delete">
+                </form>
+                <a href="/user/modify_note/{{ note.id }}">Modify</a>
+            {% endfor %}
+        </div>
+
+        <div>
+            <a href="/user/add_document">Add document</a>
+            {% for document in documents %}
+                <p>{{ document.title }}</p>
+                {#            <img src="/media/{{ document.document }}">#}
+                <img src="{{ document.document.url }}" alt="Your File">
+                <form action="/user/delete_document/{{ document.id }}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="operation" value="delete">
+                    <input type="submit" value="Delete">
+                </form>
+                <a href="/user/modify_document/{{ document.id }}">Modify</a>
+            {% endfor %}
+        </div>
+
+        <!-- Javascript: jQuery, Popper.js, Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
 </html>
