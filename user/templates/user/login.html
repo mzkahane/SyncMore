@@ -1,172 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Login Page</title>
-    <style>
-        body {
-            font-family: calibri, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+    <head>
+        <meta charset="UTF-8">
+        <title>User Login Page</title>
+        <!-- link to styles -->
+        <link rel="stylesheet" href="../../../static/Syncmore/styles.css" />
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <body>
+        <!-- START: navigation bar -->
+        <nav class="navbar navbar-expand-md">
+            <!-- website logo -->
+            <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
+            <!-- website brand name -->
+            <a class="navbar-brand" href="/">SyncMore</a>
 
-        nav {
-            display: flex;
-            justify-content: center;
-            list-style-type: none;
-            padding: 0;
-            background-color: #002147;
-        }
+            <!-- START: toggle button for mobile navigation bar links -->
+            <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
+            aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- END: toggle button for mobile navigation bar links -->
+            
+            <!-- START: navigation bar links -->
+            <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+                <!-- left hand side links: Resources and Contact Us -->
+                <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+                    <li class="navbar-item">
+                        <a class="nav-link" href="/resources/index">Resources</a>
+                    </li>
+                    <li class="navbar-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                </ul>
+                <!-- right hand side links: Sign Up and Log In -->
+                <ul class="navbar-nav justify-content-end align-right">
+                    <li class="navbar-item">
+                        <a class="nav-link" href="/user/register">Sign Up</a>
+                    </li>
+                    <li class="navbar-item">
+                        <a class="nav-link" href="/user/login">Login</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- END: navigation bar links -->
+        </nav>
+        <!-- END: navigation bar -->
 
-        a {
-            color: #F1F0E8;
-        }
-
-        nav li {
-            margin: 0 15px;
-        }
-
-        .hero {
-            background-color: #eee;
-            padding: 5em 0;
-            text-align: center;
-        }
-
-        .content {
-            padding: 2em;
-        }
-
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1em 0;
-            margin-top: 2em;
-        }
-
-        .btn-primary {
-            --bs-btn-bg: #0dcbab;
-            --bs-btn-border-color: var(--bs-btn-bg);
-            --bs-btn-hover-bg: #0db195;
-            --bs-btn-hover-border-color: var(--bs-btn-hover-bg);
-        }
-
-        .btn-secondary {
-            --bs-btn-bg: #6A5ACD;
-            --bs-btn-border-color: var(--bs-btn-bg);
-            --bs-btn-hover-bg: #5549a5;
-            --bs-btn-hover-border-color: var(--bs-btn-hover-bg);
-        }
-
-        .bg-timberwolf {
-            background-color: #D2D3D3;
-        }
-    </style>
-</head>
-<body class="text-center bg-timberwolf">
-<!-- START: navigation bar -->
-<nav class="navbar navbar-expand-md">
-    <!-- START: navigation bar container -->
-    <div class="container-xxl">
-        <a class="navbar-brand" href="/">
-            HomeMore
-        </a>
-
-        <!-- START: toggle button for mobile navigation bar links -->
-        <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
-                aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <!-- END: toggle button for mobile navigation bar links -->
-
-        <!-- START: navigation bar links -->
-        <div class="collapse navbar-collapse justify-content-end align-center"
-             id="main-nav">
-            <ul class="navbar-nav">
-                <li class="navbar-item">
-                    <a class="nav-link" href="/resources/index">Resources</a>
-                </li>
-                <li class="navbar-item">
-                    <a class="nav-link" href="#">Contact Us</a>
-                </li>
-                <li class="navbar-item">
-                    <a class="nav-link" href="/user/register">Sign Up</a>
-                </li>
-                <li class="navbar-item">
-                    <a class="nav-link" href="/user/login">Login</a>
-                </li>
-            </ul>
-        </div>
-        <!-- END: navigation bar links -->
-    </div>
-    <!-- END: navigation bar container -->
-</nav>
-<!-- END: navigation bar -->
-
-<!-- START: toggle button for mobile navigation bar links -->
-<button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav"
-        aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-</button>
-<!-- END: toggle button for mobile navigation bar links -->
-
-<!-- START: navigation bar links -->
-<div class="collapse navbar-collapse justify-content-end align-center"
-     id="main-nav">
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link text-light" href="/resources/index">Resources</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-light" href="#">Contact Us</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-light" href="/user/register">Sign Up</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active text-light" href="/user/login">Login</a>
-        </li>
-    </ul>
-</div>
-<!-- END: navigation bar links -->
-</div>
-<!-- END: navigation bar container -->
-</nav>
-<!-- END: navigation bar -->
-
-<div class="container-sm h-100">
-    <div class="row">
-        <div class="col-sm-2 col-lg-3"></div>
-        <div class="col-sm-8 col-lg-6 bg-white">
-            <h1 class="display-6 my-5"><strong>Log in</strong></h1>
-            <form action="/user/login" method="post">
-                {% csrf_token %}
-                <div class="form-floating mx-3 my-4">
-                    <label for="floatingInput">Username</label>
-                    <input type="text" name="username" class="form-control" id="floatingInput" placeholder="username">
-                    <label for="floatingInput">password</label>
-                    <input type="password" name="password" class="form-control" id="floatingInput"
-                           placeholder="password">
-
+        <div class="container-sm h-100">
+            <div class="row">
+                <div class="col-sm-2 col-lg-3"></div>
+                <div class="col-sm-8 col-lg-6 bg-white">
+                    <h1 class="display-6 my-5"><strong>Log in</strong></h1>
+                    <form action="/user/login" method="post">
+                        {% csrf_token %}
+                        <div class="form-floating mx-3 my-4">
+                            <label for="floatingInput">Username</label>
+                            <input type="text" name="username" class="form-control" id="floatingInput" placeholder="username">
+                            <label for="floatingInput">password</label>
+                            <input type="password" name="password" class="form-control" id="floatingInput" placeholder="password">
+                        </div>
+                        
+                        <div class="d-grid gap-2 m-3 mb-5">
+                            <div style="position:relative;width: 400px;text-align: center">
+                                <input style="width: 450px;border-radius: 25px;" type="submit" value="login">
+                            </div>
+                            <div class="row justify-content-center">Or</div>
+                            <a href="/user/register" class="btn btn-secondary text-light">Sign up</a>
+                        </div>
+                    </form>
                 </div>
-                <div class="d-grid gap-2 m-3 mb-5">
-                    <div style="position:relative;width: 400px;text-align: center">
-                        <input style="width: 450px;border-radius: 25px;" type="submit" value="login">
-                    </div>
-                    <div class="row justify-content-center">Or</div>
-                    <a href="/user/register" class="btn btn-secondary text-light">Sign up</a>
-                </div>
-            </form>
+                <div class="col-sm-2 col-lg-3"></div>
+            </div>
         </div>
-        <div class="col-sm-2 col-lg-3"></div>
-    </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-        crossorigin="anonymous"></script>
-</body>
+
+        <!-- Javascript: jQuery, Popper.js, Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
 </html>

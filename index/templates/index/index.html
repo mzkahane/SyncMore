@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <!-- link to styles -->
-    <link rel="stylesheet" href="../../../static/Syncmore/styles.css" />
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home Page</title>
+        <!-- link to styles -->
+        <link rel="stylesheet" href="../../../static/Syncmore/styles.css" />
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
     <body>
         <!-- START: navigation bar -->
         <nav class="navbar navbar-expand-md">
+            <!-- website logo -->
+            <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
             <!-- website brand name -->
-            <a class="navbar-brand" href="/">HomeMore</a>
+            <a class="navbar-brand" href="/">SyncMore</a>
 
             <!-- START: toggle button for mobile navigation bar links -->
             <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
@@ -42,8 +44,8 @@
                     </li>
                     <li class="navbar-item">
                         <a class="nav-link" href="/user/login">Login</a>
+                    </li>
                 </ul>
-                </li>
             </div>
             <!-- END: navigation bar links -->
         </nav>
@@ -51,15 +53,31 @@
         
         <!-- BEGIN: jumbo header -->
         <section class="hero">
-            <h2>Welcome to SyncMore</h2>
-            <p>Description</p>
-            <a href="#">Learn More</a>
+            <div class="container row justify-content-md-center">
+                {% comment %} <div class="col col-lg-6">
+                    <img src="../../../static/Syncmore/HomeMore_Logo_Blue.jpg" id="navbar-jumbo-header" alt="HomeMore Logo Big">
+                </div> {% endcomment %}
+
+                <div class="col col-lg-6">
+                    <h2>Welcome to SyncMore</h2>
+                    <p>Experiencing Homelessness? Backup and secure your personal information. </p>
+                </div>
+            </div>
         </section>
         <!-- END: jumbo header -->
 
         <!-- BEGIN: SyncMore description -->
         <div class="container justify-content-md-center">
-            <h2>What is this for?</h2>
+            <h3>What is HomeMore?</h3>
+            <p> The HomeMore Project delivers the Makeshift Traveler pack to individuals experiencing homelessness
+                throughout California.<br>
+                While the pack was designed to help the homeless keep their phones charged and better secure their
+                belongings, inevitably <b>phones and belongings get stolen, lost, or damaged.</b><br>
+                The solution is to therefore create a mobile application to <b>digitize personal information needed
+                to obtain permanent housing</b>.
+            </p>
+                
+            <h3>What is SyncMore?</h3>
             <p>SyncMore is a <b>cloud storage service</b> managed under the HomeMore project. SyncMore offers:
                 <br>1) A cloud storage service: Users can store and digitize important personal information
                 as backups for physical copies in private personal drives.
@@ -72,13 +90,13 @@
         <div class="container">
             <div class="container row justify-content-md-evenly">
                 <div class="col col-lg-6">
-                    <h2>Announcements</h2>
+                    <h3>Announcements</h3>
                     <p>Email us at: contact@name.com</p>
                     <p>Phone: (123) 456-7890</p>
                 </div>
 
                 <div class="col col-lg-6 justify-content-md-evenly">
-                    <h2>Latest Tweets</h2>
+                    <h3>Latest Tweets</h3>
                     <div class="scroll">
                         <a class="twitter-timeline" href="https://twitter.com/HomemoreProject?ref_src=twsrc%5Etfw">
                             Tweets by Homemore Project
@@ -89,9 +107,6 @@
             </div>
         </div>
         <!-- END: Announcements and Latest Tweets columns -->
-
-    {#    static image display example#}
-        <img src="../../../static/Syncmore/hi.jpg" style="position:absolute;height: 150px;width: 150px;right: 5%">
 
         <!-- footer -->
         <footer>
