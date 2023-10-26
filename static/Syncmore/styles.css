@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
+body {
+    font-family: calibri, sans-serif;
+    margin: 0;
+    padding: 0;
+    /* webpage background color */
+    background-color: #F1F0E8;
+}
+
+/* navigation bar element */
+nav {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    /* navigation bar base color: oxford blue */
+    background-color: #002147;
+}
+/* navigation bar links */
+.navbar-brand, .nav-link {
+    font: 17px calibri, sans-serif;
+    /* navbar hyperlinks text color (same as webpage background) */
+    color: #F1F0E8;
+}
+/* navigation bar links on hover */
+nav a:hover {
+    /* navigation bar hyperlinks on hover text color: turquoise */
+    color: #0DCBAB;
+}
+/* the spacing between the navigation bar item links */
+.navbar-item {
+    margin: 0 5px;
+}
+
+/* jumbo header */
+.hero {
+    background-color: #E9EAF2;
+    padding: 5em 0;
+    text-align: center;
+}
+.content {
+    padding: 2em;
+}
+/* Latest Tweets scroll container */
+div.scroll {
+    background-color: #E9EAF2;
+    width: 500px;
+    height: 500px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: center;
+    padding: 20px;
+}
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+    margin-top: 2em;
+}
