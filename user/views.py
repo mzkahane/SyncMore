@@ -122,10 +122,10 @@ def index_view(request):
         c_uid = request.COOKIES.get('uid')
         if c_uid is None:
             c_uid = request.session['uid']
-    user = User.objects.filter(id=c_uid)
+    user = User.objects.get(id=c_uid)
     phones = Phone.objects.filter(phone_user_id=c_uid)
     emails = Email.objects.filter(email_user_id=c_uid)
-    supervisor = Supervisor.objects.get(supervisor_user_id=c_uid)
+    supervisor = Supervisor.objects.get(id=user.supervisor.id)
     notes = Note.objects.filter(note_user_id=c_uid)
     documents = Document.objects.filter(document_user_id=c_uid)
     return render(request, 'user/index.html', locals())
