@@ -2,6 +2,12 @@ from django.db import models
 from storages.backends.s3boto3 import S3Boto3Storage
 
 
+class Supervisor(models.Model):
+    name = models.CharField('name', max_length=30, default='Zac')
+
+    created_time = models.DateTimeField('created_time', auto_now_add=True, null=True)
+
+
 # Create your models here.
 class User(models.Model):
     First_Name = models.CharField('First_Name', max_length=30, null=True)
@@ -23,6 +29,8 @@ class User(models.Model):
     email = models.CharField('email', max_length=30, default=None, null=True)
 
     created_time = models.DateTimeField('created_time', auto_now_add=True, null=True)
+
+    supervisor = models.ForeignKey(Supervisor, on_delete=models.CASCADE, default=1, related_name='supervisor')
 
 
 class Phone(models.Model):
@@ -47,14 +55,6 @@ class Email(models.Model):
     email_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='email_user')
 
     email = models.CharField('email', max_length=30, default=None, null=True)
-
-    created_time = models.DateTimeField('created_time', auto_now_add=True, null=True)
-
-
-class Supervisor(models.Model):
-    supervisor_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='supervisor_user')
-
-    name = models.CharField('name', max_length=30)
 
     created_time = models.DateTimeField('created_time', auto_now_add=True, null=True)
 
