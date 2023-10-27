@@ -102,10 +102,25 @@
 
                 <div class="col col-lg-6 justify-content-md-evenly">
                     <h3>Latest Tweets</h3>
-                    <div class="container-md scroll">
-                        <a class="container-md twitter-timeline" href="https://twitter.com/HomemoreProject?ref_src=twsrc%5Etfw">
+                    <div class="container-md twitter-timeline">
+                        {% comment %} <a class="container-md twitter-timeline" href="https://syndication.twitter.com/srv/timeline-profile/screen-name/HomemoreProject">
                             Tweets by Homemore Project
-                        </a>
+                        </a> {% endcomment %}
+                        <iframe title="HomeMore Twitter" id="twitter-timeline"
+                        position="static"
+                        visibility="visible"
+                        max-width="90%"
+                        height="500px"
+                        max-height="90%"
+                        overflow-x="hidden"
+                        overflow-y="auto"
+                        text-align="center"
+                        display="block"
+                        flex-grow="1"
+                        class="container-fluid" frameborder="0" allowtransparency="true" allowfullscreen="true"
+                        src="https://syndication.twitter.com/srv/timeline-profile/screen-name/HomemoreProject">
+                            Tweets by Homemore Project
+                        </iframe>
                         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                     </div>
                 </div>
