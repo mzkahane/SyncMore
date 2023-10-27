@@ -5,6 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Home Page</title>
+        <!-- favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="../../../static/Syncmore/favicon.ico">
         <!-- link to styles -->
         <link rel="stylesheet" href="../../../static/Syncmore/styles.css" />
         <!-- Bootstrap CSS -->
@@ -52,18 +54,20 @@
         <!-- END: navigation bar -->
         
         <!-- BEGIN: jumbo header -->
-        <section class="hero">
-            <div class="container row justify-content-md-center">
+        <div class="jumbo-header container-fluid">
+            <div class="row justify-content-md-center align-items-center">
                 {% comment %} <div class="col col-lg-6">
-                    <img src="../../../static/Syncmore/HomeMore_Logo_Blue.jpg" id="navbar-jumbo-header" alt="HomeMore Logo Big">
+                    <img src="../../../static/Syncmore/HomeMore_Logo_Blue.jpg" class="jumbo-image" alt="HomeMore Logo Big">
                 </div> {% endcomment %}
 
                 <div class="col col-lg-6">
                     <h2>Welcome to SyncMore</h2>
+                    <blockquote>
                     <p>Experiencing Homelessness? Backup and secure your personal information. </p>
+                    </blockquote>
                 </div>
             </div>
-        </section>
+        </div>
         <!-- END: jumbo header -->
 
         <!-- BEGIN: SyncMore description -->
@@ -79,9 +83,9 @@
                 
             <h3>What is SyncMore?</h3>
             <p>SyncMore is a <b>cloud storage service</b> managed under the HomeMore project. SyncMore offers:
-                <br>1) A cloud storage service: Users can store and digitize important personal information
+                <br>1) A <b>cloud storage service:</b> Users can store and digitize important personal information
                 as backups for physical copies in private personal drives.
-                <br>2) Centralized resources: A collection of resources and support for unhoused individuals.
+                <br>2) <b>Centralized resources:</b> A collection of resources and support for unhoused individuals.
             </p>
         </div>
         <!-- END: SyncMore description -->
@@ -91,14 +95,15 @@
             <div class="container row justify-content-md-evenly">
                 <div class="col col-lg-6">
                     <h3>Announcements</h3>
-                    <p>Email us at: contact@name.com</p>
-                    <p>Phone: (123) 456-7890</p>
+                    <p>hello@homemoreproject.org</p>
+                    <p>(628) 444-8094</p>
+                    <p>1600 Bryant St #411447 SMB#51223 San Francisco, CA 94141</p>
                 </div>
 
                 <div class="col col-lg-6 justify-content-md-evenly">
                     <h3>Latest Tweets</h3>
-                    <div class="scroll">
-                        <a class="twitter-timeline" href="https://twitter.com/HomemoreProject?ref_src=twsrc%5Etfw">
+                    <div class="container-md scroll">
+                        <a class="container-md twitter-timeline" href="https://twitter.com/HomemoreProject?ref_src=twsrc%5Etfw">
                             Tweets by Homemore Project
                         </a>
                         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

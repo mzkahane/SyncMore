@@ -1,126 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>User Home Page</title>
-    <!-- link to styles -->
-    <link rel="stylesheet" href="../../../static/Syncmore/styles.css"/>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
-<body>
-<!-- START: user navigation bar -->
-<nav class="navbar navbar-expand-md">
-    <!-- website logo -->
-    <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
-    <!-- website brand name -->
-    <a class="navbar-brand" href="/">SyncMore</a>
+    <head>
+        <meta charset="UTF-8">
+        <title>User Home Page</title>
+        <!-- favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="../../../static/Syncmore/favicon.ico">
+        <!-- link to styles -->
+        <link rel="stylesheet" href="../../../static/Syncmore/styles.css"/>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <body>
+        <!-- START: navigation bar -->
+        <nav class="navbar navbar-expand-md">
+            <!-- website logo -->
+            <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
+            <!-- website brand name -->
+            <a class="navbar-brand" href="/">SyncMore</a>
 
-    <!-- START: toggle button for mobile navigation bar links -->
-    <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
+            <!-- START: toggle button for mobile navigation bar links -->
+            <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
             aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <!-- END: toggle button for mobile navigation bar links -->
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- END: toggle button for mobile navigation bar links -->
+            
+            <!-- START: navigation bar links -->
+            <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+                <!-- left hand side links: Resources and Contact Us -->
+                <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+                    <li class="navbar-item">
+                        <a class="nav-link" href="/resources/index">Resources</a>
+                    </li>
+                    <li class="navbar-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                </ul>
+                <!-- right hand side links: User Account Settings and Log Out -->
+                <ul class="navbar-nav justify-content-end align-right">
+                    <li class="navbar-item">
+                        <!-- TODO: add user account settings page -->
+                        <a class="nav-link" href="#">Account Settings</a>
+                    </li>
+                    <li class="navbar-item">
+                        <a class="nav-link" href="/user/logout">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- END: navigation bar links -->
+        </nav>
+        <!-- END: navigation bar -->
 
-    <!-- START: navigation bar links -->
-    <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
-        <!-- left hand side links: Resources and Contact Us -->
-        <ul class="navbar-nav mr-auto mt-2 mt-md-0">
-            <li class="navbar-item">
-                <a class="nav-link" href="/resources/index">Resources</a>
-            </li>
-            <li class="navbar-item">
-                <a class="nav-link" href="#">Contact Us</a>
-            </li>
-        </ul>
-        <!-- right hand side links: Account Settings and Log Out -->
-        <ul class="navbar-nav justify-content-end align-right">
-            <li class="navbar-item">
-                <!-- TOOD: add user account settings page -->
-                <a class="nav-link" href="#">Account Settings</a>
-            </li>
-            <li class="navbar-item">
-                <a class="nav-link" href="/user/logout">Log Out</a>
-            </li>
-        </ul>
-    </div>
-    <!-- END: navigation bar links -->
-</nav>
-<!-- END: user navigation bar -->
+        <!-- for authentication -->
+        {% csrf_token %}
 
-{% csrf_token %}
+        <!-- BEGIN: user information container -->
+        <div class="user_page container-fluid"> > Home Page</div>
+        <div class="container-fluid">
+            <!-- BEGIN: Add Phone and Add Email row -->
+            <div class="row justify-content-lg-center">
 
-<div>
-    <a href="/user/add_phone">Add phone</a>
-    {% for phone in phones %}
-        <li>{{ phone.phone }}</li>
-        <form action="/user/delete_phone/{{ phone.id }}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="operation" value="delete">
-            <input type="submit" value="Delete">
-        </form>
-        <a href="/user/modify_phone/{{ phone.id }}">Modify</a>
-    {% endfor %}
-</div>
+                <!-- BEGIN: Add Phone column -->
+                <div class="add_info col-lg-6">
+                    <a class="btn add-btn" href="/user/add_phone">Add phone</a>
+                    <!-- BEGIN: Each phone entry container -->
+                    <div class="container">
+                    {% for phone in phones %}
+                        <div class="d-flex flex-wrap align-items-start">
+                            <!-- Display phone number -->
+                            <div class="mx-2">
+                                <li>{{ phone.phone }}</li>
+                            </div>
+                            <!-- Modify phone number -->
+                            <div class="mx-2">
+                                <a class="btn edit-btn" href="/user/modify_phone/{{ phone.id }}">Modify</a>
+                            </div>
+                            <!-- Delete phone number -->
+                            <div class="mx-2">
+                                <form action="/user/delete_phone/{{ phone.id }}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="operation" value="delete">
+                                    <input class="btn delete-btn" type="submit" value="Delete">
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                    <!-- END: Each phone entry container-->
+                </div>
+                <!-- END: Add Phone column-->
 
-<div>
-    <a href="/user/add_email">Add email</a>
-    {% for email in emails %}
-        <li>{{ email.email }}</li>
-        <form action="/user/delete_email/{{ email.id }}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="operation" value="delete">
-            <input type="submit" value="Delete">
-        </form>
-        <a href="/user/modify_email/{{ email.id }}">Modify</a>
-    {% endfor %}
-</div>
+                <!-- BEGIN: Add Email column -->
+                <div class="add_info col-lg-6">
+                    <a class="btn add-btn" href="/user/add_email">Add email</a>
+                    <!-- BEGIN: Each email entry container -->
+                    <div class="container">
+                        {% for email in emails %}
+                        <div class="d-flex flex-wrap align-items-start">
+                            <!-- Display email -->
+                            <div class="mx-2">
+                                <li>{{ email.email }}</li>
+                            </div>
+                            <!-- Modify email -->
+                            <div class="mx-2">
+                                <a class="btn edit-btn" href="/user/modify_email/{{ email.id }}">Modify</a>
+                            </div>
+                            <!-- Delete email -->
+                            <div class="mx-2">
+                                <form action="/user/delete_email/{{ email.id }}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="operation" value="delete">
+                                    <input class="btn delete-btn" type="submit" value="Delete">
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                    <!-- END: Each email entry container-->
+                </div>
+                <!-- END: Add Email column-->
+            </div>
+            <!-- END: Add Phone and Add Email row -->
 
-<div>
-    <p>Supervisor</p>
-    <li>{{ supervisor.name }}</li>
-</div>
+            <!-- BEGIN: HomeMore Team Contact row -->
+            <div class="homemore_contact row justify-content-lg-center">
+                <!-- BEGIN: HomeMore Team Contact container -->
+                <div class="container-fluid justify-content-lg-center">
+                    <h3>HomeMore Team Contact</h3>
+                    <p>Your HomeMore Team Contact is here for you to contact if you need any assistance.</p>
+                    <p>Contact Name: {{ supervisor.name }}</p>
+                </div>
+                <!-- END: HomeMore Team Contact container -->
+            </div>
+            <!-- END: HomeMore Team Contact row -->
+        </div>
+        <!-- END: user information container -->
 
-<div>
-    <a href="/user/add_note">Add Note</a>
-    {% for note in notes %}
-        <h1>{{ note.title }}</h1>
-        <p>{{ note.content }}</p>
-        <form action="/user/delete_note/{{ note.id }}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="operation" value="delete">
-            <input type="submit" value="Delete">
-        </form>
-        <a href="/user/modify_note/{{ note.id }}">Modify</a>
-    {% endfor %}
-</div>
+        <!-- BEGIN: user personal drive notes/documents container -->
+        <div class="user_page container-fluid"> > Personal Drive</div>
+        <div class="container-fluid">
+            <!-- BEGIN: Add Note row -->
+            <br>
+            <a class="btn add-btn" href="/user/add_note">Add note</a>
+            <div class="row justify-content-lg-center">
+                <!-- BEGIN: Each note entry container -->
+                <div class="container">
+                    {% for note in notes %}
+                    <div class="d-flex flex-wrap align-items-start">
+                        <!-- Display note  -->
+                        <div class="mx-2">
+                            <h5>{{ note.title }}</h5>
+                            <p>{{ note.content }}</p>
+                        </div>
+                        <!-- Modify note -->
+                        <div class="mx-2">
+                            <a class="btn edit-btn" href="/user/modify_note/{{ note.id }}">Modify</a>
+                        </div>
+                        <!-- Delete note -->
+                        <div class="mx-2">
+                            <form action="/user/delete_note/{{ note.id }}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="operation" value="delete">
+                                <input class="btn delete-btn" type="submit" value="Delete">
+                            </form>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <!-- END: Each note entry container-->
+            </div>
+            <!-- END: Add Note row -->
 
-<div>
-    <a href="/user/add_document">Add document</a>
-    {% for document in documents %}
-        <p>{{ document.title }}</p>
-        {#            <img src="/media/{{ document.document }}">#}
-        <img src="{{ document.document.url }}" alt="Your File">
-        <form action="/user/delete_document/{{ document.id }}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="operation" value="delete">
-            <input type="submit" value="Delete">
-        </form>
-        <a href="/user/modify_document/{{ document.id }}">Modify</a>
-    {% endfor %}
-</div>
+            <!-- BEGIN: Add Document row -->
+            <br>
+            <a class="btn add-btn" href="/user/add_document">Add document</a>
+            <div class="row justify-content-lg-center">
+                <!-- BEGIN: Documents container -->
+                <div class="container">
+                    <div class="row align-items-start">
+                        {% for document in documents %}
+                        <!-- BEGIN: Document per column -->
+                        <div class=" col-lg-3 col-md-4 col-sm-6 col-xs-12 mx-2">
+                            <h6>{{ document.title }}</h6>
+                            <!-- Display document in image_box -->
+                            <div class="image_box">
+                                <img class="user_image" src="{{ document.document.url }}" alt="Your File">
+                            </div>
+                            <!-- BEGIN: document modify and delete buttons row -->
+                            <div class="row my-2 mx-2">
+                                <!-- Modify document -->
+                                <div class="mx-2">
+                                    <a class="btn edit-btn" href="/user/modify_document/{{ document.id }}">Modify</a>
+                                </div>
+                                <!-- Delete document -->
+                                <div class="mx-2">
+                                    <form action="/user/delete_document/{{ document.id }}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="operation" value="delete">
+                                        <input class="btn delete-btn" type="submit" value="Delete">
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- END: document modify and delete buttons row -->
+                        </div>
+                        {% endfor %}
+                        <!-- END: Document per column -->
+                    </div>
+                </div>
+                <!-- END: Documents container-->
+            </div>
+            <!-- END: Add Document row -->
+        </div>
+        <!-- END: user personal drive notes/documents container -->
 
-<!-- Javascript: jQuery, Popper.js, Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-</body>
+    <!-- Javascript: jQuery, Popper.js, Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    </body>
 </html>

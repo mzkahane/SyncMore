@@ -1,18 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
 
-/* FOR TESTING: add a red border around every element */
-/* * {
-    border: 2px solid red;
-} */
-
 /* color variables */
 :root {
     --webpage-white: #F1F0E8;
     --light-gray: #E9EAF2;
     --turquoise: #0DCBAB;
+    --turquoise-hover: #16bea2;
     --oxford-blue: #002147;
     --timberwolf: #D2D3D3;
+    --slate-blue: #6759CA;
+    --slate-blue-hover: #5348a5;
+    --slate-gray: #7E8C95;
+    --slate-gray-hover: #59646a;
 }
+
+/* FOR TESTING: add a red border around every element */
+/* * {
+    border: 2px solid red;
+} */
 
 body {
     font-family: calibri, sans-serif;
@@ -31,7 +36,7 @@ nav {
 }
 /* navigation bar image logo */
 #navbar-logo {
-    max-width: 80px;
+    width: 80px;
     height: auto;
     margin-right: 10px;
 }
@@ -47,13 +52,13 @@ nav a:hover {
 }
 
 /* jumbo header */
-.hero {
-    background-color: var(--timberwolf);
+.jumbo-header {
+    background: var(--timberwolf);
     padding: 5em 15em;
     text-align: center;
 }
-#navbar-jumbo-header {
-    width: 500px;
+.jumbo-image {
+    max-width: 100%;
     height: auto;
 }
 
@@ -64,8 +69,9 @@ nav a:hover {
 /* home page latest tweets scroll container */
 div.scroll {
     background-color: var(--timberwolf);
-    width: 500px;
+    max-width: 100%;
     height: 500px;
+    max-height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
     text-align: center;
@@ -95,8 +101,86 @@ footer {
     margin-top: 2em;
 }
 
+/* user home page and personal drive page */
+.user_page {
+    background-color: var(--slate-gray-hover);
+    color: white;
+    font-size: 3vh;
+    font-family: inria sans, sans-serif;
+}
+
+/* adding user information containers (email and phone numebr) */
+.add_info {
+    min-height: 100%;
+    font-size: 2.5vh;
+    box-sizing: border-box;
+    min-height: 10vh;
+    padding: 25px;
+}
+
+/* HomeMore Team Contact information row container */
+.homemore_contact {
+    min-height: 10vh;
+    margin: 25px;
+}
+
+/* user images box */
+.image_box {
+    width: 200px;
+    height: 200px;
+    border: 3px solid var(--slate-gray-hover);
+    background-color: white;
+}
+/* user images uploaded to user personal drive */
+img.user_image {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+/* default button */
+.btn {
+    background-color: var(--turquoise);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5%;
+    text-decoration: none;
+    box-sizing: border-box;
+    margin: 0px 0 10px 0;
+}
+
+/* turquoise add user information button */
+.add-btn {
+    background-color: var(--turquoise);
+}
+.add-btn:hover {
+    background-color: var(--turquoise-hover);
+    color: white;
+    text-decoration: none;
+}
+
+/* gray modify user information button */
+.edit-btn {
+    background-color: var(--slate-gray);
+}
+.edit-btn:hover {
+    background-color: var(--slate-gray-hover);
+    color: white;
+    text-decoration: none;
+}
+
+/* purple delete user information button */
+.delete-btn {
+    background-color: var(--slate-blue);
+}
+.delete-btn:hover {
+    background-color: var(--slate-blue-hover);
+    color: white;
+    text-decoration: none;
+}
+
 .btn-primary {
-    --bs-btn-bg: #0dcbab;
+    --bs-btn-bg: var(--turquoise) !important;
     --bs-btn-border-color: var(--bs-btn-bg);
     --bs-btn-hover-bg: #0db195;
     --bs-btn-hover-border-color: var(--bs-btn-hover-bg);
