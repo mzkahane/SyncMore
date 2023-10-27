@@ -5,7 +5,11 @@ from storages.backends.s3boto3 import S3Boto3Storage
 class Supervisor(models.Model):
     name = models.CharField('name', max_length=30, default='Zac')
 
+    is_active = models.BooleanField('is_active', default=True, null=True)
+
     created_time = models.DateTimeField('created_time', auto_now_add=True, null=True)
+
+    updated_time = models.DateTimeField('updated_time', auto_now_add=True, null=True)
 
 
 # Create your models here.
@@ -20,17 +24,17 @@ class User(models.Model):
 
     address = models.CharField('address', max_length=255, default="San Francisco", null=True)
 
-    phone = models.IntegerField('phone', default=0000000000, null=True)
-
     gender = models.CharField('gender', max_length=6, default=None, null=True)
 
     is_active = models.BooleanField('is_active', default=True, null=True)
 
-    email = models.CharField('email', max_length=30, default=None, null=True)
-
     created_time = models.DateTimeField('created_time', auto_now_add=True, null=True)
 
     supervisor = models.ForeignKey(Supervisor, on_delete=models.CASCADE, default=1, related_name='supervisor')
+
+    updated_time = models.DateTimeField('updated_time', auto_now_add=True, null=True)
+
+    last_access_time = models.DateTimeField('last_access_time', auto_now_add=True, null=True)
 
 
 class Phone(models.Model):
@@ -39,6 +43,10 @@ class Phone(models.Model):
     phone = models.IntegerField('phone', default=0000000000, null=True)
 
     created_time = models.DateTimeField('created_time', auto_now_add=True, null=True)
+
+    is_active = models.BooleanField('is_active', default=True, null=True)
+
+    updated_time = models.DateTimeField('updated_time', auto_now_add=True, null=True)
 
 
 class Note(models.Model):
@@ -50,6 +58,10 @@ class Note(models.Model):
 
     created_time = models.DateTimeField('created_time', auto_now_add=True, null=True)
 
+    is_active = models.BooleanField('is_active', default=True, null=True)
+
+    updated_time = models.DateTimeField('updated_time', auto_now_add=True, null=True)
+
 
 class Email(models.Model):
     email_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='email_user')
@@ -58,13 +70,26 @@ class Email(models.Model):
 
     created_time = models.DateTimeField('created_time', auto_now_add=True, null=True)
 
+    is_active = models.BooleanField('is_active', default=True, null=True)
+
+    updated_time = models.DateTimeField('updated_time', auto_now_add=True, null=True)
+
 
 class Document(models.Model):
     document_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='document_user')
 
     title = models.CharField('title', max_length=32)
 
-    # document = models.FileField('document', upload_to='documents', default=False)
     document = models.FileField('document', storage=S3Boto3Storage())
 
     created_time = models.DateTimeField('created_time', auto_now_add=True, null=True)
+
+    is_active = models.BooleanField('is_active', default=True, null=True)
+
+    updated_time = models.DateTimeField('updated_time', auto_now_add=True, null=True)
+
+    issued_time = models.DateTimeField('issued_time', auto_now_add=True, null=True)
+
+    expired_time = models.DateTimeField('expired_time', auto_now_add=True, null=True)
+
+    type = models.CharField('type', max_length=32, default='ID', null=True)
