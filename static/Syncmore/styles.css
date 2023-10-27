@@ -1,18 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
 
-/* FOR TESTING: add a red border around every element */
-/* * {
-    border: 2px solid red;
-} */
-
 /* color variables */
 :root {
     --webpage-white: #F1F0E8;
     --light-gray: #E9EAF2;
     --turquoise: #0DCBAB;
+    --turquoise-hover: #16bea2;
     --oxford-blue: #002147;
     --timberwolf: #D2D3D3;
+    --slate-blue: #6759CA;
+    --slate-blue-hover: #5348a5;
 }
+
+/* FOR TESTING: add a red border around every element */
+/* * {
+    border: 2px solid red;
+} */
 
 body {
     font-family: calibri, sans-serif;
@@ -31,7 +34,7 @@ nav {
 }
 /* navigation bar image logo */
 #navbar-logo {
-    max-width: 80px;
+    width: 80px;
     height: auto;
     margin-right: 10px;
 }
@@ -47,13 +50,13 @@ nav a:hover {
 }
 
 /* jumbo header */
-.hero {
-    background-color: var(--timberwolf);
+.jumbo-header {
+    background: var(--timberwolf);
     padding: 5em 15em;
     text-align: center;
 }
-#navbar-jumbo-header {
-    width: 500px;
+.jumbo-image {
+    max-width: 100%;
     height: auto;
 }
 
@@ -64,8 +67,9 @@ nav a:hover {
 /* home page latest tweets scroll container */
 div.scroll {
     background-color: var(--timberwolf);
-    width: 500px;
+    max-width: 100%;
     height: 500px;
+    max-height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
     text-align: center;
@@ -93,6 +97,50 @@ footer {
     text-align: center;
     padding: 1em 0;
     margin-top: 2em;
+}
+
+/* adding user information containers (email and phone numebr) */
+.add_info {
+    min-height: 100%;
+    font-size: 2.5vh;
+    box-sizing: border-box;
+    border: 2px solid var(--oxford-blue);
+    min-height: 100vh;
+    padding: 25px;
+}
+/* add user information button */
+.add-btn {
+    background-color: var(--turquoise);
+    color: white;
+    padding: 10px 15px;
+    width: 25px;
+    height: 35px;
+    border-radius: 5%;
+    text-decoration: none;
+    box-sizing: border-box;
+    margin-bottom: 100px;
+}
+.add-btn:hover {
+    background-color: var(--turquoise-hover);
+    color: white;
+    text-decoration: none;
+}
+/* delete user information button */
+.delete-btn {
+    background-color: var(--slate-blue);
+    color: white;
+    padding: 10px 15px;
+    width: 25px;
+    height: 35px;
+    border-radius: 5%;
+    text-decoration: none;
+    box-sizing: border-box;
+    margin-bottom: 100px;
+}
+.delete-btn:hover {
+    background-color: var(--slate-blue-hover);
+    color: white;
+    text-decoration: none;
 }
 
 .btn-primary {
