@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modify Note</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="../../../static/Syncmore/favicon.ico">
+    <!-- link to styles -->
+    <link rel="stylesheet" href="../../../static/Syncmore/styles.css"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<!-- START: user navigation bar -->
+<nav class="navbar navbar-expand-md">
+    <!-- website logo -->
+    <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
+    <!-- website brand name -->
+    <a class="navbar-brand" href="/">SyncMore</a>
+
+    <!-- START: toggle button for mobile navigation bar links -->
+    <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
+            aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- END: toggle button for mobile navigation bar links -->
+
+    <!-- START: navigation bar links -->
+    <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+        <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+            <li class="navbar-item">
+                <a class="nav-link" href="/resources/index">Resources</a>
+            </li>
+            <li class="navbar-item">
+                <a class="nav-link" href="#">Contact Us</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav justify-content-end align-right">
+            <li class="navbar-item">
+                <a class="nav-link" href="#">Account Settings</a>
+            </li>
+            <li class="navbar-item">
+                <a class="nav-link" href="/user/logout">Log Out</a>
+            </li>
+        </ul>
+    </div>
+    <!-- END: navigation bar links -->
+</nav>
+<!-- END: user navigation bar -->
+
+<div class="container mt-5">
+    <div class="my-5">
+        <a class="btn delete-btn" href="/user/index"> < Back </a>
+    </div>
+
+    <form action="/user/modify_note/{{ note.id }}" class="form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="form-group mb-2">
+                    <label for="title">Title</label>
+                    <input type="text" value="{{ note.title }}" name="title" class="form-control" id="title">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <textarea cols="30" rows="10" name="content" class="form-control" id="content">{{ note.content }}</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <input type="submit" class="btn btn-primary" value="Update" style="width: 200px; text-align: center;">
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
+/* color variables */
+:root {
+    --webpage-white: #F1F0E8;
+    --light-gray: #E9EAF2;
+    --turquoise: #0DCBAB;
+    --turquoise-hover: #16bea2;
+    --oxford-blue: #002147;
+    --timberwolf: #D2D3D3;
+    --slate-blue: #6759CA;
+    --slate-blue-hover: #5348a5;
+    --slate-gray: #7E8C95;
+    --slate-gray-hover: #59646a;
+}
+
+/* FOR TESTING: add a red border around every element */
+/* * {
+    border: 2px solid red;
+} */
+
+body {
+    font-family: calibri, sans-serif;
+    margin: 0;
+    padding: 0;
+    /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+    background-color: var(--webpage-white) !important;
+}
+
+/* navigation bar element */
+nav {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    background-color: var(--oxford-blue);
+}
+/* navigation bar image logo */
+#navbar-logo {
+    width: 80px;
+    height: auto;
+    margin-right: 10px;
+}
+/* navigation bar links */
+.navbar-brand, .nav-link {
+    font: 17px calibri, sans-serif;
+    color: var(--webpage-white);
+    margin: 0 5px;
+}
+/* navigation bar links on hover */
+nav a:hover {
+    color: var(--turquoise);
+}
+
+/* jumbo header */
+.jumbo-header {
+    background: var(--timberwolf);
+    padding: 5em 15em;
+    text-align: center;
+}
+.jumbo-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.content {
+    padding: 2em;
+}
+
+/* home page latest tweets scroll container */
+div.scroll {
+    background-color: var(--timberwolf);
+    max-width: 100%;
+    height: 500px;
+    max-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: center;
+    padding: 20px;
+}
+
+/* register page create user account form  */
+#register {
+    background-color: white;
+    /* border-radius: 25px; */
+    opacity: 0.9;
+    padding-top: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-left: 100px;
+    
+    width: 500px;
+    height: 500px;
+}
+
+/* footer at the bottom of the webpage */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+    margin-top: 2em;
+}
+
+/* user home page and personal drive page */
+.user_page {
+    background-color: var(--slate-gray-hover);
+    color: white;
+    font-size: 3vh;
+    font-family: inria sans, sans-serif;
+}
+
+/* adding user information containers (email and phone numebr) */
+.add_info {
+    min-height: 100%;
+    font-size: 2.5vh;
+    box-sizing: border-box;
+    min-height: 10vh;
+    padding: 25px;
+}
+
+/* HomeMore Team Contact information row container */
+.homemore_contact {
+    min-height: 10vh;
+    margin: 25px;
+}
+
+/* user images box */
+.image_box {
+    width: 200px;
+    height: 200px;
+    border: 3px solid var(--slate-gray-hover);
+    background-color: white;
+}
+/* user images uploaded to user personal drive */
+img.user_image {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+/* default button */
+.btn {
+    background-color: var(--turquoise);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5%;
+    text-decoration: none;
+    box-sizing: border-box;
+    margin: 0px 0 10px 0;
+}
+
+/* turquoise add user information button */
+.add-btn {
+    background-color: var(--turquoise);
+}
+.add-btn:hover {
+    background-color: var(--turquoise-hover);
+    color: white;
+    text-decoration: none;
+}
+
+/* gray modify user information button */
+.edit-btn {
+    background-color: var(--slate-gray);
+}
+.edit-btn:hover {
+    background-color: var(--slate-gray-hover);
+    color: white;
+    text-decoration: none;
+}
+
+/* purple delete user information button */
+.delete-btn {
+    background-color: var(--slate-blue);
+}
+.delete-btn:hover {
+    background-color: var(--slate-blue-hover);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-primary {
+    --bs-btn-bg: var(--turquoise) !important;
+    --bs-btn-border-color: var(--bs-btn-bg);
+    --bs-btn-hover-bg: #0db195;
+    --bs-btn-hover-border-color: var(--bs-btn-hover-bg);
+}
+
+.btn-secondary {
+    --bs-btn-bg: #6A5ACD;
+    --bs-btn-border-color: var(--bs-btn-bg);
+    --bs-btn-hover-bg: #5549a5;
+    --bs-btn-hover-border-color: var(--bs-btn-hover-bg);
+}
+
+.bg-timberwolf {
+    background-color: #D2D3D3;
+}
