@@ -46,6 +46,10 @@
 <!-- END: user navigation bar -->
 
 <div class="container mt-5">
+    <div class="my-5">
+        <a class="btn delete-btn" href="/user/index"> < Back </a>
+    </div>
+    
     <form action="/user/modify_document/{{ document.id }}" class="form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row align-items-center">

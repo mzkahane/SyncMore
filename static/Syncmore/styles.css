@@ -10,6 +10,8 @@
     --timberwolf: #D2D3D3;
     --slate-blue: #6759CA;
     --slate-blue-hover: #5348a5;
+    --slate-gray: #7E8C95;
+    --slate-gray-hover: #59646a;
 }
 
 /* FOR TESTING: add a red border around every element */
@@ -99,43 +101,77 @@ footer {
     margin-top: 2em;
 }
 
+/* user home page and personal drive page */
+.user_page {
+    background-color: var(--slate-gray-hover);
+    color: white;
+    font-size: 3vh;
+    font-family: inria sans, sans-serif;
+}
+
 /* adding user information containers (email and phone numebr) */
 .add_info {
     min-height: 100%;
     font-size: 2.5vh;
     box-sizing: border-box;
-    border: 2px solid var(--oxford-blue);
-    min-height: 100vh;
+    min-height: 10vh;
     padding: 25px;
 }
-/* add user information button */
-.add-btn {
+
+/* HomeMore Team Contact information row container */
+.homemore_contact {
+    min-height: 10vh;
+    margin: 25px;
+}
+
+/* user images box */
+.image_box {
+    width: 200px;
+    height: 200px;
+    border: 3px solid var(--slate-gray-hover);
+    background-color: white;
+}
+/* user images uploaded to user personal drive */
+img.user_image {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+/* default button */
+.btn {
     background-color: var(--turquoise);
     color: white;
     padding: 10px 15px;
-    width: 25px;
-    height: 35px;
     border-radius: 5%;
     text-decoration: none;
     box-sizing: border-box;
-    margin-bottom: 100px;
+    margin: 0px 0 10px 0;
+}
+
+/* turquoise add user information button */
+.add-btn {
+    background-color: var(--turquoise);
 }
 .add-btn:hover {
     background-color: var(--turquoise-hover);
     color: white;
     text-decoration: none;
 }
-/* delete user information button */
+
+/* gray modify user information button */
+.edit-btn {
+    background-color: var(--slate-gray);
+}
+.edit-btn:hover {
+    background-color: var(--slate-gray-hover);
+    color: white;
+    text-decoration: none;
+}
+
+/* purple delete user information button */
 .delete-btn {
     background-color: var(--slate-blue);
-    color: white;
-    padding: 10px 15px;
-    width: 25px;
-    height: 35px;
-    border-radius: 5%;
-    text-decoration: none;
-    box-sizing: border-box;
-    margin-bottom: 100px;
 }
 .delete-btn:hover {
     background-color: var(--slate-blue-hover);
@@ -144,7 +180,7 @@ footer {
 }
 
 .btn-primary {
-    --bs-btn-bg: #0dcbab;
+    --bs-btn-bg: var(--turquoise) !important;
     --bs-btn-border-color: var(--bs-btn-bg);
     --bs-btn-hover-bg: #0db195;
     --bs-btn-hover-border-color: var(--bs-btn-hover-bg);

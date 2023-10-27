@@ -7,44 +7,50 @@
     <link rel="stylesheet" href="../../../static/Syncmore/styles.css"/>
 </head>
 <body>
-<!-- START: user navigation bar -->
-<nav class="navbar navbar-expand-md">
-    <!-- website logo -->
-    <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
-    <!-- website brand name -->
-    <a class="navbar-brand" href="/">SyncMore</a>
+        <!-- START: navigation bar -->
+        <nav class="navbar navbar-expand-md">
+            <!-- website logo -->
+            <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
+            <!-- website brand name -->
+            <a class="navbar-brand" href="/">SyncMore</a>
 
-    <!-- START: toggle button for mobile navigation bar links -->
-    <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
+            <!-- START: toggle button for mobile navigation bar links -->
+            <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
             aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <!-- END: toggle button for mobile navigation bar links -->
-
-    <!-- START: navigation bar links -->
-    <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
-        <ul class="navbar-nav mr-auto mt-2 mt-md-0">
-            <li class="navbar-item">
-                <a class="nav-link" href="/resources/index">Resources</a>
-            </li>
-            <li class="navbar-item">
-                <a class="nav-link" href="#">Contact Us</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav justify-content-end align-right">
-            <li class="navbar-item">
-                <a class="nav-link" href="#">Account Settings</a>
-            </li>
-            <li class="navbar-item">
-                <a class="nav-link" href="/user/logout">Log Out</a>
-            </li>
-        </ul>
-    </div>
-    <!-- END: navigation bar links -->
-</nav>
-<!-- END: user navigation bar -->
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- END: toggle button for mobile navigation bar links -->
+            
+            <!-- START: navigation bar links -->
+            <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+                <!-- left hand side links: Resources and Contact Us -->
+                <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+                    <li class="navbar-item">
+                        <a class="nav-link" href="/resources/index">Resources</a>
+                    </li>
+                    <li class="navbar-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                </ul>
+                <!-- right hand side links: Sign Up and Log In -->
+                <ul class="navbar-nav justify-content-end align-right">
+                    <li class="navbar-item">
+                        <a class="nav-link" href="/user/register">Sign Up</a>
+                    </li>
+                    <li class="navbar-item">
+                        <a class="nav-link" href="/user/login">Login</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- END: navigation bar links -->
+        </nav>
+        <!-- END: navigation bar -->
 
 <div class="container mt-5">
+    <div class="my-5">
+        <a class="btn delete-btn" href="/user/index"> < Back </a>
+    </div>
+    
     <form action="/user/add_document" class="form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row align-items-center">
