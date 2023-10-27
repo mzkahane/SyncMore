@@ -264,7 +264,7 @@ def modify_document(request, document_id):
         return render(request, 'user/modify_document.html', locals())
     elif request.method == "POST":
         title = request.POST.get('title', "")
-        documentt = request.FILES.get('document', "")
+        documentt = request.FILES.get('document', document.document)
         document.title = title
         document.document = documentt
         document.save()
