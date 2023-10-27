@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Modify email</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="../../../static/Syncmore/favicon.ico">
+    <!-- link to styles -->
     <link rel="stylesheet" href="../../../static/Syncmore/styles.css"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
 <!-- START: user navigation bar -->
@@ -48,7 +53,7 @@
     <div class="my-5">
         <a class="btn delete-btn" href="/user/index"> < Back </a>
     </div>
-    
+
     <form action="/user/modify_email/{{ email.id }}" class="form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row align-items-center">
