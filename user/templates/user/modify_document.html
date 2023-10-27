@@ -2,26 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Modify Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../static/Syncmore/styles.css"/>
 </head>
 <body>
-<form action="/user/modify_document/{{ document.id }}" class="form" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <P>
-        title
-    </P>
-    <p>
-        <input type="text" value="{{ document.title }}" name="title">
-    </p>
-    <p>
-        <input type="file" name="document">
-    </p>
-    <p>Current document:</p>
-    <img src="{{ document.document.url }}" alt="Your File">
-    <p>
-        <input style="position:absolute;left: 30%;width: 200px;text-align: center" class="but" type="submit"
-               value="Update">
-    </p>
-</form>
+
+<!-- START: user navigation bar -->
+<nav class="navbar navbar-expand-md">
+    <!-- website logo -->
+    <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
+    <!-- website brand name -->
+    <a class="navbar-brand" href="/">SyncMore</a>
+
+    <!-- START: toggle button for mobile navigation bar links -->
+    <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
+            aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- END: toggle button for mobile navigation bar links -->
+
+    <!-- START: navigation bar links -->
+    <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+        <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+            <li class="navbar-item">
+                <a class="nav-link" href="/resources/index">Resources</a>
+            </li>
+            <li class="navbar-item">
+                <a class="nav-link" href="#">Contact Us</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav justify-content-end align-right">
+            <li class="navbar-item">
+                <a class="nav-link" href="#">Account Settings</a>
+            </li>
+            <li class="navbar-item">
+                <a class="nav-link" href="/user/logout">Log Out</a>
+            </li>
+        </ul>
+    </div>
+    <!-- END: navigation bar links -->
+</nav>
+<!-- END: user navigation bar -->
+
+<div class="container mt-5">
+    <form action="/user/modify_document/{{ document.id }}" class="form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="form-group mb-2">
+                    <label for="title">Title</label>
+                    <input type="text" value="{{ document.title }}" name="title" class="form-control" id="title">
+                </div>
+                <div class="form-group mb-2">
+                    <label for="document">Document</label>
+                    <input type="file" name="document" class="form-control" id="document">
+                </div>
+                <div class="form-group mb-2">
+                    <p>Current document:</p>
+                    <img src="{{ document.document.url }}" alt="Your File" class="img-thumbnail">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <input type="submit" class="btn btn-primary" value="Update" style="width: 200px; text-align: center;">
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>
