@@ -6,22 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5dc9c044-7e75-40d0-9d09-69b128c48298" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SyncMore/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/SyncMore/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/templates/resources/resources.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/templates/resources/resources.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/templates/user/add_document.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/user/add_document.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/templates/user/add_email.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/user/add_email.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/templates/user/add_note.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/user/add_note.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/templates/user/add_phone.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/user/add_phone.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/templates/user/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/user/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/templates/user/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/user/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/templates/user/modify_document.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/user/modify_document.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/templates/user/modify_email.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/user/modify_email.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/templates/user/modify_note.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/user/modify_note.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/templates/user/modify_phone.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/user/modify_phone.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/templates/user/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/user/register.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +123,7 @@
       <workItem from="1697819836188" duration="7650000" />
       <workItem from="1698264535785" duration="11069000" />
       <workItem from="1698297201008" duration="2234000" />
-      <workItem from="1698333954511" duration="10745000" />
+      <workItem from="1698333954511" duration="12922000" />
     </task>
     <servers />
   </component>
