@@ -67,9 +67,9 @@
         <!-- END: jumbo header -->
         <!-- BEGIN: page content -->
         <div class="container" style="font-size:18px;">
-            <div class="row row-cols-2 align-items-center g-5">
+            <div class="row row-cols-2 align-items-top gx-5">
                 <!-- BEGIN: description section -->
-                <div class="col-md">
+                <div class="col-md my-2">
                     <br>
                     <p>
                         Whether you have a general question, suggestion, concern, 
@@ -92,11 +92,28 @@
                 </div>
                 <!-- END: description section -->
                 <!-- BEGIN: form section -->
-                <div class="col-md">
+                <div class="col-md my-5">
                     <form class="row g-3">
-                        <div class="col-md-6">
-                            <label for="Name" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="Name">
+                        <div class="col-md-6 my-2">
+                            <label for="First" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="First">
+                        </div>
+                        <div class="col-md-6 my-2">
+                            <label for="Last" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="Last">
+                        </div>
+                        <div class="col-12 mb-2">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email">
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control" id="message" rows="4"></textarea>
+                        </div>
+                        <div class="col-12 mb-2">
+                            <div class="d-flex justify-content-start mb-3">
+                                <input type="submit" class="btn delete-btn btn-lg rounded-pill" value="Send">
+                            </div>
                         </div>
                     </form>
                 </div>
