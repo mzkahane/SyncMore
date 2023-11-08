@@ -1,13 +1,16 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from .models import User, Phone, Document, Note, Email, Supervisor
 # Create your views here.
 import hashlib
-import sys
 import re
-from .forms import DocumentForm
-from SyncMore import settings
+import sys
+
 import requests
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+
+from SyncMore import settings
+
+from .forms import DocumentForm
+from .models import Document, Email, Note, Phone, Supervisor, User
 
 sys.path.append('..')
 
