@@ -63,13 +63,13 @@
                 <div class="sidebar col-lg-2">
                     <ul>
                         <li>
-                            <a href="">
+                            <a href="#home-page" data-toggle="collapse">
                                 <span class="icon"><i class="fas fa-home"></i></span>
                                 <span class="item" id="home-button">> Home Page</span>
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a href="#drive-page" data-toggle="collapse">
                                 <span class="icon"><i class="fas fa-desktop"></i></span>
                                 <span class="item" id="drive-button">> Personal Drive</span>
                             </a>
@@ -83,7 +83,7 @@
 
                 
                 <!-- BEGIN: user information container -->
-                <div class="user-content col-lg-10 container-fluid" id="home-page">
+                <div class="user-content col-lg-10 container-fluid collapse in" id="home-page">
                     <!-- BEGIN: Add Phone and Add Email row -->
                     <div class="row justify-content-lg-center">
 
@@ -335,7 +335,7 @@
         <!-- user_index javascript page -->
         <script src="../../../static/Syncmore/js/user_index.js"></script>
         <script type="text/javascript">
-                $(document).ready(function()
+                {% comment %} $(document).ready(function()
                 {
                     // get the contents of the link that was clicked
                     var user_home = $("#home-page").html();
@@ -352,7 +352,7 @@
                         // pop up screen which requires passcode
                         document.getElementById("home-page").innerHTML = user_drive;
                     });
-                });
+                }); {% endcomment %}
         </script>
     </body>
 </html>
