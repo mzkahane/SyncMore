@@ -63,13 +63,13 @@
                 <div class="sidebar col-lg-2">
                     <ul>
                         <li>
-                            <a href="#">
+                            <a href="">
                                 <span class="icon"><i class="fas fa-home"></i></span>
                                 <span class="item" id="home-button">> Home Page</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="">
                                 <span class="icon"><i class="fas fa-desktop"></i></span>
                                 <span class="item" id="drive-button">> Personal Drive</span>
                             </a>
@@ -77,13 +77,13 @@
                     </ul>
                 </div>
 
-                <div class="user-content col-lg-10 container-fluid" id="fill-page">
+                {% comment %} <div class="user-content col-lg-10 container-fluid" id="fill-page">
                     blah
-                </div>
+                </div> {% endcomment %}
 
                 
                 <!-- BEGIN: user information container -->
-                <div class="user-content col-lg-10 container-fluid collapse" id="home-page">
+                <div class="user-content col-lg-10 container-fluid" id="home-page">
                     <!-- BEGIN: Add Phone and Add Email row -->
                     <div class="row justify-content-lg-center">
 
@@ -322,17 +322,19 @@
         </div>
 
 
-    <!-- Javascript: jQuery, Popper.js, Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
-    <script type="text/javascript">
+        <!-- Javascript: jQuery, Popper.js, Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+        <!-- user_index javascript page -->
+        <script src="../../../static/Syncmore/js/user_index.js"></script>
+        <script type="text/javascript">
                 $(document).ready(function()
                 {
                     // get the contents of the link that was clicked
@@ -344,14 +346,13 @@
         
                     $("#home-button").click(function()
                     {
-                        document.getElementById("fill-page").innerHTML = user_home;
+                        document.getElementById("home-page").innerHTML = user_home;
                     });
                     $("#drive-button").click(function() {
-                        document.getElementById("fill-page").innerHTML = user_drive;
+                        // pop up screen which requires passcode
+                        document.getElementById("home-page").innerHTML = user_drive;
                     });
                 });
         </script>
-        <!-- user_index javascript page -->
-        <script src="../../../static/Syncmore/js/user_index.js"></script>
     </body>
 </html>
