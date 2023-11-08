@@ -6,12 +6,13 @@
     <!-- favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="../../../static/Syncmore/favicon.ico">
     <!-- link to styles -->
+    <link rel="stylesheet" href="../../../static/Syncmore/register_login.css"/>
     <link rel="stylesheet" href="../../../static/Syncmore/styles.css"/>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-<body>
+<body class="login" data-admin-utc-offset="-25200">
 <!-- START: navigation bar -->
 <nav class="navbar navbar-expand-md">
     <!-- website logo -->
@@ -50,6 +51,74 @@
     <!-- END: navigation bar links -->
 </nav>
 <!-- END: navigation bar -->
+
+    <!-- Container -->
+    <div id="container">
+    
+        
+        <!-- Header -->
+        <div id="header">
+            <div id="branding">
+            <h1 id="site-name"><a href="/admin/">Django administration</a></h1>
+            </div>
+        </div>
+        <!-- END Header -->
+        
+        
+    
+        <div class="main" id="main">
+          
+            
+          
+          <div id="content-start" class="content" tabindex="-1">
+            
+              
+            
+            <!-- Content -->
+            <div id="content" class="colM">
+              
+              
+              
+              
+    
+    
+    
+    
+    <div id="content-main">
+    
+    
+    
+    <form action="/admin/login/?next=/admin/" method="post" id="login-form"><input type="hidden" name="csrfmiddlewaretoken" value="Mo3Nv0EsGWooCo75s5gGtsrngOksJ0KlED3Vbw60kTBBvVqUTmDnTDw0DKx4XQJp">
+      <div class="form-row">
+        
+        <label for="id_username" class="required">Username:</label> <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username" fdprocessedid="ga24">
+      </div>
+      <div class="form-row">
+        
+        <label for="id_password" class="required">Password:</label> <input type="password" name="password" autocomplete="current-password" required="" id="id_password" fdprocessedid="136f2d">
+        <input type="hidden" name="next" value="/admin/">
+      </div>
+      
+      
+      <div class="submit-row">
+        <input type="submit" value="Log in" fdprocessedid="jjpjyo">
+      </div>
+    </form>
+    
+    </div>
+    
+              
+              <br class="clear">
+            </div>
+            <!-- END Content -->
+            <div id="footer"></div>
+          </div>
+        </div>
+    </div>
+    <!-- END Container -->
+    
+    
+    
 
 <!-- BEGIN: Register container -->
 <div class="container-sm h-100">

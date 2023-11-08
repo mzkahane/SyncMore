@@ -63,7 +63,23 @@
 
                 <!-- BEGIN: Add Phone column -->
                 <div class="add_info col-lg-6">
-                    <a class="btn add-btn" href="/user/add_phone">Add phone</a>
+                    {% comment %} <a class="btn add-btn" href="/user/add_phone">Add phone</a> {% endcomment %}
+                    <!-- Add phone number form -->
+                    <form action="/user/add_phone" class="form" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <label for="phone">Phone</label>
+                        <div class="row align-items-center"> <!-- Add align-items-center to vertically align elements -->
+                            <div class="col-md-6">
+                                <div class="form-group mb-0"> <!-- Remove margin-bottom using mb-0 -->
+                                    <input type="number" name="phone" class="form-control" id="phone">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="submit" class="btn add-btn" value="Add">
+                            </div>
+                        </div>
+                    </form>
+
                     <!-- BEGIN: Each phone entry container -->
                     <div class="container">
                     {% for phone in phones %}
@@ -74,7 +90,7 @@
                             </div>
                             <!-- Modify phone number -->
                             <div class="mx-2">
-                                <a class="btn edit-btn" href="/user/modify_phone/{{ phone.id }}">Modify</a>
+                                <button class="btn edit-btn modify-form-btn" value="{{ phone.phone }}">Modify</button>
                             </div>
                             <!-- Delete phone number -->
                             <div class="mx-2">
@@ -84,6 +100,22 @@
                                     <input class="btn delete-btn" type="submit" value="Delete">
                                 </form>
                             </div>
+                            <!-- START: Form to modify phone number (display shown/hidden based on Modify phone button)-->
+                            <div class="container-fluid">
+                                <form action="/user/modify_phone/{{ phone.id }}" id="{{ phone.phone }}" class="modify-form"
+                                method="post" enctype="multipart/form-data" style="display: none;">
+                                    {% csrf_token %}
+                                    <div class="row align-items-center">
+                                        <div class="col form-group">
+                                            <input type="text" value="{{ phone.phone }}" name="phone" class="form-control" id="phone">
+                                        </div>
+                                        <div class="col">
+                                            <input type="submit" class="btn edit-btn" value="Update">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- END: Form to modify phone number (display shown/hidden based on Modify email button)-->
                         </div>
                     {% endfor %}
                     </div>
@@ -93,7 +125,21 @@
 
                 <!-- BEGIN: Add Email column -->
                 <div class="add_info col-lg-6">
-                    <a class="btn add-btn" href="/user/add_email">Add email</a>
+                    <!-- Add email form -->
+                    <form action="/user/add_email" class="form" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <label for="email">Email</label>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <input type="text" name="email" class="form-control" id="email">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="submit" class="btn add-btn" value="Add">
+                            </div>
+                        </div>
+                    </form>
                     <!-- BEGIN: Each email entry container -->
                     <div class="container">
                         {% for email in emails %}
@@ -102,9 +148,9 @@
                             <div class="mx-2">
                                 <li>{{ email.email }}</li>
                             </div>
-                            <!-- Modify email -->
+                            <!-- Modify email button -->
                             <div class="mx-2">
-                                <a class="btn edit-btn" href="/user/modify_email/{{ email.id }}">Modify</a>
+                                <button class="btn edit-btn modify-form-btn" value="{{ email.email }}">Modify</button>
                             </div>
                             <!-- Delete email -->
                             <div class="mx-2">
@@ -114,6 +160,22 @@
                                     <input class="btn delete-btn" type="submit" value="Delete">
                                 </form>
                             </div>
+                            <!-- START: Form to modify email (display shown/hidden based on Modify email button)-->
+                            <div class="container-fluid">
+                                <form action="/user/modify_email/{{ email.id }}" id="{{ email.email }}" class="modify-form"
+                                method="post" enctype="multipart/form-data" style="display: none;">
+                                    {% csrf_token %}
+                                    <div class="row align-items-center">
+                                        <div class="col form-group">
+                                            <input type="text" value="{{ email.email }}" name="email" class="form-control" id="email">
+                                        </div>
+                                        <div class="col">
+                                            <input type="submit" class="btn edit-btn" value="Update">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- END: Form to modify email (display shown/hidden based on Modify email button)-->
                         </div>
                     {% endfor %}
                     </div>
@@ -215,6 +277,7 @@
         <!-- END: user personal drive notes/documents container -->
 
     <!-- Javascript: jQuery, Popper.js, Bootstrap JS -->
+    <script src="../../../static/Syncmore/js/user_index.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous"></script>
