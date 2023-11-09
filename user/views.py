@@ -177,10 +177,12 @@ def add_document(request):
         c_uid = request.session['uid']
     if request.method == "GET":
         form = DocumentForm()
+        # create dropdown options list and pass into render?
         return render(request, 'user/add_document.html', locals())
     elif request.method == "POST":
         title = request.POST.get('title', "")
         document = request.FILES.get('document', "")
+        # type = request.POST.get('type', "")
         Document.objects.create(document_user_id=c_uid, title=title, document=document)
         return HttpResponseRedirect('/user/index')
 
