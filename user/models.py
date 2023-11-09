@@ -78,6 +78,10 @@ class Email(models.Model):
 
 
 class Document(models.Model):
+    TYPE_CHOICES = [
+        ('ID', 'ID'),
+        ('Passport', 'Passport'),
+    ]
     document_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='document_user')
 
     title = models.CharField('title', max_length=32)
@@ -94,4 +98,4 @@ class Document(models.Model):
 
     expired_time = models.DateTimeField('expired_time', auto_now_add=True, null=True)
 
-    type = models.CharField('type', max_length=32, default='ID', null=True)
+    type = models.CharField('type', max_length=32, default='ID', null=True, choices=TYPE_CHOICES)
