@@ -140,3 +140,11 @@ AWS_ACCESS_KEY_ID = 'cbe6a47ab0166c624467dd34f6a4b5c4'
 AWS_SECRET_ACCESS_KEY = 'a5403fc3ee55591f65d0e8203d4ef22157cacf0566eeaf674614f62bfe890952'
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 R2_TOKEN = 'TB_5HNUNb32WHtubka201BsSFwrazG7Q5veqCf9p'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp-mail.outlook.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = '@outlook.com'
+EMAIL_HOST_PASSWORD = 'your email password'
+EMAIL_USE_TLS = True  # Or False if your email server does not use TLS
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
