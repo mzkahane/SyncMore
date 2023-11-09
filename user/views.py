@@ -69,6 +69,7 @@ def reg_view(request):
         username = request.POST['username']
         password_1 = request.POST['password_1']
         password_2 = request.POST['password_2']
+        second_password = request.POST['second_password']
 
         if len(password_1) < 6:
             note = 'the length of password is too short, at least 6 letters'
@@ -96,7 +97,7 @@ def reg_view(request):
             return render(request, 'user/register.html', locals())
 
         try:
-            user = User.objects.create(Username=username, password=password_m)
+            user = User.objects.create(Username=username, password=password_m, second_password=second_password)
         except Exception as e:
             print('--create user error %s' % (e))
             note = 'username has been signed up'
@@ -134,6 +135,7 @@ def index_view(request):
     supervisor = Supervisor.objects.get(id=user.supervisor.id)
     notes = Note.objects.filter(note_user_id=c_uid)
     documents = Document.objects.filter(document_user_id=c_uid)
+    second_password = user.second_password
     return render(request, 'user/index.html', locals())
 
 
@@ -284,6 +286,7 @@ def account(request):
     if c_uid is None:
         c_uid = request.session['uid']
     user = User.objects.get(id=c_uid)
+    current_pin = user.second_password
     return render(request, 'user/account.html', locals())
 
 

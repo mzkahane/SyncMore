@@ -353,7 +353,7 @@
         </div>
         <!-- END: index content container -->
 
-        <!-- Modal for PIN Authentication -->
+        <!-- BEGIN: Modal for PIN Authentication -->
         <div id="pinModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
@@ -361,9 +361,9 @@
                 <input type="password" id="pinInput" maxlength="4">
                 <button id="submitPin">Submit</button>
             </div>
+            
         </div>
-        <!-- END: user information container -->
-
+        <!-- BEGIN: Modal for PIN Authentication -->
 
         <!-- Javascript: jQuery, Popper.js, Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -377,85 +377,69 @@
                 integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
                 crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function()
-            {
-
-                /*var user_home = $("#home-page");
-                var user_drive = $("#drive-page");
-
-                $(document).on("click", "#home-button", function(){
-                    $('#current-view').text('Home Page');
-                    user_drive.css('display', 'none');
-                    user_home.css('display', 'block');
-                });
-
-                $(document).on("click", "#drive-button", function(){
-                    $('#current-view').text('Personal Drive');
-                    user_home.css('display', 'none');
-                    user_drive.css('display', 'block');
-                });*/
-
-                document.addEventListener("DOMContentLoaded", function () {
-                    var homeBtn = document.getElementById("home-button");
-                    var homeContent = document.getElementById("home-page");
-                    var modal = document.getElementById("pinModal"); // Ensure this ID matches your modal
-                    var driveBtn = document.getElementById("drive-button"); // Button to open drive page
-                    var closeBtn = document.getElementsByClassName("close")[0]; // Close button on the modal
-                    var submitPinBtn = document.getElementById("submitPin"); // Submit button on the modal
-                    var driveContent = document.getElementById("drive-page"); // Drive page content
-            
-                    homeBtn.onclick = function () {
-                        // Show home content
-                        homeContent.style.display = "block";
-                        // Hide drive content
-                        driveContent.style.display = "none";
-                    };
-            
-                    // When the user clicks on the drive button
-                    driveBtn.onclick = function (e) {
-                        e.preventDefault();
-                        // Check if drive-page is already visible
-                        homeContent.style.display = "none";
-                        if (driveContent.style.display === "block") {
-                            // If visible, simply collapse it without asking for a PIN
-                            driveContent.style.display = "none";
-                        } else {
-                            // If not visible, show the PIN modal
-                            modal.style.display = "block";
-                        }
-                    };
-            
-                    // Close the modal
-                    closeBtn.onclick = function () {
-                        modal.style.display = "none";
-                    };
-            
-                    // Close modal if clicked outside of it
-                    window.onclick = function (event) {
-                        if (event.target === modal) {
-                            modal.style.display = "none";
-                        }
-                    };
-            
-                    // PIN submission
-                    submitPinBtn.onclick = function () {
-                        var pin = document.getElementById("pinInput").value; // Ensure this ID matches your PIN input field
-                        if (pin === "1111") {
-                            // Correct PIN
-                            driveContent.style.display = "block"; // Show drive page content
-                            modal.style.display = "none"; // Close the modal
-                        } else {
-                            // Incorrect PIN
-                            alert("Incorrect PIN. Please try again.");
-                        }
-                        pinInput.value = '';
-                    };
-                });
-            });
-        </script>
         <!-- user_index javascript page -->
         <script src="../../../static/Syncmore/js/user_index.js"></script>
-
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function () {
+                var homeBtn = document.getElementById("home-button");
+                var homeContent = document.getElementById("home-page");
+                var modal = document.getElementById("pinModal"); // Ensure this ID matches your modal
+                var driveBtn = document.getElementById("drive-button"); // Button to open drive page
+                var closeBtn = document.getElementsByClassName("close")[0]; // Close button on the modal
+                var submitPinBtn = document.getElementById("submitPin"); // Submit button on the modal
+                var driveContent = document.getElementById("drive-page"); // Drive page content
+        
+                homeBtn.onclick = function () {
+                    $('#current-view').text('Home Page');
+                    // Show home content
+                    homeContent.style.display = "block";
+                    // Hide drive content
+                    driveContent.style.display = "none";
+                };
+        
+                // When the user clicks on the drive button
+                driveBtn.onclick = function (e) {
+                    e.preventDefault();
+                    // Check if drive-page is already visible
+                    homeContent.style.display = "none";
+                    if (driveContent.style.display === "block") {
+                        // If visible, simply collapse it without asking for a PIN
+                        driveContent.style.display = "none";
+                    } else {
+                        // If not visible, show the PIN modal
+                        modal.style.display = "block";
+                    }
+                };
+        
+                // Close the modal
+                closeBtn.onclick = function () {
+                    modal.style.display = "none";
+                    homeContent.style.display = "block";
+                };
+        
+                // Close modal if clicked outside of it
+                window.onclick = function (event) {
+                    if (event.target === modal) {
+                        modal.style.display = "none";
+                        homeContent.style.display = "block";
+                    }
+                };
+        
+                // PIN submission
+                submitPinBtn.onclick = function () {
+                    var pin = document.getElementById("pinInput").value; // Ensure this ID matches your PIN input field
+                    if (pin === "{{ second_password }}") {
+                        // Correct PIN
+                        $('#current-view').text('Personal Drive');
+                        driveContent.style.display = "block"; // Show drive page content
+                        modal.style.display = "none"; // Close the modal
+                    } else {
+                        // Incorrect PIN
+                        alert("Incorrect PIN. Please try again.");
+                    }
+                    pinInput.value = '';
+                };
+            });
+        </script>
     </body>
 </html>

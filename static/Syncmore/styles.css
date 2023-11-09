@@ -241,17 +241,20 @@ img.user_image {
     display:none;
 }
 
+#current-page {
+    padding: 13px;
+}
 
 a#current-view {
     padding: 13px 3px;
     /*color: rgb(241, 237, 237);*/
-    color: red;
-    font-size: 2.5vh;
+    color: black;
+    font-size: 3.5vh;
     position: relative;
     text-decoration: none;
 }
 
 a#current-view:hover {
-    color: var(--turquoise);
+    color: var(--slate-blue);
     text-decoration: none;
 }
