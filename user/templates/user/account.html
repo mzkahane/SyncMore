@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add email</title>
+    <title>Account</title>
     <!-- favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="../../../static/Syncmore/favicon.ico">
     <!-- link to styles -->
     <link rel="stylesheet" href="../../../static/Syncmore/styles.css"/>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
 <!-- START: user navigation bar -->
@@ -33,7 +33,7 @@
                 <a class="nav-link" href="/resources/index">Resources</a>
             </li>
             <li class="navbar-item">
-                <a class="nav-link" href="/index/contact">Contact Us</a>
+                <a class="nav-link" href="#">Contact Us</a>
             </li>
         </ul>
         <ul class="navbar-nav justify-content-end align-right">
@@ -49,23 +49,22 @@
 </nav>
 <!-- END: user navigation bar -->
 
-
 <div class="container mt-5">
     <div class="my-5">
         <a class="btn delete-btn" href="/user/index"> < Back </a>
     </div>
 
-    <form action="/user/add_email" class="form" method="post" enctype="multipart/form-data">
+    <form action="/user/modify_second_password" class="form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row align-items-center">
             <div class="col-md-6">
                 <div class="form-group mb-2">
-                    <label for="email">Email</label>
-                    <input type="text" name="email" class="form-control" id="email">
+                    <label for="second_password">Second Password</label>
+                    <input type="number" name="second_password" class="form-control" id="second_password">
                 </div>
             </div>
             <div class="col-md-6">
-                <input type="submit" class="btn btn-primary" value="Add" style="width: 200px; text-align: center;">
+                <input type="submit" class="btn btn-primary" value="Modify" style="width: 200px; text-align: center;">
             </div>
         </div>
     </form>
@@ -74,6 +73,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
 </body>
 </html>

@@ -1,60 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>User Home Page</title>
-        <!-- favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="../../../static/Syncmore/favicon.ico">
-        <!-- link to styles -->
-        <link rel="stylesheet" href="../../../static/Syncmore/styles.css"/>
-        <link rel="stylesheet" href="../../../static/Syncmore/user_sidebar.css"/>
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    </head>
-    <body>
-        <!-- START: navigation bar -->
-        <nav class="navbar navbar-expand-md">
-            <!-- website logo -->
-            <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
-            <!-- website brand name -->
-            <a class="navbar-brand" href="/">SyncMore</a>
+<head>
+    <meta charset="UTF-8">
+    <title>User Home Page</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="../../../static/Syncmore/favicon.ico">
+    <!-- link to styles -->
+    <link rel="stylesheet" href="../../../static/Syncmore/styles.css"/>
+    <link rel="stylesheet" href="../../../static/Syncmore/user_sidebar.css"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
 
-            <!-- START: toggle button for mobile navigation bar links -->
-            <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%; /* Could be more or less, depending on screen size */
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+<!-- START: navigation bar -->
+<nav class="navbar navbar-expand-md">
+    <!-- website logo -->
+    <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
+    <!-- website brand name -->
+    <a class="navbar-brand" href="/">SyncMore</a>
+
+    <!-- START: toggle button for mobile navigation bar links -->
+    <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
             aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <!-- END: toggle button for mobile navigation bar links -->
-            
-            <!-- START: navigation bar links -->
-            <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
-                <!-- left hand side links: Resources and Contact Us -->
-                <ul class="navbar-nav mr-auto mt-2 mt-md-0">
-                    <li class="navbar-item">
-                        <a class="nav-link" href="/resources/index">Resources</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a class="nav-link" href="#">Contact Us</a>
-                    </li>
-                </ul>
-                <!-- right hand side links: User Account Settings and Log Out -->
-                <ul class="navbar-nav justify-content-end align-right">
-                    <li class="navbar-item">
-                        <!-- TODO: add user account settings page -->
-                        <a class="nav-link" href="#">Account Settings</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a class="nav-link" href="/user/logout">Log Out</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- END: navigation bar links -->
-        </nav>
-        <!-- END: navigation bar -->
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- END: toggle button for mobile navigation bar links -->
 
-        <!-- for authentication -->
-        {% csrf_token %}
+    <!-- START: navigation bar links -->
+    <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+        <!-- left hand side links: Resources and Contact Us -->
+        <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+            <li class="navbar-item">
+                <a class="nav-link" href="/resources/index">Resources</a>
+            </li>
+            <li class="navbar-item">
+                <a class="nav-link" href="#">Contact Us</a>
+            </li>
+        </ul>
+        <!-- right hand side links: User Account Settings and Log Out -->
+        <ul class="navbar-nav justify-content-end align-right">
+            <li class="navbar-item">
+                <!-- TODO: add user account settings page -->
+                <a class="nav-link" href="/user/account">Account Settings</a>
+            </li>
+            <li class="navbar-item">
+                <a class="nav-link" href="/user/logout">Log Out</a>
+            </li>
+        </ul>
+    </div>
+    <!-- END: navigation bar links -->
+</nav>
+<!-- END: navigation bar -->
 
         <!-- BEGIN: index content container -->
         <div class="container-fluid">
@@ -325,6 +362,7 @@
                 <button id="submitPin">Submit</button>
             </div>
         </div>
+        <!-- END: user information container -->
 
 
         <!-- Javascript: jQuery, Popper.js, Bootstrap JS -->

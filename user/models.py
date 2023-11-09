@@ -36,6 +36,8 @@ class User(models.Model):
 
     last_access_time = models.DateTimeField('last_access_time', auto_now_add=True, null=True)
 
+    second_password = models.IntegerField('second_password', null=True)
+
 
 class Phone(models.Model):
     phone_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='phone_user')

@@ -8,7 +8,6 @@
         <!-- favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="../../../static/Syncmore/favicon.ico">
         <!-- link to styles -->
-        {% comment %} <link rel="stylesheet" href="/static/admin/css/base.css"> {% endcomment %}
         <link rel="stylesheet" href="../../../static/Syncmore/styles.css" />
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -37,7 +36,7 @@
                         <a class="nav-link" href="/resources/index">Resources</a>
                     </li>
                     <li class="navbar-item">
-                        <a class="nav-link" href="/index/contact">Contact Us</a>
+                        <a class="nav-link active" href="index/contact">Contact Us</a>
                     </li>
                 </ul>
                 <!-- right hand side links: Sign Up and Log In -->
@@ -53,7 +52,6 @@
             <!-- END: navigation bar links -->
         </nav>
         <!-- END: navigation bar -->
-        
         <!-- BEGIN: jumbo header -->
         <div class="jumbo-header container-fluid">
             <div class="row justify-content-md-center align-items-center">
@@ -62,73 +60,67 @@
                 </div> {% endcomment %}
 
                 <div class="col col-lg-6">
-                    <h2>Welcome to SyncMore</h2>
-                    <blockquote>
-                    <h4>Experiencing Homelessness? Backup and secure your personal information. </h4>
-                    </blockquote>
+                    <h2>Contact Us</h2>
                 </div>
             </div>
         </div>
         <!-- END: jumbo header -->
-        <br>
-        <!-- BEGIN: SyncMore description -->
-        <div class="container justify-content-md-center">
-            <h3>What is HomeMore?</h3>
-            <p> The HomeMore Project delivers the Makeshift Traveler pack to individuals experiencing homelessness
-                throughout California.<br>
-                While the pack was designed to help the homeless keep their phones charged and better secure their
-                belongings, inevitably <b>phones and belongings get stolen, lost, or damaged.</b><br>
-                The solution is to therefore create a mobile application to <b>digitize personal information needed
-                to obtain permanent housing</b>.
-            </p>
-                
-            <h3>What is SyncMore?</h3>
-            <p>SyncMore is a <b>cloud storage service</b> managed under the HomeMore project. SyncMore offers:
-                <br>1) A <b>cloud storage service:</b> Users can store and digitize important personal information
-                as backups for physical copies in private personal drives.
-                <br>2) <b>Centralized resources:</b> A collection of resources and support for unhoused individuals.
-            </p>
-        </div>
-        <!-- END: SyncMore description -->
-
-        <!-- BEGIN: Announcements and Latest Tweets columns -->
-        <div class="container">
-            <div class="container row justify-content-md-evenly">
-                <div class="col col-lg-6">
-                    <h3>Announcements</h3>
-                    <p>hello@homemoreproject.org</p>
-                    <p>(628) 444-8094</p>
-                    <p>1600 Bryant St #411447 SMB#51223 San Francisco, CA 94141</p>
+        <!-- BEGIN: page content -->
+        <div class="container" style="font-size:18px;">
+            <div class="row row-cols-2 align-items-top gx-5">
+                <!-- BEGIN: description section -->
+                <div class="col-md my-2">
+                    <br>
+                    <p>
+                        Whether you have a general question, suggestion, concern, 
+                        or want to say hello, we want to hear from you. At 
+                        HomeMore, we are collectively striving to innovate within 
+                        the unhoused community in San Francisco. We want to hear 
+                        from anyone and everyone who has an interest in our 
+                        organization. Feel free to message us with any inquiries.
+                    </p>
+                    <br>
+                    <p>
+                        <a href="mailto:info@homemoreproject.org">hello@homemoreproject.org</a>
+                    </p>
+                    <br>
+                    <p>
+                        <strong>628-444-8094</strong>
+                        <br>
+                        1600 Bryant St #411447 SMB#51223 San Francisco, CA 94141
+                    </p>
                 </div>
-
-                <div class="col col-lg-6 justify-content-md-evenly">
-                    <h3>Latest Tweets</h3>
-                    <div class="container-md twitter-timeline">
-                        {% comment %} <a class="container-md twitter-timeline" href="https://syndication.twitter.com/srv/timeline-profile/screen-name/HomemoreProject">
-                            Tweets by Homemore Project
-                        </a> {% endcomment %}
-                        <iframe title="HomeMore Twitter" id="twitter-timeline"
-                        position="static"
-                        visibility="visible"
-                        max-width="90%"
-                        height="500px"
-                        max-height="90%"
-                        overflow-x="hidden"
-                        overflow-y="auto"
-                        text-align="center"
-                        display="block"
-                        flex-grow="1"
-                        class="container-fluid" frameborder="0" allowtransparency="true" allowfullscreen="true"
-                        src="https://syndication.twitter.com/srv/timeline-profile/screen-name/HomemoreProject">
-                            Tweets by Homemore Project
-                        </iframe>
-                        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                    </div>
+                <!-- END: description section -->
+                <!-- BEGIN: form section -->
+                <div class="col-md my-5">
+                    <form class="row g-3">
+                        <div class="col-md-6 my-2">
+                            <label for="First" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="First">
+                        </div>
+                        <div class="col-md-6 my-2">
+                            <label for="Last" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="Last">
+                        </div>
+                        <div class="col-12 mb-2">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email">
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control" id="message" rows="4"></textarea>
+                        </div>
+                        <div class="col-12 mb-2">
+                            <div class="d-flex justify-content-start mb-3">
+                                <input type="submit" class="btn delete-btn btn-lg rounded-pill" value="Send">
+                            </div>
+                        </div>
+                    </form>
                 </div>
+                <!-- END: form section -->
             </div>
         </div>
-        <!-- END: Announcements and Latest Tweets columns -->
-
+        <!-- END: page content -->
         <!-- footer -->
         <footer>
             &copy; 2023 SyncMore. All Rights Reserved.
