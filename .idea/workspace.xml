@@ -5,11 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5dc9c044-7e75-40d0-9d09-69b128c48298" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/static/Syncmore/base.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/Syncmore/js/user_index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/Syncmore/register_login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index/templates/index/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index/templates/index/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/templates/user/add_phone.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/user/add_phone.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/Syncmore/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/Syncmore/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/templates/user/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/user/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/templates/user/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/user/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +57,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;AndrewLiu&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Merging AndrewLiu&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/andrewliu/Desktop/SyncMore/static/Syncmore&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -128,7 +133,8 @@
       <workItem from="1698297201008" duration="2234000" />
       <workItem from="1698333954511" duration="19185000" />
       <workItem from="1699033353023" duration="5647000" />
-      <workItem from="1699479104933" duration="912000" />
+      <workItem from="1699479104933" duration="3116000" />
+      <workItem from="1699486447188" duration="1199000" />
     </task>
     <servers />
   </component>
