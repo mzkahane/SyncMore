@@ -1,358 +1,435 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>User Home Page</title>
-        <!-- favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="../../../static/Syncmore/favicon.ico">
-        <!-- link to styles -->
-        <link rel="stylesheet" href="../../../static/Syncmore/styles.css"/>
-        <link rel="stylesheet" href="../../../static/Syncmore/user_sidebar.css"/>
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    </head>
-    <body>
-        <!-- START: navigation bar -->
-        <nav class="navbar navbar-expand-md">
-            <!-- website logo -->
-            <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
-            <!-- website brand name -->
-            <a class="navbar-brand" href="/">SyncMore</a>
+<head>
+    <meta charset="UTF-8">
+    <title>User Home Page</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="../../../static/Syncmore/favicon.ico">
+    <!-- link to styles -->
+    <link rel="stylesheet" href="../../../static/Syncmore/styles.css"/>
+    <link rel="stylesheet" href="../../../static/Syncmore/user_sidebar.css"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
 
-            <!-- START: toggle button for mobile navigation bar links -->
-            <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%; /* Could be more or less, depending on screen size */
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+<!-- START: navigation bar -->
+<nav class="navbar navbar-expand-md">
+    <!-- website logo -->
+    <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
+    <!-- website brand name -->
+    <a class="navbar-brand" href="/">SyncMore</a>
+
+    <!-- START: toggle button for mobile navigation bar links -->
+    <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
             aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <!-- END: toggle button for mobile navigation bar links -->
-            
-            <!-- START: navigation bar links -->
-            <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
-                <!-- left hand side links: Resources and Contact Us -->
-                <ul class="navbar-nav mr-auto mt-2 mt-md-0">
-                    <li class="navbar-item">
-                        <a class="nav-link" href="/resources/index">Resources</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a class="nav-link" href="#">Contact Us</a>
-                    </li>
-                </ul>
-                <!-- right hand side links: User Account Settings and Log Out -->
-                <ul class="navbar-nav justify-content-end align-right">
-                    <li class="navbar-item">
-                        <!-- TODO: add user account settings page -->
-                        <a class="nav-link" href="#">Account Settings</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a class="nav-link" href="/user/logout">Log Out</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- END: navigation bar links -->
-        </nav>
-        <!-- END: navigation bar -->
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- END: toggle button for mobile navigation bar links -->
 
-        <!-- for authentication -->
-        {% csrf_token %}
+    <!-- START: navigation bar links -->
+    <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+        <!-- left hand side links: Resources and Contact Us -->
+        <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+            <li class="navbar-item">
+                <a class="nav-link" href="/resources/index">Resources</a>
+            </li>
+            <li class="navbar-item">
+                <a class="nav-link" href="#">Contact Us</a>
+            </li>
+        </ul>
+        <!-- right hand side links: User Account Settings and Log Out -->
+        <ul class="navbar-nav justify-content-end align-right">
+            <li class="navbar-item">
+                <!-- TODO: add user account settings page -->
+                <a class="nav-link" href="/user/account">Account Settings</a>
+            </li>
+            <li class="navbar-item">
+                <a class="nav-link" href="/user/logout">Log Out</a>
+            </li>
+        </ul>
+    </div>
+    <!-- END: navigation bar links -->
+</nav>
+<!-- END: navigation bar -->
 
-        <div class="container-fluid">
+<!-- for authentication -->
+{% csrf_token %}
 
-            <div class="row">
+<div class="container-fluid">
 
-                <div class="sidebar col-lg-2">
-                    <ul>
-                        <li>
-                            <a href="#home-page" data-toggle="collapse">
-                                <span class="icon"><i class="fas fa-home"></i></span>
-                                <span class="item" id="home-button">> Home Page</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#drive-page" data-toggle="collapse">
-                                <span class="icon"><i class="fas fa-desktop"></i></span>
-                                <span class="item" id="drive-button">> Personal Drive</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+    <div class="row">
 
-                {% comment %} <div class="user-content col-lg-10 container-fluid" id="fill-page">
-                    blah
-                </div> {% endcomment %}
+        <div class="sidebar col-lg-2">
+            <ul>
+                <li>
+                    <a href="#home-page" data-toggle="collapse">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item" id="home-button">> Home Page</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#drive-page" data-toggle="collapse">
+                        <span class="icon"><i class="fas fa-desktop"></i></span>
+                        <span class="item" id="drive-button">> Personal Drive</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
-                
-                <!-- BEGIN: user information container -->
-                <div class="user-content col-lg-10 container-fluid collapse in" id="home-page">
-                    <!-- BEGIN: Add Phone and Add Email row -->
-                    <div class="row justify-content-lg-center">
 
-                        <!-- BEGIN: Add Phone column -->
-                        <div class="add_info col-lg-6">
-                            {% comment %} <a class="btn add-btn" href="/user/add_phone">Add phone</a> {% endcomment %}
-                            <!-- Add phone number form -->
-                            <form action="/user/add_phone" class="form" method="post" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                <label for="phone">Phone</label>
-                                <div class="row align-items-center"> <!-- Add align-items-center to vertically align elements -->
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-0"> <!-- Remove margin-bottom using mb-0 -->
-                                            <input type="number" name="phone" class="form-control" id="phone">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="submit" class="btn add-btn" value="Add">
-                                    </div>
+        <!-- BEGIN: user information container -->
+        <div class="user-content col-lg-10 container-fluid collapse in" id="home-page">
+            <!-- BEGIN: Add Phone and Add Email row -->
+            <div class="row justify-content-lg-center">
+
+                <!-- BEGIN: Add Phone column -->
+                <div class="add_info col-lg-6">
+                    {% comment %} <a class="btn add-btn" href="/user/add_phone">Add phone</a> {% endcomment %}
+                    <!-- Add phone number form -->
+                    <form action="/user/add_phone" class="form" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <label for="phone">Phone</label>
+                        <div class="row align-items-center"><!-- Add align-items-center to vertically align elements -->
+                            <div class="col-md-6">
+                                <div class="form-group mb-0"> <!-- Remove margin-bottom using mb-0 -->
+                                    <input type="number" name="phone" class="form-control" id="phone">
                                 </div>
-                            </form>
-
-                            <!-- BEGIN: Each phone entry container -->
-                            <div class="container">
-                            {% for phone in phones %}
-                                <div class="d-flex flex-wrap align-items-start">
-                                    <!-- Display phone number -->
-                                    <div class="mx-2">
-                                        <li>{{ phone.phone }}</li>
-                                    </div>
-                                    <!-- Modify phone number -->
-                                    <div class="mx-2">
-                                        <button class="btn edit-btn modify-form-btn" value="{{ phone.phone }}">Modify</button>
-                                    </div>
-                                    <!-- Delete phone number -->
-                                    <div class="mx-2">
-                                        <form action="/user/delete_phone/{{ phone.id }}" method="post">
-                                            {% csrf_token %}
-                                            <input type="hidden" name="operation" value="delete">
-                                            <input class="btn delete-btn" type="submit" value="Delete">
-                                        </form>
-                                    </div>
-                                    <!-- START: Form to modify phone number (display shown/hidden based on Modify phone button)-->
-                                    <div class="container-fluid">
-                                        <form action="/user/modify_phone/{{ phone.id }}" id="{{ phone.phone }}" class="modify-form"
-                                        method="post" enctype="multipart/form-data" style="display: none;">
-                                            {% csrf_token %}
-                                            <div class="row align-items-center">
-                                                <div class="col form-group">
-                                                    <input type="text" value="{{ phone.phone }}" name="phone" class="form-control" id="phone">
-                                                </div>
-                                                <div class="col">
-                                                    <input type="submit" class="btn edit-btn" value="Update">
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <!-- END: Form to modify phone number (display shown/hidden based on Modify email button)-->
-                                </div>
-                            {% endfor %}
                             </div>
-                            <!-- END: Each phone entry container-->
-                        </div>
-                        <!-- END: Add Phone column-->
-
-                        <!-- BEGIN: Add Email column -->
-                        <div class="add_info col-lg-6">
-                            <!-- Add email form -->
-                            <form action="/user/add_email" class="form" method="post" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                <label for="email">Email</label>
-                                <div class="row align-items-center">
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-2">
-                                            <input type="text" name="email" class="form-control" id="email">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="submit" class="btn add-btn" value="Add">
-                                    </div>
-                                </div>
-                            </form>
-                            <!-- BEGIN: Each email entry container -->
-                            <div class="container">
-                                {% for email in emails %}
-                                <div class="d-flex flex-wrap align-items-start">
-                                    <!-- Display email -->
-                                    <div class="mx-2">
-                                        <li>{{ email.email }}</li>
-                                    </div>
-                                    <!-- Modify email button -->
-                                    <div class="mx-2">
-                                        <button class="btn edit-btn modify-form-btn" value="{{ email.email }}">Modify</button>
-                                    </div>
-                                    <!-- Delete email -->
-                                    <div class="mx-2">
-                                        <form action="/user/delete_email/{{ email.id }}" method="post">
-                                            {% csrf_token %}
-                                            <input type="hidden" name="operation" value="delete">
-                                            <input class="btn delete-btn" type="submit" value="Delete">
-                                        </form>
-                                    </div>
-                                    <!-- START: Form to modify email (display shown/hidden based on Modify email button)-->
-                                    <div class="container-fluid">
-                                        <form action="/user/modify_email/{{ email.id }}" id="{{ email.email }}" class="modify-form"
-                                        method="post" enctype="multipart/form-data" style="display: none;">
-                                            {% csrf_token %}
-                                            <div class="row align-items-center">
-                                                <div class="col form-group">
-                                                    <input type="text" value="{{ email.email }}" name="email" class="form-control" id="email">
-                                                </div>
-                                                <div class="col">
-                                                    <input type="submit" class="btn edit-btn" value="Update">
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <!-- END: Form to modify email (display shown/hidden based on Modify email button)-->
-                                </div>
-                            {% endfor %}
+                            <div class="col-md-6">
+                                <input type="submit" class="btn add-btn" value="Add">
                             </div>
-                            <!-- END: Each email entry container-->
                         </div>
-                        <!-- END: Add Email column-->
-                    </div>
-                    <!-- END: Add Phone and Add Email row -->
+                    </form>
 
-                    <!-- BEGIN: HomeMore Team Contact row -->
-                    <div class="homemore_contact row justify-content-lg-center">
-                        <!-- BEGIN: HomeMore Team Contact container -->
-                        <div class="container-fluid justify-content-lg-center">
-                            <h3>HomeMore Team Contact</h3>
-                            <p>Your HomeMore Team Contact is here for you to contact if you need any assistance.</p>
-                            <p>Contact Name: {{ supervisor.name }}</p>
-                        </div>
-                        <!-- END: HomeMore Team Contact container -->
-                    </div>
-                    <!-- END: HomeMore Team Contact row -->
-                </div>
-                <!-- END: user information container -->
-
-
-                <!-- BEGIN: user personal drive notes/documents container -->
-                <div class="user-content col-lg-10 container-fluid collapse" id="drive-page">
-                    <!-- BEGIN: Add Note row -->
-                    <br>
-                    <a class="btn add-btn" href="/user/add_note">Add note</a>
-                    <div class="row justify-content-lg-center">
-                        <!-- BEGIN: Each note entry container -->
-                        <div class="container">
-                            {% for note in notes %}
+                    <!-- BEGIN: Each phone entry container -->
+                    <div class="container">
+                        {% for phone in phones %}
                             <div class="d-flex flex-wrap align-items-start">
-                                <!-- Display note  -->
+                                <!-- Display phone number -->
                                 <div class="mx-2">
-                                    <h5>{{ note.title }}</h5>
-                                    <p>{{ note.content }}</p>
+                                    <li>{{ phone.phone }}</li>
                                 </div>
-                                <!-- Modify note -->
+                                <!-- Modify phone number -->
                                 <div class="mx-2">
-                                    <a class="btn edit-btn" href="/user/modify_note/{{ note.id }}">Modify</a>
+                                    <button class="btn edit-btn modify-form-btn" value="{{ phone.phone }}">Modify
+                                    </button>
                                 </div>
-                                <!-- Delete note -->
+                                <!-- Delete phone number -->
                                 <div class="mx-2">
-                                    <form action="/user/delete_note/{{ note.id }}" method="post">
+                                    <form action="/user/delete_phone/{{ phone.id }}" method="post">
                                         {% csrf_token %}
                                         <input type="hidden" name="operation" value="delete">
                                         <input class="btn delete-btn" type="submit" value="Delete">
                                     </form>
                                 </div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                        <!-- END: Each note entry container-->
-                    </div>
-                    <!-- END: Add Note row -->
-
-                    <!-- BEGIN: Add Document row -->
-                    <br>
-                    <a class="btn add-btn" href="/user/add_document">Add document</a>
-                    <div class="row justify-content-lg-center">
-                        <!-- BEGIN: Documents container -->
-                        <div class="container">
-                            <div class="row align-items-start">
-                                {% for document in documents %}
-                                <!-- BEGIN: Document per column -->
-                                <div class=" col-lg-3 col-md-4 col-sm-6 col-xs-12 mx-2">
-                                    <h6>{{ document.title }}</h6>
-                                    <!-- Display document in image_box -->
-                                    <div class="image_box">
-                                        <img class="user_image" src="{{ document.document.url }}" alt="Your File">
-                                    </div>
-                                    <!-- BEGIN: document modify and delete buttons row -->
-                                    <div class="row my-2 mx-2">
-                                        <!-- Modify document -->
-                                        <div class="mx-2">
-                                            <a class="btn edit-btn" href="/user/modify_document/{{ document.id }}">Modify</a>
+                                <!-- START: Form to modify phone number (display shown/hidden based on Modify phone button)-->
+                                <div class="container-fluid">
+                                    <form action="/user/modify_phone/{{ phone.id }}" id="{{ phone.phone }}"
+                                          class="modify-form"
+                                          method="post" enctype="multipart/form-data" style="display: none;">
+                                        {% csrf_token %}
+                                        <div class="row align-items-center">
+                                            <div class="col form-group">
+                                                <input type="text" value="{{ phone.phone }}" name="phone"
+                                                       class="form-control" id="phone">
+                                            </div>
+                                            <div class="col">
+                                                <input type="submit" class="btn edit-btn" value="Update">
+                                            </div>
                                         </div>
-                                        <!-- Delete document -->
-                                        <div class="mx-2">
-                                            <form action="/user/delete_document/{{ document.id }}" method="post">
-                                                {% csrf_token %}
-                                                <input type="hidden" name="operation" value="delete">
-                                                <input class="btn delete-btn" type="submit" value="Delete">
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <!-- END: document modify and delete buttons row -->
+                                    </form>
                                 </div>
-                                {% endfor %}
-                                <!-- END: Document per column -->
+                                <!-- END: Form to modify phone number (display shown/hidden based on Modify email button)-->
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <!-- END: Each phone entry container-->
+                </div>
+                <!-- END: Add Phone column-->
+
+                <!-- BEGIN: Add Email column -->
+                <div class="add_info col-lg-6">
+                    <!-- Add email form -->
+                    <form action="/user/add_email" class="form" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <label for="email">Email</label>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <input type="text" name="email" class="form-control" id="email">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="submit" class="btn add-btn" value="Add">
                             </div>
                         </div>
-                        <!-- END: Documents container-->
+                    </form>
+                    <!-- BEGIN: Each email entry container -->
+                    <div class="container">
+                        {% for email in emails %}
+                            <div class="d-flex flex-wrap align-items-start">
+                                <!-- Display email -->
+                                <div class="mx-2">
+                                    <li>{{ email.email }}</li>
+                                </div>
+                                <!-- Modify email button -->
+                                <div class="mx-2">
+                                    <button class="btn edit-btn modify-form-btn" value="{{ email.email }}">Modify
+                                    </button>
+                                </div>
+                                <!-- Delete email -->
+                                <div class="mx-2">
+                                    <form action="/user/delete_email/{{ email.id }}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="operation" value="delete">
+                                        <input class="btn delete-btn" type="submit" value="Delete">
+                                    </form>
+                                </div>
+                                <!-- START: Form to modify email (display shown/hidden based on Modify email button)-->
+                                <div class="container-fluid">
+                                    <form action="/user/modify_email/{{ email.id }}" id="{{ email.email }}"
+                                          class="modify-form"
+                                          method="post" enctype="multipart/form-data" style="display: none;">
+                                        {% csrf_token %}
+                                        <div class="row align-items-center">
+                                            <div class="col form-group">
+                                                <input type="text" value="{{ email.email }}" name="email"
+                                                       class="form-control" id="email">
+                                            </div>
+                                            <div class="col">
+                                                <input type="submit" class="btn edit-btn" value="Update">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- END: Form to modify email (display shown/hidden based on Modify email button)-->
+                            </div>
+                        {% endfor %}
                     </div>
-                    <!-- END: Add Document row -->
+                    <!-- END: Each email entry container-->
                 </div>
-                <!-- END: user personal drive notes/documents container -->
-                
-    
-    
+                <!-- END: Add Email column-->
             </div>
+            <!-- END: Add Phone and Add Email row -->
 
-
-            <div class="hamburger">
-                <a href="#">
-                    <i class="fas fa-bars"></i>
-                </a>
+            <!-- BEGIN: HomeMore Team Contact row -->
+            <div class="homemore_contact row justify-content-lg-center">
+                <!-- BEGIN: HomeMore Team Contact container -->
+                <div class="container-fluid justify-content-lg-center">
+                    <h3>HomeMore Team Contact</h3>
+                    <p>Your HomeMore Team Contact is here for you to contact if you need any assistance.</p>
+                    <p>Contact Name: {{ supervisor.name }}</p>
+                </div>
+                <!-- END: HomeMore Team Contact container -->
             </div>
-
-            
-
-
-
-
-
+            <!-- END: HomeMore Team Contact row -->
         </div>
+        <!-- END: user information container -->
 
 
-        <!-- Javascript: jQuery, Popper.js, Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-                crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-                crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-                crossorigin="anonymous"></script>
-        <!-- user_index javascript page -->
-        <script src="../../../static/Syncmore/js/user_index.js"></script>
-        <script type="text/javascript">
-                {% comment %} $(document).ready(function()
-                {
-                    // get the contents of the link that was clicked
-                    var user_home = $("#home-page").html();
-                    var user_drive = $("#drive-page").html();
-        
-                    // replace the contents of the div with the link text
-                    // $('#content-container').html(user_home);
-        
-                    $("#home-button").click(function()
-                    {
-                        document.getElementById("home-page").innerHTML = user_home;
-                    });
-                    $("#drive-button").click(function() {
-                        // pop up screen which requires passcode
-                        document.getElementById("home-page").innerHTML = user_drive;
-                    });
-                }); {% endcomment %}
-        </script>
-    </body>
+        <!-- BEGIN: user personal drive notes/documents container -->
+        <div class="user-content col-lg-10 container-fluid collapse" id="drive-page" style="display: none">
+            <!-- BEGIN: Add Note row -->
+            <br>
+            <a class="btn add-btn" href="/user/add_note">Add note</a>
+            <div class="row justify-content-lg-center">
+                <!-- BEGIN: Each note entry container -->
+                <div class="container">
+                    {% for note in notes %}
+                        <div class="d-flex flex-wrap align-items-start">
+                            <!-- Display note  -->
+                            <div class="mx-2">
+                                <h5>{{ note.title }}</h5>
+                                <p>{{ note.content }}</p>
+                            </div>
+                            <!-- Modify note -->
+                            <div class="mx-2">
+                                <a class="btn edit-btn" href="/user/modify_note/{{ note.id }}">Modify</a>
+                            </div>
+                            <!-- Delete note -->
+                            <div class="mx-2">
+                                <form action="/user/delete_note/{{ note.id }}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="operation" value="delete">
+                                    <input class="btn delete-btn" type="submit" value="Delete">
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- END: Each note entry container-->
+            </div>
+            <!-- END: Add Note row -->
+
+            <!-- BEGIN: Add Document row -->
+            <br>
+            <a class="btn add-btn" href="/user/add_document">Add document</a>
+            <div class="row justify-content-lg-center">
+                <!-- BEGIN: Documents container -->
+                <div class="container">
+                    <div class="row align-items-start">
+                        {% for document in documents %}
+                            <!-- BEGIN: Document per column -->
+                            <div class=" col-lg-3 col-md-4 col-sm-6 col-xs-12 mx-2">
+                                <h6>{{ document.title }}</h6>
+                                <!-- Display document in image_box -->
+                                <div class="image_box">
+                                    <img class="user_image" src="{{ document.document.url }}" alt="Your File">
+                                </div>
+                                <!-- BEGIN: document modify and delete buttons row -->
+                                <div class="row my-2 mx-2">
+                                    <!-- Modify document -->
+                                    <div class="mx-2">
+                                        <a class="btn edit-btn"
+                                           href="/user/modify_document/{{ document.id }}">Modify</a>
+                                    </div>
+                                    <!-- Delete document -->
+                                    <div class="mx-2">
+                                        <form action="/user/delete_document/{{ document.id }}" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="operation" value="delete">
+                                            <input class="btn delete-btn" type="submit" value="Delete">
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- END: document modify and delete buttons row -->
+                            </div>
+                        {% endfor %}
+                        <!-- END: Document per column -->
+                    </div>
+                </div>
+                <!-- END: Documents container-->
+            </div>
+            <!-- END: Add Document row -->
+        </div>
+        <!-- END: user personal drive notes/documents container -->
+
+
+    </div>
+</div>
+<!-- Modal for PIN Authentication -->
+<div id="pinModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Please enter your 4-digit PIN:</p>
+        <input type="password" id="pinInput" maxlength="4">
+        <button id="submitPin">Submit</button>
+    </div>
+</div>
+
+
+<!-- Javascript: jQuery, Popper.js, Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<!-- user_index javascript page -->
+<script src="../../../static/Syncmore/js/user_index.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var homeBtn = document.getElementById("home-button");
+        var homeContent = document.getElementById("home-page");
+        var modal = document.getElementById("pinModal"); // Ensure this ID matches your modal
+        var driveBtn = document.getElementById("drive-button"); // Button to open drive page
+        var closeBtn = document.getElementsByClassName("close")[0]; // Close button on the modal
+        var submitPinBtn = document.getElementById("submitPin"); // Submit button on the modal
+        var driveContent = document.getElementById("drive-page"); // Drive page content
+
+        homeBtn.onclick = function () {
+            // Show home content
+            homeContent.style.display = "block";
+            // Hide drive content
+            driveContent.style.display = "none";
+        };
+
+        // When the user clicks on the drive button
+        driveBtn.onclick = function (e) {
+            e.preventDefault();
+            // Check if drive-page is already visible
+            homeContent.style.display = "none";
+            if (driveContent.style.display === "block") {
+                // If visible, simply collapse it without asking for a PIN
+                driveContent.style.display = "none";
+            } else {
+                // If not visible, show the PIN modal
+                modal.style.display = "block";
+            }
+        };
+
+        // Close the modal
+        closeBtn.onclick = function () {
+            modal.style.display = "none";
+        };
+
+        // Close modal if clicked outside of it
+        window.onclick = function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+
+        // PIN submission
+        submitPinBtn.onclick = function () {
+            var pin = document.getElementById("pinInput").value; // Ensure this ID matches your PIN input field
+            if (pin === "1111") {
+                // Correct PIN
+                driveContent.style.display = "block"; // Show drive page content
+                modal.style.display = "none"; // Close the modal
+            } else {
+                // Incorrect PIN
+                alert("Incorrect PIN. Please try again.");
+            }
+            pinInput.value = '';
+        };
+    });
+
+
+</script>
+</body>
 </html>
