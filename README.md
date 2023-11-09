@@ -7,3 +7,5 @@ To run the project SyncMore, please navigate to the root directory, run:
 For object storage, please install the following package:
 
     pip install django-storages boto3
+    
+    pip install requests

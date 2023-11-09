@@ -4,8 +4,11 @@ import re
 import sys
 
 import requests
-from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 
 from SyncMore import settings
 
@@ -272,3 +275,22 @@ def modify_document(request, document_id):
         document.document = documentt
         document.save()
         return HttpResponseRedirect('/user/index')
+
+
+def account(request):
+    c_uid = request.COOKIES.get('uid')
+    if c_uid is None:
+        c_uid = request.session['uid']
+    user = User.objects.get(id=c_uid)
+    return render(request, 'user/account.html', locals())
+
+
+def modify_second_password(request):
+    c_uid = request.COOKIES.get('uid')
+    if c_uid is None:
+        c_uid = request.session['uid']
+    user = User.objects.get(id=c_uid)
+    second_password = request.POST.get('second_password', "")
+    user.second_password = second_password
+    user.save()
+    return HttpResponseRedirect('/user/index')

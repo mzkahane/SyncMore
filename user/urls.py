@@ -5,7 +5,7 @@ urlpatterns = [
     path('login', views.login_view),
     path('register', views.reg_view),
     path('logout', views.logout_view),
-    path('index', views.index_view),
+    path('index', views.index_view, name='index'),
     path('add_phone', views.add_phone),
     path('add_email', views.add_email),
     path('add_note', views.add_note),
@@ -18,4 +18,7 @@ urlpatterns = [
     path('modify_email/<int:email_id>', views.modify_email),
     path('modify_note/<int:note_id>', views.modify_note),
     path('modify_document/<int:document_id>', views.modify_document),
+    path('account', views.account),
+    path('modify_second_password', views.modify_second_password),
+
 ]

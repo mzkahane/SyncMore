@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add phone</title>
+    <title>Account</title>
     <!-- favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="../../../static/Syncmore/favicon.ico">
     <!-- link to styles -->
@@ -28,19 +28,16 @@
 
     <!-- START: navigation bar links -->
     <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
-        <!-- left hand side links: Resources and Contact Us -->
         <ul class="navbar-nav mr-auto mt-2 mt-md-0">
             <li class="navbar-item">
                 <a class="nav-link" href="/resources/index">Resources</a>
             </li>
             <li class="navbar-item">
-                <a class="nav-link" href="/index/contact">Contact Us</a>
+                <a class="nav-link" href="#">Contact Us</a>
             </li>
         </ul>
-        <!-- right hand side links: Account Settings and Log Out -->
         <ul class="navbar-nav justify-content-end align-right">
             <li class="navbar-item">
-                <!-- TOOD: add user account settings page -->
                 <a class="nav-link" href="#">Account Settings</a>
             </li>
             <li class="navbar-item">
@@ -57,17 +54,17 @@
         <a class="btn delete-btn" href="/user/index"> < Back </a>
     </div>
 
-    <form action="/user/add_phone" class="form" method="post" enctype="multipart/form-data">
+    <form action="/user/modify_second_password" class="form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="row align-items-center"> <!-- Add align-items-center to vertically align elements -->
+        <div class="row align-items-center">
             <div class="col-md-6">
-                <div class="form-group mb-0"> <!-- Remove margin-bottom using mb-0 -->
-                    <label for="phone">Phone</label>
-                    <input type="number" name="phone" class="form-control" id="phone">
+                <div class="form-group mb-2">
+                    <label for="second_password">Second Password</label>
+                    <input type="number" name="second_password" class="form-control" id="second_password">
                 </div>
             </div>
             <div class="col-md-6">
-                <input type="submit" class="btn btn-primary" value="Add" style="width: 200px;text-align: center">
+                <input type="submit" class="btn btn-primary" value="Modify" style="width: 200px; text-align: center;">
             </div>
         </div>
     </form>
@@ -76,6 +73,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
 </body>
 </html>
