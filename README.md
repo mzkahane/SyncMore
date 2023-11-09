@@ -4,6 +4,7 @@ To run the project SyncMore on any local PC, you will need some dependencies, pl
 To run the project SyncMore, please navigate to the root directory, run:
 
     python3 manage.py runserver
+
 For object storage, please install the following package:
 
     pip install django-storages boto3

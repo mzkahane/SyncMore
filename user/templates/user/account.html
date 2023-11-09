@@ -51,7 +51,7 @@
 
 <div class="container mt-5">
     <div class="my-5">
-        <a class="btn delete-btn" href="/user/index"> < Back </a>
+        <a class="btn delete-btn" href="/user/index"> < Back to Personal Home </a>
     </div>
 
     <form action="/user/modify_second_password" class="form" method="post" enctype="multipart/form-data">
@@ -59,12 +59,12 @@
         <div class="row align-items-center">
             <div class="col-md-6">
                 <div class="form-group mb-2">
-                    <label for="second_password">Second Password</label>
-                    <input type="number" name="second_password" class="form-control" id="second_password">
+                    <label for="second_password">4-digit PIN</label>
+                    <input type="number" name="second_password" class="form-control" value={{ current_pin }} id="second_password">
                 </div>
             </div>
             <div class="col-md-6">
-                <input type="submit" class="btn btn-primary" value="Modify" style="width: 200px; text-align: center;">
+                <input type="submit" class="btn add-btn" value="Update" style="width: 200px; text-align: center;">
             </div>
         </div>
     </form>

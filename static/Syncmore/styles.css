@@ -236,3 +236,25 @@ img.user_image {
 .bg-timberwolf {
     background-color: #D2D3D3;
 }
+
+#drive-page {
+    display:none;
+}
+
+#current-page {
+    padding: 13px;
+}
+
+a#current-view {
+    padding: 13px 3px;
+    /*color: rgb(241, 237, 237);*/
+    color: black;
+    font-size: 3.5vh;
+    position: relative;
+    text-decoration: none;
+}
+
+a#current-view:hover {
+    color: var(--slate-blue);
+    text-decoration: none;
+}
