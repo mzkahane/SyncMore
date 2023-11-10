@@ -246,13 +246,16 @@
                                     <!-- START: Form to modify email (display shown/hidden based on Modify email button)-->
                                     <div class="container-fluid">
                                         <form action="/user/modify_email/{{ email.id }}" id="{{ email.email }}"
-                                              class="modify-form"
-                                              method="post" enctype="multipart/form-data" style="display: none;">
+                                              class="modify-form needs-validation"
+                                              method="post" enctype="multipart/form-data" style="display: none;" novalidate>
                                             {% csrf_token %}
                                             <div class="row align-items-center">
                                                 <div class="col form-group">
-                                                    <input type="text" value="{{ email.email }}" name="email"
-                                                           class="form-control" id="email">
+                                                    <input type="email" value="{{ email.email }}" name="email"
+                                                           class="form-control" id="email" autocomplete="email" required>
+                                                    <div class="div invalid-feedback">
+                                                        Please enter a valid email address.
+                                                    </div>
                                                 </div>
                                                 <div class="col">
                                                     <input type="submit" class="btn edit-btn" value="Update">
