@@ -137,14 +137,17 @@
                     <div class="add_info col-lg-6">
                         {% comment %} <a class="btn add-btn" href="/user/add_phone">Add phone</a> {% endcomment %}
                         <!-- Add phone number form -->
-                        <form action="/user/add_phone" class="form" method="post" enctype="multipart/form-data">
+                        <form action="/user/add_phone" class="form needs-validation" method="post" enctype="multipart/form-data" novalidate>
                             {% csrf_token %}
                             <label for="phone">Phone</label>
                             <div class="row align-items-center">
                                 <!-- Add align-items-center to vertically align elements -->
                                 <div class="col-md-6">
                                     <div class="form-group mb-0"> <!-- Remove margin-bottom using mb-0 -->
-                                        <input type="number" name="phone" class="form-control" id="phone">
+                                        <input type="tel" name="phone" class="form-control" id="phone" inputmode="numeric" pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$" autocomplete="tel" required>
+                                        <div class="div invalid-feedback">
+                                            Please enter a valid 10 digit number.
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -202,13 +205,16 @@
                     <!-- BEGIN: Add Email column -->
                     <div class="add_info col-lg-6">
                         <!-- Add email form -->
-                        <form action="/user/add_email" class="form" method="post" enctype="multipart/form-data">
+                        <form action="/user/add_email" class="form needs-validation" method="post" enctype="multipart/form-data" novalidate>
                             {% csrf_token %}
                             <label for="email">Email</label>
                             <div class="row align-items-center">
                                 <div class="col-md-6">
                                     <div class="form-group mb-2">
-                                        <input type="text" name="email" class="form-control" id="email">
+                                        <input type="email" name="email" class="form-control" id="email" autocomplete="email" required>
+                                        <div class="div invalid-feedback">
+                                            Please enter a valid email address.
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -520,6 +526,29 @@
     function getCsrfToken() {
         return document.cookie.split('; ').find(row => row.startsWith('csrftoken=')).split('=')[1];
     }
+</script>
+
+<!-- JS for validation -->
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+        }, false)
+    })
+    })()
 </script>
 
 </body>
