@@ -3,14 +3,17 @@
 /* color variables */
 :root {
     --webpage-white: #F1F0E8;
+    --dark: #292929;
+    --neutral: #EFEFEF;
+    --carbon: #A9A9A9;
     --light-gray: #E9EAF2;
+    --oxford-blue: #0C2137;
+    --timberwolf: #D2D3D3;
     --turquoise: #0DCBAB;
     --turquoise-hover: #16bea2;
-    --oxford-blue: #002147;
-    --timberwolf: #D2D3D3;
-    --slate-blue: #6759CA;
+    --slate-blue: #6A5ACD;
     --slate-blue-hover: #5348a5;
-    --slate-gray: #7E8C95;
+    --slate-gray: #7C8C94;
     --slate-gray-hover: #59646a;
 
     --font-family-primary:
@@ -56,7 +59,7 @@ body {
     margin: 0;
     padding: 0;
     /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
-    background-color: var(--webpage-white) !important;
+    background-color: var(--neutral) !important;
     font-size: 0.875rem;
     font-family: var(--font-family-primary);
     color: var(--body-fg);
@@ -182,11 +185,10 @@ img.user_image {
 .btn {
     background-color: var(--turquoise);
     color: white;
-    padding: 10px 15px;
-    border-radius: 5%;
+    padding: 2px 5px !important;
+    border-radius: 8%;
     text-decoration: none;
     box-sizing: border-box;
-    margin: 0px 0 10px 0;
 }
 
 /* turquoise add user information button */
@@ -257,4 +259,22 @@ a#current-view {
 a#current-view:hover {
     color: var(--slate-blue);
     text-decoration: none;
+}
+
+div.phone-entry, div.email-entry {
+    padding: 0px;
+}
+
+div.phone-items, div.email-items {
+    align-items: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#user-content {
+    min-height: 100vh;
+}
+
+div.modify-info {
+    padding: 10px;
 }

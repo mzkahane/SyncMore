@@ -55,17 +55,38 @@
 
 #sidebar{
     background: var(--slate-gray);
-    min-height: 100vh;
-    padding-top: 20px;
-    /* transition: all 0.5s ease; */
+    padding: 15px 10px 0px 0px;
+    border: none;
+    border-radius: 0;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    height: 500px;
 }
 
-#sidebar ul li a{
-    display: block;
-    padding: 13px 3px;
+#sidebar li {
+    padding: 10px;
+}
+
+#documentTypeSelector, #add-document, #add-note {
     color: rgb(241, 237, 237);
-    font-size: 2.5vh;
+    width: 100%;
+}
+
+#documentTypeSelector {
+    color: black;
+    font-size: 0.9rem;
+    padding: 2px 5px;
+}
+
+#sidebar ul li.drive-options {
+    color: rgb(241, 237, 237) !important;
+    display: none;
+}
+
+#sidebar ul li a.sidebar-item {
+    padding: 10px 3px;
+    font-size: 2.25vh;
     position: relative;
+    color: rgb(241, 237, 237);
 }
 
 #sidebar ul li a .icon{
@@ -74,7 +95,7 @@
     display: inline-block;
 }
 
-#sidebar ul li a:hover{
+#sidebar ul li a.sidebar-item:hover{
     color: var(--turquoise);
     text-decoration: none;
 }
@@ -87,13 +108,4 @@
 #sidebar ul li a:hover:before,
 .wrapper .sidebar ul li a.active:before{
     display: block;
-}
-
-.wrapper .section .top_navbar .hamburger a{
-    font-size: 28px;
-    color: #f4fbff;
-}
-
-.wrapper .section .top_navbar .hamburger a:hover{
-    color: #a2ecff;
 }
