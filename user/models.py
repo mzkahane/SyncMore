@@ -79,6 +79,7 @@ class Email(models.Model):
 
 class Document(models.Model):
     TYPE_CHOICES = [
+        ('Misc', 'Misc'),
         ('ID', 'ID'),
         ('Passport', 'Passport'),
     ]
@@ -98,4 +99,4 @@ class Document(models.Model):
 
     expired_time = models.DateTimeField('expired_time', auto_now_add=True, null=True)
 
-    type = models.CharField('type', max_length=32, default='ID', null=True, choices=TYPE_CHOICES)
+    type = models.CharField('type', max_length=32, default='Misc', null=True, choices=TYPE_CHOICES)

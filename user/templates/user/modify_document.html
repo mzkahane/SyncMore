@@ -64,12 +64,14 @@
                     <input type="text" value="{{ document.title }}" name="title" class="form-control" id="title">
                 </div>
                 <div class="form-group mb-2">
-                    <label for="document">Document</label>
+                    <label for="document">Upload new document</label>
                     <input type="file" name="document" class="form-control" id="document">
                 </div>
                 <div class="form-group mb-2">
                     <p>Current document:</p>
+                    <a href="{{document.document.url}}">document url</a>
                     <img src="{{ document.document.url }}" alt="Your File" class="img-thumbnail">
+                    <embed src="{{document.document.url}}" type="application/pdf" width="400px" height="400px" />
                 </div>
             </div>
         </div>
@@ -84,6 +86,12 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    var val = $('.html-btn').val();
+    var file_type = val.substr(val.lastIndexOf('.')).toLowerCase();
+    if (file_type  === '.pdf') {
+    }
+</script>
 
 </body>
 </html>

@@ -8,7 +8,7 @@ const buttons = document.querySelectorAll('button.modify-form-btn');
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
     // get button value (phone.id or email.id)
-    const id = button.value;
+    const id = button.dataset.id;
     // get the id's respective form
     const form = document.getElementById(id);
     
@@ -21,3 +21,4 @@ buttons.forEach((button) => {
     }
     });
 });
+

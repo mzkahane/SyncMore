@@ -53,13 +53,33 @@
     font-family: 'Open Sans', sans-serif;
 }
 
-#sidebar{
-    background: var(--slate-gray);
-    padding: 15px 10px 0px 0px;
-    border: none;
-    border-radius: 0;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    height: 500px;
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    height: 100vh;
+    background: var(--slate-gray);;
+    /* color: $text-sidebar; */
+    transition: all 0.3s;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+}
+
+.sidebar-btn {
+    background: var(--slate-gray) !important;
 }
 
 #sidebar li {

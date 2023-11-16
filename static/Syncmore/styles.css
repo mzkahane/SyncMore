@@ -66,7 +66,7 @@ body {
 }
 
 /* navigation bar element */
-nav {
+.navbar {
     display: flex;
     list-style-type: none;
     padding: 0;
@@ -271,10 +271,25 @@ div.phone-items, div.email-items {
     padding-bottom: 5px;
 }
 
-#user-content {
-    min-height: 100vh;
-}
 
 div.modify-info {
     padding: 10px;
+}
+
+div.document-item {
+    border: 1px solid var(--dark);
+    padding: 3px;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+#content {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
 }
