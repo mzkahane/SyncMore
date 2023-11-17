@@ -54,6 +54,12 @@
     border: 2px solid red;
 } */
 
+.form-text {
+    margin-top: 0.25rem;
+    font-size: .875em;
+    color: #6c757d;
+}
+
 body {
     /* font-family: var(--font-family-monospace); */
     margin: 0;
