@@ -7,10 +7,11 @@
     <link rel="shortcut icon" type="image/x-icon" href="../../../static/Syncmore/favicon.ico">
     <!-- link to styles -->
     <link rel="stylesheet" href="../../../static/Syncmore/styles.css"/>
+    {% comment %} <link rel="stylesheet" href="../../../static/Syncmore/base.css"/> {% endcomment %}
     <link rel="stylesheet" href="../../../static/Syncmore/user_sidebar.css"/>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
         /* The Modal (background) */
         .modal {
@@ -81,7 +82,6 @@
         <!-- right hand side links: User Account Settings and Log Out -->
         <ul class="navbar-nav justify-content-end align-right">
             <li class="navbar-item">
-                <!-- TODO: add user account settings page -->
                 <a class="nav-link" href="/user/account">Account Settings</a>
             </li>
             <li class="navbar-item">
@@ -102,27 +102,47 @@
 
         <!-- BEGIN: left col = sidebar container -->
         <div class="col-lg-2" id="sidebar">
-            <ul>
+            <ul class="sidebar-list">
                 <li>
                     {% comment %} <a href="#home-page" data-toggle="collapse"> {% endcomment %}
-                    <a href="" onclick="return false;">
+                    <a href="" class="sidebar-item" onclick="return false;">
                         <span class="icon"><i class="fas fa-home"></i></span>
                         <span class="item" id="home-button">> Home Page</span>
                     </a>
                 </li>
                 <li>
                     {% comment %} <a href="#drive-page" data-toggle="collapse"> {% endcomment %}
-                    <a href="" onclick="return false;">
+                    <a href="" class="sidebar-item" onclick="return false;">
                         <span class="icon"><i class="fas fa-desktop"></i></span>
                         <span class="item" id="drive-button">> Personal Drive</span>
                     </a>
+                </li>
+                <li class="drive-options">
+                    <!-- Document type dropdown -->
+                    <h6>Filter view by file type:</h6>
+                    <select id="documentTypeSelector" onchange="filterDocuments()">
+                        <option value="">--Select a file type--</option>
+                        <option value="ID">ID</option>
+                        <option value="Passport">Passport</option>
+                        <!-- Add other types as needed -->
+                    </select>
+                </li>
+                <li class="drive-options">
+                    <!-- Upload document -->
+                    <h6>Upload a document:</h6>
+                    <a class="btn add-btn" id="add-document" href="/user/add_document">Upload document</a>
+                </li>
+                <li class="drive-options">
+                    <!-- Create a note -->
+                    <h6>Create a note:</h6>
+                    <a class="btn add-btn" id="add-note" href="/user/add_note">Create note</a>
                 </li>
             </ul>
         </div>
         <!-- END: left col = sidebar container -->
 
         <!-- BEGIN: right col = user home page / personal drive view -->
-        <div class="col-lg-10 container-fluid">
+        <div class="col-lg-10 container-fluid" id="user-content">
 
             <div class="user-content row-lg-10 container-fluid" id="current-page">
                 <a href="" id="current-view">Home Page</a>
@@ -135,12 +155,11 @@
 
                     <!-- BEGIN: Add Phone column -->
                     <div class="add_info col-lg-6">
-                        {% comment %} <a class="btn add-btn" href="/user/add_phone">Add phone</a> {% endcomment %}
                         <!-- Add phone number form -->
                         <form action="/user/add_phone" class="form needs-validation" method="post" enctype="multipart/form-data" novalidate>
                             {% csrf_token %}
                             <label for="phone">Phone</label>
-                            <div class="row align-items-center">
+                            <div class="phone-items d-flex flex-wrap align-items-middle">
                                 <!-- Add align-items-center to vertically align elements -->
                                 <div class="col-md-6">
                                     <div class="form-group mb-2"> <!-- Remove margin-bottom using mb-0 -->
@@ -150,16 +169,16 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="mx-2">
                                     <input type="submit" class="btn add-btn" value="Add">
                                 </div>
                             </div>
                         </form>
 
                         <!-- BEGIN: Each phone entry container -->
-                        <div class="container">
+                        <div class="phone-entry container">
                             {% for phone in phones %}
-                                <div class="d-flex flex-wrap align-items-start">
+                                <div class="phone-items d-flex flex-wrap align-items-middle">
                                     <!-- Display phone number -->
                                     <div class="mx-2">
                                         <li>{{ phone.phone }}</li>
@@ -178,7 +197,7 @@
                                         </form>
                                     </div>
                                     <!-- START: Form to modify phone number (display shown/hidden based on Modify phone button)-->
-                                    <div class="container-fluid">
+                                    <div class="modify-info container-fluid align-items-middle">
                                         <form action="/user/modify_phone/{{ phone.id }}" id="{{ phone.phone }}"
                                               class="modify-form needs-validation"
                                               method="post" enctype="multipart/form-data" style="display: none;" novalidate>
@@ -191,7 +210,7 @@
                                                                 Input cannot be blank.
                                                            </div>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col mx-2">
                                                     <input type="submit" class="btn edit-btn" value="Update">
                                                 </div>
                                             </div>
@@ -220,15 +239,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="mx-2">
                                     <input type="submit" class="btn add-btn" value="Add">
                                 </div>
                             </div>
                         </form>
                         <!-- BEGIN: Each email entry container -->
-                        <div class="container">
+                        <div class="email-entry container">
                             {% for email in emails %}
-                                <div class="d-flex flex-wrap align-items-start">
+                                <div class="email-items d-flex flex-wrap align-items-middle">
                                     <!-- Display email -->
                                     <div class="mx-2">
                                         <li>{{ email.email }}</li>
@@ -294,7 +313,6 @@
             <div class="user-content col-lg-10 container-fluid collapse" id="drive-page" style="display: none">
                 <!-- BEGIN: Add Note row -->
                 <br>
-                <a class="btn add-btn" href="/user/add_note">Add note</a>
                 <div class="row justify-content-lg-center">
                     <!-- BEGIN: Each note entry container -->
                     <div class="container">
@@ -326,13 +344,6 @@
 
                 <!-- BEGIN: Add Document row -->
                 <br>
-                <a class="btn add-btn" href="/user/add_document">Add document</a>
-                <!-- Document Type Dropdown -->
-                <select id="documentTypeSelector" onchange="filterDocuments()">
-                    <option value="ID">ID</option>
-                    <option value="Passport">Passport</option>
-                    <!-- Add other types as needed -->
-                </select>
                 <div class="row justify-content-lg-center" id="documentList">
                     <!-- BEGIN: Documents container -->
                     <div class="container">
@@ -345,12 +356,15 @@
                                     <div class="image_box">
                                         <img class="user_image" src="{{ document.url }}" alt="Your File">
                                     </div>
+                                    <a href="{{document.url}}">document url</a>
+                                    <embed src="{{document.url}}" type="application/pdf" width="400px" height="100px" />
+
                                     <!-- BEGIN: document modify and delete buttons row -->
                                     <div class="row my-2 mx-2">
                                         <!-- Modify document -->
                                         <div class="mx-2">
                                             <a class="btn edit-btn"
-                                               href="/user/modify_document/{{ document.id }}">Modify</a>
+                                                href="/user/modify_document/{{ document.id }}">Modify</a>
                                         </div>
                                         <!-- Delete document -->
                                         <div class="mx-2">
@@ -417,6 +431,10 @@
             homeContent.style.display = "block";
             // Hide drive content
             driveContent.style.display = "none";
+            // hide sidebar drive page drive page options
+            $("li.drive-options").each(function(i, option) {
+                $(option).hide();
+            });
         };
 
         // When the user clicks on the drive button
@@ -453,6 +471,10 @@
             if (pin === "{{ second_password }}") {
                 // Correct PIN
                 $('#current-view').text('Personal Drive');
+                // show sidebar drive page drive page options
+                $("li.drive-options").each(function(i, option) {
+                    $(option).show();
+                });
                 driveContent.style.display = "block"; // Show drive page content
                 modal.style.display = "none"; // Close the modal
             } else {
@@ -509,6 +531,7 @@
                 } else {
                     output = '<div class="col-12"><p>No documents found for this type.</p></div>';
                 }
+                $('#current-view').text(`Personal Drive / ${documentType} `);
                 document.getElementById('documentList').innerHTML = output;
             }
         };
