@@ -56,20 +56,28 @@
     <div class="row justify-content-center">
         <div class="col-sm-8 col-lg-6 bg-white p-5">
             <h1 class="display-6 mb-5 text-center"><strong>Login</strong></h1>
-            <form action="/user/login" method="post">
+            <form class="needs-validation" action="/user/login" method="post" novalidate>
                 {% csrf_token %}
                 <div class="mb-4">
-                    <label for="usernameInput" class="form-label">Username</label>
-                    <input type="text" name="username" class="form-control" id="usernameInput" placeholder="Username">
+                    <label for="usernameInput" class="form-label">Username:</label>
+                    <input type="text" name="username" class="form-control" id="usernameInput" autocomplete="username" aria-describedby="UserRequired" required>
+                    <div id="UserRequired" class="form-text">Required</div>
+                    <div class="div invalid-feedback">
+                        Please enter your username.
+                    </div>
                 </div>
 
                 <div class="mb-4">
-                    <label for="passwordInput" class="form-label">Password</label>
-                    <input type="password" name="password" class="form-control" id="passwordInput" placeholder="Password">
+                    <label for="passwordInput" class="form-label">Password:</label>
+                    <input type="password" name="password" class="form-control" id="passwordInput" autocomplete="current-password" aria-describedby="PWRequired" required>
+                    <div id="PWRequired" class="form-text">Required</div>
+                    <div class="div invalid-feedback">
+                        Incorrect password.
+                    </div>
                 </div>
 
                 <div class="d-flex justify-content-center mb-3">
-                    <input type="submit" class="btn delete-btn btn-lg rounded-pill" value="Login">
+                    <input type="submit" class="btn add-btn btn-lg rounded-pill" value="Login">
                 </div>
 
                 <div class="text-center mb-3">Don't have an account?
@@ -80,6 +88,28 @@
     </div>
 </div>
 
+<!-- JS for validation -->
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+        }, false)
+    })
+    })()
+</script>
 
 <!-- Javascript: jQuery, Popper.js, Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

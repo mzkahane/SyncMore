@@ -156,13 +156,18 @@
                     <!-- BEGIN: Add Phone column -->
                     <div class="add_info col-lg-6">
                         <!-- Add phone number form -->
-                        <form action="/user/add_phone" class="form" method="post" enctype="multipart/form-data">
+                        <form action="/user/add_phone" class="form needs-validation" method="post" enctype="multipart/form-data" novalidate>
                             {% csrf_token %}
                             <label for="phone">Phone</label>
                             <div class="phone-items d-flex flex-wrap align-items-middle">
                                 <!-- Add align-items-center to vertically align elements -->
-                                <div class="mx-2">
-                                    <input type="number" name="phone" class="form-control" id="phone">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-2"> <!-- Remove margin-bottom using mb-0 -->
+                                        <input type="tel" name="phone" class="form-control" id="phone" inputmode="numeric" pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$" autocomplete="tel" required>
+                                        <div class="div invalid-feedback">
+                                            Please enter a valid 10 digit number.
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="mx-2">
                                     <input type="submit" class="btn add-btn" value="Add">
@@ -194,13 +199,16 @@
                                     <!-- START: Form to modify phone number (display shown/hidden based on Modify phone button)-->
                                     <div class="modify-info container-fluid align-items-middle">
                                         <form action="/user/modify_phone/{{ phone.id }}" id="{{ phone.phone }}"
-                                            class="modify-form"
-                                            method="post" enctype="multipart/form-data" style="display: none;">
+                                              class="modify-form needs-validation"
+                                              method="post" enctype="multipart/form-data" style="display: none;" novalidate>
                                             {% csrf_token %}
-                                            <div class="modify-info row d-flex flex-wrap align-items-middle">
-                                                <div class="col form-group mx-2">
-                                                    <input type="text" value="{{ phone.phone }}" name="phone"
-                                                        class="form-control" id="phone">
+                                            <div class="row align-items-center">
+                                                <div class="col form-group">
+                                                    <input type="tel" value="{{ phone.phone }}" name="phone"
+                                                           class="form-control" id="phone" autocomplete="tel" inputmode="numeric" pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$" required>
+                                                           <div class="div invalid-feedback">
+                                                                Input cannot be blank.
+                                                           </div>
                                                 </div>
                                                 <div class="col mx-2">
                                                     <input type="submit" class="btn edit-btn" value="Update">
@@ -219,12 +227,17 @@
                     <!-- BEGIN: Add Email column -->
                     <div class="add_info col-lg-6">
                         <!-- Add email form -->
-                        <form action="/user/add_email" class="form" method="post" enctype="multipart/form-data">
+                        <form action="/user/add_email" class="form needs-validation" method="post" enctype="multipart/form-data" novalidate>
                             {% csrf_token %}
-                            <label for="email">Email</h5>
-                            <div class="email-items d-flex flex-wrap align-items-middle">
-                                <div class="mx-2">
-                                    <input type="text" name="email" class="form-control" id="email">
+                            <label for="email">Email</label>
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-2">
+                                        <input type="email" name="email" class="form-control" id="email" autocomplete="email" required>
+                                        <div class="div invalid-feedback">
+                                            Please enter a valid email address.
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="mx-2">
                                     <input type="submit" class="btn add-btn" value="Add">
@@ -255,13 +268,16 @@
                                     <!-- START: Form to modify email (display shown/hidden based on Modify email button)-->
                                     <div class="container-fluid">
                                         <form action="/user/modify_email/{{ email.id }}" id="{{ email.email }}"
-                                            class="modify-form"
-                                            method="post" enctype="multipart/form-data" style="display: none;">
+                                              class="modify-form needs-validation"
+                                              method="post" enctype="multipart/form-data" style="display: none;" novalidate>
                                             {% csrf_token %}
                                             <div class="row align-items-center">
                                                 <div class="col form-group">
-                                                    <input type="text" value="{{ email.email }}" name="email"
-                                                        class="form-control" id="email">
+                                                    <input type="email" value="{{ email.email }}" name="email"
+                                                           class="form-control" id="email" autocomplete="email" required>
+                                                    <div class="div invalid-feedback">
+                                                        Please enter a valid email address.
+                                                    </div>
                                                 </div>
                                                 <div class="col">
                                                     <input type="submit" class="btn edit-btn" value="Update">
@@ -539,6 +555,29 @@
     function getCsrfToken() {
         return document.cookie.split('; ').find(row => row.startsWith('csrftoken=')).split('=')[1];
     }
+</script>
+
+<!-- JS for validation -->
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+        }, false)
+    })
+    })()
 </script>
 
 </body>
