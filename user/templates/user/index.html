@@ -231,12 +231,14 @@
                     <!-- Add email form -->
                     <form action="/user/add_email" class="form needs-validation" method="post" enctype="multipart/form-data" novalidate>
                         {% csrf_token %}
-                        <label for="email">Email</h5>
-                        <div class="email-items d-flex flex-wrap align-items-middle">
-                            <div class="mx-2">
+                        <label for="email">Email</label>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
                                 <div class="form-group mb-2">
                                     <input type="email" name="email" class="form-control" id="email" autocomplete="email" required>
-                                    <div class="div invalid-feedback">Please enter a valid email address.</div>
+                                    <div class="div invalid-feedback">
+                                        Please enter a valid email address.
+                                    </div>
                                 </div>
                             </div>
                             <div class="mx-2">
@@ -268,14 +270,16 @@
                                 <!-- START: Form to modify email (display shown/hidden based on Modify email button)-->
                                 <div class="container-fluid">
                                     <form action="/user/modify_email/{{ email.id }}" id="{{ email.email }}"
-                                        class="modify-form needs-validation"
-                                        method="post" enctype="multipart/form-data" style="display: none;" novalidate>
+                                            class="modify-form needs-validation"
+                                            method="post" enctype="multipart/form-data" style="display: none;" novalidate>
                                         {% csrf_token %}
                                         <div class="row align-items-center">
                                             <div class="col form-group">
                                                 <input type="email" value="{{ email.email }}" name="email"
-                                                    class="form-control" id="email" autocomplete="email" required>
-                                                <div class="div invalid-feedback">Please enter a valid email.</div>
+                                                        class="form-control" id="email" autocomplete="email" required>
+                                                <div class="div invalid-feedback">
+                                                    Please enter a valid email address.
+                                                </div>
                                             </div>
                                             <div class="col">
                                                 <input type="submit" class="btn edit-btn" value="Update">
