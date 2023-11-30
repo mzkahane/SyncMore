@@ -59,27 +59,43 @@
         <div class="col-sm-8 col-lg-6 bg-white p-5">
             <h1 class="display-6 mb-5 text-center"><strong>Sign Up</strong></h1>
             <!-- BEGIN: Register form -->
-            <form action="/user/register" method="post">
+            <form class="needs-validation" action="/user/register" method="post" novalidate>
                 <!-- for authentication -->
                 {% csrf_token %}
                 <div class="mb-4">
                     <label for="username" class="form-label">Username:</label>
-                    <input type="text" id="username" name="username" class="form-control">
+                    <input type="text" id="username" name="username" class="form-control" aria-describedby="UserRequired" required>
+                    <div id="UserRequired" class="form-text">Required</div>
+                    <div class="div invalid-feedback">
+                        Please enter a username.
+                    </div>
                 </div>
 
                 <div class="mb-4">
                     <label for="password_1" class="form-label">Password:</label>
-                    <input type="password" id="password_1" name="password_1" class="form-control">
+                    <input type="password" id="password_1" name="password_1" class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$" autocomplete="new-password" aria-describedby="PW1Help" required>
+                    <div id="PW1    Help" class="form-text">Password must be at least 6 characters with at least one capital letter and one number.</div>
+                    <div class="div invalid-feedback">
+                        Password does not meet requirements.
+                    </div>
                 </div>
 
                 <div class="mb-4">
                     <label for="password_2" class="form-label">Please enter your password again:</label>
-                    <input type="password" id="password_2" name="password_2" class="form-control">
+                    <input type="password" id="password_2" name="password_2" class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$" autocomplete="new-password" aria-describedby="PW2Required" required>
+                    <div id="PW2Required" class="form-text">Required</div>
+                    <div class="div invalid-feedback">
+                        Passwords must match.
+                    </div>
                 </div>
 
                 <div class="mb-4">
                     <label for="second_password" class="form-label">Please create a 4-digit PIN for your personal drive access:</label>
-                    <input type="password" id="second_password" name="second_password" class="form-control">
+                    <input type="password" id="second_password" name="second_password" class="form-control" inputmode="numeric" pattern="\d{4}" autocomplete="new-password" aria-describedby="PINHelp" required>
+                    <div id="PINHelp" class="form-text">PIN must be 4 digits.</div>
+                    <div class="div invalid-feedback">
+                        PIN does not meet requirements.
+                    </div>
                 </div>
 
                 <div class="text-center mb-3">
@@ -96,6 +112,28 @@
 </div>
 <!-- END: Register container -->
 
+<!-- JS for validation -->
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+        }, false)
+    })
+    })()
+</script>
 
 <!-- Javascript: jQuery, Popper.js, Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
