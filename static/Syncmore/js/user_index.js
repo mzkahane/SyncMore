@@ -22,3 +22,38 @@ buttons.forEach((button) => {
     });
 });
 
+
+function filterDocuments() {
+  console.log("Filter function called");
+  // var documentType = document.getElementById('documentTypeSelector').value;
+  // fetchDocuments(documentType);
+  const documents_list = document.querySelectorAll(".document-item"); // select all document-items
+  // grab the value in the event target's data-filter attribute
+
+  var filter = document.getElementById('documentTypeSelector').value;
+  console.log(filter);
+
+  if (filter === 'All') {
+    console.log("inside all filter");
+    documents_list.forEach(doc => {
+      console.log(doc.dataset.id);
+      doc.classList.remove('hidden')
+      doc.classList.add('active-document');
+    });
+  }  else {
+    console.log("inside other filter");
+    documents_list.forEach(doc => {
+          const typ = doc.dataset.id; // get the document type from its data-id
+          console.log(typ);
+          if (typ === filter) {
+              doc.classList.remove('hidden');
+              doc.classList.add('active-document');
+          } else {
+              doc.classList.add('hidden');
+              doc.classList.remove('active-document');
+          }
+      });
+  };
+  
+}
+

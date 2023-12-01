@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>User Home Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="../../../static/Syncmore/favicon.ico">
     <!-- link to styles -->
@@ -120,8 +121,15 @@
                 <h6>Filter view by file type:</h6>
                 <select id="documentTypeSelector" onchange="filterDocuments()">
                     <option value="">--Select a file type--</option>
+                    <option value="All">Show All</option>
+                    <option value="Birth Certificate">Birth Certificate</option>
+                    <option value="Financial">Financial</option>
+                    <option value="Housing">Housing</option>
                     <option value="ID">ID</option>
+                    <option value="Insurance">Insurance</option>
+                    <option value="SSN">SSN</option>
                     <option value="Passport">Passport</option>
+                    <option value="Other">Other</option>
                     <!-- Add other types as needed -->
                 </select>
             </li>
@@ -142,15 +150,19 @@
     <!-- BEGIN: user content: home page / personal drive view -->
     <div id="content">
 
-        <div class="container-fluid align-middle" id="current-page">
+        <nav class="user-navbar navbar-expand-lg navbar-light bg-light">
 
-            <button type="button" class="navbar-toggler navbar-dark sidebar-btn" id="sidebarCollapse"
-            aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <div class="container-fluid d-flex" id="current-page">
 
-            <a href="" id="current-view">Home Page</a>
-        </div>
+                <button type="button" class="navbar-toggler navbar-dark sidebar-btn" id="sidebarCollapse"
+                aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <a href="" id="current-view">Home Page</a>
+            </div>
+        
+        </nav>
 
         <!-- BEGIN: user information container -->
         <div class="row-lg-10 container-fluid" id="home-page">
@@ -312,75 +324,122 @@
         <!-- END: user information container -->
 
         <!-- BEGIN: user personal drive notes/documents container -->
-        <div class="user-content col-lg-10 container-fluid collapse" id="drive-page" style="display: none">
-            <!-- BEGIN: Add Note row -->
-            <br>
-            <div class="row justify-content-lg-center">
-                <!-- BEGIN: Each note entry container -->
-                <div class="container">
-                    {% for note in notes %}
-                        <div class="d-flex flex-wrap align-items-start">
-                            <!-- Display note  -->
-                            <div class="mx-2">
-                                <h5>{{ note.title }}</h5>
-                                <p>{{ note.content }}</p>
-                            </div>
-                            <!-- Modify note -->
-                            <div class="mx-2">
-                                <a class="btn edit-btn" href="/user/modify_note/{{ note.id }}">Modify</a>
-                            </div>
-                            <!-- Delete note -->
-                            <div class="mx-2">
-                                <form action="/user/delete_note/{{ note.id }}" method="post">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="operation" value="delete">
-                                    <input class="btn delete-btn" type="submit" value="Delete">
-                                </form>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-                <!-- END: Each note entry container-->
-            </div>
-            <!-- END: Add Note row -->
+        <div class="user-content container-fluid collapse" id="drive-page" style="display: none">
+            <div class="row row-cols-2">
+                <br>
+                <!-- BEGIN: Add Note col -->
+                <div class="col-lg-4 justify-content-lg-center" id="noteList">
 
-            <!-- BEGIN: Add Document row -->
-            <br>
-            <div class="row justify-content-lg-center" id="documentList">
-                <!-- BEGIN: Documents container -->
-                <div class="container">
-                    {% for document in documents %}
-                        <!-- BEGIN: Document per column -->
-                        <div class="document-item row my-2">
-                            <div class="col-lg-10">
-                                <span class="align-middle">{{ document.title }}</span>
+                    <div class="note-section-header d-flex container-fluid">
+                        <h4>Notes</h4>
+                        <button type="button" class="navbar-dark btn add-btn" id="noteListCollapse"
+                            aria-controls="noteListCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+
+                    <!-- BEGIN: Each note entry container -->
+                    <div class="notes-list container" id="notesContainer">
+                        {% for note in notes %}
+                        <div class="note-entry container">
+                            <div class="note-header">
+                                <!-- Note title -->
+                                <div class="note-header-item">
+                                    <span>{{ note.title }}</span>
+                                </div>
+
+                                <div class="note-header-item">
+                                    <!-- Last updated -->
+                                    <div class="col">
+                                        <span>Updated {{ note.updated_time|date:"M d, Y" }}</span>
+                                    </div>
+                                    <!-- Modify and Delete note -->
+                                    <div class="d-flex col">
+                                        <!-- Modify note -->
+                                        <a class="btn edit-btn mx-2" href="/user/modify_note/{{ note.id }}">Modify</a>
+                                        <!-- Delete note -->
+                                        <form action="/user/delete_note/{{ note.id }}" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="operation" value="delete">
+                                            <input class="btn delete-btn mx-2" type="submit" value="Delete">
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
-                            <!-- Display document in image_box -->
-                            {% comment %} <div class="image_box">
-                                <img class="user_image" src="{{ document.url }}" alt="Your File">
-                            </div> {% endcomment %}
-                            <!-- BEGIN: Modify document -->
-                            <div class="col col-lg-1">
-                                <a class="btn edit-btn"
-                                    href="/user/modify_document/{{ document.id }}">Modify</a>
+                            <!-- Note content -->
+                            <div class="note-content">
+                                <p class="note-content">{{ note.content }}</p>
                             </div>
-                            <!-- END: Modify document -->
-                            <!-- BEGIN: Delete document -->
-                            <div class="col col-lg-1">
-                                <form action="/user/delete_document/{{ document.id }}" method="post">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="operation" value="delete">
-                                    <input class="btn delete-btn" type="submit" value="Delete">
-                                </form>
-                            </div>
-                            <!-- END: Delete document -->
                         </div>
-                    {% endfor %}
-                    <!-- END: Document per column -->
+                        {% endfor %}
+                    </div>
+                    <!-- END: Each note entry container-->
                 </div>
-                <!-- END: Documents container-->
+                <!-- END: Add Note col -->
+
+                <!-- BEGIN: Add Document col -->
+                <br>
+                <div class="col-lg justify-content-lg-center" id="documentList">
+
+                    <div class="drive-header container-fluid">
+                        <h4>Documents</h4>
+                    </div>
+
+                    <div class="container">
+                        <div class="document-header row">
+                            <div class="col">Name</div>
+                            <div class="col-lg-2">Last modified</div>
+                            <div class="col-lg-2 center-text">Options</div>
+                        </div>
+                    </div>
+
+                    <!-- BEGIN: Documents container -->
+                    <div class="container">
+                        {% for document in documents %}
+                            <!-- BEGIN: Document per column -->
+                            <div class="document-item active-document row" data-id="{{ document.type }}">
+                                <div class="document-detail col">
+                                    <span class="document-detail align-middle">{{ document.title }}</span>
+                                </div>
+
+                                <div class="document-detail col-lg-2">
+                                    <span class="document-detail align-middle">{{ document.updated_time|date:"M d, Y" }}</span>
+                                </div>
+
+                                <!-- Display document in image_box -->
+                                {% comment %} <div class="image_box">
+                                    <img class="user_image" src="{{ document.url }}" alt="Your File">
+                                </div> {% endcomment %}
+                                <!-- BEGIN: Modify document -->
+                                <div class="document-detail d-flex col-lg-2">
+                                    <a class="document-detail btn edit-btn mx-2"
+                                        href="/user/modify_document/{{ document.id }}">Modify</a>
+
+                                        <form action="/user/delete_document/{{ document.id }}" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="operation" value="delete">
+                                            <input class="document-detail btn delete-btn mx-2" type="submit" value="Delete">
+                                        </form>
+                                </div>
+                                <!-- END: Modify document -->
+                                <!-- BEGIN: Delete document -->
+                                {% comment %} <div class="document-detail col-lg-1">
+                                    <form action="/user/delete_document/{{ document.id }}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="operation" value="delete">
+                                        <input class="document-detail btn delete-btn" type="submit" value="Delete">
+                                    </form>
+                                </div> {% endcomment %}
+                                <!-- END: Delete document -->
+                            </div>
+                        {% endfor %}
+                        <!-- END: Document per column -->
+                    </div>
+                    <!-- END: Documents container-->
+                </div>
+                <!-- END: Add Document col -->
             </div>
-            <!-- END: Add Document row -->
+            
         </div>
         <!-- END: user personal drive notes/documents container -->
     </div>
@@ -401,8 +460,7 @@
 <!-- Javascript: jQuery, Popper.js, Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"
-        type="text/javascript"></script>
+        crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
@@ -482,77 +540,7 @@
         };
     });
 </script>
-<script>
-    function fetchDocuments(documentType) {
-        const xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200) {
-                // Parse the JSON string to an object
-                const response = JSON.parse(this.responseText);
-                let output = '';
-                console.log(response)
-                console.log(response.length > 0)
-                const documents = response.documents;
-                console.log(documents.length > 0);
-                if (documents.length > 0) {
-                    for (let i = 0; i < documents.length; i++) {
-                        const doc = documents[i];
-                        if (doc.url && doc.title) {
-                            output += `<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mx-2">
-                    <h6>${doc.title}</h6>
-                    <div class="image_box">
-                        <img class="user_image" src="${doc.url}" alt="${doc.title}">
-                    </div>
-                    <!-- Modify and Delete Buttons -->
-                    <div class="row my-2 mx-2">
-                        <!-- Modify document -->
-                        <div class="mx-2">
-                            <a class="btn edit-btn" href="/user/modify_document/${doc.id}">Modify</a>
-                        </div>
-                        <!-- Delete document -->
-                        <div class="mx-2">
-                            <form action="/user/delete_document/${doc.id}" method="post">
-                                <input type="hidden" name="csrfmiddlewaretoken" value="${getCsrfToken()}">
-                                <input type="hidden" name="operation" value="delete">
-                                <input class="btn delete-btn" type="submit" value="Delete">
-                            </form>
-                        </div>
-                    </div>
-                </div>`;
-                        } else {
-                            console.log('Document fields or title missing:', response[i]);
-                            output += '<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mx-2"><p>Document information not available.</p></div>';
-                        }
-                    }
 
-                } else {
-                    output = '<div class="col-12"><p>No documents found for this type.</p></div>';
-                }
-                $('#current-view').text(`Personal Drive / ${documentType} `);
-                document.getElementById('documentList').innerHTML = output;
-            }
-        };
-        xhttp.open("GET", `/user/index?type=${documentType}`, true);
-        xhttp.setRequestHeader('x-requested-with', 'XMLHttpRequest');
-
-        // Add an Authorization header
-        const authToken = 'TB_5HNUNb32WHtubka201BsSFwrazG7Q5veqCf9p'; // Replace with your actual token
-        xhttp.setRequestHeader('Authorization', `Bearer ${authToken}`);
-
-        xhttp.send();
-    }
-
-    function filterDocuments() {
-        console.log("Filter function called");
-        var documentType = document.getElementById('documentTypeSelector').value;
-        fetchDocuments(documentType);
-    }
-
-    // Function to get CSRF token from cookies (needed for the delete form)
-    function getCsrfToken() {
-        return document.cookie.split('; ').find(row => row.startsWith('csrftoken=')).split('=')[1];
-    }
-</script>
 <!-- jQuery CDN - Slim version (=without AJAX) -->
 <script
 src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -573,6 +561,12 @@ crossorigin="anonymous"></script>
     $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
+        });
+    });
+
+    $(document).ready(function () {
+        $('#noteListCollapse').on('click', function () {
+            $('#notesContainer').toggleClass('hidden');
         });
     });
 </script>

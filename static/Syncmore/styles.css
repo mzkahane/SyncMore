@@ -249,9 +249,14 @@ img.user_image {
     display:none;
 }
 
-#current-page {
-    padding: 13px;
+.navbar-expand-lg .navbar-toggler {
+    display: block !important;
 }
+
+
+/* #current-page {
+    padding: 13px;
+} */
 
 a#current-view {
     padding: 13px 3px;
@@ -282,11 +287,6 @@ div.modify-info {
     padding: 10px;
 }
 
-div.document-item {
-    border: 1px solid var(--dark);
-    padding: 3px;
-}
-
 .wrapper {
     display: flex;
     width: 100%;
@@ -298,4 +298,72 @@ div.document-item {
     padding: 20px;
     min-height: 100vh;
     transition: all 0.3s;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.user-navbar {
+    padding: 15px 10px;
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 40px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* #documentList {
+    background-color: white;
+} */
+
+.note-section-header {
+    gap: 5px;
+}
+
+.note-entry {
+    padding: 10px;
+}
+
+.note-header {
+    /* border-bottom: 1px solid var(--dark) !important; */
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding: 3px;
+    border-radius: 10px 10px 0px 0px;
+    background-color: var(--turquoise);
+    display: grid;
+}
+
+.node-header-item {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+div.note-content {
+    border-radius: 0px 0px 10px 10px;
+    background-color: white;
+}
+
+p.note-content {
+    white-space: pre-wrap;
+    padding: 10px;
+    font-size: 0.8125rem;
+}
+
+.document-header {
+    border-bottom: 2px solid var(--dark) !important;
+}
+
+.hidden > .document-detail,
+.hidden > * {
+    display: none !important;
+}
+
+.active-document {
+    border-bottom: 1px solid var(--dark);
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding: 3px;
+    display: block;
 }

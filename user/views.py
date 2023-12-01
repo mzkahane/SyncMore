@@ -2,19 +2,21 @@
 import hashlib
 import re
 import sys
+from datetime import datetime
 
 import boto3
 import requests
+from botocore.client import Config
 from botocore.exceptions import NoCredentialsError
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.core import serializers
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
+from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
-from django.core import serializers
-from django.conf import settings
-import boto3
-from botocore.client import Config
+
 from SyncMore import settings
 
 from .forms import DocumentForm
@@ -184,6 +186,7 @@ def index_view(request):
     supervisor = Supervisor.objects.get(id=user.supervisor.id)
     notes = Note.objects.filter(note_user_id=c_uid)
     second_password = user.second_password
+    documents = Document.objects.filter(document_user_id=c_uid)
 
     # Check if the request is an AJAX request
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
@@ -197,6 +200,7 @@ def index_view(request):
             presigned_url = generate_presigned_url(
                 document.document.name)  # Assuming 'document' field is the file field in your Document model
             documents_with_urls.append({
+                'type': document.type,
                 'id': document.id,
                 'title': document.title,
                 'url': presigned_url
@@ -205,17 +209,18 @@ def index_view(request):
         return JsonResponse({'documents': documents_with_urls}, safe=False)
 
     # If not an AJAX request, render the page normally with all the context
-    document_type = request.GET.get('type', 'ID')
-    documents = Document.objects.filter(document_user_id=c_uid, type=document_type)
+    # document_type = request.GET.get('type', 'Other')
+    # documents = Document.objects.filter(document_user_id=c_uid, type=document_type)
 
-    documents_with_urls = []
-    for document in documents:
-        presigned_url = generate_presigned_url(document.document.name)
-        documents_with_urls.append({
-            'id': document.id,
-            'title': document.title,
-            'url': presigned_url
-        })
+    # documents_with_urls = []
+    # for document in documents:
+    #     presigned_url = generate_presigned_url(document.document.name)
+    #     documents_with_urls.append({
+    #         'type': document.type,
+    #         'id': document.id,
+    #         'title': document.title,
+    #         'url': presigned_url
+    #     })
 
     context = {
         'user': user,
@@ -223,7 +228,8 @@ def index_view(request):
         'emails': emails,
         'supervisor': supervisor,
         'notes': notes,
-        'documents': documents_with_urls,
+        #'documents': documents_with_urls,
+        'documents': documents,
         'second_password': second_password
     }
 
@@ -278,7 +284,7 @@ def add_document(request):
     elif request.method == "POST":
         title = request.POST.get('title', "")
         document = request.FILES.get('document', "")
-        type = request.POST.get('type', 'ID')
+        type = request.POST.get('type', 'Other')
         Document.objects.create(document_user_id=c_uid, title=title, document=document, type=type)
         return HttpResponseRedirect('/user/index')
 
@@ -368,6 +374,7 @@ def modify_document(request, document_id):
         documentt = request.FILES.get('document', document.document)
         document.title = title
         document.document = documentt
+        document.updated_time = datetime.now()
         document.save()
         return HttpResponseRedirect('/user/index')
 
