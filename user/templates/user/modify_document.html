@@ -66,23 +66,23 @@
         </div>
         <!-- BEGIN: User form content -->
         <div id="user-form-content">
-            {% csrf_token %}
             <div class="container">
                 <form action="/user/modify_document/{{ document.id }}" class="form" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
                     <!-- Document name -->
                     <div class="form-group row">
-                        <label for="title">Document name</label>
-                        <input type="text" value="{{ document.title }}" name="title" class="form-control" id="title">
+                        <label for="new-title" class="optional">Document name</label>
+                        <input type="text" value="{{ document.title }}" name="title" class="form-control" id="new-title">
                     </div>
                     <!-- Upload new document -->
                     <div class="form-group row">
-                        <label for="document">Upload new document</label>
-                        <input type="file" onChange='displayFile(event)' name="document" class="form-control" id="document">
+                        <label for="new-document" class="optional">Upload new document (PNG, JPG/JPEG, PDF files only)</label>
+                        <input type="file" onChange='displayFile(event)' name="document" class="form-control" id="new-document" accept="image/png, image/jpeg, application/pdf" />
                     </div>
                     <!-- Document type selection -->
                     <div class="form-group row">
-                        <label for="type">Document type</label>
-                        <select name="type" class="form-control" id="type">
+                        <label for="new-document-type" class="optional">Document type</label>
+                        <select name="type" class="form-control" id="new-document-type">
                             <option value="Other">Unchanged</option>
                             <option value="Other">Other</option>
                             <option value="Birth Certificate">Birth Certificate</option>
@@ -96,13 +96,9 @@
                     </div>
                     <!-- Document expiration date -->
                     <div class="form-group row">
-                        <label>
-                            Update the document's expiration date or skip if not applicable.
-                            <div class="mt-2">
-                                <input type="date" class="form-control" name="expiration-date" pattern="\d{4}-\d{2}-\d{2}" />
-                                <span class="validity"></span>
-                            </div>
-                        </label>
+                        <label for="new-expiration-date" class="optional">Update the document's expiration date or skip if not applicable.</label>
+                        <input type="date" class="form-control" name="expiration-date" id="new-expiration-date" pattern="\d{4}-\d{2}-\d{2}" />
+                        <span class="validity"></span>
                     </div>
                     <!-- View current document -->
                     <div class="form-group container align-content-center">

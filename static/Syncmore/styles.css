@@ -443,6 +443,18 @@ p.note-content {
     height: 400px;
 }
 
+.optional:after {
+    content:" (Optional)";
+    color: var(--turquoise);
+    font-size: 0.8125rem;
+}
+
+.required:after {
+    content:" (Required)";
+    color: red;
+    font-size: 0.8125rem;
+}
+
 
 @media (max-width: 767px) {
     #user-form-container {
