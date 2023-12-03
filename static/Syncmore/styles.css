@@ -4,7 +4,7 @@
 :root {
     --webpage-white: #F1F0E8;
     --dark: #292929;
-    --neutral: #EFEFEF;
+    --neutral: #F7F7F7;
     --carbon: #A9A9A9;
     --light-gray: #E9EAF2;
     --oxford-blue: #0C2137;
@@ -317,32 +317,50 @@ div.modify-info {
     background-color: white;
 } */
 
-.note-section-header {
+#noteList, #notesContainer {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.note-list-header {
     gap: 5px;
 }
 
 .note-entry {
-    padding: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
 .note-header {
     /* border-bottom: 1px solid var(--dark) !important; */
-    margin-top: 2px;
-    margin-bottom: 2px;
     padding: 3px;
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 5px 5px 0px 0px;
     background-color: var(--turquoise);
     display: grid;
+    border: 1px solid var(--dark);
 }
 
-.node-header-item {
-    grid-column: 1;
-    grid-row: 1;
+.note-header-item span,
+.note-header-item .btn {
+    color: white;
+    font-size: 0.8125rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 div.note-content {
-    border-radius: 0px 0px 10px 10px;
+    border-radius: 0px 0px 5px 5px;
     background-color: white;
+    border-left: 1px solid var(--dark);
+    border-right: 1px solid var(--dark);
+    border-bottom: 1px solid var(--dark);
 }
 
 p.note-content {
@@ -351,8 +369,9 @@ p.note-content {
     font-size: 0.8125rem;
 }
 
-.document-header {
+.document-list-header {
     border-bottom: 2px solid var(--dark) !important;
+    font-size: 0.9rem;
 }
 
 .hidden > .document-detail,
@@ -366,4 +385,73 @@ p.note-content {
     margin-bottom: 2px;
     padding: 3px;
     display: block;
+    font-size: 0.8125rem;
 }
+
+.expired {
+    color: red;
+}
+
+.gray-body {
+    background-color: var(--slate-gray);
+}
+
+.user-form {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+#user-form-container {
+    border-radius: 4px;
+    overflow: hidden;
+    width: 28em;
+    min-width: 300px;
+    margin: 100px auto;
+    height: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+#user-form-header {
+    padding: 15px 16px;
+    display: flex;
+    justify-content: center;
+}
+
+#user-form-content {
+    display: flex;
+    align-items: center;
+    float: left;
+    width: 100%;
+}
+
+.preview {
+    display: flex;
+    justify-content: center;
+}
+
+.fit-image {
+    border: 1px solid var(--dark);
+    background: white;
+    max-width: 100%;
+}
+
+.fit-pdf {
+    width: 100%;
+    height: 400px;
+}
+
+
+@media (max-width: 767px) {
+    #user-form-container {
+        width: auto;
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+}
+

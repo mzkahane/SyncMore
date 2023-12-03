@@ -57,3 +57,23 @@ function filterDocuments() {
   
 }
 
+
+// select all elements with class name="expiration-date"
+// const expirationDates = document.querySelectorAll('expiration-date');
+// console.log("outside expiration dates forEach");
+// // loop through each expiration date element and check if expiration-date is today or older than today
+// expirationDates.forEach((date) => {
+//   console.log("inside expiration dates forEach");
+//   const expires = date.innerHTML;
+
+//   var varDate = new Date(expires); //dd-mm-YYYY
+//   var today = new Date();
+//   today.setHours(0,0,0,0);
+
+//   if(varDate >= today) {
+//     //Do something..
+//     alert("Working!");
+//     expires.classList.add('expired');
+//     }
+// });
+

@@ -5,6 +5,7 @@ import sys
 from datetime import datetime
 
 import boto3
+import pytz
 import requests
 from botocore.client import Config
 from botocore.exceptions import NoCredentialsError
@@ -14,6 +15,8 @@ from django.core import serializers
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.utils import timezone
+from django.utils.dateparse import parse_date
+from django.utils.timezone import localtime
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
@@ -285,7 +288,9 @@ def add_document(request):
         title = request.POST.get('title', "")
         document = request.FILES.get('document', "")
         type = request.POST.get('type', 'Other')
-        Document.objects.create(document_user_id=c_uid, title=title, document=document, type=type)
+        date_str = request.POST.get('expiration-date', "")
+        expiration_date = parse_date(date_str)
+        Document.objects.create(document_user_id=c_uid, title=title, document=document, type=type, expired_time=expiration_date)
         return HttpResponseRedirect('/user/index')
 
 
@@ -341,6 +346,7 @@ def modify_note(request, note_id):
         content = request.POST.get('content', "")
         note.title = title
         note.content = content
+        note.updated_time = datetime.now()
         note.save()
         return HttpResponseRedirect('/user/index')
 
@@ -375,6 +381,16 @@ def modify_document(request, document_id):
         document.title = title
         document.document = documentt
         document.updated_time = datetime.now()
+        
+        type = request.POST.get('type', "")
+        if type != 'Unchanged':
+            document.type = type
+        
+        date_str = request.POST.get('expiration-date', "")
+        if date_str != None:
+            expiration_date = parse_date(date_str)
+            document.expired_time = expiration_date
+        
         document.save()
         return HttpResponseRedirect('/user/index')
 

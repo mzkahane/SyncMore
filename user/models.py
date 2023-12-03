@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.db import models
 from storages.backends.s3boto3 import S3Boto3Storage
 
@@ -102,6 +104,6 @@ class Document(models.Model):
 
     issued_time = models.DateTimeField('issued_time', auto_now_add=True, null=True)
 
-    expired_time = models.DateTimeField('expired_time', auto_now_add=True, null=True)
+    expired_time = models.DateField('expired_time', auto_now=False, auto_now_add=False, blank=True, null=True)
 
     type = models.CharField('type', max_length=32, default='Other', null=True, choices=TYPE_CHOICES)

@@ -119,7 +119,7 @@
             <li class="drive-options">
                 <!-- Document type dropdown -->
                 <h6>Filter view by file type:</h6>
-                <select id="documentTypeSelector" onchange="filterDocuments()">
+                <select class="form-select" id="documentTypeSelector" onchange="filterDocuments()">
                     <option value="">--Select a file type--</option>
                     <option value="All">Show All</option>
                     <option value="Birth Certificate">Birth Certificate</option>
@@ -156,10 +156,10 @@
 
                 <button type="button" class="navbar-toggler navbar-dark sidebar-btn" id="sidebarCollapse"
                 aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon mx-1"></span>
                 </button>
 
-                <a href="" id="current-view">Home Page</a>
+                <a href="" class="mx-2" id="current-view">Home Page</a>
             </div>
         
         </nav>
@@ -325,44 +325,48 @@
 
         <!-- BEGIN: user personal drive notes/documents container -->
         <div class="user-content container-fluid collapse" id="drive-page" style="display: none">
+            <!-- BEGIN: row of 2 columns: Nost list and Document list -->
             <div class="row row-cols-2">
                 <br>
-                <!-- BEGIN: Add Note col -->
+                <!-- BEGIN: Note list -->
                 <div class="col-lg-4 justify-content-lg-center" id="noteList">
-
-                    <div class="note-section-header d-flex container-fluid">
+                    <!-- Note list header -->
+                    <div class="note-list-header d-flex container-fluid">
                         <h4>Notes</h4>
                         <button type="button" class="navbar-dark btn add-btn" id="noteListCollapse"
                             aria-controls="noteListCollapse" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                     </div>
-
-                    <!-- BEGIN: Each note entry container -->
+                    <!-- BEGIN: Note list container -->
                     <div class="notes-list container" id="notesContainer">
                         {% for note in notes %}
+                        <!-- Each Note entry per container -->
                         <div class="note-entry container">
+                            <!-- Note header -->
                             <div class="note-header">
                                 <!-- Note title -->
                                 <div class="note-header-item">
                                     <span>{{ note.title }}</span>
                                 </div>
-
+                                <!-- Note Last updated date & Modify/Delete functions -->
                                 <div class="note-header-item">
-                                    <!-- Last updated -->
-                                    <div class="col">
-                                        <span>Updated {{ note.updated_time|date:"M d, Y" }}</span>
-                                    </div>
-                                    <!-- Modify and Delete note -->
-                                    <div class="d-flex col">
-                                        <!-- Modify note -->
-                                        <a class="btn edit-btn mx-2" href="/user/modify_note/{{ note.id }}">Modify</a>
-                                        <!-- Delete note -->
-                                        <form action="/user/delete_note/{{ note.id }}" method="post">
-                                            {% csrf_token %}
-                                            <input type="hidden" name="operation" value="delete">
-                                            <input class="btn delete-btn mx-2" type="submit" value="Delete">
-                                        </form>
+                                    <div class="row row-cols-2">
+                                        <!-- Last updated -->
+                                        <div class="col">
+                                            <span>Updated {{ note.updated_time|date:"M d, Y" }}</span>
+                                        </div>
+                                        <!-- Modify and Delete note -->
+                                        <div class="d-flex align-items-center col">
+                                            <!-- Modify note -->
+                                            <a class="btn edit-btn mx-2" href="/user/modify_note/{{ note.id }}">Modify</a>
+                                            <!-- Delete note -->
+                                            <form action="/user/delete_note/{{ note.id }}" method="post">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="operation" value="delete">
+                                                <input class="btn delete-btn mx-2" type="submit" value="Delete">
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -377,69 +381,68 @@
                 </div>
                 <!-- END: Add Note col -->
 
-                <!-- BEGIN: Add Document col -->
                 <br>
+                <!-- BEGIN: Document list -->
                 <div class="col-lg justify-content-lg-center" id="documentList">
-
-                    <div class="drive-header container-fluid">
+                    <!-- Document header -->
+                    <div class="document-header container-fluid">
                         <h4>Documents</h4>
                     </div>
-
+                    <!-- Document section header -->
                     <div class="container">
-                        <div class="document-header row">
-                            <div class="col">Name</div>
-                            <div class="col-lg-2">Last modified</div>
-                            <div class="col-lg-2 center-text">Options</div>
+                        <div class="document-list-header row">
+                            <div class="col">
+                                <span>Name</span>
+                            </div>
+                            <div class="col-lg-2">
+                                <span>Expiration date</span>
+                            </div>
+                            <div class="col-lg-2">
+                                <span>Last modified</span>
+                            </div>
+                            <div class="col-lg-2 center-text">
+                                <span>Options</span>
+                            </div>
                         </div>
                     </div>
-
-                    <!-- BEGIN: Documents container -->
+                    <!-- BEGIN: Document list container -->
                     <div class="container">
                         {% for document in documents %}
-                            <!-- BEGIN: Document per column -->
+                            <!-- BEGIN: Document entry per row -->
                             <div class="document-item active-document row" data-id="{{ document.type }}">
+                                <!-- Document title -->
                                 <div class="document-detail col">
                                     <span class="document-detail align-middle">{{ document.title }}</span>
                                 </div>
-
+                                <!-- Document expiration date -->
+                                <div class="document-detail col-lg-2">
+                                    <span class="document-detail align-middle expiration-date" data-id="{{ document.expired_time }}">{{ document.expired_time|date:"M d, Y" }}</span>
+                                </div>
+                                <!-- Document last modified date -->
                                 <div class="document-detail col-lg-2">
                                     <span class="document-detail align-middle">{{ document.updated_time|date:"M d, Y" }}</span>
                                 </div>
-
-                                <!-- Display document in image_box -->
-                                {% comment %} <div class="image_box">
-                                    <img class="user_image" src="{{ document.url }}" alt="Your File">
-                                </div> {% endcomment %}
-                                <!-- BEGIN: Modify document -->
-                                <div class="document-detail d-flex col-lg-2">
-                                    <a class="document-detail btn edit-btn mx-2"
+                                <!-- Modify and Delete document -->
+                                <div class="document-detail d-flex col-lg-2.5">
+                                    <!-- Modify document -->
+                                    <a class="document-detail btn edit-btn mx-1"
                                         href="/user/modify_document/{{ document.id }}">Modify</a>
-
-                                        <form action="/user/delete_document/{{ document.id }}" method="post">
-                                            {% csrf_token %}
-                                            <input type="hidden" name="operation" value="delete">
-                                            <input class="document-detail btn delete-btn mx-2" type="submit" value="Delete">
-                                        </form>
-                                </div>
-                                <!-- END: Modify document -->
-                                <!-- BEGIN: Delete document -->
-                                {% comment %} <div class="document-detail col-lg-1">
+                                    <!-- Delete document -->
                                     <form action="/user/delete_document/{{ document.id }}" method="post">
                                         {% csrf_token %}
                                         <input type="hidden" name="operation" value="delete">
-                                        <input class="document-detail btn delete-btn" type="submit" value="Delete">
+                                        <input class="document-detail btn delete-btn mx-1" type="submit" value="Delete">
                                     </form>
-                                </div> {% endcomment %}
-                                <!-- END: Delete document -->
+                                </div>
                             </div>
+                            <!-- END: Document entry per row -->
                         {% endfor %}
-                        <!-- END: Document per column -->
                     </div>
-                    <!-- END: Documents container-->
+                    <!-- END: Document list container-->
                 </div>
-                <!-- END: Add Document col -->
+                <!-- END: Document list -->
             </div>
-            
+            <!-- END: row of 2 columns: Nost list and Document list -->
         </div>
         <!-- END: user personal drive notes/documents container -->
     </div>
@@ -592,6 +595,30 @@ crossorigin="anonymous"></script>
         }, false)
     })
     })()
+</script>
+<!-- JS for User Documents Expiration -->
+<script>
+    $(document).ready(function () {
+        // select all elements with class name="expiration-date"
+        const expirationDates = document.querySelectorAll('.expiration-date');
+        // console.log(expirationDates);
+        // loop through each expiration date element and check if expiration-date is today or older than today
+        expirationDates.forEach(date => {
+            // get the expiration date from HTML
+            const expires = date.innerHTML;
+            if (expires != null)
+            var varDate = new Date(expires);
+            varDate.setHours(0,0,0,0);
+            // get todays date
+            var today = new Date();
+            today.setHours(0,0,0,0);
+            // if expiration date is today or older than (before) today, mark date as expired
+            if(varDate <= today) {
+                // alert("Working!");
+                date.classList.add('expired');
+            }
+        });
+    });
 </script>
 
 </body>

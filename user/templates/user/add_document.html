@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Add document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="../../../static/Syncmore/favicon.ico">
     <!-- link to styles -->
@@ -11,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-<body>
+<body class="justify-content-md-center">
 <!-- START: navigation bar -->
 <nav class="navbar navbar-expand-md">
     <!-- website logo -->
@@ -66,7 +67,7 @@
                 </div>
                 <div class="form-group">
                     <label for="document">Document</label>
-                    <input type="file" name="document" class="form-control-file" id="document">
+                    <input type="file" onchange="readURL(this);" name="document" class="form-control-file" id="document">
                 </div>
             </div>
             <!-- Document Type Selection -->
@@ -83,6 +84,21 @@
                     <option value="Passport">Passport</option>
                 </select>
             </div>
+            <!-- Document expiration date -->
+            <div class="form-group mb-2">
+                <label>
+                    (Optional) Input the document's expiration date or skip if not applicable.
+                    <div>
+                        <input type="date" class="form-control" name="expiration-date" pattern="\d{4}-\d{2}-\d{2}" />
+                        <span class="validity"></span>
+                    </div>
+                </label>
+            </div>
+            <!-- View uploaded document -->
+            <div class="form-group">
+                <img id="blah" src="#" alt="your image" />
+            </div>
+            <!-- Submit button -->
             <div class="col-md-6">
                 <input type="submit" class="btn btn-primary" value="Add" style="width: 200px; text-align: center;">
             </div>
@@ -93,6 +109,18 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+    
+        reader.onload = function (e) {
+        $('#blah').attr('src', e.target.result).width(150).height(200);
+        };
+    
+        reader.readAsDataURL(input.files[0]);
+    }
+    }
+</script>
 </body>
 </html>
