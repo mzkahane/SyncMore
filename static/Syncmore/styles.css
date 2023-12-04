@@ -8,6 +8,7 @@
     --carbon: #A9A9A9;
     --light-gray: #E9EAF2;
     --oxford-blue: #0C2137;
+    --oxford-blue-dark: #112035;
     --timberwolf: #D2D3D3;
     --turquoise: #0DCBAB;
     --turquoise-hover: #16bea2;
@@ -191,7 +192,8 @@ img.user_image {
 .btn {
     background-color: var(--turquoise);
     color: white;
-    padding: 2px 5px !important;
+    /* padding: top right bottom left */
+    padding: 3px 6px 3px 6px !important;
     border-radius: 8%;
     text-decoration: none;
     box-sizing: border-box;
@@ -422,14 +424,25 @@ a.document-url:hover {
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: white;
-    padding: 10px;
 }
 
 #user-form-header {
     padding: 15px 16px;
     display: flex;
     justify-content: center;
+    border-radius: 4px 4px 0px 0px;
+    background-color: var(--oxford-blue);
+    color: var(--webpage-white);
+}
+#user-form-header h5 {
+    font-weight: normal;
+}
+
+.user-form-register {
+    background-color: var(--turquoise) !important;
+}
+.user-form-login {
+    background-color: var(--slate-blue) !important;
 }
 
 #user-form-content {
@@ -437,6 +450,8 @@ a.document-url:hover {
     align-items: center;
     float: left;
     width: 100%;
+    background-color: white;
+    padding: 10px;
 }
 
 .line-above {

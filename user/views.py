@@ -406,7 +406,7 @@ def account(request):
     return render(request, 'user/account.html', locals())
 
 
-def modify_second_password(request):
+def account_settings(request):
     c_uid = request.COOKIES.get('uid')
     if c_uid is None:
         c_uid = request.session['uid']
