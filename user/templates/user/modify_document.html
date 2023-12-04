@@ -104,19 +104,18 @@
                     <div class="form-group container align-content-center">
                         <div>
                             <label>
-                                Current document:
+                                Current document link:
                                 <a id="document-url" href="{{document.document.url}}">Document URL</a>
                             </label>
                         </div>
                         <div class="current-preview">
-                            {% comment %} <img src="{{ document.document.url }}" alt="Your File" class="img-thumbnail">
-                            <embed class="fit-pdf" src="{{document.document.url}}" type="application/pdf" /> {% endcomment %}
+                            <label>Current document preview (only supported for JPG, JPEG, PNG, PDF files):</label>
                         </div>
                     </div>
                     <!-- View new document -->
-                    <div class="form-group container align-items-center">
+                    <div class="form-group container align-items-center line-above">
                         <div>
-                            <label>New document:</label>
+                            <label>New document preview (only supported for JPG, JPEG, PNG, PDF files):</label>
                         </div>
                         <div class="preview">
                             <p>No files currently selected for upload</p>
@@ -146,6 +145,7 @@
     "bmp",
     "gif",
     "jpeg",
+    "jpg",
     "pjpeg",
     "png",
     "svg+xml",
@@ -201,6 +201,7 @@
     "image/bmp",
     "image/gif",
     "image/jpeg",
+    "image/jpg",
     "image/pjpeg",
     "image/png",
     "image/svg+xml",

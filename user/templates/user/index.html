@@ -174,11 +174,11 @@
                     <!-- Add phone number form -->
                     <form action="/user/add_phone" class="form needs-validation" method="post" enctype="multipart/form-data" novalidate>
                         {% csrf_token %}
-                        <label for="phone">Phone</label>
+                        <label for="add-phone">Phone</label>
                         <div class="phone-items d-flex flex-wrap align-items-middle">
                             <!-- Add align-items-center to vertically align elements -->
                             <div class="mx-2">
-                                <input type="tel" name="phone" class="form-control" id="phone" inputmode="numeric" pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$" autocomplete="tel" required>
+                                <input type="tel" name="phone" class="form-control" id="add-phone" inputmode="numeric" pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$" autocomplete="tel" required>
                                 <div class="div invalid-feedback">
                                     Please enter a valid 10 digit number.
                                 </div>
@@ -220,7 +220,7 @@
                                             <div class="col form-group mx-2">
                                                 <div class="col form-group">
                                                     <input type="tel" value="{{ phone.phone }}" name="phone"
-                                                        class="form-control" id="phone" autocomplete="tel" inputmode="numeric" pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$" required>
+                                                        class="form-control" autocomplete="tel" inputmode="numeric" pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$" required>
                                                     <div class="div invalid-feedback">Input cannot be blank.</div>
                                                 </div>
                                             </div>
@@ -243,11 +243,11 @@
                     <!-- Add email form -->
                     <form action="/user/add_email" class="form needs-validation" method="post" enctype="multipart/form-data" novalidate>
                         {% csrf_token %}
-                        <label for="email">Email</label>
+                        <label for="add-email">Email</label>
                         <div class="row align-items-center">
                             <div class="col-md-6">
                                 <div class="form-group mb-2">
-                                    <input type="email" name="email" class="form-control" id="email" autocomplete="email" required>
+                                    <input type="email" name="email" class="form-control" id="add-email" autocomplete="email" required>
                                     <div class="div invalid-feedback">
                                         Please enter a valid email address.
                                     </div>
@@ -288,7 +288,7 @@
                                         <div class="row align-items-center">
                                             <div class="col form-group">
                                                 <input type="email" value="{{ email.email }}" name="email"
-                                                        class="form-control" id="new-email" autocomplete="email" required>
+                                                        class="form-control" autocomplete="email" required>
                                                 <div class="div invalid-feedback">
                                                     Please enter a valid email address.
                                                 </div>
@@ -412,7 +412,8 @@
                             <div class="document-item active-document row" data-id="{{ document.type }}">
                                 <!-- Document title -->
                                 <div class="document-detail col">
-                                    <span class="document-detail align-middle">{{ document.title }}</span>
+                                    {% comment %} <span class="document-detail align-middle">{{ document.title }}</span> {% endcomment %}
+                                    <a target="_blank" rel="noopener" href="{{ document.document.url }}" class="document-detail document-url align-middle">{{ document.title }}</a>
                                 </div>
                                 <!-- Document expiration date -->
                                 <div class="document-detail col-lg-2">

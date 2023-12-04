@@ -65,7 +65,7 @@ body {
     margin: 0;
     padding: 0;
     /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
-    background-color: var(--neutral) !important;
+    background-color: var(--neutral);
     font-size: 0.875rem;
     font-family: var(--font-family-primary);
     color: var(--body-fg);
@@ -374,9 +374,19 @@ p.note-content {
     font-size: 0.9rem;
 }
 
+.hidden,
 .hidden > .document-detail,
 .hidden > * {
     display: none !important;
+}
+
+a.document-url {
+    color: var(--turquoise);
+}
+
+a.document-url:hover {
+    color: var(--turquoise-hover);
+    text-decoration: none;
 }
 
 .active-document {
@@ -393,7 +403,7 @@ p.note-content {
 }
 
 .gray-body {
-    background-color: var(--slate-gray);
+    background-color: var(--light-gray);
 }
 
 .user-form {
@@ -412,6 +422,8 @@ p.note-content {
     position: relative;
     display: flex;
     flex-direction: column;
+    background-color: white;
+    padding: 10px;
 }
 
 #user-form-header {
@@ -425,6 +437,11 @@ p.note-content {
     align-items: center;
     float: left;
     width: 100%;
+}
+
+.line-above {
+    border-top: 1px dashed var(--dark);
+    padding-top: 15px;
 }
 
 .preview {
@@ -441,6 +458,14 @@ p.note-content {
 .fit-pdf {
     width: 100%;
     height: 400px;
+}
+
+.form-submission-error-div {
+    display: none;
+}
+
+.form-submission-error {
+    color: red;
 }
 
 .optional:after {

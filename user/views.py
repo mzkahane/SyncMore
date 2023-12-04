@@ -400,6 +400,8 @@ def account(request):
     if c_uid is None:
         c_uid = request.session['uid']
     user = User.objects.get(id=c_uid)
+    username = user.Username
+    password = user.password
     current_pin = user.second_password
     return render(request, 'user/account.html', locals())
 
@@ -409,7 +411,62 @@ def modify_second_password(request):
     if c_uid is None:
         c_uid = request.session['uid']
     user = User.objects.get(id=c_uid)
-    second_password = request.POST.get('second_password', "")
-    user.second_password = second_password
+    username = user.Username
+    password = user.password
+    current_pin = user.second_password
+    new_username = request.POST.get('new_username', "")
+    new_password = request.POST.get('new_password', "")
+    new_password_retype = request.POST.get('new_password_retype', "")
+    new_second_password = request.POST.get('second_password', "")
+    
+    # if the username has been updated
+    if user.Username != new_username:
+        old_users = User.objects.filter(Username=new_username)
+        if old_users:
+            note = 'Username is taken already! Please try a different one.'
+            dis = 'block'
+            return render(request, 'user/account.html', locals())
+        # if all checks passed, update username with new username
+        else:
+            user.Username = new_username
+    
+    # if the password has been updated
+    if new_password:
+        if len(new_password) < 6:
+                note = 'The length of the new password is too short. Password must be at least 6 characters.'
+                dis = 'block'
+                return render(request, 'user/account.html', locals())
+
+        if not re.search("^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$", new_password):
+            note = 'The new password does not meet the requirements. Password should include at least one digit, one uppercase letter, and one lowercase letter.'
+            dis = 'block'
+            return render(request, 'user/account.html', locals())
+
+        if new_password != new_password_retype:
+            note = 'The new password does not match the retyped new password.'
+            dis = 'block'
+            return render(request, 'user/account.html', locals())
+
+        m = hashlib.md5()
+        m.update(new_password.encode())
+        password_m = m.hexdigest()
+        # if all checks passed, update user password with new one
+        user.password = password_m
+
+    # if user pin has been updated
+    if new_second_password != user.second_password:
+        if len(new_second_password) != 4:
+            note = 'The length of the PIN must be 4 digits.'
+            dis = 'block'
+            return render(request, 'user/account.html', locals())
+
+        if not re.search("^\d{4}$", new_second_password):
+            note = 'The PIN must be exactly 4 digits.'
+            dis = 'block'
+            return render(request, 'user/account.html', locals())
+        # if all checks passed, update user PIN with new PIN
+        user.second_password = new_second_password
+    
+    # save changes to user
     user.save()
     return HttpResponseRedirect('/user/index')

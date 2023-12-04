@@ -77,8 +77,8 @@
                     </div>
                     <!-- Upload new document -->
                     <div class="form-group row">
-                        <label for="document" class="required">Upload new document (PNG, JPG/JPEG, PDF files only)</label>
-                        <input type="file" onchange="displayFile(event)" name="document" class="form-control" id="document" required accept="image/png, image/jpeg, application/pdf" />
+                        <label for="document" class="required">Upload new document</label>
+                        <input type="file" onchange="displayFile(event)" name="document" class="form-control" id="document" required />
                     </div>
                     <!-- Document type selection -->
                     <div class="form-group row">
@@ -103,7 +103,7 @@
                     <!-- View new document -->
                     <div class="form-group container align-items-center">
                         <div>
-                            <p>New document:</p>
+                            <p>Document preview (only supported for JPG, JPEG, PNG, PDF files)</p>
                         </div>
                         <div class="preview">
                             <p>No files currently selected for upload</p>
@@ -133,6 +133,7 @@
     "image/bmp",
     "image/gif",
     "image/jpeg",
+    "image/jpg",
     "image/pjpeg",
     "image/png",
     "image/svg+xml",
