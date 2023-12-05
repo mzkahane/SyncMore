@@ -12,5 +12,14 @@ WORKDIR /code
 COPY requirements.txt /code/
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Install uWSGI
+RUN pip install uwsgi
+
 # Copy project
 COPY . /code/
+
+# uWSGI will listen on this port
+EXPOSE 8000
+
+# uWSGI configuration (adjust accordingly)
+CMD ["uwsgi", "--socket", ":8000", "--module", "Syncmore.wsgi", "--processes", "4", "--threads", "2"]

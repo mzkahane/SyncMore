@@ -3,7 +3,7 @@ version: '3'
 services:
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: uwsgi --http :8000 --module Syncmore.wsgi --workers 4 --threads 2
     volumes:
       - .:/code
     ports:
@@ -19,3 +19,11 @@ services:
       MYSQL_ROOT_PASSWORD: 'syncmore'
     ports:
       - "3306:3306"
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./path/to/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - web

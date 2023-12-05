@@ -63,7 +63,5 @@ jobs:
           username: ${{ secrets.VULTR_USERNAME }}
           key: ${{ secrets.VULTR_SSH_PRIVATE_KEY }}
           script: |
-            docker pull andrewliu666/syncmore:${{ github.sha }}
-            docker stop syncmore-web || true
-            docker run --rm -d --name syncmore-web -p 80:80 andrewliu666/syncmore:${{ github.sha }}
-            docker run -d --name syncmore-web --restart unless-stopped -p 80:80 andrewliu666/syncmore:${{ github.sha }}
+            cd /root
+            git pull origin main
