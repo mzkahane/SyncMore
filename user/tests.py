@@ -381,3 +381,4 @@ class UserViewsTestCase(TestCase):
         response = self.client.get('/user/index')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'user/index.html')
+
