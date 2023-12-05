@@ -256,11 +256,48 @@ img.user_image {
 }
 
 
-/* #current-page {
-    padding: 13px;
-} */
+/*   Open state of the dialog  */
+#pinModal[open] {
+    opacity: 1;
+    transform: scaleY(1);
+    overflow: hidden;
+    margin: 250px auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
 
-a#current-view {
+#pinModalContent {
+    display: flex;
+    align-items: center;
+    float: left;
+    width: 100%;
+    background-color: white;
+    padding: 10px;
+}
+
+/*   Closed state of the dialog   */
+#pinModal {
+    opacity: 0;
+    transform: scaleY(0);
+}
+
+/* The Close Button */
+#closeModal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#closeModal:hover,
+#closeModal:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a#currentContent {
     padding: 13px 3px;
     /*color: rgb(241, 237, 237);*/
     color: black;
@@ -269,7 +306,7 @@ a#current-view {
     text-decoration: none;
 }
 
-a#current-view:hover {
+a#currentContent:hover {
     color: var(--slate-blue);
     text-decoration: none;
 }

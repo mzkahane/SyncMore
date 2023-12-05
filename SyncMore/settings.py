@@ -10,8 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import os
+import sys
 from pathlib import Path
-import os, sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -133,13 +134,21 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# AWS_STORAGE_BUCKET_NAME = 'testforsyncmore'
+# AWS_S3_ENDPOINT_URL = 'https://410c407b35453e7b55084a1f482705db.r2.cloudflarestorage.com'
+# AWS_ACCESS_KEY_ID = 'cbe6a47ab0166c624467dd34f6a4b5c4'
+# AWS_SECRET_ACCESS_KEY = 'a5403fc3ee55591f65d0e8203d4ef22157cacf0566eeaf674614f62bfe890952'
+# AWS_S3_SIGNATURE_VERSION = 's3v4'
+# R2_TOKEN = 'TB_5HNUNb32WHtubka201BsSFwrazG7Q5veqCf9p'
+
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_STORAGE_BUCKET_NAME = 'testforsyncmore'
-AWS_S3_ENDPOINT_URL = 'https://410c407b35453e7b55084a1f482705db.r2.cloudflarestorage.com'
-AWS_ACCESS_KEY_ID = 'cbe6a47ab0166c624467dd34f6a4b5c4'
-AWS_SECRET_ACCESS_KEY = 'a5403fc3ee55591f65d0e8203d4ef22157cacf0566eeaf674614f62bfe890952'
+AWS_STORAGE_BUCKET_NAME = 'syncmore'
+AWS_S3_ENDPOINT_URL = 'https://d8eec9876b716aab3fbb2703475ed117.r2.cloudflarestorage.com'
+AWS_ACCESS_KEY_ID = 'd097692bcc5903716272cb3acf2ba8f5'
+AWS_SECRET_ACCESS_KEY = '74c4418b8d474b893b4827b12653126241639c8dcb25b9c7d9bf94c9d2e764c0'
 AWS_S3_SIGNATURE_VERSION = 's3v4'
-R2_TOKEN = 'TB_5HNUNb32WHtubka201BsSFwrazG7Q5veqCf9p'
+R2_TOKEN = 'evmgt-T0is460sIb7i76Br_GHrf8ve-tDpC09ZKK'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp-mail.outlook.com'

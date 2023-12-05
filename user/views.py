@@ -211,27 +211,12 @@ def index_view(request):
 
         return JsonResponse({'documents': documents_with_urls}, safe=False)
 
-    # If not an AJAX request, render the page normally with all the context
-    # document_type = request.GET.get('type', 'Other')
-    # documents = Document.objects.filter(document_user_id=c_uid, type=document_type)
-
-    # documents_with_urls = []
-    # for document in documents:
-    #     presigned_url = generate_presigned_url(document.document.name)
-    #     documents_with_urls.append({
-    #         'type': document.type,
-    #         'id': document.id,
-    #         'title': document.title,
-    #         'url': presigned_url
-    #     })
-
     context = {
         'user': user,
         'phones': phones,
         'emails': emails,
         'supervisor': supervisor,
         'notes': notes,
-        #'documents': documents_with_urls,
         'documents': documents,
         'second_password': second_password
     }
