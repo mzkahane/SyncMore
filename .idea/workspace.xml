@@ -5,18 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5dc9c044-7e75-40d0-9d09-69b128c48298" name="Changes" comment="change">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/django_ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/django_ci.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SyncMore/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/SyncMore/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/templates/index/contact.html" beforeDir="false" afterPath="$PROJECT_DIR$/index/templates/index/contact.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/templates/index/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index/templates/index/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/index/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/index/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/templates/user/add_document.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/user/add_document.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/templates/user/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/user/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +57,7 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
@@ -82,7 +75,107 @@
       <recent name="$PROJECT_DIR$/user" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Django Server.SyncMore">
+    <configuration name="Test: user.tests.DocumentModelTest" type="DjangoTestsConfigurationType" temporary="true">
+      <module name="SyncMore" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="user.tests.DocumentModelTest" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test: user.tests.EmailModelTest" type="DjangoTestsConfigurationType" temporary="true">
+      <module name="SyncMore" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="user.tests.EmailModelTest" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test: user.tests.NoteModelTest" type="DjangoTestsConfigurationType" temporary="true">
+      <module name="SyncMore" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="user.tests.NoteModelTest" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test: user.tests.PhoneModelTest" type="DjangoTestsConfigurationType" temporary="true">
+      <module name="SyncMore" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="user.tests.PhoneModelTest" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test: user.tests.UserViewsTestCase" type="DjangoTestsConfigurationType" temporary="true">
+      <module name="SyncMore" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="user.tests.UserViewsTestCase" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="SyncMore" type="Python.DjangoServer" factoryName="Django server">
       <module name="SyncMore" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -107,6 +200,15 @@
       <option name="customRunCommand" value="" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Django tests.Test: user.tests.UserViewsTestCase" />
+        <item itemvalue="Django tests.Test: user.tests.DocumentModelTest" />
+        <item itemvalue="Django tests.Test: user.tests.EmailModelTest" />
+        <item itemvalue="Django tests.Test: user.tests.NoteModelTest" />
+        <item itemvalue="Django tests.Test: user.tests.PhoneModelTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -138,6 +240,15 @@
       <workItem from="1699479104933" duration="3116000" />
       <workItem from="1699486447188" duration="14165000" />
       <workItem from="1699541240910" duration="8685000" />
+      <workItem from="1699646574473" duration="794000" />
+      <workItem from="1700108879594" duration="1342000" />
+      <workItem from="1700163169039" duration="13949000" />
+      <workItem from="1701273337787" duration="1533000" />
+      <workItem from="1701361608468" duration="1394000" />
+      <workItem from="1701395555818" duration="10464000" />
+      <workItem from="1701645638657" duration="1769000" />
+      <workItem from="1701655005278" duration="5089000" />
+      <workItem from="1701706908625" duration="44335000" />
     </task>
     <task id="LOCAL-00001" summary="change">
       <option name="closed" value="true" />
@@ -167,5 +278,65 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="change" />
     <option name="LAST_COMMIT_MESSAGE" value="change" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_NoteModelTest_test_note_creation.coverage" NAME="Test: user.tests.NoteModelTest.test_note_creation Coverage Results" MODIFIED="1701722638082" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserFunctionalityTestCase_test_modify_email_get.coverage" NAME="Test: user.tests.UserFunctionalityTestCase.test_modify_email_get Coverage Results" MODIFIED="1701733338010" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_EmailModelTest_test_email_creation.coverage" NAME="Test: user.tests.EmailModelTest.test_email_creation Coverage Results" MODIFIED="1701722845983" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserFunctionalityTestCase_test_delete_email_post.coverage" NAME="Test: user.tests.UserFunctionalityTestCase.test_delete_email_post Coverage Results" MODIFIED="1701733258095" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__resources_tests_ResourceModelTest_test_create_resource.coverage" NAME="Test: resources.tests.ResourceModelTest.test_create_resource Coverage Results" MODIFIED="1701715022104" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_EmailModelTest.coverage" NAME="Test: user.tests.EmailModelTest Coverage Results" MODIFIED="1701756912498" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserViewsTestCase_test_reg_view_get.coverage" NAME="Test: user.tests.UserViewsTestCase.test_reg_view_get Coverage Results" MODIFIED="1701739488911" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserFunctionalityTestCase_test_modify_document_post.coverage" NAME="Test: user.tests.UserFunctionalityTestCase.test_modify_document_post Coverage Results" MODIFIED="1701740740976" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__resources_tests_ResourceModelTest_test_max_length_constraints.coverage" NAME="Test: resources.tests.ResourceModelTest.test_max_length_constraints Coverage Results" MODIFIED="1701715672649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserViewsTestCase_test_index_view.coverage" NAME="Test: user.tests.UserViewsTestCase.test_index_view Coverage Results" MODIFIED="1701739547611" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserFunctionalityTestCase_test_account_view.coverage" NAME="Test: user.tests.UserFunctionalityTestCase.test_account_view Coverage Results" MODIFIED="1701740447446" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserFunctionalityTestCase_test_add_document_post.coverage" NAME="Test: user.tests.UserFunctionalityTestCase.test_add_document_post Coverage Results" MODIFIED="1701755064430" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__index_tests_ViewsTestCase_test_contact_view_post.coverage" NAME="Test: index.tests.ViewsTestCase.test_contact_view_post Coverage Results" MODIFIED="1701714489802" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_SupervisorModelTest_test_nullable_fields.coverage" NAME="Test: user.tests.SupervisorModelTest.test_nullable_fields Coverage Results" MODIFIED="1701720470465" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserViewsTestCase_test_login_view_post_valid.coverage" NAME="Test: user.tests.UserViewsTestCase.test_login_view_post_valid Coverage Results" MODIFIED="1701739965390" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_PhoneModelTest_test_phone_creation.coverage" NAME="Test: user.tests.PhoneModelTest.test_phone_creation Coverage Results" MODIFIED="1701722329588" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserFunctionalityTestCase_test_add_document_get.coverage" NAME="Test: user.tests.UserFunctionalityTestCase.test_add_document_get Coverage Results" MODIFIED="1701731758412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserViewsTestCase_test_login_view_post_invalid.coverage" NAME="Test: user.tests.UserViewsTestCase.test_login_view_post_invalid Coverage Results" MODIFIED="1701739459532" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserFunctionalityTestCase_test_modify_document_get.coverage" NAME="Test: user.tests.UserFunctionalityTestCase.test_modify_document_get Coverage Results" MODIFIED="1701740904326" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__resources_tests_ResourceModelTest_test_nullable_fields.coverage" NAME="Test: resources.tests.ResourceModelTest.test_nullable_fields Coverage Results" MODIFIED="1701715871884" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserFunctionalityTestCase_test_add_phone_post.coverage" NAME="Test: user.tests.UserFunctionalityTestCase.test_add_phone_post Coverage Results" MODIFIED="1701753311556" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__index_tests_ViewsTestCase.coverage" NAME="Test: index.tests.ViewsTestCase Coverage Results" MODIFIED="1701753031006" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_SupervisorModelTest.coverage" NAME="Test: user.tests.SupervisorModelTest Coverage Results" MODIFIED="1701756794557" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__index_tests_ViewsTestCase_test_index_view.coverage" NAME="Test: index.tests.ViewsTestCase.test_index_view Coverage Results" MODIFIED="1701712791077" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_DocumentModelTest_test_document_creation.coverage" NAME="Test: user.tests.DocumentModelTest.test_document_creation Coverage Results" MODIFIED="1701723005707" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserFunctionalityTestCase_test_modify_note_get.coverage" NAME="Test: user.tests.UserFunctionalityTestCase.test_modify_note_get Coverage Results" MODIFIED="1701740521094" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserFunctionalityTestCase_test_modify_note_post.coverage" NAME="Test: user.tests.UserFunctionalityTestCase.test_modify_note_post Coverage Results" MODIFIED="1701740677356" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserFunctionalityTestCase_test_add_note_get.coverage" NAME="Test: user.tests.UserFunctionalityTestCase.test_add_note_get Coverage Results" MODIFIED="1701753411649" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserFunctionalityTestCase_test_modify_second_password.coverage" NAME="Test: user.tests.UserFunctionalityTestCase.test_modify_second_password Coverage Results" MODIFIED="1701753473347" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserFunctionalityTestCase_test_add_email_post.coverage" NAME="Test: user.tests.UserFunctionalityTestCase.test_add_email_post Coverage Results" MODIFIED="1701731101997" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_SupervisorModelTest_test_supervisor_creation.coverage" NAME="Test: user.tests.SupervisorModelTest.test_supervisor_creation Coverage Results" MODIFIED="1701720264814" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_PhoneModelTest.coverage" NAME="Test: user.tests.PhoneModelTest Coverage Results" MODIFIED="1701756854402" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserModelTest_test_user_creation.coverage" NAME="Test: user.tests.UserModelTest.test_user_creation Coverage Results" MODIFIED="1701753612182" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__resources_tests_ResourceModelTest.coverage" NAME="Test: resources.tests.ResourceModelTest Coverage Results" MODIFIED="1701753082472" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserViewsTestCase.coverage" NAME="Test: user.tests.UserViewsTestCase Coverage Results" MODIFIED="1701758950889" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserViewsTestCase_test_reg_view_post.coverage" NAME="Test: user.tests.UserViewsTestCase.test_reg_view_post Coverage Results" MODIFIED="1701739517557" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__index_tests_ViewsTestCase_test_contact_view_get.coverage" NAME="Test: index.tests.ViewsTestCase.test_contact_view_get Coverage Results" MODIFIED="1701714064994" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserModelTest_test_max_length_constraints.coverage" NAME="Test: user.tests.UserModelTest.test_max_length_constraints Coverage Results" MODIFIED="1701753641264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserFunctionalityTestCase_test_delete_document_post.coverage" NAME="Test: user.tests.UserFunctionalityTestCase.test_delete_document_post Coverage Results" MODIFIED="1701740410937" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserFunctionalityTestCase.coverage" NAME="Test: user.tests.UserFunctionalityTestCase Coverage Results" MODIFIED="1701756555998" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserFunctionalityTestCase_test_delete_note_post.coverage" NAME="Test: user.tests.UserFunctionalityTestCase.test_delete_note_post Coverage Results" MODIFIED="1701740327310" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserModelTest.coverage" NAME="Test: user.tests.UserModelTest Coverage Results" MODIFIED="1701756825062" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserFunctionalityTestCase_test_modify_phone_get.coverage" NAME="Test: user.tests.UserFunctionalityTestCase.test_modify_phone_get Coverage Results" MODIFIED="1701732029151" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserViewsTestCase_test_login_view_get.coverage" NAME="Test: user.tests.UserViewsTestCase.test_login_view_get Coverage Results" MODIFIED="1701739431114" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserFunctionalityTestCase_test_add_phone_get.coverage" NAME="Test: user.tests.UserFunctionalityTestCase.test_add_phone_get Coverage Results" MODIFIED="1701753247643" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserFunctionalityTestCase_test_modify_phone_post.coverage" NAME="Test: user.tests.UserFunctionalityTestCase.test_modify_phone_post Coverage Results" MODIFIED="1701732144993" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_SupervisorModelTest_test_max_length_constraints.coverage" NAME="Test: user.tests.SupervisorModelTest.test_max_length_constraints Coverage Results" MODIFIED="1701720360619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserFunctionalityTestCase_test_delete_phone.coverage" NAME="Test: user.tests.UserFunctionalityTestCase.test_delete_phone Coverage Results" MODIFIED="1701753345327" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserFunctionalityTestCase_test_add_email_get.coverage" NAME="Test: user.tests.UserFunctionalityTestCase.test_add_email_get Coverage Results" MODIFIED="1701753376051" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_NoteModelTest.coverage" NAME="Test: user.tests.NoteModelTest Coverage Results" MODIFIED="1701756883887" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__resources_tests_ResourceViewTestCase.coverage" NAME="Test: resources.tests.ResourceViewTestCase Coverage Results" MODIFIED="1701753111119" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserFunctionalityTestCase_test_add_note_post.coverage" NAME="Test: user.tests.UserFunctionalityTestCase.test_add_note_post Coverage Results" MODIFIED="1701753441409" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__index_tests_MyViewTest_test_functionality.coverage" NAME="Test: index.tests.MyViewTest.test_functionality Coverage Results" MODIFIED="1700109033167" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_DocumentModelTest_test_document_type_choices.coverage" NAME="Test: user.tests.DocumentModelTest.test_document_type_choices Coverage Results" MODIFIED="1701723058307" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__index_tests_MyViewTest_test_view_response.coverage" NAME="Test: index.tests.MyViewTest.test_view_response Coverage Results" MODIFIED="1700238458493" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserFunctionalityTestCase_test_modify_email_post.coverage" NAME="Test: user.tests.UserFunctionalityTestCase.test_modify_email_post Coverage Results" MODIFIED="1701756107595" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_DocumentModelTest.coverage" NAME="Test: user.tests.DocumentModelTest Coverage Results" MODIFIED="1701756942155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/SyncMore$Test__user_tests_UserModelTest_test_nullable_fields.coverage" NAME="Test: user.tests.UserModelTest.test_nullable_fields Coverage Results" MODIFIED="1701753670365" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

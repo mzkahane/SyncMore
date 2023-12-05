@@ -1,0 +1,67 @@
+name: Django CI
+
+on: [ push, pull_request ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_DATABASE: test_syncmore
+          MYSQL_USER: user
+          MYSQL_PASSWORD: 'syncmore'
+          MYSQL_ROOT_PASSWORD: 'syncmore'
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=10s
+          --health-retries=3
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install mysqlclient
+      - name: Run tests
+        env:
+          MYSQL_HOST: localhost
+          MYSQL_PORT: 3306
+          MYSQL_USER: user
+          MYSQL_PASSWORD: 'syncmore'
+          MYSQL_DATABASE: testdb
+        run: |
+          python manage.py test
+
+      - name: Build Docker image
+        run: docker build -t andrewliu666/syncmore:${{ github.sha }} .
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
+
+      - name: Push Docker image to Docker Hub
+        run: docker push andrewliu666/syncmore:${{ github.sha }}
+
+      - name: Deploy to Vultr
+        if: github.ref == 'refs/heads/main'  # Only deploy on main branch
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VULTR_HOST }}
+          username: ${{ secrets.VULTR_USERNAME }}
+          key: ${{ secrets.VULTR_SSH_PRIVATE_KEY }}
+          script: |
+            cd /root
+            git pull origin main
