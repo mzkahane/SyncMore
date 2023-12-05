@@ -10,11 +10,13 @@
     <link rel="stylesheet" href="../../../static/Syncmore/styles.css"/>
     {% comment %} <link rel="stylesheet" href="../../../static/Syncmore/base.css"/> {% endcomment %}
     <link rel="stylesheet" href="../../../static/Syncmore/user_sidebar.css"/>
+    <!-- link to sidebar JS -->
+    <script src="../../../static/Syncmore/js/user_sidebar.js" defer=""></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-<body>
+<body class="gray-body">
 <!-- START: navigation bar -->
 <nav class="navbar navbar-expand-md">
     <!-- website logo -->
@@ -57,367 +59,367 @@
 <!-- for authentication -->
 {% csrf_token %}
 
-<div class="wrapper">
+<!-- BEGIN: main content -->
+<div class="main" id="main">
 
-    <!-- BEGIN: sidebar -->
-    <nav class="col-lg-2" id="sidebar">
-        <ul class="sidebar-list">
-            <li>
-                <a href="" class="sidebar-item" onclick="return false;">
-                    <span class="icon"><i class="fas fa-home"></i></span>
-                    <span class="item" id="homeButton">> Home Page</span>
-                </a>
-            </li>
-            <li>
-                <a href="" class="sidebar-item" onclick="return false;">
-                    <span class="icon"><i class="fas fa-desktop"></i></span>
-                    <span class="item" id="driveButton">> Personal Drive</span>
-                </a>
-            </li>
-            <li class="drive-options">
-                <!-- Document type dropdown -->
-                <h6>Filter view by file type:</h6>
-                <select class="form-select" id="documentTypeSelector" onchange="filterDocuments()">
-                    <option value="">--Select a file type--</option>
-                    <option value="All">Show All</option>
-                    <option value="Birth Certificate">Birth Certificate</option>
-                    <option value="Financial">Financial</option>
-                    <option value="Housing">Housing</option>
-                    <option value="ID">ID</option>
-                    <option value="Insurance">Insurance</option>
-                    <option value="SSN">SSN</option>
-                    <option value="Passport">Passport</option>
-                    <option value="Other">Other</option>
-                    <!-- Add other types as needed -->
-                </select>
-            </li>
-            <li class="drive-options">
-                <!-- Upload document -->
-                <h6>Upload a document:</h6>
-                <a class="btn add-btn" id="add-document" href="/user/add_document">Upload document</a>
-            </li>
-            <li class="drive-options">
-                <!-- Create a note -->
-                <h6>Create a note:</h6>
-                <a class="btn add-btn" id="add-note" href="/user/add_note">Create note</a>
-            </li>
-        </ul>
-    </nav>
-    <!-- END: sidebar -->
+    <!-- BEGIN: User main div -->
+    <div id="user-main">
+        <!-- BEGIN: User main container -->
+        <div id="user-main-container">
 
-    <!-- BEGIN: user content: home page / personal drive view -->
-    <div id="content">
-
-        <nav class="user-navbar navbar-expand-lg navbar-light bg-light">
-
-            <div class="container-fluid d-flex" id="current-page">
-
-                <button type="button" class="navbar-toggler navbar-dark sidebar-btn" id="sidebarCollapse"
-                aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon mx-1"></span>
-                </button>
-
-                <a href="" class="mx-2" id="currentContent">Home Page</a>
-            </div>
-        
-        </nav>
-
-        <!-- BEGIN: user information container -->
-        <div class="row-lg-10 container-fluid" id="homeContent">
-            <!-- BEGIN: Add Phone and Add Email row -->
-            <div class="row justify-content-lg-center">
-
-                <!-- BEGIN: Add Phone column -->
-                <div class="add_info col-lg-6">
-                    <!-- Add phone number form -->
-                    <form action="/user/add_phone" class="form needs-validation" method="post" enctype="multipart/form-data" novalidate>
-                        {% csrf_token %}
-                        <label for="add-phone">Phone</label>
-                        <div class="phone-items d-flex flex-wrap align-items-middle">
-                            <!-- Add align-items-center to vertically align elements -->
-                            <div class="mx-2">
-                                <input type="tel" name="phone" class="form-control" id="add-phone" inputmode="numeric" pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$" autocomplete="tel" required>
-                                <div class="div invalid-feedback">
-                                    Please enter a valid 10 digit number.
-                                </div>
-                            </div>
-                            <div class="mx-2">
-                                <input type="submit" class="btn add-btn" value="Add">
-                            </div>
-                        </div>
-                    </form>
-
-                    <!-- BEGIN: Each phone entry container -->
-                    <div class="phone-entry container">
-                        {% for phone in phones %}
-                            <div class="phone-items d-flex flex-wrap align-items-middle">
-                                <!-- Display phone number -->
-                                <div class="mx-2">
-                                    <li>{{ phone.phone }}</li>
-                                </div>
-                                <!-- Modify phone number -->
-                                <div class="mx-2">
-                                    <button class="btn edit-btn modify-form-btn" data-id="{{ phone.phone }}">Modify
-                                    </button>
-                                </div>
-                                <!-- Delete phone number -->
-                                <div class="mx-2">
-                                    <form action="/user/delete_phone/{{ phone.id }}" method="post">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="operation" value="delete">
-                                        <input class="btn delete-btn" type="submit" value="Delete">
-                                    </form>
-                                </div>
-                                <!-- START: Form to modify phone number (display shown/hidden based on Modify phone button)-->
-                                <div class="modify-info container-fluid align-items-middle">
-                                    <form action="/user/modify_phone/{{ phone.id }}" id="{{ phone.phone }}"
-                                        class="modify-form needs-validation"
-                                        method="post" enctype="multipart/form-data" style="display: none;" novalidate>
-                                        {% csrf_token %}
-                                        <div class="modify-info row d-flex flex-wrap align-items-middle">
-                                            <div class="col form-group mx-2">
-                                                <div class="col form-group">
-                                                    <input type="tel" value="{{ phone.phone }}" name="phone"
-                                                        class="form-control" autocomplete="tel" inputmode="numeric" pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$" required>
-                                                    <div class="div invalid-feedback">Input cannot be blank.</div>
-                                                </div>
-                                            </div>
-                                            <div class="col mx-2">
-                                                <input type="submit" class="btn edit-btn" value="Update">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- END: Form to modify phone number (display shown/hidden based on Modify email button)-->
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <!-- END: Each phone entry container-->
+            <!-- Navigation -->
+            <div class="my-3" id="user-main-navigation">
+                <!-- Go to home page -->
+                <div id="homeButtonHeader" style="display: none">
+                    <button class="btn edit-btn" id="homeButton">Go to Home Page</button>
                 </div>
-                <!-- END: Add Phone column-->
+                <!-- Go to personal drive -->
+                <div id="driveButtonHeader">
+                    <button class="btn edit-btn" id="driveButton"> Go to Personal Drive</button>
+                </div>
+            </div>
 
-                <!-- BEGIN: Add Email column -->
-                <div class="add_info col-lg-6">
-                    <!-- Add email form -->
-                    <form action="/user/add_email" class="form needs-validation" method="post" enctype="multipart/form-data" novalidate>
-                        {% csrf_token %}
-                        <label for="add-email">Email</label>
-                        <div class="row align-items-center">
-                            <div class="col-md-6">
-                                <div class="form-group mb-2">
-                                    <input type="email" name="email" class="form-control" id="add-email" autocomplete="email" required>
-                                    <div class="div invalid-feedback">
-                                        Please enter a valid email address.
+            <!-- User main header -->
+            <div id="user-main-header">
+                <!-- Home page header -->
+                <div id="homeHeader">
+                    <h5>Home Page</h5>
+                </div>
+                <!-- Personal drive header -->
+                <div id="driveHeader" style="display: none">
+                    <h5>Personal Drive</h5>
+                </div>
+            </div>
+
+            <!-- BEGIN: user main content: home page / personal drive view -->
+            <div id="user-main-content">
+
+                <!-- BEGIN: user home page container -->
+                <div class="row-lg-10 container-fluid" id="homeContent">
+                    <!-- BEGIN: Add Phone and Add Email row -->
+                    <div class="row justify-content-lg-center">
+
+                        <!-- BEGIN: Add Phone column -->
+                        <div class="add_info col-lg-6">
+                            <!-- Add phone number form -->
+                            <form action="/user/add_phone" class="form needs-validation" method="post" enctype="multipart/form-data" novalidate>
+                                {% csrf_token %}
+                                <label for="add-phone">Phone</label>
+                                <div class="phone-items d-flex flex-wrap align-items-middle">
+                                    <!-- Add align-items-center to vertically align elements -->
+                                    <div class="mx-2">
+                                        <input type="tel" name="phone" class="form-control" id="add-phone" inputmode="numeric" pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$" autocomplete="tel" required>
+                                        <div class="div invalid-feedback">
+                                            Please enter a valid 10 digit number.
+                                        </div>
+                                    </div>
+                                    <div class="mx-2">
+                                        <input type="submit" class="btn add-btn" value="Add">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="mx-2">
-                                <input type="submit" class="btn add-btn" value="Add">
-                            </div>
-                        </div>
-                    </form>
-                    <!-- BEGIN: Each email entry container -->
-                    <div class="email-entry container">
-                        {% for email in emails %}
-                            <div class="email-items d-flex flex-wrap align-items-middle">
-                                <!-- Display email -->
-                                <div class="mx-2">
-                                    <li>{{ email.email }}</li>
-                                </div>
-                                <!-- Modify email button -->
-                                <div class="mx-2">
-                                    <button class="btn edit-btn modify-form-btn" data-id="{{ email.email }}">Modify
-                                    </button>
-                                </div>
-                                <!-- Delete email -->
-                                <div class="mx-2">
-                                    <form action="/user/delete_email/{{ email.id }}" method="post">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="operation" value="delete">
-                                        <input class="btn delete-btn" type="submit" value="Delete">
-                                    </form>
-                                </div>
-                                <!-- START: Form to modify email (display shown/hidden based on Modify email button)-->
-                                <div class="container-fluid">
-                                    <form action="/user/modify_email/{{ email.id }}" id="{{ email.email }}"
-                                            class="modify-form needs-validation"
-                                            method="post" enctype="multipart/form-data" style="display: none;" novalidate>
-                                        {% csrf_token %}
-                                        <div class="row align-items-center">
-                                            <div class="col form-group">
-                                                <input type="email" value="{{ email.email }}" name="email"
-                                                        class="form-control" autocomplete="email" required>
-                                                <div class="div invalid-feedback">
-                                                    Please enter a valid email address.
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <input type="submit" class="btn edit-btn" value="Update">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- END: Form to modify email (display shown/hidden based on Modify email button)-->
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <!-- END: Each email entry container-->
-                </div>
-                <!-- END: Add Email column-->
-            </div>
-            <!-- END: Add Phone and Add Email row -->
+                            </form>
 
-            <!-- BEGIN: HomeMore Team Contact row -->
-            <div class="homemore_contact row justify-content-lg-center">
-                <!-- BEGIN: HomeMore Team Contact container -->
-                <div class="container-fluid justify-content-lg-center">
-                    <h3>HomeMore Team Contact</h3>
-                    <p>Your HomeMore Team Contact is here for you to contact if you need any assistance.</p>
-                    <p>Contact Name: {{ supervisor.name }}</p>
-                </div>
-                <!-- END: HomeMore Team Contact container -->
-            </div>
-            <!-- END: HomeMore Team Contact row -->
-        </div>
-        <!-- END: user information container -->
-
-        <!-- BEGIN: user personal drive notes/documents container -->
-        <div class="user-content container-fluid collapse" id="driveContent" style="display: none">
-            <!-- BEGIN: row of 2 columns: Nost list and Document list -->
-            <div class="row row-cols-2">
-                <br>
-                <!-- BEGIN: Note list -->
-                <div class="col-lg-4 justify-content-lg-center" id="noteList">
-                    <!-- Note list header -->
-                    <div class="note-list-header d-flex container-fluid">
-                        <h4>Notes</h4>
-                        <button type="button" class="navbar-dark btn add-btn" id="noteListCollapse"
-                            aria-controls="noteListCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                    </div>
-                    <!-- BEGIN: Note list container -->
-                    <div class="notes-list container" id="notesContainer">
-                        {% for note in notes %}
-                        <!-- Each Note entry per container -->
-                        <div class="note-entry container">
-                            <!-- Note header -->
-                            <div class="note-header">
-                                <!-- Note title -->
-                                <div class="note-header-item">
-                                    <span>{{ note.title }}</span>
-                                </div>
-                                <!-- Note Last updated date & Modify/Delete functions -->
-                                <div class="note-header-item">
-                                    <div class="row row-cols-2">
-                                        <!-- Last updated -->
-                                        <div class="col">
-                                            <span>Updated {{ note.updated_time|date:"M d, Y" }}</span>
+                            <!-- BEGIN: Each phone entry container -->
+                            <div class="phone-entry container">
+                                {% for phone in phones %}
+                                    <div class="phone-items d-flex flex-wrap align-items-middle">
+                                        <!-- Display phone number -->
+                                        <div class="mx-2">
+                                            <li>{{ phone.phone }}</li>
                                         </div>
-                                        <!-- Modify and Delete note -->
-                                        <div class="d-flex align-items-center col">
-                                            <!-- Modify note -->
-                                            <a class="btn edit-btn mx-2" href="/user/modify_note/{{ note.id }}">Modify</a>
-                                            <!-- Delete note -->
-                                            <form action="/user/delete_note/{{ note.id }}" method="post">
+                                        <!-- Modify phone number -->
+                                        <div class="mx-2">
+                                            <button class="btn edit-btn modify-form-btn" data-id="{{ phone.phone }}">Modify
+                                            </button>
+                                        </div>
+                                        <!-- Delete phone number -->
+                                        <div class="mx-2">
+                                            <form action="/user/delete_phone/{{ phone.id }}" method="post">
                                                 {% csrf_token %}
                                                 <input type="hidden" name="operation" value="delete">
-                                                <input class="btn delete-btn mx-2" type="submit" value="Delete">
+                                                <input class="btn delete-btn" type="submit" value="Delete">
                                             </form>
+                                        </div>
+                                        <!-- START: Form to modify phone number (display shown/hidden based on Modify phone button)-->
+                                        <div class="modify-info container-fluid align-items-middle">
+                                            <form action="/user/modify_phone/{{ phone.id }}" id="{{ phone.phone }}"
+                                                class="modify-form needs-validation"
+                                                method="post" enctype="multipart/form-data" style="display: none;" novalidate>
+                                                {% csrf_token %}
+                                                <div class="modify-info row d-flex flex-wrap align-items-middle">
+                                                    <div class="col form-group mx-2">
+                                                        <div class="col form-group">
+                                                            <input type="tel" value="{{ phone.phone }}" name="phone"
+                                                                class="form-control" autocomplete="tel" pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$" required>
+                                                            <div class="div invalid-feedback">Input cannot be blank.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col mx-2">
+                                                        <input type="submit" class="btn edit-btn" value="Update">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- END: Form to modify phone number (display shown/hidden based on Modify email button)-->
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <!-- END: Each phone entry container-->
+                        </div>
+                        <!-- END: Add Phone column-->
+
+                        <!-- BEGIN: Add Email column -->
+                        <div class="add_info col-lg-6">
+                            <!-- Add email form -->
+                            <form action="/user/add_email" class="form needs-validation" method="post" enctype="multipart/form-data" novalidate>
+                                {% csrf_token %}
+                                <label for="add-email">Email</label>
+                                <div class="row align-items-center">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-2">
+                                            <input type="email" name="email" class="form-control" id="add-email" autocomplete="email" required>
+                                            <div class="div invalid-feedback">
+                                                Please enter a valid email address.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mx-2">
+                                        <input type="submit" class="btn add-btn" value="Add">
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- BEGIN: Each email entry container -->
+                            <div class="email-entry container">
+                                {% for email in emails %}
+                                    <div class="email-items d-flex flex-wrap align-items-middle">
+                                        <!-- Display email -->
+                                        <div class="mx-2">
+                                            <li>{{ email.email }}</li>
+                                        </div>
+                                        <!-- Modify email button -->
+                                        <div class="mx-2">
+                                            <button class="btn edit-btn modify-form-btn" data-id="{{ email.email }}">Modify
+                                            </button>
+                                        </div>
+                                        <!-- Delete email -->
+                                        <div class="mx-2">
+                                            <form action="/user/delete_email/{{ email.id }}" method="post">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="operation" value="delete">
+                                                <input class="btn delete-btn" type="submit" value="Delete">
+                                            </form>
+                                        </div>
+                                        <!-- START: Form to modify email (display shown/hidden based on Modify email button)-->
+                                        <div class="container-fluid">
+                                            <form action="/user/modify_email/{{ email.id }}" id="{{ email.email }}"
+                                                    class="modify-form needs-validation"
+                                                    method="post" enctype="multipart/form-data" style="display: none;" novalidate>
+                                                {% csrf_token %}
+                                                <div class="row align-items-center">
+                                                    <div class="col form-group">
+                                                        <input type="email" value="{{ email.email }}" name="email"
+                                                                class="form-control" autocomplete="email" required>
+                                                        <div class="div invalid-feedback">
+                                                            Please enter a valid email address.
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="submit" class="btn edit-btn" value="Update">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- END: Form to modify email (display shown/hidden based on Modify email button)-->
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <!-- END: Each email entry container-->
+                        </div>
+                        <!-- END: Add Email column-->
+                    </div>
+                    <!-- END: Add Phone and Add Email row -->
+
+                    <!-- BEGIN: HomeMore Team Contact row -->
+                    <div class="homemore_contact row justify-content-lg-center">
+                        <!-- BEGIN: HomeMore Team Contact container -->
+                        <div class="container-fluid justify-content-lg-center">
+                            <h3>HomeMore Team Contact</h3>
+                            <p>Your HomeMore Team Contact is here for you to contact if you need any assistance.</p>
+                            <p>Contact Name: {{ supervisor.name }}</p>
+                        </div>
+                        <!-- END: HomeMore Team Contact container -->
+                    </div>
+                    <!-- END: HomeMore Team Contact row -->
+                </div>
+                <!-- END: user information container -->
+
+                <!-- BEGIN: user personal drive notes/documents container -->
+                <div class="user-content collapse" id="driveContent" style="display: none">
+
+                    <!-- Note list toggler -->
+                    <div class="toggler-container">
+                        <button class="content-toggler" id="noteListToggler"
+                            aria-controls="noteListToggler" aria-expanded="false" aria-label="Toggle notes">
+                                Notes
+                        </button>
+                    </div>
+
+                    <!-- BEGIN: Note list container -->
+                    <div class="row justify-content-lg-center" id="noteListContainer">
+
+                        <!-- Note list container header -->
+                        <div class="list-header">
+                            <!-- Create a note -->
+                            <div class="list-header-option">
+                                <h6>Create a note:</h6>
+                                <a class="btn add-btn" id="add-note" href="/user/add_note">Create note</a>
+                            </div>
+                        </div>
+                        
+                        <!-- BEGIN: Note list -->
+                        <div class="notes-list" id="noteList">
+                            {% for note in notes %}
+                            <!-- Each Note entry per container -->
+                            <div class="note-entry">
+                                <!-- Note header -->
+                                <div class="note-header">
+                                    <!-- Note title -->
+                                    <div class="note-header-item">
+                                        <span>{{ note.title }}</span>
+                                    </div>
+                                    <!-- Note Last updated date & Modify/Delete functions -->
+                                    <div class="note-header-item">
+                                        <div class="row row-cols-2">
+                                            <!-- Last updated -->
+                                            <div class="col">
+                                                <span>Updated {{ note.updated_time|date:"M d, Y" }}</span>
+                                            </div>
+                                            <!-- Modify and Delete note -->
+                                            <div class="d-flex align-items-center col">
+                                                <!-- Modify note -->
+                                                <a class="btn edit-btn mx-2" href="/user/modify_note/{{ note.id }}">Modify</a>
+                                                <!-- Delete note -->
+                                                <form action="/user/delete_note/{{ note.id }}" method="post">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="operation" value="delete">
+                                                    <input class="btn delete-btn mx-2" type="submit" value="Delete">
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- Note content -->
+                                <div class="note-content">
+                                    <p class="note-content">{{ note.content }}</p>
+                                </div>
                             </div>
-                            <!-- Note content -->
-                            <div class="note-content">
-                                <p class="note-content">{{ note.content }}</p>
-                            </div>
+                            {% endfor %}
                         </div>
-                        {% endfor %}
+                        <!-- END: Each note entry container-->
                     </div>
-                    <!-- END: Each note entry container-->
-                </div>
-                <!-- END: Add Note col -->
+                    <!-- END: Add Note col -->
 
-                <br>
-                <!-- BEGIN: Document list -->
-                <div class="col-lg justify-content-lg-center" id="documentList">
-                    <!-- Document header -->
-                    <div class="document-header container-fluid">
-                        <h4>Documents</h4>
+                    <!-- Document list toggler -->
+                    <div class="toggler-container">
+                        <button class="content-toggler" id="documentListToggler"
+                            aria-controls="documentListToggler" aria-expanded="false" aria-label="Toggle documents">
+                                Documents
+                        </button>
                     </div>
-                    <!-- Document section header -->
-                    <div class="container">
-                        <div class="document-list-header row">
-                            <div class="col">
-                                <span>Name</span>
-                            </div>
-                            <div class="col-lg-2">
-                                <span>Expiration date</span>
-                            </div>
-                            <div class="col-lg-2">
-                                <span>Last modified</span>
-                            </div>
-                            <div class="col-lg-2 center-text">
-                                <span>Options</span>
-                            </div>
-                        </div>
-                    </div>
+
                     <!-- BEGIN: Document list container -->
-                    <div class="container">
-                        {% for document in documents %}
-                            <!-- BEGIN: Document entry per row -->
-                            <div class="document-item active-document row" data-id="{{ document.type }}">
-                                <!-- Document title -->
-                                <div class="document-detail col">
-                                    {% comment %} <span class="document-detail align-middle">{{ document.title }}</span> {% endcomment %}
-                                    <a target="_blank" rel="noopener" href="{{ document.document.url }}" class="document-detail document-url align-middle">{{ document.title }}</a>
+                    <div class="row justify-content-lg-center" id="documentListContainer">
+                        
+                        <!-- BEGIN: Document list container header  -->
+                        <div class="list-header">
+                            <!-- Upload document -->
+                            <div class="list-header-option">
+                                <h6>Upload a document:</h6>
+                                <a class="btn add-btn" id="add-document" href="/user/add_document">Upload document</a>
+                            </div>
+                            <!-- Document type dropdown -->
+                            <div class="list-header-option">
+                                <h6>Filter view by file type:</h6>
+                                <select class="form-select" id="documentTypeSelector" onchange="filterDocuments()">
+                                    <option value="">--Select a file type--</option>
+                                    <option value="All">Show All</option>
+                                    <option value="Birth Certificate">Birth Certificate</option>
+                                    <option value="Financial">Financial</option>
+                                    <option value="Housing">Housing</option>
+                                    <option value="ID">ID</option>
+                                    <option value="Insurance">Insurance</option>
+                                    <option value="SSN">SSN</option>
+                                    <option value="Passport">Passport</option>
+                                    <option value="Other">Other</option>
+                                    <!-- Add other types as needed -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- BEGIN: Document list container -->
+                        <div class="container" id="documentList">
+                            <!-- Document list header -->
+                            <div class="document-list-header row">
+                                <div class="col">
+                                    <span>Name</span>
                                 </div>
-                                <!-- Document expiration date -->
-                                <div class="document-detail col-lg-2">
-                                    <span class="document-detail align-middle expiration-date" data-id="{{ document.expired_time }}">{{ document.expired_time|date:"M d, Y" }}</span>
+                                <div class="col-lg-2">
+                                    <span>Expiration date</span>
                                 </div>
-                                <!-- Document last modified date -->
-                                <div class="document-detail col-lg-2">
-                                    <span class="document-detail align-middle">{{ document.updated_time|date:"M d, Y" }}</span>
+                                <div class="col-lg-2">
+                                    <span>Last modified</span>
                                 </div>
-                                <!-- Modify and Delete document -->
-                                <div class="document-detail d-flex col-lg-2.5">
-                                    <!-- Modify document -->
-                                    <a class="document-detail btn edit-btn mx-1"
-                                        href="/user/modify_document/{{ document.id }}">Modify</a>
-                                    <!-- Delete document -->
-                                    <form action="/user/delete_document/{{ document.id }}" method="post">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="operation" value="delete">
-                                        <input class="document-detail btn delete-btn mx-1" type="submit" value="Delete">
-                                    </form>
+                                <div class="col-lg-2 center-text">
+                                    <span>Options</span>
                                 </div>
                             </div>
-                            <!-- END: Document entry per row -->
-                        {% endfor %}
+
+                            {% for document in documents %}
+                                <!-- BEGIN: Document entry per row -->
+                                <div class="document-item active-document row" data-id="{{ document.type }}">
+                                    <!-- Document title -->
+                                    <div class="document-detail col">
+                                        {% comment %} <span class="document-detail align-middle">{{ document.title }}</span> {% endcomment %}
+                                        <a target="_blank" rel="noopener" href="{{ document.document.url }}" class="document-detail document-url align-middle">{{ document.title }}</a>
+                                    </div>
+                                    <!-- Document expiration date -->
+                                    <div class="document-detail col-lg-2">
+                                        <span class="document-detail align-middle expiration-date" data-id="{{ document.expired_time }}">{{ document.expired_time|date:"M d, Y" }}</span>
+                                    </div>
+                                    <!-- Document last modified date -->
+                                    <div class="document-detail col-lg-2">
+                                        <span class="document-detail align-middle">{{ document.updated_time|date:"M d, Y" }}</span>
+                                    </div>
+                                    <!-- Modify and Delete document -->
+                                    <div class="document-detail d-flex col-lg-2.5">
+                                        <!-- Modify document -->
+                                        <a class="document-detail btn edit-btn mx-1"
+                                            href="/user/modify_document/{{ document.id }}">Modify</a>
+                                        <!-- Delete document -->
+                                        <form action="/user/delete_document/{{ document.id }}" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="operation" value="delete">
+                                            <input class="document-detail btn delete-btn mx-1" type="submit" value="Delete">
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- END: Document entry per row -->
+                            {% endfor %}
+                        </div>
+                        <!-- END: Document list container-->
                     </div>
-                    <!-- END: Document list container-->
+                    <!-- END: Document list -->
                 </div>
-                <!-- END: Document list -->
+                <!-- END: user personal drive notes/documents container -->
             </div>
-            <!-- END: row of 2 columns: Nost list and Document list -->
+            <!-- END: user main content: home page / personal drive view -->
         </div>
-        <!-- END: user personal drive notes/documents container -->
+        <!-- END: User main container -->
     </div>
-    <!-- END: user content: home page / personal drive view -->
-
-
-    <!-- Modal for PIN Authentication -->
-    {% comment %} <div id="pinModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>Please enter your 4-digit PIN:</p>
-            <input type="password" id="pinInput" maxlength="4">
-            <button id="submitPin">Submit</button>
-        </div>
-    </div> {% endcomment %}
+    <!-- BEGIN: User main div -->
 </div>
+<!-- END: main content -->
+
 
 <!-- PIN modal dialog -->
     <dialog id="pinModal" onKeyPress="return checkSubmit(event)">
@@ -472,8 +474,6 @@
         var homeContent = document.getElementById("homeContent");
         var driveBtn = document.getElementById("driveButton"); // Button to open drive page
         var driveContent = document.getElementById("driveContent"); // Drive page content
-
-        var currentView = document.getElementById("currentContent");
         
         var pinModal = document.getElementById("pinModal");
         var closeBtn = document.getElementById("closeModal"); // Close button on the modal
@@ -482,15 +482,11 @@
 
         // if home button clicked, display home content and hide drive content
         homeBtn.addEventListener("click", () => {
-            currentView.innerText = "Home Page";
             // Show home content
             homeContent.style.display = "block";
             // Hide drive content
             driveContent.style.display = "none";
-            // hide sidebar drive page drive page options
-            $("li.drive-options").each(function(i, option) {
-                $(option).hide();
-            });
+            goToHome();
         });
 
         // if drive button clicked and drive content is not displayed, open PIN modal
@@ -510,11 +506,8 @@
                 homeContent.style.display = "block";
             // if correct PIN is submitted, display drive content
             } else if (pinModal.returnValue === "{{ second_password }}") {
-                currentView.innerText = "Personal Drive";
-                $("li.drive-options").each(function(i, option) {
-                    $(option).show();
-                });
                 driveContent.style.display = "block";
+                goToDrive();
             // if incorrect PIN is submitted, alert to error and redisplay PIN modal again
             } else {
                 // Incorrect PIN
@@ -531,6 +524,39 @@
             event.preventDefault(); // dont submit this fake form
             pinModal.close(pinInput.value); // send the pinInput button input value to pinModal
         });
+
+        const homeBtnHeader = document.querySelector("#homeButtonHeader");
+
+        const driveBtnHeader = document.querySelector("#driveButtonHeader");
+
+        const userMainHeader = document.querySelector("#user-main-header");
+
+        const homeHeader = document.querySelector("#homeHeader");
+        const driveHeader = document.querySelector("#driveHeader");
+
+        // on user home page view
+        function goToHome() {
+            // hide the home button
+            homeBtnHeader.style.display = "none";
+            // display option to go to drive
+            driveBtnHeader.style.display = "block";
+            // hide driveHeader
+            driveHeader.style.display = "none";
+            // display homeHeader
+            homeHeader.style.display = "block";
+        }
+
+        // on personal drive page view
+        function goToDrive() {
+            // hide the drive button
+            driveBtnHeader.style.display = "none";
+            // display option to go to home
+            homeBtnHeader.style.display = "block";
+            // hide homeHeader
+            homeHeader.style.display = "none";
+            // display driveHeader
+            driveHeader.style.display = "block";
+        }
     });
 </script>
 
@@ -550,17 +576,17 @@ src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
 integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
 crossorigin="anonymous"></script>
 
-<!-- Javascript for sidebar -->
+<!-- Javascript for toggling notes and documents display -->
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
+        $('#noteListToggler').on('click', function () {
+            $('#noteListContainer').toggleClass('hidden');
         });
     });
 
     $(document).ready(function () {
-        $('#noteListCollapse').on('click', function () {
-            $('#notesContainer').toggleClass('hidden');
+        $('#documentListToggler').on('click', function () {
+            $('#documentListContainer').toggleClass('hidden');
         });
     });
 </script>

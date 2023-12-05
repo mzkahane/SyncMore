@@ -8,6 +8,7 @@
     --carbon: #A9A9A9;
     --light-gray: #E9EAF2;
     --oxford-blue: #0C2137;
+    --oxford-blue-light: rgba(3, 42, 86, 0.714);
     --oxford-blue-dark: #112035;
     --timberwolf: #D2D3D3;
     --turquoise: #0DCBAB;
@@ -49,11 +50,6 @@
         "Segoe UI Symbol",
         "Noto Color Emoji";
 }
-
-/* FOR TESTING: add a red border around every element */
-/* * {
-    border: 2px solid red;
-} */
 
 .form-text {
     margin-top: 0.25rem;
@@ -111,23 +107,6 @@ nav a:hover {
     padding: 2em;
 }
 
-/* home page latest tweets scroll container */
-/* .twitter-timeline {
-    background-color: var(--timberwolf);
-    overflow-x: hidden;
-    text-align: center;
-    padding: 5px;
-    border: 2px solid red;
-}
-#twitter-timeline {
-    position: static;
-    visibility: visible;
-    width: 520px;
-    height: 400px;
-    display: block;
-    flex-grow: 1;
-} */
-
 /* register page create user account form  */
 #register {
     background-color: white;
@@ -166,6 +145,20 @@ footer {
     box-sizing: border-box;
     min-height: 10vh;
     padding: 25px;
+}
+
+div.phone-entry, div.email-entry {
+    padding: 0px;
+}
+
+div.phone-items, div.email-items {
+    align-items: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+div.modify-info {
+    padding: 10px;
 }
 
 /* HomeMore Team Contact information row container */
@@ -229,34 +222,9 @@ img.user_image {
     text-decoration: none;
 }
 
-.btn-primary {
-    --bs-btn-bg: var(--turquoise) !important;
-    --bs-btn-border-color: var(--bs-btn-bg);
-    --bs-btn-hover-bg: #0db195;
-    --bs-btn-hover-border-color: var(--bs-btn-hover-bg);
-}
+/* PIN MODAL DIALOG */
 
-.btn-secondary {
-    --bs-btn-bg: #6A5ACD;
-    --bs-btn-border-color: var(--bs-btn-bg);
-    --bs-btn-hover-bg: #5549a5;
-    --bs-btn-hover-border-color: var(--bs-btn-hover-bg);
-}
-
-.bg-timberwolf {
-    background-color: #D2D3D3;
-}
-
-#drive-page {
-    display:none;
-}
-
-.navbar-expand-lg .navbar-toggler {
-    display: block !important;
-}
-
-
-/*   Open state of the dialog  */
+/*   Open state of the PIN modal dialog  */
 #pinModal[open] {
     opacity: 1;
     transform: scaleY(1);
@@ -276,20 +244,19 @@ img.user_image {
     padding: 10px;
 }
 
-/*   Closed state of the dialog   */
+/*   Closed state of the PIN modal dialog   */
 #pinModal {
     opacity: 0;
     transform: scaleY(0);
 }
 
-/* The Close Button */
+/* close button on PIN modal dialog */
 #closeModal {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
-
 #closeModal:hover,
 #closeModal:focus {
     color: black;
@@ -297,75 +264,121 @@ img.user_image {
     cursor: pointer;
 }
 
-a#currentContent {
-    padding: 13px 3px;
-    /*color: rgb(241, 237, 237);*/
-    color: black;
-    font-size: 3.5vh;
+/* USER MAIN CONTENT */
+
+.gray-body {
+    background-color: var(--light-gray);
+}
+
+#user-main {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#user-main-container {
+    border-radius: 4px;
+    overflow: hidden;
+    width: 50em;
+    min-width: 300px;
+    margin-top: 25px;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
     position: relative;
-    text-decoration: none;
-}
-
-a#currentContent:hover {
-    color: var(--slate-blue);
-    text-decoration: none;
-}
-
-div.phone-entry, div.email-entry {
-    padding: 0px;
-}
-
-div.phone-items, div.email-items {
-    align-items: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-
-
-div.modify-info {
-    padding: 10px;
-}
-
-.wrapper {
     display: flex;
-    width: 100%;
-    align-items: stretch;
+    flex-direction: column;
 }
 
-#content {
-    width: 100%;
-    padding: 20px;
-    min-height: 100vh;
-    transition: all 0.3s;
+#user-main-header {
+    padding: 15px 16px;
+    display: flex;
+    justify-content: center;
+    border-radius: 4px 4px 0px 0px;
+    background-color: var(--dark);
+    color: var(--webpage-white);
 }
-
-.center-text {
+#user-main-header h5 {
+    font-weight: normal;
     text-align: center;
+    margin-bottom: 0px;
 }
 
-.user-navbar {
-    padding: 15px 10px;
-    background: #fff;
-    border: none;
-    border-radius: 0;
-    margin-bottom: 40px;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-/* #documentList {
+#user-main-content {
+    float: left;
+    width: 100%;
     background-color: white;
-} */
+}
 
-#noteList, #notesContainer {
-    margin-left: 0px;
-    margin-right: 0px;
+.toggler-container {
+    width: 100%;
+    display: block;
+}
+
+.content-toggler {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 70px;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    background-color: var(--turquoise);
+    color: white;
+    display: flex;
+    justify-content: center;
+    z-index: 20;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 23px;
+    border: 0;
+    cursor: pointer;
+    font-size: 1.25rem;
+}
+
+#noteListToggler {
+    background-color: var(--oxford-blue-light);
+}
+#noteListToggler:hover {
+    background-color: var(--oxford-blue);
+    outline: none;
+}
+
+#documentListToggler {
+    background-color: var(--oxford-blue-light)
+}
+#documentListToggler:hover {
+    background-color: var(--oxford-blue);
+    outline: none;
+}
+
+#documentListContainer, #noteListContainer {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     padding-left: 0px;
     padding-right: 0px;
 }
 
-.note-list-header {
-    gap: 5px;
+.list-header {
+    border-radius: 4px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: var(--light-gray);
+    width: 40em;
+    min-width: 300px;
+    text-align: center;
+    margin-bottom: 20px;
 }
+
+/* NOTE LIST CONTENT */
 
 .note-entry {
     padding-top: 10px;
@@ -374,13 +387,14 @@ div.modify-info {
     padding-right: 0px;
     margin-left: 0px;
     margin-right: 0px;
+    width: 40em;
+    min-width: 300px;
 }
 
 .note-header {
-    /* border-bottom: 1px solid var(--dark) !important; */
     padding: 3px;
     border-radius: 5px 5px 0px 0px;
-    background-color: var(--turquoise);
+    background-color: var(--oxford-blue-light);
     display: grid;
     border: 1px solid var(--dark);
 }
@@ -406,6 +420,15 @@ p.note-content {
     white-space: pre-wrap;
     padding: 10px;
     font-size: 0.8125rem;
+}
+
+/* DOCUMENT LIST CONTENT */
+
+#documentList {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 40em;
+    min-width: 300px;
 }
 
 .document-list-header {
@@ -441,22 +464,22 @@ a.document-url:hover {
     color: red;
 }
 
-.gray-body {
-    background-color: var(--light-gray);
-}
+/* USER FORM CONTENT */
 
 .user-form {
     padding-left: 15px;
     padding-right: 15px;
 }
 
-
 #user-form-container {
     border-radius: 4px;
     overflow: hidden;
     width: 28em;
     min-width: 300px;
-    margin: 100px auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
     height: auto;
     position: relative;
     display: flex;
@@ -473,6 +496,8 @@ a.document-url:hover {
 }
 #user-form-header h5 {
     font-weight: normal;
+    text-align: center;
+    margin-bottom: 0px;
 }
 
 .user-form-register {
@@ -491,10 +516,8 @@ a.document-url:hover {
     padding: 10px;
 }
 
-.line-above {
-    border-top: 1px dashed var(--dark);
-    padding-top: 15px;
-}
+
+/* DOCUMENT PREVIEW */
 
 .preview {
     display: flex;
@@ -512,35 +535,80 @@ a.document-url:hover {
     height: 400px;
 }
 
+.line-above {
+    border-top: 1px dashed var(--dark);
+    padding-top: 15px;
+}
+
+/* FORM SUBMISSION ERROR DIV */
 .form-submission-error-div {
     display: none;
 }
-
+/* FORM SUBMISSION ERROR */
 .form-submission-error {
     color: red;
 }
 
+/* OPTIONAL */
 .optional:after {
     content:" (Optional)";
     color: var(--turquoise);
     font-size: 0.8125rem;
 }
-
+/* REQUIRED */
 .required:after {
     content:" (Required)";
     color: red;
     font-size: 0.8125rem;
 }
 
+/* MOBILE SCREEN ADJUSTMENTS */
 
 @media (max-width: 767px) {
+    #user-main {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    #user-main-navigation {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    #user-main-header {
+        border-radius: 0px;
+    }
+
+    #user-main-container {
+        border-radius: 0px;
+        width: auto;
+        max-width: 480px;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 5px;
+        margin-bottom: 0px;
+    }
+
+    .note-entry {
+        width: auto;
+    }
+
+    /* .user-form {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    #user-form-navigation {
+        padding-left: 15px;
+        padding-right: 15px;
+    } */
+    
     #user-form-container {
         width: auto;
         max-width: 480px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 50px;
-        margin-bottom: 50px;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 5px;
     }
 }
 
