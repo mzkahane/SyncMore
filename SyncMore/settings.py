@@ -88,7 +88,7 @@ DATABASES = {
 
 if 'test' in sys.argv:
     DATABASES['default']['NAME'] = 'test_syncmore'
-    DATABASES['default']['HOST'] = 'localhost'
+    DATABASES['default']['HOST'] = '149.28.36.162'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
