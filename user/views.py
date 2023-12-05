@@ -19,6 +19,7 @@ from SyncMore import settings
 
 from .forms import DocumentForm
 from .models import Document, Email, Note, Phone, Supervisor, User
+from django.shortcuts import get_object_or_404
 
 sys.path.append('..')
 

@@ -16,13 +16,15 @@ def contact_view(request):
         email = request.POST.get('email')
         message = request.POST.get('message')
 
+        # Construct the message
+        full_message = f"From: {first_name} {last_name}, Email: {email}\n\n{message}"
+
         # Send an email
         send_mail(
-            'Contact Form: {} {}'.format(first_name, last_name),
-            message,
-            email,  # From email
-            [settings.DEFAULT_FROM_EMAIL],  # To email, should be your email address
-            fail_silently=False,
+            f'Contact Form: {first_name} {last_name}',
+            full_message,
+            settings.EMAIL_HOST_USER,  # From email, use your email configured in settings
+            [settings.EMAIL_HOST_USER],  # To email, should be your email address
         )
 
         return HttpResponse('Thanks for contacting us!')

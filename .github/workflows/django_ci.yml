@@ -1,0 +1,44 @@
+name: Django CI
+
+on: [ push, pull_request ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: mysql:5.7
+        env:
+          MYSQL_DATABASE: testdb
+          MYSQL_USER: user
+          MYSQL_PASSWORD: 'syncmore'
+          MYSQL_ROOT_PASSWORD: 'syncmore'
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=10s
+          --health-retries=3
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install mysqlclient
+      - name: Run tests
+        env:
+          MYSQL_HOST: 149.28.36.162
+          MYSQL_PORT: 3306
+          MYSQL_USER: user
+          MYSQL_PASSWORD: 'syncmore'
+          MYSQL_DATABASE: testdb
+        run: |
+          python manage.py test
