@@ -60,7 +60,7 @@
                 </div> {% endcomment %}
 
         <div class="col col-lg-6">
-            <h2>Contact Us</h2>
+            <h1><strong>Contact Us</strong></h1>
         </div>
     </div>
 </div>
@@ -69,7 +69,7 @@
 <div class="container" style="font-size:18px;">
     <div class="row row-cols-2 align-items-top gx-5">
         <!-- BEGIN: description section -->
-        <div class="col-md my-2">
+        <div class="col-md my-5">
             <br>
             <p>
                 Whether you have a general question, suggestion, concern,
@@ -86,30 +86,44 @@
             <br>
             <p>
                 <strong>628-444-8094</strong>
-                <br>
-                1600 Bryant St #411447 SMB#51223 San Francisco, CA 94141
             </p>
         </div>
         <!-- END: description section -->
         <!-- BEGIN: form section -->
         <div class="col-md my-5">
-            <form class="row g-3" method="post" action="/index/contact/">
+            <form class="row g-3 needs-validation" method="post" action="/index/contact/" novalidate>
                 {% csrf_token %}
                 <div class="col-md-6 my-2">
                     <label for="First" class="form-label">First Name</label>
-                    <input type="text" class="form-control" name="first_name" id="First" required>
+                    <input type="text" class="form-control" name="first_name" id="First" autocomplete="given-name" aria-describedby="FirstRequired" required>
+                    <div id="FirstRequired" class="form-text">Required</div>
+                    <div class="div invalid-feedback">
+                        Please enter your first name.
+                    </div>
                 </div>
                 <div class="col-md-6 my-2">
                     <label for="Last" class="form-label">Last Name</label>
-                    <input type="text" class="form-control" name="last_name" id="Last" required>
+                    <input type="text" class="form-control" name="last_name" id="Last" autocomplete="family-name" aria-describedby="LastRequired" required>
+                    <div id="LastRequired" class="form-text">Required</div>
+                    <div class="div invalid-feedback">
+                        Please enter your last name.
+                    </div>
                 </div>
                 <div class="col-12 mb-2">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" name="email" id="email" required>
+                    <input type="email" class="form-control" name="email" id="email" autocomplete="email" aria-describedby="EmailRequired" required>
+                    <div id="EmailRequired" class="form-text">Required</div>
+                    <div class="div invalid-feedback">
+                        Please enter a valid email address.
+                    </div>
                 </div>
                 <div class="col-12 mb-3">
                     <label for="message" class="form-label">Message</label>
-                    <textarea class="form-control" name="message" id="message" rows="4" required></textarea>
+                    <textarea class="form-control" name="message" id="message" rows="4" aria-describedby="MsgRequired" required></textarea>
+                    <div id="MsgRequired" class="form-text">Required</div>
+                    <div class="div invalid-feedback">
+                        Message must not be blank.
+                    </div>
                 </div>
                 <div class="col-12 mb-2">
                     <div class="d-flex justify-content-start mb-3">
@@ -127,6 +141,29 @@
 <footer>
     &copy; 2023 SyncMore. All Rights Reserved.
 </footer>
+
+<!-- JS for validation -->
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+        }, false)
+    })
+    })()
+</script>
 
 <!-- Javascript: jQuery, Popper.js, Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
