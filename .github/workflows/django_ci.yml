@@ -63,5 +63,5 @@ jobs:
           username: ${{ secrets.VULTR_USERNAME }}
           key: ${{ secrets.VULTR_SSH_PRIVATE_KEY }}
           script: |
-            cd /root/Syncmore
+            cd Syncmore
             git pull origin main
