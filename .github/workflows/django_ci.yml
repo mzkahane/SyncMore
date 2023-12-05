@@ -53,4 +53,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
 
       - name: Push Docker image to Docker Hub
-        run: docker push your-dockerhub-username/your-repo-name:${{ github.sha }}
+        run: docker push andrewliu666/syncmore:${{ github.sha }}
