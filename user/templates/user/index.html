@@ -61,47 +61,58 @@
 
     <!-- BEGIN: sidebar -->
     <nav class="col-lg-2" id="sidebar">
-        <ul class="sidebar-list">
-            <li>
-                <a href="" class="sidebar-item" onclick="return false;">
-                    <span class="icon"><i class="fas fa-home"></i></span>
-                    <span class="item" id="homeButton">> Home Page</span>
-                </a>
-            </li>
-            <li>
-                <a href="" class="sidebar-item" onclick="return false;">
-                    <span class="icon"><i class="fas fa-desktop"></i></span>
-                    <span class="item" id="driveButton">> Personal Drive</span>
-                </a>
-            </li>
-            <li class="drive-options">
-                <!-- Document type dropdown -->
-                <h6>Filter view by file type:</h6>
-                <select class="form-select" id="documentTypeSelector" onchange="filterDocuments()">
-                    <option value="">--Select a file type--</option>
-                    <option value="All">Show All</option>
-                    <option value="Birth Certificate">Birth Certificate</option>
-                    <option value="Financial">Financial</option>
-                    <option value="Housing">Housing</option>
-                    <option value="ID">ID</option>
-                    <option value="Insurance">Insurance</option>
-                    <option value="SSN">SSN</option>
-                    <option value="Passport">Passport</option>
-                    <option value="Other">Other</option>
-                    <!-- Add other types as needed -->
-                </select>
-            </li>
-            <li class="drive-options">
-                <!-- Upload document -->
-                <h6>Upload a document:</h6>
-                <a class="btn add-btn" id="add-document" href="/user/add_document">Upload document</a>
-            </li>
-            <li class="drive-options">
-                <!-- Create a note -->
-                <h6>Create a note:</h6>
-                <a class="btn add-btn" id="add-note" href="/user/add_note">Create note</a>
-            </li>
-        </ul>
+        <!-- BEGIN: Note list -->
+        <div class="col-lg-4 justify-content-lg-center" id="noteList">
+            <!-- Note list header -->
+            <div class="note-list-header d-flex container-fluid">
+                <h4>Notes</h4>
+                <button type="button" class="navbar-dark btn add-btn" id="noteListCollapse"
+                    aria-controls="noteListCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <!-- BEGIN: Note list container -->
+            <div class="notes-list container" id="notesContainer">
+                {% for note in notes %}
+                <!-- Each Note entry per container -->
+                <div class="note-entry container">
+                    <!-- Note header -->
+                    <div class="note-header">
+                        <!-- Note title -->
+                        <div class="note-header-item">
+                            <span>{{ note.title }}</span>
+                        </div>
+                        <!-- Note Last updated date & Modify/Delete functions -->
+                        <div class="note-header-item">
+                            <div class="row row-cols-2">
+                                <!-- Last updated -->
+                                <div class="col">
+                                    <span>Updated {{ note.updated_time|date:"M d, Y" }}</span>
+                                </div>
+                                <!-- Modify and Delete note -->
+                                <div class="d-flex align-items-center col">
+                                    <!-- Modify note -->
+                                    <a class="btn edit-btn mx-2" href="/user/modify_note/{{ note.id }}">Modify</a>
+                                    <!-- Delete note -->
+                                    <form action="/user/delete_note/{{ note.id }}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="operation" value="delete">
+                                        <input class="btn delete-btn mx-2" type="submit" value="Delete">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Note content -->
+                    <div class="note-content">
+                        <p class="note-content">{{ note.content }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <!-- END: Each note entry container-->
+        </div>
+        <!-- END: Add Note col -->
     </nav>
     <!-- END: sidebar -->
 
@@ -119,6 +130,48 @@
 
                 <a href="" class="mx-2" id="currentContent">Home Page</a>
             </div>
+
+            <ul class="sidebar-list">
+                <li>
+                    <a href="" class="sidebar-item" onclick="return false;">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item" id="homeButton">> Home Page</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="sidebar-item" onclick="return false;">
+                        <span class="icon"><i class="fas fa-desktop"></i></span>
+                        <span class="item" id="driveButton">> Personal Drive</span>
+                    </a>
+                </li>
+                <li class="drive-options">
+                    <!-- Document type dropdown -->
+                    <h6>Filter view by file type:</h6>
+                    <select class="form-select" id="documentTypeSelector" onchange="filterDocuments()">
+                        <option value="">--Select a file type--</option>
+                        <option value="All">Show All</option>
+                        <option value="Birth Certificate">Birth Certificate</option>
+                        <option value="Financial">Financial</option>
+                        <option value="Housing">Housing</option>
+                        <option value="ID">ID</option>
+                        <option value="Insurance">Insurance</option>
+                        <option value="SSN">SSN</option>
+                        <option value="Passport">Passport</option>
+                        <option value="Other">Other</option>
+                        <!-- Add other types as needed -->
+                    </select>
+                </li>
+                <li class="drive-options">
+                    <!-- Upload document -->
+                    <h6>Upload a document:</h6>
+                    <a class="btn add-btn" id="add-document" href="/user/add_document">Upload document</a>
+                </li>
+                <li class="drive-options">
+                    <!-- Create a note -->
+                    <h6>Create a note:</h6>
+                    <a class="btn add-btn" id="add-note" href="/user/add_note">Create note</a>
+                </li>
+            </ul>
         
         </nav>
 
@@ -286,58 +339,7 @@
             <!-- BEGIN: row of 2 columns: Nost list and Document list -->
             <div class="row row-cols-2">
                 <br>
-                <!-- BEGIN: Note list -->
-                <div class="col-lg-4 justify-content-lg-center" id="noteList">
-                    <!-- Note list header -->
-                    <div class="note-list-header d-flex container-fluid">
-                        <h4>Notes</h4>
-                        <button type="button" class="navbar-dark btn add-btn" id="noteListCollapse"
-                            aria-controls="noteListCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                    </div>
-                    <!-- BEGIN: Note list container -->
-                    <div class="notes-list container" id="notesContainer">
-                        {% for note in notes %}
-                        <!-- Each Note entry per container -->
-                        <div class="note-entry container">
-                            <!-- Note header -->
-                            <div class="note-header">
-                                <!-- Note title -->
-                                <div class="note-header-item">
-                                    <span>{{ note.title }}</span>
-                                </div>
-                                <!-- Note Last updated date & Modify/Delete functions -->
-                                <div class="note-header-item">
-                                    <div class="row row-cols-2">
-                                        <!-- Last updated -->
-                                        <div class="col">
-                                            <span>Updated {{ note.updated_time|date:"M d, Y" }}</span>
-                                        </div>
-                                        <!-- Modify and Delete note -->
-                                        <div class="d-flex align-items-center col">
-                                            <!-- Modify note -->
-                                            <a class="btn edit-btn mx-2" href="/user/modify_note/{{ note.id }}">Modify</a>
-                                            <!-- Delete note -->
-                                            <form action="/user/delete_note/{{ note.id }}" method="post">
-                                                {% csrf_token %}
-                                                <input type="hidden" name="operation" value="delete">
-                                                <input class="btn delete-btn mx-2" type="submit" value="Delete">
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Note content -->
-                            <div class="note-content">
-                                <p class="note-content">{{ note.content }}</p>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                    <!-- END: Each note entry container-->
-                </div>
-                <!-- END: Add Note col -->
+                
 
                 <br>
                 <!-- BEGIN: Document list -->

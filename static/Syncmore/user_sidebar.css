@@ -62,9 +62,6 @@
     transition: all 0.3s;
 }
 
-#sidebar.active {
-    margin-left: -250px;
-}
 
 @media (max-width: 768px) {
     #sidebar {
