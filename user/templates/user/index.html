@@ -4,320 +4,484 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>User Home Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="../../../static/Syncmore/favicon.ico">
     <!-- link to styles -->
     <link rel="stylesheet" href="../../../static/Syncmore/styles.css"/>
     <!-- {% comment %} <link rel="stylesheet" href="../../../static/Syncmore/base.css"/> {% endcomment %} -->
     <link rel="stylesheet" href="../../../static/Syncmore/user_sidebar.css"/>
+    <!-- link to sidebar JS -->
+    <script src="../../../static/Syncmore/js/user_sidebar.js" defer=""></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <style>
-        /* The Modal (background) */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0, 0, 0); /* Fallback color */
-            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-        }
-
-        /* Modal Content */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 30%; /* Could be more or less, depending on screen size */
-        }
-
-        /* The Close Button */
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-    </style>
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-<body>
-    <!-- START: navigation bar -->
-    <nav class="navbar navbar-expand-md">
-        <!-- website logo -->
-        <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
-        <!-- website brand name -->
-        <a class="navbar-brand" href="/">SyncMore</a>
+<body class="gray-body">
+<!-- START: navigation bar -->
+<nav class="navbar navbar-expand-md">
+    <!-- website logo -->
+    <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
+    <!-- website brand name -->
+    <a class="navbar-brand" href="/">SyncMore</a>
 
-        <!-- START: toggle button for mobile navigation bar links -->
-        <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
-                aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <!-- END: toggle button for mobile navigation bar links -->
+    <!-- START: toggle button for mobile navigation bar links -->
+    <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
+            aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- END: toggle button for mobile navigation bar links -->
 
-        <!-- START: navigation bar links -->
-        <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
-            <!-- left hand side links: Resources and Contact Us -->
-            <ul class="navbar-nav mr-auto mt-2 mt-md-0">
-                <li class="navbar-item">
-                    <a class="nav-link" href="/resources/index">Resources</a>
-                </li>
-                <li class="navbar-item">
-                    <a class="nav-link" href="/index/contact/">Contact Us</a>
-                </li>
-            </ul>
-            <!-- right hand side links: Sign Up and Log In -->
-            <ul class="navbar-nav justify-content-end align-right">
-                <li class="navbar-item">
-                    <a class="nav-link" href="/user/register">Sign Up</a>
-                </li>
-                <li class="navbar-item">
-                    <a class="nav-link" href="/user/login">Login</a>
-                </li>
-            </ul>
-        </div>
-        <!-- END: navigation bar links -->
-    </nav>
-    <!-- END: navigation bar -->
+    <!-- START: navigation bar links -->
+    <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+        <!-- left hand side links: Resources and Contact Us -->
+        <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+            <li class="navbar-item">
+                <a class="nav-link" href="/resources/index">Resources</a>
+            </li>
+            <li class="navbar-item">
+                <a class="nav-link" href="/index/contact/">Contact Us</a>
+            </li>
+        </ul>
+        <!-- right hand side links: User Account Settings and Log Out -->
+        <ul class="navbar-nav justify-content-end align-right">
+            <li class="navbar-item">
+                <a class="nav-link" href="/user/account">Account Settings</a>
+            </li>
+            <li class="navbar-item">
+                <a class="nav-link" href="/user/logout">Log Out</a>
+            </li>
+        </ul>
+    </div>
+    <!-- END: navigation bar links -->
+</nav>
+<!-- END: navigation bar -->
 
-    <!-- for authentication -->
-    {% csrf_token %}
+<!-- for authentication -->
+{% csrf_token %}
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2"style="background-color:grey">
-                sidebar
-                <br>
-                will replace with good one later
+<!-- BEGIN: main content -->
+<div class="main" id="main">
+
+    <!-- BEGIN: User main div -->
+    <div id="user-main">
+        <!-- BEGIN: User main container -->
+        <div id="user-main-container">
+
+            <!-- Navigation -->
+            <div class="my-3" id="user-main-navigation">
+                <!-- Go to home page -->
+                <div id="homeButtonHeader" style="display: none">
+                    <button class="btn edit-btn" id="homeButton">Go to Home Page</button>
+                </div>
+                <!-- Go to personal drive -->
+                <div id="driveButtonHeader">
+                    <button class="btn edit-btn" id="driveButton"> Go to Personal Drive</button>
+                </div>
             </div>
-            <!-- BEGIN: right col = user home page / personal drive view -->
-            <div class="col-md-10">
-                <h1><strong>Home Page</strong></h1>
-                <div class="row row-cols-2">
-                    <!-- BEGIN: Add Phone col -->
-                    <div class="col-md-6 mt-3">
-                         <form action="/user/add_phone" class="form needs-validation" method="post" enctype="multipart/form-data" novalidate>
+
+            <!-- User main header -->
+            <div id="user-main-header">
+                <!-- Home page header -->
+                <div id="homeHeader">
+                    <h5>{{ user.Username }}'s Home Page</h5>
+                </div>
+                <!-- Personal drive header -->
+                <div id="driveHeader" style="display: none">
+                    <h5>{{ user.Username }}'s Personal Drive</h5>
+                </div>
+            </div>
+
+            <!-- BEGIN: user main content: home page / personal drive view -->
+            <div id="user-main-content">
+
+                <!-- BEGIN: user home page container -->
+                <div class="container-fluid" id="homeContent">
+
+                    <!-- BEGIN: Adding first name, last name, and description of current living area -->
+                    <form action="/user/add_user_info" id="add-user-info" class="form needs-validation" method="post" enctype="multipart/form-data" novalidate>
+                        <!-- BEGIN: Adding first name and last name -->
+                        <div class="row justify-content-lg-center">
                             {% csrf_token %}
-                            <label for="phone"><h4>Phone</h4></label>
-                            <div class="phone-items d-flex flex-wrap align-items-middle">
-                                <!-- Add align-items-center to vertically align elements -->
-                                <div class="col">
-                                    <div class="form-group mb-2"> <!-- Remove margin-bottom using mb-0 -->
-                                        <input type="tel" name="phone" class="form-control" id="phone" inputmode="numeric" pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$" autocomplete="tel" required>
+                            <!-- First name -->
+                            <div class="add_info col-lg-6">
+                                <label for="new-first-name" class="form-label optional">First Name</label>
+                                <input type="text" name="new_first_name" id="new-first-name" class="form-control" maxlength="30" value={{ user.First_Name|default_if_none:"" }}>
+                                <div class="div invalid-feedback">
+                                    Please enter a first name.
+                                </div>
+                            </div>
+                            <!-- Last name -->
+                            <div class="add_info col-lg-6">
+                                <label for="new-last-name" class="form-label optional">Last Name</label>
+                                <input type="text" name="new_last_name" id="new-last-name" class="form-control" maxlength="30" value={{ user.Last_Name|default_if_none:"&nbsp;" }}>
+                                <div class="div invalid-feedback">
+                                    Please enter a last name.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END: Adding first name and last name row -->
+                        <!-- BEGIN: Adding description of current living area row -->
+                        <div class="add_info row justify-content-lg-center">
+                            <label for="new-living-area" class="form-label optional">Description of Current Living Area</label>
+                            <textarea cols="10" rows="5" name="new_living_area" id="new-living-area" class="form-control" style="overflow:hidden" maxlength="255">{{ user.address|default_if_none:"" }}</textarea>
+                            <div class="div invalid-feedback">
+                                Please describe your current living situation and area.
+                            </div>
+                        </div>
+                        <!-- BEGIN: Adding description of current living area row -->
+                    </form>
+                    <!-- END: Adding first name, last name, and description of current living area -->
+                        
+                    <!-- BEGIN: Add Phone and Add Email row -->
+                    <div class="row justify-content-lg-center">
+
+                        <!-- BEGIN: Add Phone column -->
+                        <div class="add_info col-lg-6">
+                            <!-- Add phone number form -->
+                            <form action="/user/add_phone" class="form needs-validation" method="post" enctype="multipart/form-data" novalidate>
+                                {% csrf_token %}
+                                <label for="add-phone">Phone</label>
+                                <div class="phone-items d-flex flex-wrap align-items-middle">
+                                    <!-- Add align-items-center to vertically align elements -->
+                                    <div class="mx-2">
+                                        <input type="tel" name="phone" class="form-control" id="add-phone" inputmode="numeric" pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$" autocomplete="tel" required>
                                         <div class="div invalid-feedback">
                                             Please enter a valid 10 digit number.
                                         </div>
                                     </div>
-                                </div>
-                                <div class="mx-2">
-                                    <input type="submit" class="btn add-btn" value="Add">
-                                </div>
-                            </div>
-                        </form>
-                        <!-- BEGIN: Each phone entry container -->
-                        <div class="phone-entry">
-                            {% for phone in phones %}
-                                <div class="phone-items d-flex flex-wrap align-items-middle">
-                                    <!-- Display phone number -->
                                     <div class="mx-2">
-                                        <li>{{ phone.phone }}</li>
-                                    </div>
-                                    <!-- Modify phone number -->
-                                    <div class="mx-2">
-                                        <button class="btn edit-btn modify-form-btn" value="{{ phone.phone }}">Modify
-                                        </button>
-                                    </div>
-                                    <!-- Delete phone number -->
-                                    <div class="mx-2">
-                                        <form action="/user/delete_phone/{{ phone.id }}" method="post">
-                                            {% csrf_token %}
-                                            <input type="hidden" name="operation" value="delete">
-                                            <input class="btn delete-btn" type="submit" value="Delete">
-                                        </form>
-                                    </div>
-                                    <!-- START: Form to modify phone number (display shown/hidden based on Modify phone button)-->
-                                    <div class="modify-info align-items-middle">
-                                        <form action="/user/modify_phone/{{ phone.id }}" id="{{ phone.phone }}"
-                                              class="modify-form needs-validation"
-                                              method="post" enctype="multipart/form-data" style="display: none;" novalidate>
-                                            {% csrf_token %}
-                                            <div class="row align-items-center">
-                                                <div class="col form-group">
-                                                    <input type="tel" value="{{ phone.phone }}" name="phone"
-                                                           class="form-control" id="phone" autocomplete="tel" inputmode="numeric" pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$" required>
-                                                           <div class="div invalid-feedback">
-                                                                Input cannot be blank.
-                                                           </div>
-                                                </div>
-                                                <div class="col mx-2">
-                                                    <input type="submit" class="btn edit-btn" value="Update">
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <!-- END: Form to modify phone number (display shown/hidden based on Modify email button)-->
-                                </div>
-                            {% endfor %}
-                        </div>
-                        <!-- END: Each phone entry container-->
-                    </div>
-                    <!-- END: Add Phone col -->
-                    <!-- BEGIN: Add Email col -->
-                    <div class="col-md-6 mt-3">
-                        <form action="/user/add_email" class="form needs-validation" method="post" enctype="multipart/form-data" novalidate>
-                            {% csrf_token %}
-                            <label for="email"><h4>Email</h4></label>
-                            <div class="email-items d-flex flex-wrap align-items-middle">
-                                <div class="col">
-                                        <div class="form-group mb-2">
-                                        <input type="email" name="email" class="form-control" id="email" autocomplete="email" required>
-                                        <div class="div invalid-feedback">
-                                            Please enter a valid email address.
-                                        </div>
+                                        <input type="submit" class="btn add-btn" value="Add">
                                     </div>
                                 </div>
-                                <div class="mx-2">
-                                    <input type="submit" class="btn add-btn" value="Add">
-                                </div>
-                            </div>
-                        </form>
-                         <!-- BEGIN: Each email entry container -->
-                         <div class="email-entry container">
-                            {% for email in emails %}
-                                <div class="email-items d-flex flex-wrap align-items-middle">
-                                    <!-- Display email -->
-                                    <div class="mx-2">
-                                        <li>{{ email.email }}</li>
-                                    </div>
-                                    <!-- Modify email button -->
-                                    <div class="mx-2">
-                                        <button class="btn edit-btn modify-form-btn" value="{{ email.email }}">Modify
-                                        </button>
-                                    </div>
-                                    <!-- Delete email -->
-                                    <div class="mx-2">
-                                        <form action="/user/delete_email/{{ email.id }}" method="post">
-                                            {% csrf_token %}
-                                            <input type="hidden" name="operation" value="delete">
-                                            <input class="btn delete-btn" type="submit" value="Delete">
-                                        </form>
-                                    </div>
-                                    <!-- START: Form to modify email (display shown/hidden based on Modify email button)-->
-                                    <div class="container-fluid">
-                                              class="modify-form needs-validation"
-                                              method="post" enctype="multipart/form-data" style="display: none;" novalidate>
-                                            {% csrf_token %}
-                                            <div class="row align-items-center">
-                                                <div class="col form-group">
-                                                    <input type="email" value="{{ email.email }}" name="email"
-                                                           class="form-control" id="email" autocomplete="email" required>
-                                                    <div class="div invalid-feedback">
-                                                        Please enter a valid email address.
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <input type="submit" class="btn edit-btn" value="Update">
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <!-- END: Form to modify email (display shown/hidden based on Modify email button)-->
-                                </div>
-                            {% endfor %}
-                        </div>
-                        <!-- END: Each email entry container-->
-                    </div>
-                </div>
-                <!-- END: Add Email col -->
-                <div class="row row-cols-2">
-                    <div class="col-12 mt-5">
-                        <h1><strong>HomeMore Contact</strong></h1>
-                    </div>
-                    <div class="col-12">
-                        <p>
-                            Your HomeMore Team Contact is here for you to 
-                            contact if you need any assistance. You can also 
-                            send a message to the SyncMore team on our Contact 
-                            Us page <a href="#">here</a>.
-                        </p>
-                    </div>
-                    <!-- END: Each note entry container-->
-                </div>
-                <!-- END: Add Note row -->
+                            </form>
 
-                <!-- BEGIN: Add Document row -->
-                <br>
-                <div class="row justify-content-lg-center" id="documentList">
-                    <!-- BEGIN: Documents container -->
-                    <div class="container">
-                        <div class="row align-items-start">
-                            {% for document in documents %}
-                                <!-- BEGIN: Document per column -->
-                                <div class=" col-lg-3 col-md-4 col-sm-6 col-xs-12 mx-2">
-                                    <h6>{{ document.title }}</h6>
-                                    <!-- Display document in image_box -->
-                                    <div class="image_box">
-                                        <img class="user_image" src="{{ document.url }}" alt="Your File">
-                                    </div>
-                                    <a href="{{ document.url }}">document url</a>
-                                    {#                                    <embed src="{{ document.url }}" type="application/pdf" width="400px"#}
-                                    {#                                           height="100px"/>#}
-
-                                    <!-- BEGIN: document modify and delete buttons row -->
-                                    <div class="row my-2 mx-2">
-                                        <!-- Modify document -->
+                            <!-- BEGIN: Each phone entry container -->
+                            <div class="phone-entry container">
+                                {% for phone in phones %}
+                                    <div class="phone-items d-flex flex-wrap align-items-middle">
+                                        <!-- Display phone number -->
                                         <div class="mx-2">
-                                            <a class="btn edit-btn"
-                                               href="/user/modify_document/{{ document.id }}">Modify</a>
+                                            <p>{{ phone.phone }}</p>
                                         </div>
-                                        <!-- Delete document -->
+                                        <!-- Modify phone number -->
                                         <div class="mx-2">
-                                            <form action="/user/delete_document/{{ document.id }}" method="post">
+                                            <button class="btn edit-btn modify-form-btn" data-id="{{ phone.phone }}">Modify
+                                            </button>
+                                        </div>
+                                        <!-- Delete phone number -->
+                                        <div class="mx-2">
+                                            <form action="/user/delete_phone/{{ phone.id }}" method="post">
                                                 {% csrf_token %}
                                                 <input type="hidden" name="operation" value="delete">
                                                 <input class="btn delete-btn" type="submit" value="Delete">
                                             </form>
                                         </div>
+                                        <!-- START: Form to modify phone number (display shown/hidden based on Modify phone button)-->
+                                        <div class="modify-info container-fluid align-items-middle">
+                                            <form action="/user/modify_phone/{{ phone.id }}" id="{{ phone.phone }}"
+                                                class="modify-form needs-validation"
+                                                method="post" enctype="multipart/form-data" style="display: none;" novalidate>
+                                                {% csrf_token %}
+                                                <div class="modify-info row d-flex flex-wrap align-items-middle">
+                                                    <div class="col form-group mx-2">
+                                                        <div class="col form-group">
+                                                            <input type="tel" value="{{ phone.phone }}" name="phone"
+                                                                class="form-control" autocomplete="tel" pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$" required>
+                                                            <div class="div invalid-feedback">Input cannot be blank.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col mx-2">
+                                                        <input type="submit" class="btn edit-btn" value="Update">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- END: Form to modify phone number (display shown/hidden based on Modify email button)-->
                                     </div>
-                                    <!-- END: document modify and delete buttons row -->
-                                </div>
-                            {% endfor %}
-                            <!-- END: Document per column -->
+                                {% endfor %}
+                            </div>
+                            <!-- END: Each phone entry container-->
                         </div>
-                    </div>
-                </div>
-                <div class="row my-5"></div>
-                <div class="row my-5"></div>
-                <div class="row my-5"></div>
-            </div>
-            <!-- END: right col = user home page / personal drive view -->
-        </div>
-    </div>
+                        <!-- END: Add Phone column-->
 
-<!-- footer -->
-<footer>
-    &copy; 2023 SyncMore. All Rights Reserved.
-</footer>
+                        <!-- BEGIN: Add Email column -->
+                        <div class="add_info col-lg-6">
+                            <!-- Add email form -->
+                            <form action="/user/add_email" class="form needs-validation" method="post" enctype="multipart/form-data" novalidate>
+                                {% csrf_token %}
+                                <label for="add-email">Email</label>
+                                <div class="row align-items-center">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-2">
+                                            <input type="email" name="email" class="form-control" id="add-email" autocomplete="email" required>
+                                            <div class="div invalid-feedback">
+                                                Please enter a valid email address.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mx-2">
+                                        <input type="submit" class="btn add-btn" value="Add">
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- BEGIN: Each email entry container -->
+                            <div class="email-entry container">
+                                {% for email in emails %}
+                                    <div class="email-items d-flex flex-wrap align-items-middle">
+                                        <!-- Display email -->
+                                        <div class="mx-2">
+                                            <p>{{ email.email }}</p>
+                                        </div>
+                                        <!-- Modify email button -->
+                                        <div class="mx-2">
+                                            <button class="btn edit-btn modify-form-btn" data-id="{{ email.email }}">Modify
+                                            </button>
+                                        </div>
+                                        <!-- Delete email -->
+                                        <div class="mx-2">
+                                            <form action="/user/delete_email/{{ email.id }}" method="post">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="operation" value="delete">
+                                                <input class="btn delete-btn" type="submit" value="Delete">
+                                            </form>
+                                        </div>
+                                        <!-- START: Form to modify email (display shown/hidden based on Modify email button)-->
+                                        <div class="container-fluid">
+                                            <form action="/user/modify_email/{{ email.id }}" id="{{ email.email }}"
+                                                    class="modify-form needs-validation"
+                                                    method="post" enctype="multipart/form-data" style="display: none;" novalidate>
+                                                {% csrf_token %}
+                                                <div class="row align-items-center">
+                                                    <div class="col form-group">
+                                                        <input type="email" value="{{ email.email }}" name="email"
+                                                                class="form-control" autocomplete="email" required>
+                                                        <div class="div invalid-feedback">
+                                                            Please enter a valid email address.
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="submit" class="btn edit-btn" value="Update">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- END: Form to modify email (display shown/hidden based on Modify email button)-->
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <!-- END: Each email entry container-->
+                        </div>
+                        <!-- END: Add Email column-->
+                    </div>
+                    <!-- END: Add Phone and Add Email row -->
+
+                    <!-- BEGIN: HomeMore Team Contact row -->
+                    <div class="homemore_contact row justify-content-lg-center">
+                        <!-- BEGIN: HomeMore Team Contact container -->
+                        <div class="container-fluid justify-content-lg-center">
+                            <h3>HomeMore Team Contact</h3>
+                            <p>Your HomeMore Team Contact is here for you to contact if you need any assistance.</p>
+                            <p>Contact Name: {{ supervisor.name }}</p>
+                            <p>Position: {{supervisor.position}}</p>
+                            <p>Email: {{ supervisor.email }}</p>
+                        </div>
+                        <!-- END: HomeMore Team Contact container -->
+                    </div>
+                    <!-- END: HomeMore Team Contact row -->
+                </div>
+                <!-- END: user information container -->
+
+                <!-- BEGIN: user personal drive notes/documents container -->
+                <div class="user-content collapse" id="driveContent" style="display: none">
+
+                    <!-- Note list toggler -->
+                    <div class="toggler-container">
+                        <button class="content-toggler" id="noteListToggler"
+                            aria-controls="noteListToggler" aria-expanded="false" aria-label="Toggle notes">
+                                Notes
+                        </button>
+                    </div>
+
+                    <!-- BEGIN: Note list container -->
+                    <div class="row justify-content-lg-center" id="noteListContainer">
+
+                        <!-- Note list container header -->
+                        <div class="list-header">
+                            <!-- Create a note -->
+                            <div class="list-header-option">
+                                <h6>Create a note:</h6>
+                                <a class="btn add-btn" id="add-note" href="/user/add_note">Create note</a>
+                            </div>
+                        </div>
+                        
+                        <!-- BEGIN: Note list -->
+                        <div class="notes-list" id="noteList">
+                            {% for note in notes %}
+                            <!-- Each Note entry per container -->
+                            <div class="note-entry">
+                                <!-- Note header -->
+                                <div class="note-header">
+                                    <!-- Note title -->
+                                    <div class="note-header-item">
+                                        <span>{{ note.title }}</span>
+                                    </div>
+                                    <!-- Note Last updated date & Modify/Delete functions -->
+                                    <div class="note-header-item">
+                                        <div class="row row-cols-2">
+                                            <!-- Last updated -->
+                                            <div class="col">
+                                                <span>Updated {{ note.updated_time|date:"M d, Y" }}</span>
+                                            </div>
+                                            <!-- Modify and Delete note -->
+                                            <div class="d-flex align-items-center col">
+                                                <!-- Modify note -->
+                                                <a class="btn edit-btn mx-2" href="/user/modify_note/{{ note.id }}">Modify</a>
+                                                <!-- Delete note -->
+                                                <form action="/user/delete_note/{{ note.id }}" method="post">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="operation" value="delete">
+                                                    <input class="btn delete-btn mx-2" type="submit" value="Delete">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Note content -->
+                                <div class="note-content">
+                                    <p class="note-content">{{ note.content }}</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <!-- END: Each note entry container-->
+                    </div>
+                    <!-- END: Add Note col -->
+
+                    <!-- Document list toggler -->
+                    <div class="toggler-container">
+                        <button class="content-toggler" id="documentListToggler"
+                            aria-controls="documentListToggler" aria-expanded="false" aria-label="Toggle documents">
+                                Documents
+                        </button>
+                    </div>
+
+                    <!-- BEGIN: Document list container -->
+                    <div class="row justify-content-lg-center" id="documentListContainer">
+                        
+                        <!-- BEGIN: Document list container header  -->
+                        <div class="list-header">
+                            <!-- Upload document -->
+                            <div class="list-header-option">
+                                <h6>Upload a document:</h6>
+                                <a class="btn add-btn" id="add-document" href="/user/add_document">Upload document</a>
+                            </div>
+                            <!-- Document type dropdown -->
+                            <div class="list-header-option">
+                                <h6>Filter view by file type:</h6>
+                                <select class="form-select" id="documentTypeSelector" onchange="filterDocuments()">
+                                    <option value="">--Select a file type--</option>
+                                    <option value="All">Show All</option>
+                                    <option value="Birth Certificate">Birth Certificate</option>
+                                    <option value="Financial">Financial</option>
+                                    <option value="Housing">Housing</option>
+                                    <option value="ID">ID</option>
+                                    <option value="Insurance">Insurance</option>
+                                    <option value="SSN">SSN</option>
+                                    <option value="Passport">Passport</option>
+                                    <option value="Other">Other</option>
+                                    <!-- Add other types as needed -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- BEGIN: Document list container -->
+                        <div class="container" id="documentList">
+                            <!-- Document list header -->
+                            <div class="document-list-header row">
+                                <div class="col">
+                                    <span>Name</span>
+                                </div>
+                                <div class="col-lg-2">
+                                    <span>Expiration date</span>
+                                </div>
+                                <div class="col-lg-2">
+                                    <span>Last modified</span>
+                                </div>
+                                <div class="col-lg-2 center-text">
+                                    <span>Options</span>
+                                </div>
+                            </div>
+                            {% for document in documents %}
+                                <!-- BEGIN: Document entry per row -->
+                                <div class="document-item active-document row" data-id="{{ document.type }}">
+                                    <!-- Document title -->
+                                    <div class="document-detail col">
+                                        {% comment %} <span class="document-detail align-middle">{{ document.title }}</span> {% endcomment %}
+                                        <a target="_blank" rel="noopener" href="{{ document.document.url }}" class="document-detail document-url align-middle">{{ document.title }}</a>
+                                    </div>
+                                    <!-- Document expiration date -->
+                                    <div class="document-detail col-lg-2">
+                                        <span class="document-detail align-middle expiration-date" data-id="{{ document.expired_time }}">{{ document.expired_time|date:"M d, Y" }}</span>
+                                    </div>
+                                    <!-- Document last modified date -->
+                                    <div class="document-detail col-lg-2">
+                                        <span class="document-detail align-middle">{{ document.updated_time|date:"M d, Y" }}</span>
+                                    </div>
+                                    <!-- Modify and Delete document -->
+                                    <div class="document-detail d-flex col-lg-2.5">
+                                        <!-- Modify document -->
+                                        <a class="document-detail btn edit-btn mx-1"
+                                            href="/user/modify_document/{{ document.id }}">Modify</a>
+                                        <!-- Delete document -->
+                                        <form action="/user/delete_document/{{ document.id }}" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="operation" value="delete">
+                                            <input class="document-detail btn delete-btn mx-1" type="submit" value="Delete">
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- END: Document entry per row -->
+                            {% endfor %}
+                        </div>
+                        <!-- END: Document list container-->
+                    </div>
+                    <!-- END: Document list -->
+                </div>
+                <!-- END: user personal drive notes/documents container -->
+            </div>
+            <!-- END: user main content: home page / personal drive view -->
+        </div>
+        <!-- END: User main container -->
+    </div>
+    <!-- BEGIN: User main div -->
+</div>
+<!-- END: main content -->
+
+
+<!-- PIN modal dialog -->
+    <dialog id="pinModal" onKeyPress="return checkSubmit(event)">
+        <div id="pinModalContent">
+            <form>
+                <div class="form-group">
+                    <button id="closeModal" value="cancel" formmethod="dialog">&times;</button>
+                </div>
+                <div class="form-group">
+                    <label for="pinInput">Please enter your 4-digit PIN:</label>
+                    <br>
+                    <input type="password" id="pinInput" class="form-control" maxlength="4">
+                </div>
+                <div class="form-group">
+                    <button id="submitPin" class="btn add-btn" value="default">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
 
 <!-- Javascript: jQuery, Popper.js, Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"
-        type="text/javascript"></script>
+        crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
@@ -325,175 +489,174 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!-- More jQuery -->
+<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <!-- user_index javascript page -->
 <script src="../../../static/Syncmore/js/user_index.js"></script>
+
+<!-- Function to close the PIN modal when pressing enter key -->
+<script>
+    function checkSubmit(e) {
+        if(e && e.keyCode == 13) {
+            pinModal.close(pinInput.value);
+        }
+    }
+
+    $('#add-user-info input').on('change', function() {
+        $(this).closest('form').submit();
+    });
+    $('#add-user-info textarea').on('change', function() {
+        $(this).closest('form').submit();
+    });
+</script>
+
+<!-- Javascript for displaying and hiding home page content, drive page content, and PIN modal -->
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function () {
-        var homeBtn = document.getElementById("home-button");
-        var homeContent = document.getElementById("home-page");
-        var modal = document.getElementById("pinModal"); // Ensure this ID matches your modal
-        var driveBtn = document.getElementById("drive-button"); // Button to open drive page
-        var closeBtn = document.getElementsByClassName("close")[0]; // Close button on the modal
-        var submitPinBtn = document.getElementById("submitPin"); // Submit button on the modal
-        var driveContent = document.getElementById("drive-page"); // Drive page content
+        var homeBtn = document.getElementById("homeButton");
+        var homeContent = document.getElementById("homeContent");
+        var driveBtn = document.getElementById("driveButton"); // Button to open drive page
+        var driveContent = document.getElementById("driveContent"); // Drive page content
+        
+        var pinModal = document.getElementById("pinModal");
+        var closeBtn = document.getElementById("closeModal"); // Close button on the modal
+        var pinInput = document.getElementById("pinInput");
+        var submitBtn = document.getElementById("submitPin"); // Submit button on the modal
+
         var pinValidationTimeout = null;
 
-        homeBtn.onclick = function () {
-            $('#current-view').text('Home Page');
+        // if home button clicked, display home content and hide drive content
+        homeBtn.addEventListener("click", () => {
             // Show home content
             homeContent.style.display = "block";
             // Hide drive content
             driveContent.style.display = "none";
-            // hide sidebar drive page drive page options
-            $("li.drive-options").each(function (i, option) {
-                $(option).hide();
-            });
-        };
+            goToHome();
+        });
 
-        // When the user clicks on the drive button
-        driveBtn.onclick = function (e) {
-            e.preventDefault();
-            homeContent.style.display = "none";
-
+        // if drive button clicked and drive content is not displayed, open PIN modal
+        driveBtn.addEventListener("click", () => {
             var pinValidatedTime = sessionStorage.getItem('pinValidatedTime');
             var currentTime = Date.now();
 
-            if (driveContent.style.display === "block") {
-                driveContent.style.display = "none";
-            } else if (pinValidatedTime && currentTime - pinValidatedTime <= 6000) {
-                // Session is still valid, show sidebar and drive content without asking for PIN
-                showSidebarAndDriveContent();
-            } else {
+            // drive content currently not displayed
+            if (driveContent.style.display === "none") {
+                homeContent.style.display = "none";
+                // Session is still valid, show drive content without asking for PIN
+                if (pinValidatedTime && currentTime - pinValidatedTime <= 60000) {
+                    driveContent.style.display = "block";
+                    goToDrive();
                 // Session expired or not set, show the PIN modal
-                modal.style.display = "block";
+                } else {
+                    pinModal.showModal();
+                }
             }
-        };
+        });
 
-
-        // Close the modal
-        closeBtn.onclick = function () {
-            modal.style.display = "none";
-            homeContent.style.display = "block";
-        };
-
-        // Close modal if clicked outside of it
-        window.onclick = function (event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
+        // closing the PIN modal
+        pinModal.addEventListener("close", (e) => {
+            // if return value was default or cancel, close
+            // "cancel" button closes the dialog without submitting because of [formmethod="dialog"], triggering a close event.
+            if (pinModal.returnValue == "default" || pinModal.returnValue == "cancel") {
+                pinModal.close();
                 homeContent.style.display = "block";
-            }
-        };
-
-        function showSidebarAndDriveContent() {
-            $('#current-view').text('Personal Drive');
-            $("li.drive-options").each(function (i, option) {
-                $(option).show();
-            });
-            driveContent.style.display = "block"; // Show drive page content
-        }
-
-
-        // PIN submission
-        submitPinBtn.onclick = function () {
-            var pin = document.getElementById("pinInput").value; // Ensure this ID matches your PIN input field
-            if (pin === "{{ second_password }}") {
-                // Correct PIN
-                showSidebarAndDriveContent();
-                //$('#current-view').text('Personal Drive');
-                // show sidebar drive page drive page options
-                //$("li.drive-options").each(function (i, option) {
-                //    $(option).show();
-                //});
-                //driveContent.style.display = "block"; // Show drive page content
-                modal.style.display = "none"; // Close the modal
+            // if correct PIN is submitted, display drive content
+            } else if (pinModal.returnValue === "{{ second_password }}") {
+                driveContent.style.display = "block";
+                goToDrive();
+                // SESSION TIMEOUT
                 sessionStorage.setItem('pinValidatedTime', Date.now());
                 clearTimeout(pinValidationTimeout);
                 pinValidationTimeout = setTimeout(function () {
                     sessionStorage.removeItem('pinValidatedTime');
                     pinValidationTimeout = null;
-                }, 6000);
+                }, 60000);
+            // if incorrect PIN is submitted, alert to error and redisplay PIN modal again
             } else {
                 // Incorrect PIN
                 alert("Incorrect PIN. Please try again.");
+                pinModal.showModal();
             }
-            pinInput.value = '';
-        };
+            pinModal.returnValue = "default";
+            pinInput.value = "";
+        });
+        
+        // prevent the "confirm" button from the default behavior of submitting the form
+        // and close the dialog with the `close()` method, which triggers the "close" event.
+        submitBtn.addEventListener("click", (event) => {
+            event.preventDefault(); // dont submit this fake form
+            pinModal.close(pinInput.value); // send the pinInput button input value to pinModal
+        });
 
+        const homeBtnHeader = document.querySelector("#homeButtonHeader");
+
+        const driveBtnHeader = document.querySelector("#driveButtonHeader");
+
+        const userMainHeader = document.querySelector("#user-main-header");
+
+        const homeHeader = document.querySelector("#homeHeader");
+        const driveHeader = document.querySelector("#driveHeader");
+
+        // on user home page view
+        function goToHome() {
+            // hide the home button
+            homeBtnHeader.style.display = "none";
+            // display option to go to drive
+            driveBtnHeader.style.display = "block";
+            // hide driveHeader
+            driveHeader.style.display = "none";
+            // display homeHeader
+            homeHeader.style.display = "block";
+        }
+
+        // on personal drive page view
+        function goToDrive() {
+            // hide the drive button
+            driveBtnHeader.style.display = "none";
+            // display option to go to home
+            homeBtnHeader.style.display = "block";
+            // hide homeHeader
+            homeHeader.style.display = "none";
+            // display driveHeader
+            driveHeader.style.display = "block";
+        }
     });
 </script>
-<script>
-    function fetchDocuments(documentType) {
-        const xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200) {
-                // Parse the JSON string to an object
-                const response = JSON.parse(this.responseText);
-                let output = '';
-                console.log(response)
-                console.log(response.length > 0)
-                const documents = response.documents;
-                console.log(documents.length > 0);
-                if (documents.length > 0) {
-                    for (let i = 0; i < documents.length; i++) {
-                        const doc = documents[i];
-                        if (doc.url && doc.title) {
-                            output += `<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mx-2">
-                    <h6>${doc.title}</h6>
-                    <div class="image_box">
-                        <img class="user_image" src="${doc.url}" alt="${doc.title}">
-                    </div>
-                    <!-- Modify and Delete Buttons -->
-                    <div class="row my-2 mx-2">
-                        <!-- Modify document -->
-                        <div class="mx-2">
-                            <a class="btn edit-btn" href="/user/modify_document/${doc.id}">Modify</a>
-                        </div>
-                        <!-- Delete document -->
-                        <div class="mx-2">
-                            <form action="/user/delete_document/${doc.id}" method="post">
-                                <input type="hidden" name="csrfmiddlewaretoken" value="${getCsrfToken()}">
-                                <input type="hidden" name="operation" value="delete">
-                                <input class="btn delete-btn" type="submit" value="Delete">
-                            </form>
-                        </div>
-                    </div>
-                </div>`;
-                        } else {
-                            console.log('Document fields or title missing:', response[i]);
-                            output += '<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mx-2"><p>Document information not available.</p></div>';
-                        }
-                    }
 
-                } else {
-                    output = '<div class="col-12"><p>No documents found for this type.</p></div>';
-                }
-                $('#current-view').text(`Personal Drive / ${documentType} `);
-                document.getElementById('documentList').innerHTML = output;
-            }
-        };
-        xhttp.open("GET", `/user/index?type=${documentType}`, true);
-        xhttp.setRequestHeader('x-requested-with', 'XMLHttpRequest');
+<!-- jQuery CDN - Slim version (=without AJAX) -->
+<script
+src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+crossorigin="anonymous"></script>
+<!-- Popper.JS -->
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script
+src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+crossorigin="anonymous"></script>
 
-        // Add an Authorization header
-        const authToken = 'TB_5HNUNb32WHtubka201BsSFwrazG7Q5veqCf9p'; // Replace with your actual token
-        xhttp.setRequestHeader('Authorization', `Bearer ${authToken}`);
+<!-- Javascript for toggling notes and documents display -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#noteListToggler').on('click', function () {
+            $('#noteListContainer').toggleClass('hidden');
+        });
+    });
 
-        xhttp.send();
-    }
-
-    function filterDocuments() {
-        console.log("Filter function called");
-        var documentType = document.getElementById('documentTypeSelector').value;
-        fetchDocuments(documentType);
-    }
-
-    // Function to get CSRF token from cookies (needed for the delete form)
-    function getCsrfToken() {
-        return document.cookie.split('; ').find(row => row.startsWith('csrftoken=')).split('=')[1];
-    }
+    $(document).ready(function () {
+        $('#documentListToggler').on('click', function () {
+            $('#documentListContainer').toggleClass('hidden');
+        });
+    });
 </script>
 
-<!-- JS for validation -->
+<!-- Javascript for validation -->
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (() => {
@@ -514,6 +677,31 @@
         }, false)
     })
     })()
+</script>
+
+<!-- Javascript for user documents expiration -->
+<script>
+    $(document).ready(function () {
+        // select all elements with class name="expiration-date"
+        const expirationDates = document.querySelectorAll('.expiration-date');
+        // console.log(expirationDates);
+        // loop through each expiration date element and check if expiration-date is today or older than today
+        expirationDates.forEach(date => {
+            // get the expiration date from HTML
+            const expires = date.innerHTML;
+            if (expires != null)
+            var varDate = new Date(expires);
+            varDate.setHours(0,0,0,0);
+            // get todays date
+            var today = new Date();
+            today.setHours(0,0,0,0);
+            // if expiration date is today or older than (before) today, mark date as expired
+            if(varDate <= today) {
+                // alert("Working!");
+                date.classList.add('expired');
+            }
+        });
+    });
 </script>
 
 </body>

@@ -1,11 +1,18 @@
+from datetime import date
+
+from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
+                                        PermissionsMixin)
 from django.db import models
 from storages.backends.s3boto3 import S3Boto3Storage
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
 
 class Supervisor(models.Model):
-    name = models.CharField('name', max_length=30, default='Zac')
-
+    name = models.CharField('name', max_length=50, default='Zac Clark')
+    
+    position = models.CharField('position', max_length=50, default='Team Leader')
+    
+    email = models.CharField('email', max_length=50, default='zac@homemoreproject.org', null=True)
+    
     is_active = models.BooleanField('is_active', default=True, null=True)
 
     created_time = models.DateTimeField('created_time', auto_now_add=True, null=True)
@@ -15,15 +22,15 @@ class Supervisor(models.Model):
 
 # Create your models here.
 class User(AbstractBaseUser, PermissionsMixin):
-    First_Name = models.CharField('First_Name', max_length=30, null=True)
+    First_Name = models.CharField('First_Name', max_length=30, blank=True, null=True)
 
-    Last_Name = models.CharField('Last_Name', max_length=30, null=True)
+    Last_Name = models.CharField('Last_Name', max_length=30, blank=True,null=True)
 
     Username = models.CharField('Username', max_length=30, unique=True)
 
     password = models.CharField('password', max_length=32)
 
-    address = models.CharField('address', max_length=255, default="San Francisco", null=True)
+    address = models.CharField('address', max_length=255, default="San Francisco", blank=True, null=True)
 
     gender = models.CharField('gender', max_length=6, default=None, null=True)
 
@@ -63,11 +70,11 @@ class Note(models.Model):
 
     content = models.TextField('content')
 
-    created_time = models.DateTimeField('created_time', auto_now_add=True, null=True)
+    created_time = models.DateField('created_time', auto_now_add=True, null=True)
 
     is_active = models.BooleanField('is_active', default=True, null=True)
 
-    updated_time = models.DateTimeField('updated_time', auto_now_add=True, null=True)
+    updated_time = models.DateField('updated_time', auto_now_add=True, null=True)
 
 
 class Email(models.Model):
@@ -84,8 +91,14 @@ class Email(models.Model):
 
 class Document(models.Model):
     TYPE_CHOICES = [
+        ('Other', 'Other'),
         ('ID', 'ID'),
         ('Passport', 'Passport'),
+        ('SSN', 'SSN'),
+        ('Birth Certificate', 'Birth Certificate'),
+        ('Housing', 'Housing'),
+        ('Financial', 'Financial'),
+        ('Insurance', 'Insurance')
     ]
     document_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='document_user')
 
@@ -93,14 +106,14 @@ class Document(models.Model):
 
     document = models.FileField('document', storage=S3Boto3Storage())
 
-    created_time = models.DateTimeField('created_time', auto_now_add=True, null=True)
+    created_time = models.DateField('created_time', auto_now_add=True, null=True)
 
     is_active = models.BooleanField('is_active', default=True, null=True)
 
-    updated_time = models.DateTimeField('updated_time', auto_now_add=True, null=True)
+    updated_time = models.DateField('updated_time', auto_now_add=True, null=True)
 
-    issued_time = models.DateTimeField('issued_time', auto_now_add=True, null=True)
+    issued_time = models.DateField('issued_time', auto_now_add=True, null=True)
 
-    expired_time = models.DateField('expired_time', auto_now_add=True, null=True)
+    expired_time = models.DateField('expired_time', auto_now=False, auto_now_add=False, null=True)
 
-    type = models.CharField('type', max_length=32, default='ID', null=True, choices=TYPE_CHOICES)
+    type = models.CharField('type', max_length=32, default='Other', null=True, choices=TYPE_CHOICES)

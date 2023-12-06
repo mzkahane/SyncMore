@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Account</title>
     <!-- favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="../../../static/Syncmore/favicon.ico">
@@ -11,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-<body>
+<body class="gray-body">
 <!-- START: user navigation bar -->
 <nav class="navbar navbar-expand-md">
     <!-- website logo -->
@@ -49,29 +50,78 @@
 </nav>
 <!-- END: user navigation bar -->
 
-<div class="container mt-5">
-    <div class="my-5">
-        <a class="btn delete-btn" href="/user/index"> < Back to Personal Home </a>
-    </div>
-
-    <form action="/user/modify_second_password" class="form needs-validation" method="post" enctype="multipart/form-data" novalidate>
-        {% csrf_token %}
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <div class="form-group mb-2">
-                    <label for="second_password">4-digit PIN</label>
-                    <input type="text" name="second_password" class="form-control" value={{ current_pin }} id="second_password" inputmode="numeric" pattern="\d{4}" autocomplete="new-password" required>
-                    <div class="div invalid-feedback">
-                        PIN must be 4 digits.
+<!-- BEGIN: User form div -->
+<div class="user-form">
+    <!-- BEGIN: User form container -->
+    <div id="user-form-container">
+        <!-- Go back button -->
+        <div id="user-form-navigation" class="my-3">
+            <a class="btn delete-btn" href="/user/index"> < Back to Personal Home</a>
+        </div>
+        <!-- User form header -->
+        <div id="user-form-header">
+            <h5>Account Settings</h5>
+        </div>
+        <!-- BEGIN: User form content -->
+        <div id="user-form-content">
+            <div class="container">
+                <form action="/user/account_settings" class="form needs-validation" method="post" enctype="multipart/form-data" novalidate>
+                    {% csrf_token %}
+                    <!-- User username -->
+                    <div class="form-group row">
+                        <label for="new-username" class="form-label required">Username:</label>
+                        <input type="text" name="new_username" id="new-username" class="form-control" value={{ username }} required>
+                        <div class="div invalid-feedback">
+                            Please enter a username.
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <input type="submit" class="btn add-btn" value="Update" style="width: 200px; text-align: center;">
+                    <!-- User new password -->
+                    <div class="form-group row">
+                        <label for="new-password" class="form-label">New password:</label>
+                        <input type="password" name="new_password" id="new-password" class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$" aria-describedby="NewPasswordHelp">
+                        <div id="NewPasswordHelp" class="form-text">Password must be at least 6 characters with at least one capital letter and one number.</div>
+                        <div class="div invalid-feedback">
+                            Password does not meet requirements.
+                        </div>
+                    </div>
+                    <!-- User new password retype -->
+                    <div class="form-group row">
+                        <label for="new-password-retype" class="form-label">Enter new password again:</label>
+                        <input type="password" name="new_password_retype" id="new-password-retype" class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$" aria-describedby="NewPasswordRetype">
+                        <div class="div invalid-feedback">
+                            Passwords must match.
+                        </div>
+                    </div>
+                    <!-- User PIN -->
+                    <div class="form-group row">
+                        <label for="second-password" class="form-label required">4-digit PIN</label>
+                        <input type="text" name="second_password" id="second-password" class="form-control" value={{ current_pin }} inputmode="numeric" pattern="\d{4}" required>
+                        <div class="div invalid-feedback">
+                            PIN must be 4 digits.
+                        </div>
+                    </div>
+                    <!-- Save button -->
+                    <div class="form-group row d-flex justify-content-center">
+                        <input type="submit" class="btn add-btn" value="Save Changes" style="width: 200px; text-align: center;">
+                    </div>
+                    <!-- ISSUES AFTER ATTEMTPING FORM SUBMISSION -->
+                    <div class="form-group row form-submission-error-div">
+                        <div class="my-2">
+                            <label class="form-submission-error">{{ note }}</label>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-    </form>
+        <!-- END: User form content -->
+    </div>
+    <!-- BEGIN: User form container -->
 </div>
+<!-- END: User form div -->
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <!-- JS for validation -->
 <script>
@@ -96,9 +146,17 @@
     })()
 </script>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        const errorMessage = document.querySelector(".form-submission-error")
+        const errorDiv = document.querySelector(".form-submission-error-div");
+        if (errorMessage.innerText == "") {
+            errorDiv.style.display = "none";
+        } else {
+            errorDiv.style.display = "block";
+        }
+    });
+</script>
 
 
 </body>

@@ -2,26 +2,31 @@
 import hashlib
 import re
 import sys
+from datetime import datetime
 
 import boto3
 import requests
+from botocore.client import Config
 from botocore.exceptions import NoCredentialsError
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.core import serializers
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
+from django.utils import timezone
+from django.utils.dateparse import parse_date
+from django.utils.timezone import localtime
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
-from django.core import serializers
-from django.conf import settings
-import boto3
-from botocore.client import Config
+
 from SyncMore import settings
 
 from .forms import DocumentForm
 from .models import Document, Email, Note, Phone, Supervisor, User
-from django.shortcuts import get_object_or_404
 
 sys.path.append('..')
+
+TIME_ZONE = 'America/Los_Angeles'
 
 
 def login_view(request):
@@ -157,6 +162,7 @@ def index_view(request):
     supervisor = Supervisor.objects.get(id=user.supervisor.id)
     notes = Note.objects.filter(note_user_id=c_uid)
     second_password = user.second_password
+    documents = Document.objects.filter(document_user_id=c_uid)
 
     # Check if the request is an AJAX request
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
@@ -170,6 +176,7 @@ def index_view(request):
             presigned_url = generate_presigned_url(
                 document.document.name)  # Assuming 'document' field is the file field in your Document model
             documents_with_urls.append({
+                'type': document.type,
                 'id': document.id,
                 'title': document.title,
                 'url': presigned_url
@@ -177,31 +184,45 @@ def index_view(request):
 
         return JsonResponse({'documents': documents_with_urls}, safe=False)
 
-    # If not an AJAX request, render the page normally with all the context
-    document_type = request.GET.get('type', 'ID')
-    documents = Document.objects.filter(document_user_id=c_uid, type=document_type)
-
-    documents_with_urls = []
-    for document in documents:
-        presigned_url = generate_presigned_url(document.document.name)
-        documents_with_urls.append({
-            'id': document.id,
-            'title': document.title,
-            'url': presigned_url
-        })
-
-
     context = {
         'user': user,
         'phones': phones,
         'emails': emails,
         'supervisor': supervisor,
         'notes': notes,
-        'documents': documents_with_urls,
+        'documents': documents,
         'second_password': second_password
     }
 
     return render(request, 'user/index.html', context)
+
+def add_user_info(request):
+    c_uid = request.COOKIES.get('uid')
+    if c_uid is None:
+        c_uid = request.session['uid']
+    user = User.objects.get(id=c_uid)
+    first_name = user.First_Name
+    last_name = user.Last_Name
+    living_area = user.address
+    new_first_name = request.POST.get('new_first_name', "")
+    new_last_name = request.POST.get('new_last_name', "")
+    new_living_area = request.POST.get('new_living_area', "")
+    
+    # if the user's first name has been updated
+    if first_name != new_first_name:
+        user.First_Name = new_first_name
+    
+    # if the user's last name has been updated
+    if last_name != new_last_name:
+        user.Last_Name = new_last_name
+        
+    # if the user's description of living area has been updated
+    if living_area != new_living_area:
+        user.address = new_living_area
+    
+    # save changes to user
+    user.save()
+    return HttpResponseRedirect('/user/index')
 
 
 def add_phone(request):
@@ -252,8 +273,10 @@ def add_document(request):
     elif request.method == "POST":
         title = request.POST.get('title', "")
         document = request.FILES.get('document', "")
-        type = request.POST.get('type', 'ID')
-        Document.objects.create(document_user_id=c_uid, title=title, document=document, type=type)
+        type = request.POST.get('type', 'Other')
+        date_str = request.POST.get('expiration-date', "")
+        expiration_date = parse_date(date_str)
+        Document.objects.create(document_user_id=c_uid, title=title, document=document, type=type, expired_time=expiration_date)
         return HttpResponseRedirect('/user/index')
 
 
@@ -309,6 +332,7 @@ def modify_note(request, note_id):
         content = request.POST.get('content', "")
         note.title = title
         note.content = content
+        note.updated_time = datetime.now()
         note.save()
         return HttpResponseRedirect('/user/index')
 
@@ -342,6 +366,17 @@ def modify_document(request, document_id):
         documentt = request.FILES.get('document', document.document)
         document.title = title
         document.document = documentt
+        document.updated_time = datetime.now()
+        
+        type = request.POST.get('type', "")
+        if type != 'Unchanged':
+            document.type = type
+        
+        date_str = request.POST.get('expiration-date', "")
+        if date_str != None:
+            expiration_date = parse_date(date_str)
+            document.expired_time = expiration_date
+        
         document.save()
         return HttpResponseRedirect('/user/index')
 
@@ -351,16 +386,73 @@ def account(request):
     if c_uid is None:
         c_uid = request.session['uid']
     user = User.objects.get(id=c_uid)
+    username = user.Username
+    password = user.password
     current_pin = user.second_password
     return render(request, 'user/account.html', locals())
 
 
-def modify_second_password(request):
+def account_settings(request):
     c_uid = request.COOKIES.get('uid')
     if c_uid is None:
         c_uid = request.session['uid']
     user = User.objects.get(id=c_uid)
-    second_password = request.POST.get('second_password', "")
-    user.second_password = second_password
+    username = user.Username
+    password = user.password
+    current_pin = user.second_password
+    new_username = request.POST.get('new_username', "")
+    new_password = request.POST.get('new_password', "")
+    new_password_retype = request.POST.get('new_password_retype', "")
+    new_second_password = request.POST.get('second_password', "")
+    
+    # if the username has been updated
+    if user.Username != new_username:
+        old_users = User.objects.filter(Username=new_username)
+        if old_users:
+            note = 'Username is taken already! Please try a different one.'
+            dis = 'block'
+            return render(request, 'user/account.html', locals())
+        # if all checks passed, update username with new username
+        else:
+            user.Username = new_username
+    
+    # if the password has been updated
+    if new_password:
+        if len(new_password) < 6:
+                note = 'The length of the new password is too short. Password must be at least 6 characters.'
+                dis = 'block'
+                return render(request, 'user/account.html', locals())
+
+        if not re.search("^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$", new_password):
+            note = 'The new password does not meet the requirements. Password should include at least one digit, one uppercase letter, and one lowercase letter.'
+            dis = 'block'
+            return render(request, 'user/account.html', locals())
+
+        if new_password != new_password_retype:
+            note = 'The new password does not match the retyped new password.'
+            dis = 'block'
+            return render(request, 'user/account.html', locals())
+
+        m = hashlib.md5()
+        m.update(new_password.encode())
+        password_m = m.hexdigest()
+        # if all checks passed, update user password with new one
+        user.password = password_m
+
+    # if user pin has been updated
+    if new_second_password != user.second_password:
+        if len(new_second_password) != 4:
+            note = 'The length of the PIN must be 4 digits.'
+            dis = 'block'
+            return render(request, 'user/account.html', locals())
+
+        if not re.search("^\d{4}$", new_second_password):
+            note = 'The PIN must be exactly 4 digits.'
+            dis = 'block'
+            return render(request, 'user/account.html', locals())
+        # if all checks passed, update user PIN with new PIN
+        user.second_password = new_second_password
+    
+    # save changes to user
     user.save()
     return HttpResponseRedirect('/user/index')
