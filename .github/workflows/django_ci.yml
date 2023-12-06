@@ -56,16 +56,17 @@ jobs:
       - name: Push Docker image to Docker Hub
         run: docker push andrewliu666/syncmore:${{ github.sha }}
 
+      - name: install ssh keys
+        # check this thread to understand why its needed:
+        # https://stackoverflow.com/a/70447517
+        run: |
+          install -m 600 -D /dev/null ~/.ssh/id_rsa
+          echo "${{ secrets.VULTR_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.VULTR_HOST }} > ~/.ssh/known_hosts
+
       - name: Deploy to server
-        if: github.ref == 'refs/heads/main'  # Only deploy on main branch
+        #        if: github.ref == 'refs/heads/main'  # Only deploy on main branch
         uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.VULTR_HOST }}
-          username: ${{ secrets.VULTR_USERNAME }}
-          key: ${{ secrets.VULTR_SSH_PRIVATE_KEY }}
-          script: |
-            cd /root/SyncMore
-            ${{ secrets.SCRIPT}}
-            sudo pkill -f uwsgi -9
-            uwsgi --ini uwsgi.ini
-            sudo /etc/init.d/nginx restart
+        run: ssh ${{ secrets.VULTR_USERNAME }}@${{ secrets.VULTR_HOST }} "cd /root/SyncMore && git checkout main && ${{secrets.SCRIPT}} && exit"
+      - name: cleanup
+        run: rm -rf ~/.ssh
