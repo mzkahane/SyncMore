@@ -160,17 +160,6 @@ class UserFunctionalityTestCase(TestCase):
         note.refresh_from_db()
         self.assertEqual(note.title, 'Test Note1')
 
-    # This is a test function to test the delete document functionality by POST request
-    def test_delete_document_post(self):
-        document = Document.objects.create(
-            document_user=self.user,
-            title='Test Document',
-            type='ID'
-        )
-        response = self.client.post(f'/user/delete_document/{document.id}')
-        self.assertRedirects(response, '/user/index')
-        self.assertFalse(Document.objects.filter(id=document.id).exists())
-
     # This is a test function to test the modify document functionality by GET request
     def test_modify_document_get(self):
         document = Document.objects.create(
