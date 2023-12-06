@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>User Home Page</title>
     <!-- favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="../../../static/Syncmore/favicon.ico">
     <!-- link to styles -->
     <link rel="stylesheet" href="../../../static/Syncmore/styles.css"/>
-    {% comment %} <link rel="stylesheet" href="../../../static/Syncmore/base.css"/> {% endcomment %}
+    <!-- {% comment %} <link rel="stylesheet" href="../../../static/Syncmore/base.css"/> {% endcomment %} -->
     <link rel="stylesheet" href="../../../static/Syncmore/user_sidebar.css"/>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -54,114 +55,67 @@
     </style>
 </head>
 <body>
-<!-- START: navigation bar -->
-<nav class="navbar navbar-expand-md">
-    <!-- website logo -->
-    <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
-    <!-- website brand name -->
-    <a class="navbar-brand" href="/">SyncMore</a>
+    <!-- START: navigation bar -->
+    <nav class="navbar navbar-expand-md">
+        <!-- website logo -->
+        <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
+        <!-- website brand name -->
+        <a class="navbar-brand" href="/">SyncMore</a>
 
-    <!-- START: toggle button for mobile navigation bar links -->
-    <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
-            aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <!-- END: toggle button for mobile navigation bar links -->
+        <!-- START: toggle button for mobile navigation bar links -->
+        <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
+                aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- END: toggle button for mobile navigation bar links -->
 
-    <!-- START: navigation bar links -->
-    <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
-        <!-- left hand side links: Resources and Contact Us -->
-        <ul class="navbar-nav mr-auto mt-2 mt-md-0">
-            <li class="navbar-item">
-                <a class="nav-link" href="/resources/index">Resources</a>
-            </li>
-            <li class="navbar-item">
-                <a class="nav-link" href="/index/contact/">Contact Us</a>
-            </li>
-        </ul>
-        <!-- right hand side links: User Account Settings and Log Out -->
-        <ul class="navbar-nav justify-content-end align-right">
-            <li class="navbar-item">
-                <a class="nav-link" href="/user/account">Account Settings</a>
-            </li>
-            <li class="navbar-item">
-                <a class="nav-link" href="/user/logout">Log Out</a>
-            </li>
-        </ul>
-    </div>
-    <!-- END: navigation bar links -->
-</nav>
-<!-- END: navigation bar -->
-
-<!-- for authentication -->
-{% csrf_token %}
-
-<div class="container-fluid">
-
-    <div class="row">
-
-        <!-- BEGIN: left col = sidebar container -->
-        <div class="col-lg-2" id="sidebar">
-            <ul class="sidebar-list">
-                <li>
-                    {% comment %} <a href="#home-page" data-toggle="collapse"> {% endcomment %}
-                    <a href="" class="sidebar-item" onclick="return false;">
-                        <span class="icon"><i class="fas fa-home"></i></span>
-                        <span class="item" id="home-button">> Home Page</span>
-                    </a>
+        <!-- START: navigation bar links -->
+        <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+            <!-- left hand side links: Resources and Contact Us -->
+            <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+                <li class="navbar-item">
+                    <a class="nav-link" href="/resources/index">Resources</a>
                 </li>
-                <li>
-                    {% comment %} <a href="#drive-page" data-toggle="collapse"> {% endcomment %}
-                    <a href="" class="sidebar-item" onclick="return false;">
-                        <span class="icon"><i class="fas fa-desktop"></i></span>
-                        <span class="item" id="drive-button">> Personal Drive</span>
-                    </a>
+                <li class="navbar-item">
+                    <a class="nav-link" href="/index/contact/">Contact Us</a>
                 </li>
-                <li class="drive-options">
-                    <!-- Document type dropdown -->
-                    <h6>Filter view by file type:</h6>
-                    <select id="documentTypeSelector" onchange="filterDocuments()">
-                        <option value="">--Select a file type--</option>
-                        <option value="ID">ID</option>
-                        <option value="Passport">Passport</option>
-                        <!-- Add other types as needed -->
-                    </select>
+            </ul>
+            <!-- right hand side links: Sign Up and Log In -->
+            <ul class="navbar-nav justify-content-end align-right">
+                <li class="navbar-item">
+                    <a class="nav-link" href="/user/register">Sign Up</a>
                 </li>
-                <li class="drive-options">
-                    <!-- Upload document -->
-                    <h6>Upload a document:</h6>
-                    <a class="btn add-btn" id="add-document" href="/user/add_document">Upload document</a>
-                </li>
-                <li class="drive-options">
-                    <!-- Create a note -->
-                    <h6>Create a note:</h6>
-                    <a class="btn add-btn" id="add-note" href="/user/add_note">Create note</a>
+                <li class="navbar-item">
+                    <a class="nav-link" href="/user/login">Login</a>
                 </li>
             </ul>
         </div>
-        <!-- END: left col = sidebar container -->
+        <!-- END: navigation bar links -->
+    </nav>
+    <!-- END: navigation bar -->
 
-        <!-- BEGIN: right col = user home page / personal drive view -->
-        <div class="col-lg-10 container-fluid" id="user-content">
+    <!-- for authentication -->
+    {% csrf_token %}
 
-            <div class="user-content row-lg-10 container-fluid" id="current-page">
-                <a href="" id="current-view">Home Page</a>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2"style="background-color:grey">
+                sidebar
+                <br>
+                will replace with good one later
             </div>
-
-            <!-- BEGIN: user information container -->
-            <div class="user-content row-lg-10 container-fluid" id="home-page">
-                <!-- BEGIN: Add Phone and Add Email row -->
-                <div class="row justify-content-lg-center">
-
-                    <!-- BEGIN: Add Phone column -->
-                    <div class="add_info col-lg-6">
-                        <!-- Add phone number form -->
-                        <form action="/user/add_phone" class="form needs-validation" method="post" enctype="multipart/form-data" novalidate>
+            <!-- BEGIN: right col = user home page / personal drive view -->
+            <div class="col-md-10">
+                <h1><strong>Home Page</strong></h1>
+                <div class="row row-cols-2">
+                    <!-- BEGIN: Add Phone col -->
+                    <div class="col-md-6 mt-3">
+                         <form action="/user/add_phone" class="form needs-validation" method="post" enctype="multipart/form-data" novalidate>
                             {% csrf_token %}
-                            <label for="phone">Phone</label>
+                            <label for="phone"><h4>Phone</h4></label>
                             <div class="phone-items d-flex flex-wrap align-items-middle">
                                 <!-- Add align-items-center to vertically align elements -->
-                                <div class="col-md-6">
+                                <div class="col">
                                     <div class="form-group mb-2"> <!-- Remove margin-bottom using mb-0 -->
                                         <input type="tel" name="phone" class="form-control" id="phone" inputmode="numeric" pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$" autocomplete="tel" required>
                                         <div class="div invalid-feedback">
@@ -174,9 +128,8 @@
                                 </div>
                             </div>
                         </form>
-
                         <!-- BEGIN: Each phone entry container -->
-                        <div class="phone-entry container">
+                        <div class="phone-entry">
                             {% for phone in phones %}
                                 <div class="phone-items d-flex flex-wrap align-items-middle">
                                     <!-- Display phone number -->
@@ -197,7 +150,7 @@
                                         </form>
                                     </div>
                                     <!-- START: Form to modify phone number (display shown/hidden based on Modify phone button)-->
-                                    <div class="modify-info container-fluid align-items-middle">
+                                    <div class="modify-info align-items-middle">
                                         <form action="/user/modify_phone/{{ phone.id }}" id="{{ phone.phone }}"
                                               class="modify-form needs-validation"
                                               method="post" enctype="multipart/form-data" style="display: none;" novalidate>
@@ -222,16 +175,15 @@
                         </div>
                         <!-- END: Each phone entry container-->
                     </div>
-                    <!-- END: Add Phone column-->
-
-                    <!-- BEGIN: Add Email column -->
-                    <div class="add_info col-lg-6">
-                        <!-- Add email form -->
+                    <!-- END: Add Phone col -->
+                    <!-- BEGIN: Add Email col -->
+                    <div class="col-md-6 mt-3">
                         <form action="/user/add_email" class="form needs-validation" method="post" enctype="multipart/form-data" novalidate>
                             {% csrf_token %}
-                            <div class="row align-items-center">
-                                <div class="col-md-6">
-                                    <div class="form-group mb-2">
+                            <label for="email"><h4>Email</h4></label>
+                            <div class="email-items d-flex flex-wrap align-items-middle">
+                                <div class="col">
+                                        <div class="form-group mb-2">
                                         <input type="email" name="email" class="form-control" id="email" autocomplete="email" required>
                                         <div class="div invalid-feedback">
                                             Please enter a valid email address.
@@ -243,8 +195,8 @@
                                 </div>
                             </div>
                         </form>
-                        <!-- BEGIN: Each email entry container -->
-                        <div class="email-entry container">
+                         <!-- BEGIN: Each email entry container -->
+                         <div class="email-entry container">
                             {% for email in emails %}
                                 <div class="email-items d-flex flex-wrap align-items-middle">
                                     <!-- Display email -->
@@ -289,52 +241,19 @@
                         </div>
                         <!-- END: Each email entry container-->
                     </div>
-                    <!-- END: Add Email column-->
                 </div>
-                <!-- END: Add Phone and Add Email row -->
-
-                <!-- BEGIN: HomeMore Team Contact row -->
-                <div class="homemore_contact row justify-content-lg-center">
-                    <!-- BEGIN: HomeMore Team Contact container -->
-                    <div class="container-fluid justify-content-lg-center">
-                        <h3>HomeMore Team Contact</h3>
-                        <p>Your HomeMore Team Contact is here for you to contact if you need any assistance.</p>
-                        <p>Contact Name: {{ supervisor.name }}</p>
+                <!-- END: Add Email col -->
+                <div class="row row-cols-2">
+                    <div class="col-12 mt-5">
+                        <h1><strong>HomeMore Contact</strong></h1>
                     </div>
-                    <!-- END: HomeMore Team Contact container -->
-                </div>
-                <!-- END: HomeMore Team Contact row -->
-            </div>
-            <!-- END: user information container -->
-
-            <!-- BEGIN: user personal drive notes/documents container -->
-            <div class="user-content col-lg-10 container-fluid collapse" id="drive-page" style="display: none">
-                <!-- BEGIN: Add Note row -->
-                <br>
-                <div class="row justify-content-lg-center">
-                    <!-- BEGIN: Each note entry container -->
-                    <div class="container">
-                        {% for note in notes %}
-                            <div class="d-flex flex-wrap align-items-start">
-                                <!-- Display note  -->
-                                <div class="mx-2">
-                                    <h5>{{ note.title }}</h5>
-                                    <p>{{ note.content }}</p>
-                                </div>
-                                <!-- Modify note -->
-                                <div class="mx-2">
-                                    <a class="btn edit-btn" href="/user/modify_note/{{ note.id }}">Modify</a>
-                                </div>
-                                <!-- Delete note -->
-                                <div class="mx-2">
-                                    <form action="/user/delete_note/{{ note.id }}" method="post">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="operation" value="delete">
-                                        <input class="btn delete-btn" type="submit" value="Delete">
-                                    </form>
-                                </div>
-                            </div>
-                        {% endfor %}
+                    <div class="col-12">
+                        <p>
+                            Your HomeMore Team Contact is here for you to 
+                            contact if you need any assistance. You can also 
+                            send a message to the SyncMore team on our Contact 
+                            Us page <a href="#">here</a>.
+                        </p>
                     </div>
                     <!-- END: Each note entry container-->
                 </div>
@@ -380,25 +299,19 @@
                             <!-- END: Document per column -->
                         </div>
                     </div>
-                    <!-- END: Documents container-->
                 </div>
-                <!-- END: Add Document row -->
+                <div class="row my-5"></div>
+                <div class="row my-5"></div>
+                <div class="row my-5"></div>
             </div>
-            <!-- END: user personal drive notes/documents container -->
-
-
+            <!-- END: right col = user home page / personal drive view -->
         </div>
     </div>
-    <!-- Modal for PIN Authentication -->
-    <div id="pinModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>Please enter your 4-digit PIN:</p>
-            <input type="password" id="pinInput" maxlength="4">
-            <button id="submitPin">Submit</button>
-        </div>
-    </div>
-</div>
+
+<!-- footer -->
+<footer>
+    &copy; 2023 SyncMore. All Rights Reserved.
+</footer>
 
 <!-- Javascript: jQuery, Popper.js, Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
