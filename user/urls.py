@@ -37,8 +37,7 @@ urlpatterns = [
     path('modify_document/<int:document_id>', views.modify_document),
     # /user/account
     path('account', views.account),
-    # /user/modify_second_password
-    path('modify_second_password', views.modify_second_password),
+    # /user/account_settings
     path('account_settings', views.account_settings),
 
 ]

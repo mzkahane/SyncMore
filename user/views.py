@@ -213,19 +213,6 @@ def index_view(request):
             })
 
         return JsonResponse({'documents': documents_with_urls}, safe=False)
-
-    # If not an AJAX request, render the page normally with all the context
-    document_type = request.GET.get('type', 'ID')
-    documents = Document.objects.filter(document_user_id=c_uid, type=document_type)
-
-    documents_with_urls = []
-    for document in documents:
-        presigned_url = generate_presigned_url(document.document.name)
-        documents_with_urls.append({
-            'id': document.id,
-            'title': document.title,
-            'url': presigned_url
-        })
     # Generate the data passed to frontend
     context = {
         'user': user,
@@ -238,6 +225,7 @@ def index_view(request):
     }
 
     return render(request, 'user/index.html', context)
+
 
 def add_user_info(request):
     c_uid = request.COOKIES.get('uid')
@@ -335,7 +323,8 @@ def add_document(request):
         type = request.POST.get('type', 'Other')
         date_str = request.POST.get('expiration-date', "")
         expiration_date = parse_date(date_str)
-        Document.objects.create(document_user_id=c_uid, title=title, document=document, type=type, expired_time=expiration_date)
+        Document.objects.create(document_user_id=c_uid, title=title, document=document, type=type,
+                                expired_time=expiration_date)
         return HttpResponseRedirect('/user/index')
 
 
@@ -413,13 +402,12 @@ def modify_note(request, note_id):
 
 # This function is used to delete the document from the object storage
 def delete_object_from_r2(object_name):
-    delete_url = f"{settings.AWS_S3_ENDPOINT_URL}/{settings.AWS_STORAGE_BUCKET_NAME}/{object_name}"
-    headers = {
-        "Authorization": f"Bearer {settings.R2_TOKEN}",
-    }
-
-    response = requests.delete(delete_url, headers=headers)
-    return response.status_code == 200
+    r2_endpoint_url = settings.AWS_S3_ENDPOINT_URL
+    client = boto3.client('s3',
+                          endpoint_url=r2_endpoint_url,
+                          aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+                          aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY)
+    client.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=object_name)
 
 
 # This function is used to delete the document
@@ -428,8 +416,8 @@ def delete_document(request, document_id):
     if request.method == "POST":
         document = Document.objects.get(id=document_id)
         object_name = document.document.name
-        if delete_object_from_r2(object_name):
-            document.delete()
+        delete_object_from_r2(object_name)
+        document.delete()
     return HttpResponseRedirect('/user/index')
 
 
@@ -442,6 +430,7 @@ def modify_document(request, document_id):
     # Make changes to the database if getting a POST request
     elif request.method == "POST":
         title = request.POST.get('title', "")
+        delete_object_from_r2(document.document.name)
         documentt = request.FILES.get('document', document.document)
         document.title = title
         document.document = documentt
@@ -474,8 +463,6 @@ def account(request):
 
 
 # This function is used to modify the pin for the personal drive
-def modify_second_password(request):
-    # Get the session
 def account_settings(request):
     c_uid = request.COOKIES.get('uid')
     if c_uid is None:
@@ -506,9 +493,9 @@ def account_settings(request):
     # if the password has been updated
     if new_password:
         if len(new_password) < 6:
-                note = 'The length of the new password is too short. Password must be at least 6 characters.'
-                dis = 'block'
-                return render(request, 'user/account.html', locals())
+            note = 'The length of the new password is too short. Password must be at least 6 characters.'
+            dis = 'block'
+            return render(request, 'user/account.html', locals())
 
         if not re.search("^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$", new_password):
             note = 'The new password does not meet the requirements. Password should include at least one digit, one uppercase letter, and one lowercase letter.'
