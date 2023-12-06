@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Modify Note</title>
     <!-- favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="../../../static/Syncmore/favicon.ico">
@@ -11,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-<body>
+<body class="gray-body">
 <!-- START: user navigation bar -->
 <nav class="navbar navbar-expand-md">
     <!-- website logo -->
@@ -49,40 +50,58 @@
 </nav>
 <!-- END: user navigation bar -->
 
-<div class="container mt-5">
-    <div class="my-5">
-        <a class="btn delete-btn" href="/user/index"> < Back </a>
+<!-- BEGIN: User form div -->
+<div class="user-form">
+    <!-- BEGIN: User form container -->
+    <div id="user-form-container">
+        <!-- Go back button -->
+        <div id="user-form-navigation" class="my-3">
+            <a class="btn delete-btn" href="/user/index"> < Back </a>
+        </div>
+        <!-- User form header -->
+        <div id="user-form-header">
+            <h5>Edit note</h5>
+        </div>
+        <!-- BEGIN: User form content -->
+        <div id="user-form-content">
+            <div class="container">
+                <form action="/user/modify_note/{{ note.id }}" class="form" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <!-- Note name -->
+                    <div class="form-group row">
+                        <label for="new-note-title" class="required">Note title</label>
+                        <input type="text" value="{{ note.title }}" name="title" class="form-control" id="new-note-title" required/>
+                    </div>
+                    <!-- Note content -->
+                    <div class="form-group row">
+                        <label for="new-note-content">Note content</label>
+                    <textarea cols="30" rows="10" name="content" class="form-control" onkeyup="textAreaAdjust(this)" style="overflow:hidden" id="new-note-content">{{ note.content }}</textarea>
+                    </div>
+                    <!-- Update button -->
+                    <div class="form-group row d-flex justify-content-center">
+                        <input type="submit" class="btn add-btn" value="Save" style="width: 200px; text-align: center;">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- END: User form content -->
     </div>
-
-    <form action="/user/modify_note/{{ note.id }}" class="form" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <div class="form-group mb-2">
-                    <label for="title">Title</label>
-                    <input type="text" value="{{ note.title }}" name="title" class="form-control" id="title">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="content">Content</label>
-                    <textarea cols="30" rows="10" name="content" class="form-control" id="content">{{ note.content }}</textarea>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <input type="submit" class="btn btn-primary" value="Update" style="width: 200px; text-align: center;">
-            </div>
-        </div>
-    </form>
+    <!-- BEGIN: User form container -->
 </div>
+<!-- END: User form div -->
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    const content = document.getElementById("new-note-content");
+    content.style.height = (25+content.scrollHeight)+"px";
+    function textAreaAdjust(element) {
+        element.style.height = "1px";
+        element.style.height = (25+element.scrollHeight)+"px";
+    }
+</script>
 
 </body>
 </html>

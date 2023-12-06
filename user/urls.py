@@ -10,6 +10,7 @@ urlpatterns = [
     path('logout', views.logout_view),
     # /user/index
     path('index', views.index_view, name='index'),
+    path('add_user_info', views.add_user_info),
     # /user/add_phone
     path('add_phone', views.add_phone),
     # /user/add_email
@@ -38,5 +39,6 @@ urlpatterns = [
     path('account', views.account),
     # /user/modify_second_password
     path('modify_second_password', views.modify_second_password),
+    path('account_settings', views.account_settings),
 
 ]

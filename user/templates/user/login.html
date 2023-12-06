@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>User Login Page</title>
     <!-- favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="../../../static/Syncmore/favicon.ico">
@@ -16,7 +17,7 @@
         }
     </style>
 </head>
-<body>
+<body class="gray-body">
 <!-- START: navigation bar -->
 <nav class="navbar navbar-expand-md">
     <!-- website logo -->
@@ -56,74 +57,63 @@
 </nav>
 <!-- END: navigation bar -->
 
-<div class="container-sm h-100">
-    <div class="row my-5"></div>
-    <div class="row justify-content-center">
-        <div class="col-sm-8 col-lg-6 bg-white p-5">
-            <h1 class="display-6 mb-5 text-center"><strong>Login</strong></h1>
-            <form class="needs-validation" action="/user/login" method="post" novalidate>
-                {% csrf_token %}
-                {% if messages %}
-                    <ul class="messages">
-                        {% for message in messages %}
-                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-                <div class="mb-4">
-                    <label for="usernameInput" class="form-label">Username:</label>
-                    <input type="text" name="username" class="form-control" id="usernameInput" autocomplete="username"
-                           aria-describedby="UserRequired" required>
-                    <div id="UserRequired" class="form-text">Required</div>
-                    <div class="div invalid-feedback">
-                        Please enter your username.
-                    </div>
-                </div>
 
-                <div class="mb-4">
-                    <label for="passwordInput" class="form-label">Password:</label>
-                    <input type="password" name="password" class="form-control" id="passwordInput"
-                           autocomplete="current-password" aria-describedby="PWRequired" required>
-                    <div id="PWRequired" class="form-text">Required</div>
-                    <div class="div invalid-feedback">
-                        Incorrect password.
-                    </div>
-                </div>
-
-                <div class="d-flex justify-content-center mb-3">
-                    <input type="submit" class="btn add-btn btn-lg rounded-pill" value="Login">
-                </div>
-
-                <div class="text-center mb-3">Don't have an account?
-                    <a href="/user/register">Sign up</a>
-                </div>
-            </form>
+<!-- BEGIN: User form div -->
+<div class="user-form">
+    <!-- BEGIN: User form container -->
+    <div id="user-form-container">
+        <!-- User form header -->
+        <div id="user-form-header" class="user-form-login">
+            <h5>Login</h5>
         </div>
+        <!-- BEGIN: User form content -->
+        <div id="user-form-content">
+            <div class="container">
+                <form class="needs-validation" action="/user/login" method="post" novalidate>
+                    {% csrf_token %}
+                    <!-- User username -->
+                    <div class="form-group row">
+                        <label for="usernameInput" class="form-label required">Username</label>
+                        <input type="text" name="username" class="form-control" id="usernameInput" autocomplete="username" aria-describedby="UserRequired" required>
+                        <div class="div invalid-feedback">
+                            Please enter your username.
+                        </div>
+                    </div>
+                    <!-- User password -->
+                    <div class="form-group row">
+                        <label for="passwordInput" class="form-label required">Password</label>
+                        <input type="password" name="password" class="form-control" id="passwordInput" autocomplete="current-password" aria-describedby="PWRequired" required>
+                        <div class="div invalid-feedback">
+                            Incorrect password.
+                        </div>
+                    </div>
+                    <!-- Save button -->
+                    <div class="form-group row d-flex justify-content-center">
+                        <input type="submit" class="btn delete-btn" value="Log in" style="width: 100%; text-align: center;">
+                    </div>
+                    <!-- ISSUES AFTER ATTEMTPING FORM SUBMISSION -->
+                    <div class="form-group row form-submission-error-div">
+                        <div class="my-2">
+                            <label class="form-submission-error">{{ note }}</label>
+                        </div>
+                    </div>
+                    <!-- OR separator -->
+                    <div class="form-group row">
+                        <div class="separator">or</div>
+                    </div>
+                    <!-- For non-users, direct to sign up -->
+                    <div class="form-group row">
+                        <a href="/user/register" class="btn add-btn" style="width: 100%; text-align: center;">Go to Sign Up</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- END: User form content -->
     </div>
+    <!-- BEGIN: User form container -->
 </div>
+<!-- END: User form div -->
 
-<!-- JS for validation -->
-<script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (() => {
-        'use strict'
-
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        const forms = document.querySelectorAll('.needs-validation')
-
-        // Loop over them and prevent submission
-        Array.from(forms).forEach(form => {
-            form.addEventListener('submit', event => {
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-
-                form.classList.add('was-validated')
-            }, false)
-        })
-    })()
-</script>
 
 <!-- Javascript: jQuery, Popper.js, Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -135,5 +125,41 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+
+<!-- JS for validation -->
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+        }, false)
+    })
+    })()
+</script>
+
+<script>
+    $(document).ready(function () {
+        const errorMessage = document.querySelector(".form-submission-error")
+        const errorDiv = document.querySelector(".form-submission-error-div");
+        if (errorMessage.innerText == "") {
+            errorDiv.style.display = "none";
+        } else {
+            errorDiv.style.display = "block";
+        }
+    });
+</script>
+
 </body>
 </html>
