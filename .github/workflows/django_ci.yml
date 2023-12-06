@@ -43,17 +43,15 @@ jobs:
         run: |
           python manage.py test
 
-      - name: Set up SSH
-#        if: github.ref == 'refs/heads/main'
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.VULTR_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H your-server-ip > ~/.ssh/known_hosts
-
-      - name: Trigger deployment on server
-#        if: github.ref == 'refs/heads/main'
-        run: ssh root@149.28.36.162 'bash -s' < ./deploy_script.sh
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VULTR_HOST }}
+          username: ${{ secrets.VULTR_USERNAME }}
+          key: ${{ secrets.VULTR_SSH_PRIVATE_KEY }}
+          script: |
+            cd /root/SyncMore
+            git pull origin main
 
         #      - name: Build Docker image
         #        run: docker build -t andrewliu666/syncmore:${{ github.sha }} .
