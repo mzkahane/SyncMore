@@ -480,6 +480,8 @@
         var pinInput = document.getElementById("pinInput");
         var submitBtn = document.getElementById("submitPin"); // Submit button on the modal
 
+        var pinValidationTimeout = null;
+
         // if home button clicked, display home content and hide drive content
         homeBtn.addEventListener("click", () => {
             // Show home content
@@ -508,6 +510,13 @@
             } else if (pinModal.returnValue === "{{ second_password }}") {
                 driveContent.style.display = "block";
                 goToDrive();
+                // SESSION TIMEOUT
+                sessionStorage.setItem('pinValidatedTime', Date.now());
+                clearTimeout(pinValidationTimeout);
+                pinValidationTimeout = setTimeout(function () {
+                    sessionStorage.removeItem('pinValidatedTime');
+                    pinValidationTimeout = null;
+                }, 6000);
             // if incorrect PIN is submitted, alert to error and redisplay PIN modal again
             } else {
                 // Incorrect PIN

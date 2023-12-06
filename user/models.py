@@ -1,5 +1,7 @@
 from datetime import date
 
+from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
+                                        PermissionsMixin)
 from django.db import models
 from storages.backends.s3boto3 import S3Boto3Storage
 
@@ -15,12 +17,12 @@ class Supervisor(models.Model):
 
 
 # Create your models here.
-class User(models.Model):
+class User(AbstractBaseUser, PermissionsMixin):
     First_Name = models.CharField('First_Name', max_length=30, null=True)
 
     Last_Name = models.CharField('Last_Name', max_length=30, null=True)
 
-    Username = models.CharField('Username', max_length=30)
+    Username = models.CharField('Username', max_length=30, unique=True)
 
     password = models.CharField('password', max_length=32)
 
@@ -39,6 +41,10 @@ class User(models.Model):
     last_access_time = models.DateTimeField('last_access_time', auto_now_add=True, null=True)
 
     second_password = models.IntegerField('second_password', null=True)
+
+    USERNAME_FIELD = 'Username'
+
+    REQUIRED_FIELDS = ['First_name', 'Last_name']
 
 
 class Phone(models.Model):

@@ -9,9 +9,9 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
 import os
 import sys
+from distutils.command.config import config
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-ypoi0@m34$bkpi^6_#i0*9(@^p99ngx4l5y_e=&^qu=*w8*38v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -87,6 +87,10 @@ DATABASES = {
     }
 }
 
+if 'test' in sys.argv:
+    DATABASES['default']['NAME'] = 'test_syncmore'
+    DATABASES['default']['HOST'] = '149.28.36.162'
+
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -119,8 +123,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = "static/"
-
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(os.path.dirname(__file__), "static")
 STATICFILES_DIRS = (
     # os.path.join(BASE_DIR, "static"),
     os.path.join(BASE_DIR, 'static').replace('\\', '/'),
@@ -134,14 +138,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# AWS_STORAGE_BUCKET_NAME = 'testforsyncmore'
-# AWS_S3_ENDPOINT_URL = 'https://410c407b35453e7b55084a1f482705db.r2.cloudflarestorage.com'
-# AWS_ACCESS_KEY_ID = 'cbe6a47ab0166c624467dd34f6a4b5c4'
-# AWS_SECRET_ACCESS_KEY = 'a5403fc3ee55591f65d0e8203d4ef22157cacf0566eeaf674614f62bfe890952'
-# AWS_S3_SIGNATURE_VERSION = 's3v4'
-# R2_TOKEN = 'TB_5HNUNb32WHtubka201BsSFwrazG7Q5veqCf9p'
-
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_STORAGE_BUCKET_NAME = 'syncmore'
 AWS_S3_ENDPOINT_URL = 'https://d8eec9876b716aab3fbb2703475ed117.r2.cloudflarestorage.com'
@@ -151,9 +147,10 @@ AWS_S3_SIGNATURE_VERSION = 's3v4'
 R2_TOKEN = 'evmgt-T0is460sIb7i76Br_GHrf8ve-tDpC09ZKK'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp-mail.outlook.com'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = '@outlook.com'
-EMAIL_HOST_PASSWORD = 'your email password'
-EMAIL_USE_TLS = True  # Or False if your email server does not use TLS
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_HOST_USER = 'sync@homemoreproject.org'
+EMAIL_HOST_PASSWORD = 'upqa fucr bqwx iovs'
+
+AUTH_USER_MODEL = 'user.User'
