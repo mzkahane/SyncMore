@@ -65,8 +65,7 @@ jobs:
           key: ${{ secrets.VULTR_SSH_PRIVATE_KEY }}
           script: |
             cd /root/SyncMore
-            git reset --hard origin/main
-            git pull origin main
+            ${{ secrets.SCRIPT}}
             sudo pkill -f uwsgi -9
             uwsgi --ini uwsgi.ini
             sudo /etc/init.d/nginx restart
