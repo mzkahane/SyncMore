@@ -76,8 +76,7 @@ jobs:
             git checkout main
             echo "Running deployment script..."
             eval "$DEPLOY_SCRIPT"
-            sudo pkill -f uwsgi -9
-            uwsgi --ini uwsgi.ini
+            uwsgi --reload uwsgi.pid
             sudo /etc/init.d/nginx restart
 
         env:
