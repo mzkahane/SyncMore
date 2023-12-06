@@ -11,4 +11,8 @@ __pycache__/
 *.py[cod]
 *.pyc
 .idea/workspace.xml
-node_modules
+.idea/
+myenv/
+package-lock.json
+package.json
+node_modules/
