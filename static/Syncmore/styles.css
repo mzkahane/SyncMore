@@ -540,6 +540,30 @@ a.document-url:hover {
     padding-top: 15px;
 }
 
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #000;
+}
+
+.separator:not(:empty)::before {
+    margin-right: .25em;
+    margin-left: 0px;
+}
+
+.separator:not(:empty)::after {
+    margin-left: .25em;
+    margin-right: 0px;
+}
+
 /* FORM SUBMISSION ERROR DIV */
 .form-submission-error-div {
     display: none;

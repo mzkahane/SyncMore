@@ -82,21 +82,23 @@
                             Incorrect password.
                         </div>
                     </div>
-                    <!-- For non-users, go direct to sign up -->
-                    <div class="form-group container align-items-center">
-                        <div>
-                            <center>Don't have an account? <a href="/user/register">Sign up</a></center>
-                        </div>
-                    </div>
                     <!-- Save button -->
                     <div class="form-group row d-flex justify-content-center">
-                        <input type="submit" class="btn delete-btn" value="Log in" style="width: 200px; text-align: center;">
+                        <input type="submit" class="btn delete-btn" value="Log in" style="width: 100%; text-align: center;">
                     </div>
                     <!-- ISSUES AFTER ATTEMTPING FORM SUBMISSION -->
                     <div class="form-group row form-submission-error-div">
                         <div class="my-2">
                             <label class="form-submission-error">{{ note }}</label>
                         </div>
+                    </div>
+                    <!-- OR separator -->
+                    <div class="form-group row">
+                        <div class="separator">or</div>
+                    </div>
+                    <!-- For non-users, direct to sign up -->
+                    <div class="form-group row">
+                        <a href="/user/register" class="btn add-btn" style="width: 100%; text-align: center;">Go to Sign Up</a>
                     </div>
                 </form>
             </div>

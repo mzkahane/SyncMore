@@ -101,21 +101,23 @@
                             PIN does not meet requirements.
                         </div>
                     </div>
-                    <!-- For users, direct to login -->
-                    <div class="form-group container align-items-center">
-                        <div>
-                            <center>Have an account already? <a href="/user/login">Login</a></center>
-                        </div>
-                    </div>
                     <!-- Save button -->
-                    <div class="form-group row d-flex justify-content-center">
-                        <input type="submit" class="btn add-btn" value="Create Account" style="width: 200px; text-align: center;">
+                    <div class="form-group row">
+                        <input type="submit" class="btn add-btn" value="Create Account" style="width: 100%; text-align: center;">
                     </div>
                     <!-- ISSUES AFTER ATTEMTPING FORM SUBMISSION -->
                     <div class="form-group row form-submission-error-div">
                         <div class="my-2">
                             <label class="form-submission-error">{{ note }}</label>
                         </div>
+                    </div>
+                    <!-- OR separator -->
+                    <div class="form-group row">
+                        <div class="separator">or</div>
+                    </div>
+                    <!-- For users, direct to login -->
+                    <div class="form-group row">
+                        <a href="/user/login" class="btn delete-btn" style="width: 100%; text-align: center;">Go to Login</a>
                     </div>
                 </form>
             </div>
