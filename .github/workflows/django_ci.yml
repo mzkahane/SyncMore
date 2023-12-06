@@ -74,7 +74,10 @@ jobs:
             cd /root/SyncMore
             git reset --hard origin/main
             git checkout main
-            ${secrets.SCRIPT}
+            echo "Running deployment script..."
+            eval "$DEPLOY_SCRIPT"
+        env:
+          DEPLOY_SCRIPT: ${{ secrets.SCRIPT }}
 
       - name: cleanup
         run: rm -rf ~/.ssh
