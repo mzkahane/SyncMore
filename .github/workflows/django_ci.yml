@@ -80,8 +80,8 @@ jobs:
             uwsgi --reload uwsgi.pid
             sudo /etc/init.d/nginx restart
 
-        env:
-          DEPLOY_SCRIPT: ${{ secrets.SCRIPT }}
+#        env:
+#          DEPLOY_SCRIPT: ${{ secrets.SCRIPT }}
 
       - name: cleanup
         run: rm -rf ~/.ssh
