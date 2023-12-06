@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../../../static/Syncmore/user_sidebar.css"/>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
         /* The Modal (background) */
         .modal {
@@ -183,7 +183,7 @@
                             <label for="email"><h4>Email</h4></label>
                             <div class="email-items d-flex flex-wrap align-items-middle">
                                 <div class="col">
-                                    <div class="form-group mb-2">
+                                        <div class="form-group mb-2">
                                         <input type="email" name="email" class="form-control" id="email" autocomplete="email" required>
                                         <div class="div invalid-feedback">
                                             Please enter a valid email address.
@@ -218,7 +218,6 @@
                                     </div>
                                     <!-- START: Form to modify email (display shown/hidden based on Modify email button)-->
                                     <div class="container-fluid">
-                                        <form action="/user/modify_email/{{ email.id }}" id="{{ email.email }}"
                                               class="modify-form needs-validation"
                                               method="post" enctype="multipart/form-data" style="display: none;" novalidate>
                                             {% csrf_token %}
@@ -256,8 +255,49 @@
                             Us page <a href="#">here</a>.
                         </p>
                     </div>
-                    <div class="col-12">
-                        Contact Name: {{ supervisor.name }}
+                    <!-- END: Each note entry container-->
+                </div>
+                <!-- END: Add Note row -->
+
+                <!-- BEGIN: Add Document row -->
+                <br>
+                <div class="row justify-content-lg-center" id="documentList">
+                    <!-- BEGIN: Documents container -->
+                    <div class="container">
+                        <div class="row align-items-start">
+                            {% for document in documents %}
+                                <!-- BEGIN: Document per column -->
+                                <div class=" col-lg-3 col-md-4 col-sm-6 col-xs-12 mx-2">
+                                    <h6>{{ document.title }}</h6>
+                                    <!-- Display document in image_box -->
+                                    <div class="image_box">
+                                        <img class="user_image" src="{{ document.url }}" alt="Your File">
+                                    </div>
+                                    <a href="{{ document.url }}">document url</a>
+                                    {#                                    <embed src="{{ document.url }}" type="application/pdf" width="400px"#}
+                                    {#                                           height="100px"/>#}
+
+                                    <!-- BEGIN: document modify and delete buttons row -->
+                                    <div class="row my-2 mx-2">
+                                        <!-- Modify document -->
+                                        <div class="mx-2">
+                                            <a class="btn edit-btn"
+                                               href="/user/modify_document/{{ document.id }}">Modify</a>
+                                        </div>
+                                        <!-- Delete document -->
+                                        <div class="mx-2">
+                                            <form action="/user/delete_document/{{ document.id }}" method="post">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="operation" value="delete">
+                                                <input class="btn delete-btn" type="submit" value="Delete">
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- END: document modify and delete buttons row -->
+                                </div>
+                            {% endfor %}
+                            <!-- END: Document per column -->
+                        </div>
                     </div>
                 </div>
                 <div class="row my-5"></div>
@@ -296,6 +336,7 @@
         var closeBtn = document.getElementsByClassName("close")[0]; // Close button on the modal
         var submitPinBtn = document.getElementById("submitPin"); // Submit button on the modal
         var driveContent = document.getElementById("drive-page"); // Drive page content
+        var pinValidationTimeout = null;
 
         homeBtn.onclick = function () {
             $('#current-view').text('Home Page');
@@ -304,7 +345,7 @@
             // Hide drive content
             driveContent.style.display = "none";
             // hide sidebar drive page drive page options
-            $("li.drive-options").each(function(i, option) {
+            $("li.drive-options").each(function (i, option) {
                 $(option).hide();
             });
         };
@@ -312,16 +353,22 @@
         // When the user clicks on the drive button
         driveBtn.onclick = function (e) {
             e.preventDefault();
-            // Check if drive-page is already visible
             homeContent.style.display = "none";
+
+            var pinValidatedTime = sessionStorage.getItem('pinValidatedTime');
+            var currentTime = Date.now();
+
             if (driveContent.style.display === "block") {
-                // If visible, simply collapse it without asking for a PIN
                 driveContent.style.display = "none";
+            } else if (pinValidatedTime && currentTime - pinValidatedTime <= 6000) {
+                // Session is still valid, show sidebar and drive content without asking for PIN
+                showSidebarAndDriveContent();
             } else {
-                // If not visible, show the PIN modal
+                // Session expired or not set, show the PIN modal
                 modal.style.display = "block";
             }
         };
+
 
         // Close the modal
         closeBtn.onclick = function () {
@@ -337,24 +384,41 @@
             }
         };
 
+        function showSidebarAndDriveContent() {
+            $('#current-view').text('Personal Drive');
+            $("li.drive-options").each(function (i, option) {
+                $(option).show();
+            });
+            driveContent.style.display = "block"; // Show drive page content
+        }
+
+
         // PIN submission
         submitPinBtn.onclick = function () {
             var pin = document.getElementById("pinInput").value; // Ensure this ID matches your PIN input field
             if (pin === "{{ second_password }}") {
                 // Correct PIN
-                $('#current-view').text('Personal Drive');
+                showSidebarAndDriveContent();
+                //$('#current-view').text('Personal Drive');
                 // show sidebar drive page drive page options
-                $("li.drive-options").each(function(i, option) {
-                    $(option).show();
-                });
-                driveContent.style.display = "block"; // Show drive page content
+                //$("li.drive-options").each(function (i, option) {
+                //    $(option).show();
+                //});
+                //driveContent.style.display = "block"; // Show drive page content
                 modal.style.display = "none"; // Close the modal
+                sessionStorage.setItem('pinValidatedTime', Date.now());
+                clearTimeout(pinValidationTimeout);
+                pinValidationTimeout = setTimeout(function () {
+                    sessionStorage.removeItem('pinValidatedTime');
+                    pinValidationTimeout = null;
+                }, 6000);
             } else {
                 // Incorrect PIN
                 alert("Incorrect PIN. Please try again.");
             }
             pinInput.value = '';
         };
+
     });
 </script>
 <script>

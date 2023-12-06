@@ -19,6 +19,7 @@ from SyncMore import settings
 
 from .forms import DocumentForm
 from .models import Document, Email, Note, Phone, Supervisor, User
+from django.shortcuts import get_object_or_404
 
 sys.path.append('..')
 
@@ -145,34 +146,6 @@ def generate_presigned_url(object_name):
         print(e)
         return None  # Handle exceptions according to your needs
 
-
-# def index_view(request):
-#     c_uid = request.COOKIES.get('uid')
-#     if c_uid is None:
-#         c_uid = request.session['uid']
-#     user = User.objects.get(id=c_uid)
-#     phones = Phone.objects.filter(phone_user_id=c_uid)
-#     emails = Email.objects.filter(email_user_id=c_uid)
-#     supervisor = Supervisor.objects.get(id=user.supervisor.id)
-#     notes = Note.objects.filter(note_user_id=c_uid)
-#     # Check if the request is an AJAX request
-#     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-#         document_type = request.GET.get('type', None)
-#         documents = Document.objects.filter(document_user_id=c_uid,
-#                                             type=document_type) if document_type else Document.objects.filter(
-#             document_user_id=c_uid)
-#         data = serializers.serialize('json', documents)
-#         print(data)
-#
-#         return JsonResponse(data, safe=False)
-#
-#
-#     # If not an AJAX request, render the page normally with all the context
-#     document_type = request.GET.get('type', 'ID')
-#     documents = Document.objects.filter(document_user_id=c_uid, type=document_type)
-#
-#     return render(request, 'user/index.html', locals())
-
 def index_view(request):
     c_uid = request.COOKIES.get('uid')
     if c_uid is None:
@@ -216,6 +189,7 @@ def index_view(request):
             'title': document.title,
             'url': presigned_url
         })
+
 
     context = {
         'user': user,
