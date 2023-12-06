@@ -44,6 +44,7 @@ jobs:
           python manage.py test
 
       - name: Build Docker image
+
         run: docker build -t andrewliu666/syncmore:${{ github.sha }} .
 
       - name: Log in to Docker Hub
@@ -55,7 +56,7 @@ jobs:
       - name: Push Docker image to Docker Hub
         run: docker push andrewliu666/syncmore:${{ github.sha }}
 
-      - name: Deploy to Vultr
+      - name: Deploy to server
         if: github.ref == 'refs/heads/main'  # Only deploy on main branch
         uses: appleboy/ssh-action@master
         with:
@@ -63,5 +64,5 @@ jobs:
           username: ${{ secrets.VULTR_USERNAME }}
           key: ${{ secrets.VULTR_SSH_PRIVATE_KEY }}
           script: |
-            cd /root
+            cd /root/SyncMore
             git pull origin main
