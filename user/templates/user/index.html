@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>User Home Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="../../../static/Syncmore/favicon.ico">
     <!-- link to styles -->
     <link rel="stylesheet" href="../../../static/Syncmore/styles.css"/>
-    {% comment %} <link rel="stylesheet" href="../../../static/Syncmore/base.css"/> {% endcomment %}
+    <!-- {% comment %} <link rel="stylesheet" href="../../../static/Syncmore/base.css"/> {% endcomment %} -->
     <link rel="stylesheet" href="../../../static/Syncmore/user_sidebar.css"/>
     <!-- link to sidebar JS -->
     <script src="../../../static/Syncmore/js/user_sidebar.js" defer=""></script>
@@ -411,7 +412,6 @@
                                     <span>Options</span>
                                 </div>
                             </div>
-
                             {% for document in documents %}
                                 <!-- BEGIN: Document entry per row -->
                                 <div class="document-item active-document row" data-id="{{ document.type }}">

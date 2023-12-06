@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>Contact Us</title>
     <!-- favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="../../../static/Syncmore/favicon.ico">
     <!-- link to styles -->
@@ -109,12 +109,20 @@
                         Please enter your last name.
                     </div>
                 </div>
-                <div class="col-12 mb-2">
+                <div class="col-12 mb-5">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" name="email" id="email" autocomplete="email" aria-describedby="EmailRequired" required>
                     <div id="EmailRequired" class="form-text">Required</div>
                     <div class="div invalid-feedback">
                         Please enter a valid email address.
+                    </div>
+                </div>
+                <div class="col-12">
+                    <label for="subject" class="form-label">Subject</label>
+                    <input type="text" class="form-control" name="subject" id="subject" aria-describedby="SubRequired" required>
+                    <div id="SubRequired" class="form-text">Required</div>
+                    <div class="div invalid-feedback">
+                        Subject must not be blank.
                     </div>
                 </div>
                 <div class="col-12 mb-3">

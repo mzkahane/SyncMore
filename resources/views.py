@@ -17,7 +17,7 @@ def resources_view(request):
     grouped_resources = {k: list(v) for k, v in groupby(resources_ordered, key=lambda r: r.category)}
 
     page_num = request.GET.get('page', 1)
-    paginator = Paginator(list(grouped_resources.items()), 3)
+    paginator = Paginator(list(grouped_resources.items()), 30)
     c_page = paginator.page(int(page_num))
 
     return render(request, 'resources/resources.html', locals())
