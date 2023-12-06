@@ -27,6 +27,8 @@ from .models import Document, Email, Note, Phone, Supervisor, User
 
 sys.path.append('..')
 
+TIME_ZONE = 'America/Los_Angeles'
+
 
 def login_view(request):
     if request.method == 'GET':
@@ -194,6 +196,34 @@ def index_view(request):
     }
 
     return render(request, 'user/index.html', context)
+
+def add_user_info(request):
+    c_uid = request.COOKIES.get('uid')
+    if c_uid is None:
+        c_uid = request.session['uid']
+    user = User.objects.get(id=c_uid)
+    first_name = user.First_Name
+    last_name = user.Last_Name
+    living_area = user.address
+    new_first_name = request.POST.get('new_first_name', "")
+    new_last_name = request.POST.get('new_last_name', "")
+    new_living_area = request.POST.get('new_living_area', "")
+    
+    # if the user's first name has been updated
+    if first_name != new_first_name:
+        user.First_Name = new_first_name
+    
+    # if the user's last name has been updated
+    if last_name != new_last_name:
+        user.Last_Name = new_last_name
+        
+    # if the user's description of living area has been updated
+    if living_area != new_living_area:
+        user.address = new_living_area
+    
+    # save changes to user
+    user.save()
+    return HttpResponseRedirect('/user/index')
 
 
 def add_phone(request):

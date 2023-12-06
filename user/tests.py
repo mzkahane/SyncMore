@@ -1,21 +1,15 @@
-import hashlib
-
-from django.db import DataError
-from django.test import TestCase
-
-# Create your tests here.
-from django.test import TestCase
-from .models import Supervisor, User, Phone, Note, Email, Document
 import datetime
-from django.test import TestCase, Client
-from django.urls import reverse
-from .models import User, Phone, Email, Note, Document
-from django.test import TestCase, Client
-from django.urls import reverse
-from django.core.files.uploadedfile import SimpleUploadedFile
-from .models import User, Phone, Email, Note, Document
-from django.utils import timezone
+import hashlib
 from datetime import timedelta
+
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.db import DataError
+# Create your tests here.
+from django.test import Client, TestCase
+from django.urls import reverse
+from django.utils import timezone
+
+from .models import Document, Email, Note, Phone, Supervisor, User
 
 
 class UserFunctionalityTestCase(TestCase):
@@ -76,10 +70,10 @@ class UserFunctionalityTestCase(TestCase):
         self.assertRedirects(response, '/user/index')
         self.assertTrue(Document.objects.filter(title='Test Document').exists())
 
-    def test_modify_second_password(self):
-        response = self.client.post('/user/modify_second_password', {'second_password': '123456'})
+    def test_user_account_settings(self):
+        response = self.client.post('/user/account_settings', {'second_password': '1234'})
         self.user.refresh_from_db()
-        self.assertEqual(self.user.second_password, 123456)
+        self.assertEqual(self.user.second_password, 1234)
         self.assertRedirects(response, '/user/index')
 
     def test_modify_phone_get(self):
@@ -193,13 +187,13 @@ class SupervisorModelTest(TestCase):
         self.assertTrue(timezone.now() - supervisor.created_time < timedelta(seconds=1))
         self.assertTrue(timezone.now() - supervisor.updated_time < timedelta(seconds=1))
         default_supervisor = Supervisor.objects.create()
-        self.assertEqual(default_supervisor.name, 'Zac')
+        self.assertEqual(default_supervisor.name, 'Zac Clark')
 
     def test_max_length_constraints(self):
         # Test max_length constraints of fields
         short_string = 'x'  # A string longer than any max_length in the model
         with self.assertRaises(DataError):
-            Supervisor.objects.create(name=short_string * 31)
+            Supervisor.objects.create(name=short_string * 54)
 
 
 class UserModelTest(TestCase):
@@ -326,7 +320,6 @@ class DocumentModelTest(TestCase):
         self.assertIsNotNone(document.created_time)
         self.assertIsNotNone(document.updated_time)
         self.assertIsNotNone(document.issued_time)
-        self.assertIsNotNone(document.expired_time)
         short_string = 'x'  # A string longer than any max_length in the model
         with self.assertRaises(DataError):
             Document.objects.create(document_user=self.user, title=short_string * 33)

@@ -310,6 +310,12 @@ img.user_image {
     background-color: white;
 }
 
+#homeContent label,
+#homeContent input,
+#homeContent p {
+    font-size: 0.9rem;
+}
+
 .toggler-container {
     width: 100%;
     display: block;
