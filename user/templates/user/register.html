@@ -11,6 +11,11 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 <body class="login" data-admin-utc-offset="-25200">
 <!-- START: navigation bar -->
@@ -62,9 +67,17 @@
             <form class="needs-validation" action="/user/register" method="post" novalidate>
                 <!-- for authentication -->
                 {% csrf_token %}
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
                 <div class="mb-4">
                     <label for="username" class="form-label">Username:</label>
-                    <input type="text" id="username" name="username" class="form-control" aria-describedby="UserRequired" required>
+                    <input type="text" id="username" name="username" class="form-control"
+                           aria-describedby="UserRequired" required>
                     <div id="UserRequired" class="form-text">Required</div>
                     <div class="div invalid-feedback">
                         Please enter a username.
@@ -73,8 +86,12 @@
 
                 <div class="mb-4">
                     <label for="password_1" class="form-label">Password:</label>
-                    <input type="password" id="password_1" name="password_1" class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$" autocomplete="new-password" aria-describedby="PW1Help" required>
-                    <div id="PW1    Help" class="form-text">Password must be at least 6 characters with at least one capital letter and one number.</div>
+                    <input type="password" id="password_1" name="password_1" class="form-control"
+                           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$" autocomplete="new-password"
+                           aria-describedby="PW1Help" required>
+                    <div id="PW1    Help" class="form-text">Password must be at least 6 characters with at least one
+                        capital letter and one number.
+                    </div>
                     <div class="div invalid-feedback">
                         Password does not meet requirements.
                     </div>
@@ -82,7 +99,9 @@
 
                 <div class="mb-4">
                     <label for="password_2" class="form-label">Please enter your password again:</label>
-                    <input type="password" id="password_2" name="password_2" class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$" autocomplete="new-password" aria-describedby="PW2Required" required>
+                    <input type="password" id="password_2" name="password_2" class="form-control"
+                           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$" autocomplete="new-password"
+                           aria-describedby="PW2Required" required>
                     <div id="PW2Required" class="form-text">Required</div>
                     <div class="div invalid-feedback">
                         Passwords must match.
@@ -90,8 +109,11 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="second_password" class="form-label">Please create a 4-digit PIN for your personal drive access:</label>
-                    <input type="password" id="second_password" name="second_password" class="form-control" inputmode="numeric" pattern="\d{4}" autocomplete="new-password" aria-describedby="PINHelp" required>
+                    <label for="second_password" class="form-label">Please create a 4-digit PIN for your personal drive
+                        access:</label>
+                    <input type="password" id="second_password" name="second_password" class="form-control"
+                           inputmode="numeric" pattern="\d{4}" autocomplete="new-password" aria-describedby="PINHelp"
+                           required>
                     <div id="PINHelp" class="form-text">PIN must be 4 digits.</div>
                     <div class="div invalid-feedback">
                         PIN does not meet requirements.
@@ -116,22 +138,22 @@
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (() => {
-    'use strict'
+        'use strict'
 
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.needs-validation')
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
 
-    // Loop over them and prevent submission
-    Array.from(forms).forEach(form => {
-        form.addEventListener('submit', event => {
-        if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-        }
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
 
-        form.classList.add('was-validated')
-        }, false)
-    })
+                form.classList.add('was-validated')
+            }, false)
+        })
     })()
 </script>
 

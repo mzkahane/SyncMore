@@ -5,6 +5,7 @@ from django.contrib.auth.models import BaseUserManager
 from django.utils.translation import gettext_lazy as _
 
 
+# Create a Supervisor table in the database
 class Supervisor(models.Model):
     name = models.CharField('name', max_length=30, default='Zac')
 
@@ -15,6 +16,7 @@ class Supervisor(models.Model):
     updated_time = models.DateTimeField('updated_time', auto_now_add=True, null=True)
 
 
+# Create a UserManger table in the database for the admin system
 class UserManager(BaseUserManager):
     def create_user(self, username, password=None, **extra_fields):
         """
@@ -47,6 +49,8 @@ class UserManager(BaseUserManager):
 
 
 # Create your models here.
+
+# Create a User table in the database
 class User(AbstractBaseUser, PermissionsMixin):
     First_Name = models.CharField('First_Name', max_length=30, null=True)
 
@@ -75,6 +79,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     is_staff = models.BooleanField(default=False)
+
     is_superuser = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'Username'
@@ -82,6 +87,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['First_Name', 'Last_Name']
 
 
+# Create a Phone table in the database
 class Phone(models.Model):
     phone_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='phone_user')
 
@@ -94,6 +100,7 @@ class Phone(models.Model):
     updated_time = models.DateTimeField('updated_time', auto_now_add=True, null=True)
 
 
+# Create a Note table in the database
 class Note(models.Model):
     note_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='note_user')
 
@@ -108,6 +115,7 @@ class Note(models.Model):
     updated_time = models.DateTimeField('updated_time', auto_now_add=True, null=True)
 
 
+# Create a Email table in the database
 class Email(models.Model):
     email_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='email_user')
 
@@ -120,6 +128,7 @@ class Email(models.Model):
     updated_time = models.DateTimeField('updated_time', auto_now_add=True, null=True)
 
 
+# Create a Document table in the database
 class Document(models.Model):
     TYPE_CHOICES = [
         ('ID', 'ID'),

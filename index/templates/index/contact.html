@@ -12,6 +12,11 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .success {
+            color: red;
+        }
+    </style>
 </head>
 <body>
 <!-- START: navigation bar -->
@@ -93,9 +98,18 @@
         <div class="col-md my-5">
             <form class="row g-3 needs-validation" method="post" action="/index/contact/" novalidate>
                 {% csrf_token %}
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
                 <div class="col-md-6 my-2">
                     <label for="First" class="form-label">First Name</label>
-                    <input type="text" class="form-control" name="first_name" id="First" autocomplete="given-name" aria-describedby="FirstRequired" required>
+                    <input type="text" class="form-control" name="first_name" id="First" autocomplete="given-name"
+                           aria-describedby="FirstRequired" required>
                     <div id="FirstRequired" class="form-text">Required</div>
                     <div class="div invalid-feedback">
                         Please enter your first name.
@@ -103,7 +117,8 @@
                 </div>
                 <div class="col-md-6 my-2">
                     <label for="Last" class="form-label">Last Name</label>
-                    <input type="text" class="form-control" name="last_name" id="Last" autocomplete="family-name" aria-describedby="LastRequired" required>
+                    <input type="text" class="form-control" name="last_name" id="Last" autocomplete="family-name"
+                           aria-describedby="LastRequired" required>
                     <div id="LastRequired" class="form-text">Required</div>
                     <div class="div invalid-feedback">
                         Please enter your last name.
@@ -111,7 +126,8 @@
                 </div>
                 <div class="col-12 mb-5">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" name="email" id="email" autocomplete="email" aria-describedby="EmailRequired" required>
+                    <input type="email" class="form-control" name="email" id="email" autocomplete="email"
+                           aria-describedby="EmailRequired" required>
                     <div id="EmailRequired" class="form-text">Required</div>
                     <div class="div invalid-feedback">
                         Please enter a valid email address.
@@ -119,7 +135,8 @@
                 </div>
                 <div class="col-12">
                     <label for="subject" class="form-label">Subject</label>
-                    <input type="text" class="form-control" name="subject" id="subject" aria-describedby="SubRequired" required>
+                    <input type="text" class="form-control" name="subject" id="subject" aria-describedby="SubRequired"
+                           required>
                     <div id="SubRequired" class="form-text">Required</div>
                     <div class="div invalid-feedback">
                         Subject must not be blank.
@@ -127,7 +144,8 @@
                 </div>
                 <div class="col-12 mb-3">
                     <label for="message" class="form-label">Message</label>
-                    <textarea class="form-control" name="message" id="message" rows="4" aria-describedby="MsgRequired" required></textarea>
+                    <textarea class="form-control" name="message" id="message" rows="4" aria-describedby="MsgRequired"
+                              required></textarea>
                     <div id="MsgRequired" class="form-text">Required</div>
                     <div class="div invalid-feedback">
                         Message must not be blank.
@@ -154,22 +172,22 @@
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (() => {
-    'use strict'
+        'use strict'
 
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.needs-validation')
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
 
-    // Loop over them and prevent submission
-    Array.from(forms).forEach(form => {
-        form.addEventListener('submit', event => {
-        if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-        }
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
 
-        form.classList.add('was-validated')
-        }, false)
-    })
+                form.classList.add('was-validated')
+            }, false)
+        })
     })()
 </script>
 
