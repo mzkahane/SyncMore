@@ -5,7 +5,6 @@ import sys
 from datetime import datetime
 
 import boto3
-import pytz
 import requests
 from botocore.client import Config
 from botocore.exceptions import NoCredentialsError
