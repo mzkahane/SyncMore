@@ -76,7 +76,7 @@ jobs:
             git reset --hard origin/main
             git checkout main
             echo "Running deployment script...."
-            eval "$DEPLOY_SCRIPT"
+#            eval "$DEPLOY_SCRIPT"
             uwsgi --reload uwsgi.pid
             sudo /etc/init.d/nginx restart
 
