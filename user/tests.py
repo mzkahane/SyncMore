@@ -100,10 +100,10 @@ class UserFunctionalityTestCase(TestCase):
     # This is a test function to test the modify phone functionality by POST request
     def test_modify_phone_post(self):
         phone = Phone.objects.create(phone_user=self.user, phone='1234567890')
-        response = self.client.post(f'/user/modify_phone/{phone.id}', {'phone': '0987654321'})
+        response = self.client.post(f'/user/modify_phone/{phone.id}', {'phone': '987654321'})
         self.assertRedirects(response, '/user/index')
         phone.refresh_from_db()
-        self.assertEqual(phone.phone, 987654321)
+        self.assertEqual(phone.phone, '987654321')
 
     # This is a test function to test the delete email functionality by POST request
     def test_delete_email_post(self):
