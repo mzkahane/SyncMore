@@ -119,6 +119,8 @@ Execute the following command to run the tests:
 
 This will run all the test cases defined in the application.
 
+You will not see any warnings or errors if all test cases pass. Otherwise you will see specific warnings or error messages about failed test cases.
+
 ## What to Expect
 
 When you run SyncMore, you can expect the following features to be available:
