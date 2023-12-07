@@ -1,4 +1,5 @@
 # SyncMore
+<img width="1085" alt="Screenshot 2023-12-07 at 3 50 57 PM" src="https://github.com/mzkahane/SyncMore/assets/112012223/289c78bf-0070-495a-a560-4c376d4882e5">
 
 [![My Skills](https://skillicons.dev/icons?i=js,html,css,bootstrap,jquery,python,django,mysql,cloudflare,figma,docker)](https://skillicons.dev)
 
