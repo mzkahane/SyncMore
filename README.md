@@ -119,7 +119,8 @@ Execute the following command to run the tests:
 
 This will run all the test cases defined in the application.
 
-You will not see any warnings or errors if all test cases pass. Otherwise you will see specific warnings or error messages about failed test cases.
+You will not see any warnings or errors if all test cases pass. Otherwise you will see specific warnings or error
+messages about failed test cases.
 
 ## What to Expect
 
@@ -161,16 +162,17 @@ When you run SyncMore, you can expect the following features to be available:
 
    paste the content in the file:
 
-   <pre>[uwsgi]<br>  
-   socket=127.0.0.1:8000<br>  
-   chdir=/root/SyncMore<br>  
-   wsgi-file=SyncMore/wsgi.py<br>  
-   process=4<br>  
-   threads=2<br>  
-   pidfile=uwsgi.pid<br>  
-   daemonize=uwsgi.log<br>  
-   master=true</pre>
-
+   <pre>
+   [uwsgi]
+   socket=127.0.0.1:8000
+   chdir=/root/SyncMore
+   wsgi-file=SyncMore/wsgi.py
+   process=4
+   threads=2
+   pidfile=uwsgi.pid
+   daemonize=uwsgi.log
+   master=true
+   </pre>
 
 6. Enable uwsgi:
 
