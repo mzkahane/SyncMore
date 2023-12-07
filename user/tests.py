@@ -83,6 +83,7 @@ class UserFunctionalityTestCase(TestCase):
     # This is a test function to test the modify second password functionality by POST request
     def test_modify_second_password(self):
         response = self.client.post('/user/modify_second_password', {'second_password': '123456'})
+
     def test_user_account_settings(self):
         response = self.client.post('/user/account_settings', {'second_password': '1234'})
         self.user.refresh_from_db()

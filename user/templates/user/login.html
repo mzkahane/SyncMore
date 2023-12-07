@@ -74,7 +74,8 @@
                     <!-- User username -->
                     <div class="form-group row">
                         <label for="usernameInput" class="form-label required">Username</label>
-                        <input type="text" name="username" class="form-control" id="usernameInput" autocomplete="username" aria-describedby="UserRequired" required>
+                        <input type="text" name="username" class="form-control" id="usernameInput"
+                               autocomplete="username" aria-describedby="UserRequired" required>
                         <div class="div invalid-feedback">
                             Please enter your username.
                         </div>
@@ -82,14 +83,16 @@
                     <!-- User password -->
                     <div class="form-group row">
                         <label for="passwordInput" class="form-label required">Password</label>
-                        <input type="password" name="password" class="form-control" id="passwordInput" autocomplete="current-password" aria-describedby="PWRequired" required>
+                        <input type="password" name="password" class="form-control" id="passwordInput"
+                               autocomplete="current-password" aria-describedby="PWRequired" required>
                         <div class="div invalid-feedback">
                             Incorrect password.
                         </div>
                     </div>
                     <!-- Save button -->
                     <div class="form-group row d-flex justify-content-center">
-                        <input type="submit" class="btn delete-btn" value="Log in" style="width: 100%; text-align: center;">
+                        <input type="submit" class="btn delete-btn" value="Log in"
+                               style="width: 100%; text-align: center;">
                     </div>
                     <!-- ISSUES AFTER ATTEMTPING FORM SUBMISSION -->
                     <div class="form-group row form-submission-error-div">
@@ -103,7 +106,8 @@
                     </div>
                     <!-- For non-users, direct to sign up -->
                     <div class="form-group row">
-                        <a href="/user/register" class="btn add-btn" style="width: 100%; text-align: center;">Go to Sign Up</a>
+                        <a href="/user/register" class="btn add-btn" style="width: 100%; text-align: center;">Go to Sign
+                            Up</a>
                     </div>
                 </form>
             </div>
@@ -130,22 +134,22 @@
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (() => {
-    'use strict'
+        'use strict'
 
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.needs-validation')
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
 
-    // Loop over them and prevent submission
-    Array.from(forms).forEach(form => {
-        form.addEventListener('submit', event => {
-        if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-        }
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
 
-        form.classList.add('was-validated')
-        }, false)
-    })
+                form.classList.add('was-validated')
+            }, false)
+        })
     })()
 </script>
 

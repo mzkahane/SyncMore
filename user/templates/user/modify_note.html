@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../../../static/Syncmore/styles.css"/>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body class="gray-body">
 <!-- START: user navigation bar -->
@@ -70,12 +70,14 @@
                     <!-- Note name -->
                     <div class="form-group row">
                         <label for="new-note-title" class="required">Note title</label>
-                        <input type="text" value="{{ note.title }}" name="title" class="form-control" id="new-note-title" required/>
+                        <input type="text" value="{{ note.title }}" name="title" class="form-control"
+                               id="new-note-title" required/>
                     </div>
                     <!-- Note content -->
                     <div class="form-group row">
                         <label for="new-note-content">Note content</label>
-                    <textarea cols="30" rows="10" name="content" class="form-control" onkeyup="textAreaAdjust(this)" style="overflow:hidden" id="new-note-content">{{ note.content }}</textarea>
+                        <textarea cols="30" rows="10" name="content" class="form-control" onkeyup="textAreaAdjust(this)"
+                                  style="overflow:hidden" id="new-note-content">{{ note.content }}</textarea>
                     </div>
                     <!-- Update button -->
                     <div class="form-group row d-flex justify-content-center">
@@ -96,10 +98,11 @@
 
 <script>
     const content = document.getElementById("new-note-content");
-    content.style.height = (25+content.scrollHeight)+"px";
+    content.style.height = (25 + content.scrollHeight) + "px";
+
     function textAreaAdjust(element) {
         element.style.height = "1px";
-        element.style.height = (25+element.scrollHeight)+"px";
+        element.style.height = (25 + element.scrollHeight) + "px";
     }
 </script>
 

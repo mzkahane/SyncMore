@@ -18,37 +18,35 @@
     --slate-gray: #7C8C94;
     --slate-gray-hover: #59646a;
 
-    --font-family-primary:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        system-ui,
-        Roboto,
-        "Helvetica Neue",
-        Arial,
-        sans-serif,
-        "Apple Color Emoji",
-        "Segoe UI Emoji",
-        "Segoe UI Symbol",
-        "Noto Color Emoji";
-    --font-family-monospace:
-        ui-monospace,
-        Menlo,
-        Monaco,
-        "Cascadia Mono",
-        "Segoe UI Mono",
-        "Roboto Mono",
-        "Oxygen Mono",
-        "Ubuntu Monospace",
-        "Source Code Pro",
-        "Fira Mono",
-        "Droid Sans Mono",
-        "Courier New",
-        monospace,
-        "Apple Color Emoji",
-        "Segoe UI Emoji",
-        "Segoe UI Symbol",
-        "Noto Color Emoji";
+    --font-family-primary: -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    system-ui,
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji";
+    --font-family-monospace: ui-monospace,
+    Menlo,
+    Monaco,
+    "Cascadia Mono",
+    "Segoe UI Mono",
+    "Roboto Mono",
+    "Oxygen Mono",
+    "Ubuntu Monospace",
+    "Source Code Pro",
+    "Fira Mono",
+    "Droid Sans Mono",
+    "Courier New",
+    monospace,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji";
 }
 
 .form-text {
@@ -75,18 +73,21 @@ body {
     padding: 0;
     background-color: var(--oxford-blue);
 }
+
 /* navigation bar image logo */
 #navbar-logo {
     width: 80px;
     height: auto;
     margin-right: 10px;
 }
+
 /* navigation bar links */
 .navbar-brand, .nav-link {
     /* font: 17px calibri, sans-serif; */
     color: var(--webpage-white);
     margin: 0 5px;
 }
+
 /* navigation bar links on hover */
 nav a:hover {
     color: var(--turquoise);
@@ -98,6 +99,7 @@ nav a:hover {
     padding: 5em 15em;
     text-align: center;
 }
+
 .jumbo-image {
     max-width: 100%;
     height: auto;
@@ -116,7 +118,7 @@ nav a:hover {
     padding-left: 50px;
     padding-right: 50px;
     margin-left: 100px;
-    
+
     width: 500px;
     height: 500px;
 }
@@ -174,6 +176,7 @@ div.modify-info {
     border: 3px solid var(--slate-gray-hover);
     background-color: white;
 }
+
 /* user images uploaded to user personal drive */
 img.user_image {
     height: 100%;
@@ -196,6 +199,7 @@ img.user_image {
 .add-btn {
     background-color: var(--turquoise);
 }
+
 .add-btn:hover {
     background-color: var(--turquoise-hover);
     color: white;
@@ -206,6 +210,7 @@ img.user_image {
 .edit-btn {
     background-color: var(--slate-gray);
 }
+
 .edit-btn:hover {
     background-color: var(--slate-gray-hover);
     color: white;
@@ -216,6 +221,7 @@ img.user_image {
 .delete-btn {
     background-color: var(--slate-blue);
 }
+
 .delete-btn:hover {
     background-color: var(--slate-blue-hover);
     color: white;
@@ -257,6 +263,7 @@ img.user_image {
     font-size: 28px;
     font-weight: bold;
 }
+
 #closeModal:hover,
 #closeModal:focus {
     color: black;
@@ -298,6 +305,7 @@ img.user_image {
     background-color: var(--dark);
     color: var(--webpage-white);
 }
+
 #user-main-header h5 {
     font-weight: normal;
     text-align: center;
@@ -349,6 +357,7 @@ img.user_image {
 #noteListToggler {
     background-color: var(--oxford-blue-light);
 }
+
 #noteListToggler:hover {
     background-color: var(--oxford-blue);
     outline: none;
@@ -357,6 +366,7 @@ img.user_image {
 #documentListToggler {
     background-color: var(--oxford-blue-light)
 }
+
 #documentListToggler:hover {
     background-color: var(--oxford-blue);
     outline: none;
@@ -500,6 +510,7 @@ a.document-url:hover {
     background-color: var(--oxford-blue);
     color: var(--webpage-white);
 }
+
 #user-form-header h5 {
     font-weight: normal;
     text-align: center;
@@ -509,6 +520,7 @@ a.document-url:hover {
 .user-form-register {
     background-color: var(--turquoise) !important;
 }
+
 .user-form-login {
     background-color: var(--slate-blue) !important;
 }
@@ -574,6 +586,7 @@ a.document-url:hover {
 .form-submission-error-div {
     display: none;
 }
+
 /* FORM SUBMISSION ERROR */
 .form-submission-error {
     color: red;
@@ -581,13 +594,14 @@ a.document-url:hover {
 
 /* OPTIONAL */
 .optional:after {
-    content:" (Optional)";
+    content: " (Optional)";
     color: var(--turquoise);
     font-size: 0.8125rem;
 }
+
 /* REQUIRED */
 .required:after {
-    content:" (Required)";
+    content: " (Required)";
     color: red;
     font-size: 0.8125rem;
 }
@@ -632,7 +646,6 @@ a.document-url:hover {
         padding-left: 15px;
         padding-right: 15px;
     } */
-    
     #user-form-container {
         width: auto;
         max-width: 480px;

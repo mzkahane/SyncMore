@@ -65,12 +65,14 @@
         <!-- BEGIN: User form content -->
         <div id="user-form-content">
             <div class="container">
-                <form action="/user/account_settings" class="form needs-validation" method="post" enctype="multipart/form-data" novalidate>
+                <form action="/user/account_settings" class="form needs-validation" method="post"
+                      enctype="multipart/form-data" novalidate>
                     {% csrf_token %}
                     <!-- User username -->
                     <div class="form-group row">
                         <label for="new-username" class="form-label required">Username:</label>
-                        <input type="text" name="new_username" id="new-username" class="form-control" value={{ username }} required>
+                        <input type="text" name="new_username" id="new-username" class="form-control"
+                               value={{ username }} required>
                         <div class="div invalid-feedback">
                             Please enter a username.
                         </div>
@@ -78,8 +80,12 @@
                     <!-- User new password -->
                     <div class="form-group row">
                         <label for="new-password" class="form-label">New password:</label>
-                        <input type="password" name="new_password" id="new-password" class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$" aria-describedby="NewPasswordHelp">
-                        <div id="NewPasswordHelp" class="form-text">Password must be at least 6 characters with at least one capital letter and one number.</div>
+                        <input type="password" name="new_password" id="new-password" class="form-control"
+                               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$"
+                               aria-describedby="NewPasswordHelp">
+                        <div id="NewPasswordHelp" class="form-text">Password must be at least 6 characters with at least
+                            one capital letter and one number.
+                        </div>
                         <div class="div invalid-feedback">
                             Password does not meet requirements.
                         </div>
@@ -87,7 +93,9 @@
                     <!-- User new password retype -->
                     <div class="form-group row">
                         <label for="new-password-retype" class="form-label">Enter new password again:</label>
-                        <input type="password" name="new_password_retype" id="new-password-retype" class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$" aria-describedby="NewPasswordRetype">
+                        <input type="password" name="new_password_retype" id="new-password-retype" class="form-control"
+                               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$"
+                               aria-describedby="NewPasswordRetype">
                         <div class="div invalid-feedback">
                             Passwords must match.
                         </div>
@@ -95,14 +103,16 @@
                     <!-- User PIN -->
                     <div class="form-group row">
                         <label for="second-password" class="form-label required">4-digit PIN</label>
-                        <input type="text" name="second_password" id="second-password" class="form-control" value={{ current_pin }} inputmode="numeric" pattern="\d{4}" required>
+                        <input type="text" name="second_password" id="second-password" class="form-control"
+                               value={{ current_pin }} inputmode="numeric" pattern="\d{4}" required>
                         <div class="div invalid-feedback">
                             PIN must be 4 digits.
                         </div>
                     </div>
                     <!-- Save button -->
                     <div class="form-group row d-flex justify-content-center">
-                        <input type="submit" class="btn add-btn" value="Save Changes" style="width: 200px; text-align: center;">
+                        <input type="submit" class="btn add-btn" value="Save Changes"
+                               style="width: 200px; text-align: center;">
                     </div>
                     <!-- ISSUES AFTER ATTEMTPING FORM SUBMISSION -->
                     <div class="form-group row form-submission-error-div">
@@ -127,22 +137,22 @@
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (() => {
-    'use strict'
+        'use strict'
 
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.needs-validation')
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
 
-    // Loop over them and prevent submission
-    Array.from(forms).forEach(form => {
-        form.addEventListener('submit', event => {
-        if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-        }
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
 
-        form.classList.add('was-validated')
-        }, false)
-    })
+                form.classList.add('was-validated')
+            }, false)
+        })
     })()
 </script>
 

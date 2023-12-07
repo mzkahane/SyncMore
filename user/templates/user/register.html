@@ -75,7 +75,8 @@
                     <!-- User username -->
                     <div class="form-group row">
                         <label for="register-username" class="form-label required">Username</label>
-                        <input type="text" name="username" id="register-username" class="form-control" aria-describedby="UserRequired" required>
+                        <input type="text" name="username" id="register-username" class="form-control"
+                               aria-describedby="UserRequired" required>
                         <div class="div invalid-feedback">
                             Please enter a username.
                         </div>
@@ -83,8 +84,12 @@
                     <!-- User new password -->
                     <div class="form-group row">
                         <label for="password_1" class="form-label required">Password</label>
-                        <input type="password" id="password_1" name="password_1" class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$" aria-describedby="PW1Help" required>
-                        <div id="PW1Help" class="form-text">Password must be at least 6 characters with at least one capital letter and one number.</div>
+                        <input type="password" id="password_1" name="password_1" class="form-control"
+                               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$" aria-describedby="PW1Help"
+                               required>
+                        <div id="PW1Help" class="form-text">Password must be at least 6 characters with at least one
+                            capital letter and one number.
+                        </div>
                         <div class="div invalid-feedback">
                             Password does not meet requirements.
                         </div>
@@ -92,15 +97,20 @@
                     <!-- User new password retype -->
                     <div class="form-group row">
                         <label for="password_2" class="form-label required">Enter new password again</label>
-                        <input type="password" id="password_2" name="password_2" class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$" aria-describedby="PW2Required" required>
+                        <input type="password" id="password_2" name="password_2" class="form-control"
+                               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$" aria-describedby="PW2Required"
+                               required>
                         <div class="div invalid-feedback">
                             Passwords must match.
                         </div>
                     </div>
                     <!-- User PIN -->
                     <div class="form-group row">
-                        <label for="second_password" class="form-label required">Please create a 4-digit PIN for your personal drive access</label>
-                        <input type="password" id="second_password" name="second_password" class="form-control" inputmode="numeric" pattern="\d{4}" autocomplete="new-password" aria-describedby="PINHelp" required>
+                        <label for="second_password" class="form-label required">Please create a 4-digit PIN for your
+                            personal drive access</label>
+                        <input type="password" id="second_password" name="second_password" class="form-control"
+                               inputmode="numeric" pattern="\d{4}" autocomplete="new-password"
+                               aria-describedby="PINHelp" required>
                         <div id="PINHelp" class="form-text">PIN must be 4 digits.</div>
                         <div class="div invalid-feedback">
                             PIN does not meet requirements.
@@ -108,7 +118,8 @@
                     </div>
                     <!-- Save button -->
                     <div class="form-group row">
-                        <input type="submit" class="btn add-btn" value="Create Account" style="width: 100%; text-align: center;">
+                        <input type="submit" class="btn add-btn" value="Create Account"
+                               style="width: 100%; text-align: center;">
                     </div>
                     <!-- ISSUES AFTER ATTEMTPING FORM SUBMISSION -->
                     <div class="form-group row form-submission-error-div">
@@ -122,7 +133,8 @@
                     </div>
                     <!-- For users, direct to login -->
                     <div class="form-group row">
-                        <a href="/user/login" class="btn delete-btn" style="width: 100%; text-align: center;">Go to Login</a>
+                        <a href="/user/login" class="btn delete-btn" style="width: 100%; text-align: center;">Go to
+                            Login</a>
                     </div>
                 </form>
             </div>

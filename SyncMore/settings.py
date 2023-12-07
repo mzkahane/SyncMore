@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-ypoi0@m34$bkpi^6_#i0*9(@^p99ngx4l5y_e=&^qu=*w8*38v"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -82,14 +82,14 @@ DATABASES = {
         'NAME': 'syncmore',
         'USER': 'syncmore',
         'PASSWORD': 'syncmore',
-        'HOST': '149.28.36.162',
+        'HOST': '149.28.212.88',
         'PORT': '3306',
     }
 }
 
 if 'test' in sys.argv:
     DATABASES['default']['NAME'] = 'test_syncmore'
-    DATABASES['default']['HOST'] = '149.28.36.162'
+    DATABASES['default']['HOST'] = '149.28.212.88'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
