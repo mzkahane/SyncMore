@@ -78,7 +78,8 @@
                     <!-- Upload new document -->
                     <div class="form-group row">
                         <label for="document" class="required">Upload new document</label>
-                        <input type="file" onchange="displayFile(event)" name="document" class="form-control" id="document" required />
+                        <input type="file" onchange="displayFile(event)" name="document" class="form-control"
+                               id="document" required/>
                     </div>
                     <!-- Document type selection -->
                     <div class="form-group row">
@@ -96,8 +97,10 @@
                     </div>
                     <!-- Document expiration date -->
                     <div class="form-group row">
-                        <label for="expiration-date" class="optional">Update the document's expiration date or skip if not applicable.</label>
-                        <input type="date" class="form-control" name="expiration-date" id="expiration-date" pattern="\d{4}-\d{2}-\d{2}" />
+                        <label for="expiration-date" class="optional">Update the document's expiration date or skip if
+                            not applicable.</label>
+                        <input type="date" class="form-control" name="expiration-date" id="expiration-date"
+                               pattern="\d{4}-\d{2}-\d{2}"/>
                         <span class="validity"></span>
                     </div>
                     <!-- View new document -->
@@ -129,21 +132,21 @@
 <script>
     // https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types
     const imageTypes = [
-    "image/apng",
-    "image/bmp",
-    "image/gif",
-    "image/jpeg",
-    "image/jpg",
-    "image/pjpeg",
-    "image/png",
-    "image/svg+xml",
-    "image/tiff",
-    "image/webp",
-    "image/x-icon",
+        "image/apng",
+        "image/bmp",
+        "image/gif",
+        "image/jpeg",
+        "image/jpg",
+        "image/pjpeg",
+        "image/png",
+        "image/svg+xml",
+        "image/tiff",
+        "image/webp",
+        "image/x-icon",
     ];
 
     const pdfTypes = [
-    "application/pdf",
+        "application/pdf",
     ];
 
     function imageType(file) {
@@ -160,10 +163,10 @@
         const lastDot = name.lastIndexOf('.');
 
         var full_ext = file.type;
-    
+
         const fileName = name.substring(0, lastDot);
         const ext = name.substring(lastDot + 1);
-    
+
         outputfile.value = fileName;
         extension.value = full_ext;
     }
@@ -175,11 +178,11 @@
         }
 
         const preview = document.querySelector(".preview");
-    
+
         while (preview.firstChild) {
             preview.removeChild(preview.firstChild);
         }
-        
+
         const file = event.target.files[0];
         const para = document.createElement("p");
         if (imageType(file)) {
@@ -202,8 +205,7 @@
             reader.onload = function (e) {
                 $('.fit-pdf').attr('src', e.target.result);
             };
-        }
-        else {
+        } else {
             para.textContent = `File name ${file.name}: Not a valid file type. Update your selection.`;
             preview.append(para);
         }

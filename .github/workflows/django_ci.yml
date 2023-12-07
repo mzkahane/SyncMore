@@ -68,20 +68,17 @@ jobs:
         if: github.ref == 'refs/heads/main'  # Only deploy on main branch
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.VULTR_HOST }}
+          host: ${{ secrets.VULTR_HOST_2 }}
           username: ${{ secrets.VULTR_USERNAME }}
-          key: ${{ secrets.VULTR_SSH_PRIVATE_KEY }}
+          key: ${{ secrets.VULTR_SSH_PRIVATE_KEY_2 }}
           script: |
             cd /root/SyncMore
             git reset --hard origin/main
             git checkout main
-            echo "Running deployment script..."
-            eval "$DEPLOY_SCRIPT"
+            echo "Running deployment script...."
+            ${{ secrets.SCRIPT }}
             uwsgi --reload uwsgi.pid
             sudo /etc/init.d/nginx restart
-
-        env:
-          DEPLOY_SCRIPT: ${{ secrets.SCRIPT }}
 
       - name: cleanup
         run: rm -rf ~/.ssh
