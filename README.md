@@ -2,7 +2,6 @@
 
 [![My Skills](https://skillicons.dev/icons?i=js,html,css,bootstrap,jquery,python,django,mysql,cloudflare,figma,docker)](https://skillicons.dev)
 
-
 [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
 [![asgiref](https://img.shields.io/badge/asgiref-3.7.2-brightgreen)](https://pypi.org/project/asgiref/)
 [![backports.zoneinfo](https://img.shields.io/badge/backports.zoneinfo-0.2.1-brightgreen)](https://pypi.org/project/backports.zoneinfo/)
@@ -160,7 +159,7 @@ When you run SyncMore, you can expect the following features to be available:
 
    paste the content in the file:
 
-   <code>[uwsgi] <br> socket=127.0.0.1:8000 <br> chdir=/root/SyncMore <br> wsgi-file=SyncMore/wsgi.py <br> process=4 <br> threads=2 <br> pidfile=uwsgi.pid <br> daemonize=uwsgi.log <br> master=true</code>
+   <pre>[uwsgi]<br>socket=127.0.0.1:8000<br>chdir=/root/SyncMore<br>wsgi-file=SyncMore/wsgi.py<br>process=4<br>threads=2<br>pidfile=uwsgi.pid<br>daemonize=uwsgi.log<br>master=true</pre>
 
 
 6. Enable uwsgi:
@@ -178,7 +177,7 @@ When you run SyncMore, you can expect the following features to be available:
 
    with
 
-   <code>uwsgi_pass 127.0.0.1:8000; <br> include /etc/nginx/uwsgi_params;</code> 
+   <pre>uwsgi_pass 127.0.0.1:8000;<br>include /etc/nginx/uwsgi_params;</pre> 
 
 
 8. Install nginx Service:
