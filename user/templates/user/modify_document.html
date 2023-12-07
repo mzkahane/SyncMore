@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--
+        This HTML template displays the User Modify Document page
+        This page allows the user to preview the current document they wish to modify and edit its information.
+        The user can edit the document title, upload a new document to replace the current one,
+        edit the document type, and add/edit the expiration.
+        Document preview is supported for both the current document and any new document uploaded.
+        Document information that is required are: title, file, document type
+        Document information that is optional is: expiration date
+        All types of files uploads are supported, but file preview only supports PNG, JPEG/JPG, and PDF files.
+        PDF file view is not supported on mobile screens.
+    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Modify Document</title>
@@ -176,22 +187,26 @@
         question = ext_match[0].lastIndexOf('?');
         ext = ext_match[0].substring(1, question);
         const para = document.createElement("p");
+        // if file is an image type (PNG, JPEG/JPG)
         if (imageExt.includes(ext)) {
+            // create an image preview
             const image = document.createElement("img");
             image.classList.add("fit-image");
             image.src = file_url;
             preview.appendChild(image);
-
+            // render the image preview
             var reader = new FileReader();
             reader.onload = function (e) {
                 $('.fit-image').attr('src', e.target.result);
             };
+        // if the file is a PDF type
         } else if (pdfExt.includes(ext)) {
+            // create a PDF preview
             const embed_element = document.createElement("embed");
             embed_element.classList.add("fit-pdf");
             embed_element.src = file_url;
             preview.appendChild(embed_element);
-
+            // render the PDF preview
             var reader = new FileReader();
             reader.onload = function (e) {
                 $('.fit-pdf').attr('src', e.target.result);
@@ -257,31 +272,35 @@
 
         const file = event.target.files[0];
         const para = document.createElement("p");
+        // if the file is an image type (PNG, JPG/JPEG)
         if (imageType(file)) {
+            // create an image preview
             const image = document.createElement("img");
             image.classList.add("fit-image");
             image.src = URL.createObjectURL(file);
             preview.appendChild(image);
-
+            // render the image preview
             var reader = new FileReader();
             reader.onload = function (e) {
                 $('.fit-image').attr('src', e.target.result);
             };
+        // if the file is a PDF type
         } else if (pdfType(file)) {
+            // create a file preview
             const embed_element = document.createElement("embed");
             embed_element.classList.add("fit-pdf");
             embed_element.src = URL.createObjectURL(file);
             preview.appendChild(embed_element);
-
+            // render the file preview
             var reader = new FileReader();
             reader.onload = function (e) {
                 $('.fit-pdf').attr('src', e.target.result);
             };
+        // if the file is not of a type which file preview supports
         } else {
             para.textContent = `File name ${file.name}: Not a valid file type. Update your selection.`;
             preview.append(para);
         }
-
     }
 </script>
 

@@ -95,11 +95,12 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<!-- JS for updating the <textarea> element size as note content changes -->
 <script>
+    // start the <textarea> element size based on the initial content size
     const content = document.getElementById("new-note-content");
     content.style.height = (25 + content.scrollHeight) + "px";
-
+    // update the <textarea> element size as content size changes
     function textAreaAdjust(element) {
         element.style.height = "1px";
         element.style.height = (25 + element.scrollHeight) + "px";
