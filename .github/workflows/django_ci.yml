@@ -73,12 +73,12 @@ jobs:
           key: ${{ secrets.VULTR_SSH_PRIVATE_KEY }}
           script: |
             cd /root/SyncMore
+            git reset --hard origin/main
+            git checkout main
             echo "Running deployment script...."
+            git pull https://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@github.com/mzkahane/SyncMore
             uwsgi --reload uwsgi.pid
             sudo /etc/init.d/nginx restart
-
-      #        env:
-      #          DEPLOY_SCRIPT: ${{ secrets.SCRIPT }}
 
       - name: cleanup
         run: rm -rf ~/.ssh
