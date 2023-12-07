@@ -1,6 +1,8 @@
 # SyncMore
 
 [![My Skills](https://skillicons.dev/icons?i=js,html,css,bootstrap,jquery,python,django,mysql,cloudflare,figma,docker)](https://skillicons.dev)
+
+
 [![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
 [![asgiref](https://img.shields.io/badge/asgiref-3.7.2-brightgreen)](https://pypi.org/project/asgiref/)
 [![backports.zoneinfo](https://img.shields.io/badge/backports.zoneinfo-0.2.1-brightgreen)](https://pypi.org/project/backports.zoneinfo/)
@@ -58,7 +60,7 @@ towards securing permanent housing.
 
    or
 
-   `$git clone https://github.com/mzkahane/SyncMore.git`
+   `$ git clone https://github.com/mzkahane/SyncMore.git`
 
 
 2. Navigate to the Project Directory:
@@ -74,7 +76,8 @@ towards securing permanent housing.
 
 1. Run this command in your database host:
 
-`$ sudo apt-get install mysql-server`
+   `$ sudo apt-get install mysql-server`
+
 
 2. Set up the database detailed information in setting.py under the project folder.
 
@@ -178,20 +181,26 @@ master=true`
 
    `uwsgi --ini uwsgi.ini`
 
+
 7. Edit nginx Configration:
 
    `sudo vim /etc/nginx/sites-enabled/default;`
 
-replace
+   replace
 
-`try_files $uri $uri/ =404;`
+   `try_files $uri $uri/ =404;`
 
-with
+   with
 
-'uwsgi_pass 127.0.0.1:8000;
+   'uwsgi_pass 127.0.0.1:8000;
 include /etc/nginx/uwsgi_params;'
 
-8. Enable nginx Service:
+8. Install nginx Service:
+
+   `sudo apt install nginx`
+
+
+9. Enable nginx Service:
 
    `sudo /etc/init.d/nginx start`
 
