@@ -161,14 +161,14 @@ When you run SyncMore, you can expect the following features to be available:
 
    paste the content in the file:
 
-   <pre>[uwsgi]<br>
-   socket=127.0.0.1:8000<br>
-   chdir=/root/SyncMore<br>
-   wsgi-file=SyncMore/wsgi.py<br>
-   process=4<br>
-   threads=2<br>
-   pidfile=uwsgi.pid<br>
-   daemonize=uwsgi.log<br>
+   <pre>[uwsgi]<br>  
+   socket=127.0.0.1:8000<br>  
+   chdir=/root/SyncMore<br>  
+   wsgi-file=SyncMore/wsgi.py<br>  
+   process=4<br>  
+   threads=2<br>  
+   pidfile=uwsgi.pid<br>  
+   daemonize=uwsgi.log<br>  
    master=true</pre>
 
 
@@ -187,7 +187,7 @@ When you run SyncMore, you can expect the following features to be available:
 
    with
 
-   <pre>uwsgi_pass 127.0.0.1:8000;<br>
+   <pre>uwsgi_pass 127.0.0.1:8000;<br>  
    include /etc/nginx/uwsgi_params;</pre> 
 
 
