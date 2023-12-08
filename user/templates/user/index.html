@@ -476,13 +476,13 @@
                                         </td>
                                         <td>
                                             <!-- Modify document -->
-                                            <a class="document-detail btn edit-btn mx-1"
+                                            <a class="document-detail btn edit-btn my-1"
                                                 href="/user/modify_document/{{ document.id }}">Modify</a>
                                             <!-- Delete document -->
                                             <form action="/user/delete_document/{{ document.id }}" method="post">
                                                 {% csrf_token %}
                                                 <input type="hidden" name="operation" value="delete">
-                                                <input class="document-detail btn delete-btn mx-1" type="submit"
+                                                <input class="document-detail btn delete-btn my-1" type="submit"
                                                     value="Delete">
                                             </form>
                                         </td>
