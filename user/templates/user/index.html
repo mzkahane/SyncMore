@@ -35,7 +35,24 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
+<style>
+    {% comment %} documents table styling {% endcomment %}
+    .table td, .table th {
+        padding: 0px !important;
+        vertical-align: middle !important;
+        border-top: 1px solid #dee2e6;
+    }
+    .active-document {
+        margin-top: 2px;
+        margin-bottom: 2px;
+        border: none !important;
+        display: table-row;
+        font-size: 0.8125rem;
+        width: 100%;
+    }
+</style>
+
+        </head>
 <body class="gray-body">
 <!-- START: navigation bar -->
 <nav class="navbar navbar-expand-md">
