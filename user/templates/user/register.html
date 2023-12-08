@@ -1,12 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!--
-        This HTML template displays the User Sign Up page
-        This page allows the user to create an account by entering:
-        username, password, retyped password, and 4-digit PIN
-        Error messages are displayed from the backend views upon form submission
-    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Create User Account Page</title>
@@ -27,8 +21,10 @@
 <body class="login gray-body" data-admin-utc-offset="-25200">
 <!-- START: navigation bar -->
 <nav class="navbar navbar-expand-md">
-    <!-- SyncMore clickable logo -->
-    <a class="navbar-brand" href="/"><img src="../../../static/Syncmore/SyncMore_Logo_Transparent_Cropped.png" id="navbar-logo" alt="SyncMore Logo"></a>
+    <!-- website logo -->
+    <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
+    <!-- website brand name -->
+    <a class="navbar-brand" href="/">SyncMore</a>
 
     <!-- START: toggle button for mobile navigation bar links -->
     <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
@@ -183,7 +179,6 @@
     })()
 </script>
 
-<!-- JS for displaying error messages from the backend views -->
 <script>
     $(document).ready(function () {
         const errorMessage = document.querySelector(".form-submission-error")

@@ -1,17 +1,14 @@
-from itertools import groupby
-
-from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.test import Client, TestCase
-from django.urls import reverse
-
+from .models import Resource
+from django.core.paginator import Paginator
 import resources
-
+from itertools import groupby
+from django.test import TestCase, Client
+from django.urls import reverse
 from .models import Resource
 
 
-# handles the display of resources on the Resources page
 def resources_view(request):
     # Order resources by 'category'
     resources_ordered = Resource.objects.all().order_by('category')
