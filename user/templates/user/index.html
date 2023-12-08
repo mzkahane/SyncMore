@@ -39,10 +39,8 @@
 <body class="gray-body">
 <!-- START: navigation bar -->
 <nav class="navbar navbar-expand-md">
-    <!-- website logo -->
-    <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
-    <!-- website brand name -->
-    <a class="navbar-brand" href="/">SyncMore</a>
+    <!-- SyncMore clickable logo -->
+    <a class="navbar-brand" href="/"><img src="../../../static/Syncmore/SyncMore_Logo_Transparent_Cropped.png" id="navbar-logo" alt="SyncMore Logo"></a>
 
     <!-- START: toggle button for mobile navigation bar links -->
     <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
@@ -347,7 +345,7 @@
                         <!-- Note list container header -->
                         <div class="list-header">
                             <!-- Create a note -->
-                            <div class="list-header-option">
+                            <div class="list-header-option mb-2">
                                 <h6>Create a note:</h6>
                                 <a class="btn add-btn" id="add-note" href="/user/add_note">Create note</a>
                             </div>
@@ -368,11 +366,11 @@
                                         <div class="note-header-item">
                                             <div class="row row-cols-2">
                                                 <!-- Last updated -->
-                                                <div class="col">
+                                                <div class="col my-auto">
                                                     <span>Updated {{ note.updated_time|date:"M d, Y" }}</span>
                                                 </div>
                                                 <!-- Modify and Delete note -->
-                                                <div class="d-flex align-items-center col">
+                                                <div class="col d-flex justify-content-center">
                                                     <!-- Modify note -->
                                                     <a class="btn edit-btn mx-2" href="/user/modify_note/{{ note.id }}">Modify</a>
                                                     <!-- Delete note -->
@@ -410,7 +408,7 @@
                         <!-- BEGIN: Document list container header  -->
                         <div class="list-header">
                             <!-- Upload document -->
-                            <div class="list-header-option">
+                            <div class="list-header-option mb-2">
                                 <h6>Upload a document:</h6>
                                 <a class="btn add-btn" id="add-document" href="/user/add_document">Upload document</a>
                             </div>
@@ -434,28 +432,71 @@
                         </div>
 
                         <!-- BEGIN: Document list container -->
-                        <div class="container" id="documentList">
+                        <div id="documentList">
                             <!-- Document list header -->
-                            <div class="document-list-header row">
+                            {% comment %} <div class="document-list-header row">
                                 <div class="col">
                                     <span>Name</span>
                                 </div>
-                                <div class="col-lg-2">
+                                <div class="col">
                                     <span>Expiration date</span>
                                 </div>
-                                <div class="col-lg-2">
+                                <div class="col">
                                     <span>Last modified</span>
                                 </div>
-                                <div class="col-lg-2 center-text">
+                                <div class="col">
                                     <span>Options</span>
                                 </div>
-                            </div>
-                            {% for document in documents %}
+                            </div> {% endcomment %}
+                            
+                            {% comment %} <div class="document-item active-document row" data-id="{{ document.type }}"> {% endcomment %}
+                            <table id="documentTable" class="table table-hover">
+                                <thead>
+                                    <colgroup span="4"></colgroup>
+                                    <tr id="#documentTableHeader">
+                                        <th class="document-table-header-item" scope="col">Name</th>
+                                        <th class="document-table-header-item" scope="col">Expires</th>
+                                        <th class="document-table-header-item" scope="col">Last modified</th>
+                                        <th class="document-table-header-item" scope="col">Options</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for document in documents %}
+                                    <tr class="document-item active-document" data-id="{{ document.type }}">
+                                        <th scope="row">
+                                            <a target="_blank" rel="noopener" href="{{ document.document.url }}"
+                                                class="document-detail document-url align-middle">{{ document.title }}</a>
+                                        </th>
+                                        <td>
+                                            <span class="document-detail align-middle expiration-date"
+                                                data-id="{{ document.expired_time }}">{{ document.expired_time|date:"M d, Y" }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="document-detail align-middle">{{ document.updated_time|date:"M d, Y" }}</span>
+                                        </td>
+                                        <td>
+                                            <!-- Modify document -->
+                                            <a class="document-detail btn edit-btn mx-1"
+                                                href="/user/modify_document/{{ document.id }}">Modify</a>
+                                            <!-- Delete document -->
+                                            <form action="/user/delete_document/{{ document.id }}" method="post">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="operation" value="delete">
+                                                <input class="document-detail btn delete-btn mx-1" type="submit"
+                                                    value="Delete">
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            {% comment %} {% for document in documents %} {% endcomment %}
+                            
                                 <!-- BEGIN: Document entry per row -->
-                                <div class="document-item active-document row" data-id="{{ document.type }}">
+                                
+                                    
                                     <!-- Document title -->
-                                    <div class="document-detail col">
-                                        {% comment %} <span class="document-detail align-middle">{{ document.title }}</span> {% endcomment %}
+                                    {% comment %} <div class="document-detail col">
                                         <a target="_blank" rel="noopener" href="{{ document.document.url }}"
                                            class="document-detail document-url align-middle">{{ document.title }}</a>
                                     </div>
@@ -483,7 +524,7 @@
                                     </div>
                                 </div>
                                 <!-- END: Document entry per row -->
-                            {% endfor %}
+                            {% endfor %} {% endcomment %}
                         </div>
                         <!-- END: Document list container-->
                     </div>

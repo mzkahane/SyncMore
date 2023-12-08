@@ -11,16 +11,18 @@
     <title>Resources Page</title>
     <!-- favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="../../../static/Syncmore/favicon.ico">
-    <!-- link to styles -->
-    <link rel="stylesheet" href="../../../static/Syncmore/styles.css"/>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- link to styles -->
+    <link rel="stylesheet" href="../../../static/Syncmore/styles.css"/>
     <style>
         .nav-link {
             color: white;
         }
-
+        .nav-link:hover {
+            color: #0DCBAB;
+        }
         .navbar-brand {
             color: white;
         }
@@ -29,10 +31,8 @@
 <body>
 <!-- START: navigation bar -->
 <nav class="navbar navbar-expand-md">
-    <!-- website logo -->
-    <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
-    <!-- website brand name -->
-    <a class="navbar-brand" href="/">SyncMore</a>
+    <!-- SyncMore clickable logo -->
+    <a class="navbar-brand" href="/"><img src="../../../static/Syncmore/SyncMore_Logo_Transparent_Cropped.png" id="navbar-logo" alt="SyncMore Logo"></a>
 
     <!-- START: toggle button for mobile navigation bar links -->
     <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
@@ -42,9 +42,9 @@
     <!-- END: toggle button for mobile navigation bar links -->
 
     <!-- START: navigation bar links -->
-    <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+    <div class="collapse navbar-collapse d-flex align-center" id="main-nav">
         <!-- left hand side links: Resources and Contact Us -->
-        <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+        <ul class="navbar-nav justify-content-start align-left">
             <li class="navbar-item">
                 <a class="nav-link" href="/resources/index">Resources</a>
             </li>
@@ -52,6 +52,8 @@
                 <a class="nav-link" href="/index/contact/">Contact Us</a>
             </li>
         </ul>
+    </div>
+    <div class="collapse navbar-collapse d-flex align-center justify-content-lg-end" id="main-nav">
         <!-- right hand side links: Sign Up and Log In -->
         <ul class="navbar-nav justify-content-end align-right">
             <li class="navbar-item">
