@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--
+        This HTML template displays the User Add Note page.
+        This page allows the user to create a note and enter information about it.
+        Note information consists of the note title and note content.
+        The <textarea> element which houses the note content expands as the user types.
+    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Add note</title>
@@ -15,10 +21,8 @@
 <body class="gray-body">
 <!-- START: user navigation bar -->
 <nav class="navbar navbar-expand-md">
-    <!-- website logo -->
-    <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
-    <!-- website brand name -->
-    <a class="navbar-brand" href="/">SyncMore</a>
+    <!-- SyncMore clickable logo -->
+    <a class="navbar-brand" href="/"><img src="../../../static/Syncmore/SyncMore_Logo_Transparent_Cropped.png" id="navbar-logo" alt="SyncMore Logo"></a>
 
     <!-- START: toggle button for mobile navigation bar links -->
     <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
@@ -95,6 +99,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<!-- JS for updating the <textarea> element size as note content changes -->
 <script>
     function textAreaAdjust(element) {
         element.style.height = "1px";
