@@ -493,7 +493,6 @@ a.document-url:hover {
 }
 
 .active-document {
-    /* border-bottom: 1px solid var(--dark); */
     margin-top: 2px;
     margin-bottom: 2px;
     font-size: 0.8125rem;
