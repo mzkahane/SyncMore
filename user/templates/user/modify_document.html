@@ -21,10 +21,10 @@
 
 <!-- START: user navigation bar -->
 <nav class="navbar navbar-expand-md">
-    <!-- website logo -->
-    <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
-    <!-- website brand name -->
-    <a class="navbar-brand" href="/">SyncMore</a>
+
+    <!-- SyncMore clickable logo -->
+    <a class="navbar-brand" href="/"><img src="../../../static/Syncmore/SyncMore_Logo_Transparent_Cropped.png"
+                                          id="navbar-logo" alt="SyncMore Logo"></a>
 
     <!-- START: toggle button for mobile navigation bar links -->
     <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
@@ -86,20 +86,19 @@
                     <div class="form-group row">
                         <label for="new-title" class="optional">Document name</label>
                         <input type="text" value="{{ document.title }}" name="title" class="form-control"
-                               id="new-title">
+                               id="new-title" required>
                     </div>
                     <!-- Upload new document -->
                     <div class="form-group row">
                         <label for="new-document" class="optional">Upload new document (PNG, JPG/JPEG, PDF files
                             only)</label>
                         <input type="file" onChange='displayFile(event)' name="document" class="form-control"
-                               id="new-document" accept="image/png, image/jpeg, application/pdf"/>
+                               id="new-document" accept="image/png, image/jpeg, application/pdf" required/>
                     </div>
                     <!-- Document type selection -->
                     <div class="form-group row">
                         <label for="new-document-type" class="optional">Document type</label>
-                        <select name="type" class="form-control" id="new-document-type">
-                            <option value="Other">Unchanged</option>
+                        <select name="type" class="form-control" id="new-document-type" required>
                             <option value="Other">Other</option>
                             <option value="Birth Certificate">Birth Certificate</option>
                             <option value="Financial">Financial</option>
@@ -115,7 +114,7 @@
                         <label for="new-expiration-date" class="optional">Update the document's expiration date or skip
                             if not applicable.</label>
                         <input type="date" class="form-control" name="expiration-date" id="new-expiration-date"
-                               pattern="\d{4}-\d{2}-\d{2}"/>
+                               pattern="\d{4}-\d{2}-\d{2}" required/>
                         <span class="validity"></span>
                     </div>
                     <!-- View current document -->
@@ -198,6 +197,7 @@
             reader.onload = function (e) {
                 $('.fit-image').attr('src', e.target.result);
             };
+            // if the file is a PDF type
         } else if (pdfExt.includes(ext)) {
             const embed_element = document.createElement("embed");
             embed_element.classList.add("fit-pdf");
@@ -279,6 +279,7 @@
             reader.onload = function (e) {
                 $('.fit-image').attr('src', e.target.result);
             };
+            // if the file is a PDF type
         } else if (pdfType(file)) {
             const embed_element = document.createElement("embed");
             embed_element.classList.add("fit-pdf");
@@ -289,6 +290,7 @@
             reader.onload = function (e) {
                 $('.fit-pdf').attr('src', e.target.result);
             };
+            // if the file is not of a type which file preview supports
         } else {
             para.textContent = `File name ${file.name}: Not a valid file type. Update your selection.`;
             preview.append(para);
