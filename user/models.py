@@ -99,7 +99,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Phone(models.Model):
     phone_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='phone_user')
 
-    phone = models.IntegerField('phone', default=00000000000000000000, null=True)
+    phone = models.CharField('phone', default='1234567890', null=True, max_length=20)
 
     created_time = models.DateTimeField('created_time', auto_now_add=True, null=True)
 

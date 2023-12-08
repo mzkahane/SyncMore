@@ -22,6 +22,11 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 <body class="gray-body">
 
@@ -79,6 +84,13 @@
                 <form action="/user/modify_document/{{ document.id }}" class="form" method="post"
                       enctype="multipart/form-data">
                     {% csrf_token %}
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
                     <!-- Document name -->
                     <div class="form-group row">
                         <label for="new-title" class="optional">Document name</label>

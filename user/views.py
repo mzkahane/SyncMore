@@ -327,9 +327,16 @@ def add_document(request):
         type = request.POST.get('type', 'Other')
         date_str = request.POST.get('expiration-date', "")
         expiration_date = parse_date(date_str)
-        Document.objects.create(document_user_id=c_uid, title=title, document=document, type=type,
-                                expired_time=expiration_date)
-        return HttpResponseRedirect('/user/index')
+        # Allowed file types
+        allowed_extensions = ['.png', '.jpg', '.jpeg', '.pdf']
+        # Check if the file is of an allowed type
+        if any(document.name.lower().endswith(ext) for ext in allowed_extensions):
+            Document.objects.create(document_user_id=c_uid, title=title, document=document, type=type,
+                                    expired_time=expiration_date)
+            return HttpResponseRedirect('/user/index')
+        else:
+            messages.error(request, 'Invalid file type. Allowed types are: PNG, JPG, JPEG, PDF.')
+    return HttpResponseRedirect('/user/add_document')
 
 
 # This function handles the user functionality to delete a phone number
@@ -436,10 +443,18 @@ def modify_document(request, document_id):
     elif request.method == "POST":
         title = request.POST.get('title', "")
         delete_object_from_r2(document.document.name)
-        documentt = request.FILES.get('document', document.document)
+        new_document = request.FILES.get('document', document.document)
+
+        # Allowed file types
+        allowed_extensions = ['.png', '.jpg', '.jpeg', '.pdf']
+        if any(new_document.name.lower().endswith(ext) for ext in allowed_extensions):
+            document.document = new_document
+        else:
+            # Add error message for invalid file type
+            messages.error(request, 'Invalid file type. Allowed types are: PNG, JPG, JPEG, PDF.')
+            return HttpResponseRedirect('user/modify_document/' + document)
+
         document.title = title
-        document.document = documentt
-        # update the documents updated time to the current time
         document.updated_time = datetime.now()
         # update the document type, if one is provided
         type = request.POST.get('type', "")
