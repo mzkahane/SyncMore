@@ -1,20 +1,17 @@
-from django.conf import settings
-from django.contrib import messages
+from django.shortcuts import render
 from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.conf import settings
+from django.contrib import messages
 
 
-# handles requests to view the Home Page
+# index view
 def index_view(request):
     return render(request, 'index/index.html')
 
 
-# handles requests to view the Contact Us page and form submissions when users submit a form to email SyncMore.
-# It constructs a message from the information the user provides and sends an email to what is specified by the EMAIL_HOST_USER
 def contact_view(request):
     if request.method == 'POST':
-        # get information from the form submission
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         email = request.POST.get('email')

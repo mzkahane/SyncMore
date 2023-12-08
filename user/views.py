@@ -9,7 +9,6 @@ import requests
 from botocore.client import Config
 from botocore.exceptions import NoCredentialsError
 from django.conf import settings
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -24,13 +23,14 @@ from SyncMore import settings
 
 from .forms import DocumentForm
 from .models import Document, Email, Note, Phone, Supervisor, User
+from django.contrib import messages
 
 sys.path.append('..')
 
 TIME_ZONE = 'America/Los_Angeles'
 
 
-# Handles User Login page functionality
+# This function is used to login
 def login_view(request):
     # Display the page if getting a GET request
     if request.method == 'GET':
@@ -54,9 +54,9 @@ def login_view(request):
             user = User.objects.get(Username=username)
         except Exception as e:
             print('--login user error %s' % (e))
-            note = 'Username or password is incorrect.'
+            note = 'username or password incorrect'
             dis = 'block'
-            messages.error(request, 'Username or password is incorrect.')
+            messages.error(request, 'Username or password incorrect')
 
             return render(request, 'user/login.html', locals())
 
@@ -66,9 +66,9 @@ def login_view(request):
 
         # If the password doesn't match
         if m.hexdigest() != user.password:
-            note = 'Username or password is incorrect.'
+            note = 'username or password incorrect'
             dis = 'block'
-            messages.error(request, 'Username or password is incorrect.')
+            messages.error(request, 'Username or password incorrect')
             return render(request, 'user/login.html', locals())
 
         request.session['username'] = username
@@ -96,13 +96,13 @@ def reg_view(request):
         password_2 = request.POST['password_2']
         second_password = request.POST['second_password']
 
-        # Password length restriction
+        # Password restriction
         if len(password_1) < 6:
             note = 'the length of password is too short, at least 6 letters'
             dis = 'block'
             messages.error(request, 'The length of password is too short, at least 6 letters')
             return render(request, 'user/register.html', locals())
-        # check if given password meets the requirements
+
         if not re.search("^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$", password_1):
             note = 'Failed, the password should include at least one digit, one uppercase and one lower case'
             dis = 'block'
@@ -110,7 +110,7 @@ def reg_view(request):
                            'Failed, the password should include at least one digit, one uppercase and one lower case')
             return render(request, 'user/register.html', locals())
 
-        # If the entered password and retyped password don't match
+        # If the two password don't match
         if password_1 != password_2:
             note = 'the two passwords are not match'
             dis = 'block'
@@ -128,8 +128,7 @@ def reg_view(request):
             dis = 'block'
             messages.error(request, 'Username has been signed up')
             return render(request, 'user/register.html', locals())
-        
-        # attempt to create a new user--check if username is unique
+
         try:
             user = User.objects.create(Username=username, password=password_m, second_password=second_password)
         except Exception as e:
@@ -185,7 +184,7 @@ def index_view(request):
     c_uid = request.COOKIES.get('uid')
     if c_uid is None:
         c_uid = request.session['uid']
-    # get the user by their UID, and all objects which belong to the user by their UID
+
     user = User.objects.get(id=c_uid)
     phones = Phone.objects.filter(phone_user_id=c_uid)
     emails = Email.objects.filter(email_user_id=c_uid)
@@ -228,13 +227,10 @@ def index_view(request):
     return render(request, 'user/index.html', context)
 
 
-# Function which handles the updating user info functionality from the User Home Page
-# when user is editing First Name, Last Name, and Description of current living area
 def add_user_info(request):
     c_uid = request.COOKIES.get('uid')
     if c_uid is None:
         c_uid = request.session['uid']
-    # get the user by their UID and their respective information
     user = User.objects.get(id=c_uid)
     first_name = user.First_Name
     last_name = user.Last_Name
@@ -260,7 +256,7 @@ def add_user_info(request):
     return HttpResponseRedirect('/user/index')
 
 
-# This function handles the user functionality to a new phone number
+# This function is used to add the phone
 def add_phone(request):
     # Get the session
     c_uid = request.COOKIES.get('uid')
@@ -276,7 +272,7 @@ def add_phone(request):
         return HttpResponseRedirect('/user/index')
 
 
-# This function handles the user functionality to add a new email
+# This function is used to add the email
 def add_email(request):
     # Get the session
     c_uid = request.COOKIES.get('uid')
@@ -292,7 +288,7 @@ def add_email(request):
         return HttpResponseRedirect('/user/index')
 
 
-# This function handles the user functionality to add a new note
+# This function is used to add the note
 def add_note(request):
     # Get the session
     c_uid = request.COOKIES.get('uid')
@@ -309,7 +305,7 @@ def add_note(request):
         return HttpResponseRedirect('/user/index')
 
 
-# This function handles the user functionality to add a new document
+# This function is used to add the document
 def add_document(request):
     # Get the session
     c_uid = request.COOKIES.get('uid')
@@ -339,7 +335,7 @@ def add_document(request):
     return HttpResponseRedirect('/user/add_document')
 
 
-# This function handles the user functionality to delete a phone number
+# This function is used to delete the phone
 def delete_phone(request, phone_id):
     # Make changes to the database if getting a POST request
     if request.method == "POST":
@@ -348,7 +344,7 @@ def delete_phone(request, phone_id):
     return HttpResponseRedirect('/user/index')
 
 
-# This function handles the user functionality to modify a phone number
+# This function is used to modify the phone
 def modify_phone(request, phone_id):
     phone = Phone.objects.get(id=phone_id)
     # Display the page if getting a GET request
@@ -362,7 +358,7 @@ def modify_phone(request, phone_id):
         return HttpResponseRedirect('/user/index')
 
 
-# This function handles the user functionality to delete an email
+# This function is used to delete the email
 def delete_email(request, email_id):
     # Make changes to the database if getting a POST request
     if request.method == "POST":
@@ -371,7 +367,7 @@ def delete_email(request, email_id):
     return HttpResponseRedirect('/user/index')
 
 
-# This function handles the user functionality to modify an email
+# This function is used to modify the email
 def modify_email(request, email_id):
     email = Email.objects.get(id=email_id)
     # Display the page if getting a GET request
@@ -385,7 +381,7 @@ def modify_email(request, email_id):
         return HttpResponseRedirect('/user/index')
 
 
-# This function handles the user functionality to delete a note
+# This function is used to delete the note
 def delete_note(request, note_id):
     # Make changes to the database if getting a POST request
     if request.method == "POST":
@@ -394,7 +390,7 @@ def delete_note(request, note_id):
     return HttpResponseRedirect('/user/index')
 
 
-# This function handles the user functionality to modify a note
+# This function is used to modify the note
 def modify_note(request, note_id):
     note = Note.objects.get(id=note_id)
     # Display the page if getting a GET request
@@ -406,7 +402,6 @@ def modify_note(request, note_id):
         content = request.POST.get('content', "")
         note.title = title
         note.content = content
-        # update the notes updated time to the current time
         note.updated_time = datetime.now()
         note.save()
         return HttpResponseRedirect('/user/index')
@@ -422,7 +417,7 @@ def delete_object_from_r2(object_name):
     client.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=object_name)
 
 
-# This function handles the user functionality to delete a document
+# This function is used to delete the document
 def delete_document(request, document_id):
     # Make changes to the database if getting a POST request
     if request.method == "POST":
@@ -433,7 +428,7 @@ def delete_document(request, document_id):
     return HttpResponseRedirect('/user/index')
 
 
-# This function handles the user functionality to modify a document
+# This function is used to modify the document
 def modify_document(request, document_id):
     document = Document.objects.get(id=document_id)
     # Display the page if getting a GET request
@@ -456,16 +451,16 @@ def modify_document(request, document_id):
 
         document.title = title
         document.updated_time = datetime.now()
-        # update the document type, if one is provided
+
         type = request.POST.get('type', "")
         if type != 'Unchanged':
             document.type = type
-        # update the document expiration date, if one is provided
+
         date_str = request.POST.get('expiration-date', "")
         if date_str != None:
             expiration_date = parse_date(date_str)
             document.expired_time = expiration_date
-        # save document changes
+
         document.save()
         return HttpResponseRedirect('/user/index')
 
@@ -483,14 +478,15 @@ def account(request):
     return render(request, 'user/account.html', locals())
 
 
-# This function handles the user functionality to modify user account information
-# user account information involves: username, password, and 4-digit PIN
+# This function is used to modify the pin for the personal drive
 def account_settings(request):
     c_uid = request.COOKIES.get('uid')
     if c_uid is None:
         c_uid = request.session['uid']
-    # get the user by their UID and respective account information
     user = User.objects.get(id=c_uid)
+    # Save the new pin
+    second_password = request.POST.get('second_password', "")
+    user.second_password = second_password
     username = user.Username
     password = user.password
     current_pin = user.second_password
@@ -512,17 +508,16 @@ def account_settings(request):
 
     # if the password has been updated
     if new_password:
-        # check if the length of the password meets requirements
         if len(new_password) < 6:
             note = 'The length of the new password is too short. Password must be at least 6 characters.'
             dis = 'block'
             return render(request, 'user/account.html', locals())
-        # check if the password meets other requirements
+
         if not re.search("^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$", new_password):
             note = 'The new password does not meet the requirements. Password should include at least one digit, one uppercase letter, and one lowercase letter.'
             dis = 'block'
             return render(request, 'user/account.html', locals())
-        # check that the entered password and retyped password match
+
         if new_password != new_password_retype:
             note = 'The new password does not match the retyped new password.'
             dis = 'block'
