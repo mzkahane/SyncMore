@@ -74,7 +74,7 @@ class UserFunctionalityTestCase(TestCase):
 
     # This is a test function to test the add document functionality by POST request
     def test_add_document_post(self):
-        document_file = SimpleUploadedFile("test_file.txt", b"file_content", content_type="text/plain")
+        document_file = SimpleUploadedFile("test_file.pdf", b"file_content", content_type="text/plain")
         response = self.client.post('/user/add_document',
                                     {'title': 'Test Document', 'document': document_file, 'type': 'ID'})
         self.assertRedirects(response, '/user/index')
