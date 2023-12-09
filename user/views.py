@@ -129,6 +129,7 @@ def reg_view(request):
             messages.error(request, 'Username has been signed up')
             return render(request, 'user/register.html', locals())
 
+        # attempt to create a new user--check if username is unique
         try:
             user = User.objects.create(Username=username, password=password_m, second_password=second_password)
         except Exception as e:
@@ -546,3 +547,7 @@ def account_settings(request):
     # save changes to user
     user.save()
     return HttpResponseRedirect('/user/index')
+
+
+def redirect_to_home(request, exception):
+    return HttpResponseRedirect('/')

@@ -139,7 +139,7 @@ When you run SyncMore, you can expect the following features to be available:
 
    or
 
-   `$git clone https://github.com/mzkahane/SyncMore.git`
+   `$ git clone https://github.com/mzkahane/SyncMore.git`
 
 
 2. Navigate to the Project Directory:

@@ -84,20 +84,20 @@
                     {% endif %}
                     <!-- Document name -->
                     <div class="form-group row">
-                        <label for="new-title" class="optional">Document name</label>
+                        <label for="new-title" class="required">Document name</label>
                         <input type="text" value="{{ document.title }}" name="title" class="form-control"
                                id="new-title" required>
                     </div>
                     <!-- Upload new document -->
                     <div class="form-group row">
-                        <label for="new-document" class="optional">Upload new document (PNG, JPG/JPEG, PDF files
+                        <label for="new-document" class="required">Upload new document (PNG, JPG/JPEG, PDF files
                             only)</label>
                         <input type="file" onChange='displayFile(event)' name="document" class="form-control"
                                id="new-document" accept="image/png, image/jpeg, application/pdf" required/>
                     </div>
                     <!-- Document type selection -->
                     <div class="form-group row">
-                        <label for="new-document-type" class="optional">Document type</label>
+                        <label for="new-document-type" class="required">Document type</label>
                         <select name="type" class="form-control" id="new-document-type" required>
                             <option value="Other">Other</option>
                             <option value="Birth Certificate">Birth Certificate</option>
@@ -111,10 +111,10 @@
                     </div>
                     <!-- Document expiration date -->
                     <div class="form-group row">
-                        <label for="new-expiration-date" class="optional">Update the document's expiration date or skip
+                        <label for="new-expiration-date" class="required">Update the document's expiration date or skip
                             if not applicable.</label>
                         <input type="date" class="form-control" name="expiration-date" id="new-expiration-date"
-                               pattern="\d{4}-\d{2}-\d{2}" required/>
+                               pattern="\d{4}-\d{2}-\d{2}" required value="{{ document.expired_time|date:"Y-m-d" }}"/>
                         <span class="validity"></span>
                     </div>
                     <!-- View current document -->

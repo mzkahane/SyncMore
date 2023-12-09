@@ -16,14 +16,70 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        {% comment %} documents table styling {% endcomment %}
+        .table td, .table th {
+            padding: 0px !important;
+            vertical-align: middle !important;
+            border-top: 1px solid #dee2e6;
+            text-align: center;
+        }
+
+        .active-document {
+            margin-top: 2px;
+            margin-bottom: 2px;
+            border: none !important;
+            display: table-row;
+            font-size: 0.8125rem;
+            width: 100%;
+        }
+
+        #documentTableOptions {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        @media (min-width: 800px) {
+            #documentTableOption {
+                display: block;
+                gap: 0px;
+            }
+        }
+
+        .email-items, .phone-items {
+            font-size: 0.9125rem;
+        }
+
+        .user-info-row {
+            padding-top: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .living-area {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .add-email {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        .modify-phone-form, .modify-email-form {
+            gap: 10px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+    </style>
 </head>
 <body class="gray-body">
 <!-- START: navigation bar -->
 <nav class="navbar navbar-expand-md">
-    <!-- website logo -->
-    <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
-    <!-- website brand name -->
-    <a class="navbar-brand" href="/">SyncMore</a>
+    <!-- SyncMore clickable logo -->
+    <a class="navbar-brand" href="/"><img src="../../../static/Syncmore/SyncMore_Logo_Transparent_Cropped.png"
+                                          id="navbar-logo" alt="SyncMore Logo"></a>
 
     <!-- START: toggle button for mobile navigation bar links -->
     <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
@@ -143,13 +199,13 @@
                     <div class="row justify-content-lg-center">
 
                         <!-- BEGIN: Add Phone column -->
-                        <div class="add_info col-lg-6">
+                        <div class="add-phone col-lg-6">
                             <!-- Add phone number form -->
                             <form action="/user/add_phone" class="form needs-validation" method="post"
                                   enctype="multipart/form-data" novalidate>
                                 {% csrf_token %}
-                                <label for="add-phone">Phone</label>
-                                <div class="phone-items d-flex flex-wrap align-items-middle">
+                                <label for="add-phone" class="ms-5">Phone</label>
+                                <div class="phone-items d-flex align-items-middle mb-2">
                                     <!-- Add align-items-center to vertically align elements -->
                                     <div class="mx-2">
                                         <input type="tel" name="phone" class="form-control" id="add-phone"
@@ -189,29 +245,20 @@
                                             </form>
                                         </div>
                                         <!-- START: Form to modify phone number (display shown/hidden based on Modify phone button)-->
-                                        <div class="modify-info container-fluid align-items-middle">
-                                            <form action="/user/modify_phone/{{ phone.id }}" id="{{ phone.phone }}"
-                                                  class="modify-form needs-validation"
-                                                  method="post" enctype="multipart/form-data" style="display: none;"
-                                                  novalidate>
-                                                {% csrf_token %}
-                                                <div class="modify-info row d-flex flex-wrap align-items-middle">
-                                                    <div class="col form-group mx-2">
-                                                        <div class="col form-group">
-                                                            <input type="tel" value="{{ phone.phone }}" name="phone"
-                                                                   class="form-control" autocomplete="tel"
-                                                                   pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$"
-                                                                   required>
-                                                            <div class="div invalid-feedback">Input cannot be blank.
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col mx-2">
-                                                        <input type="submit" class="btn edit-btn" value="Update">
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
+                                        <form action="/user/modify_phone/{{ phone.id }}" id="{{ phone.phone }}"
+                                              class="modify-form needs-validation"
+                                              method="post" enctype="multipart/form-data" style="display: none;"
+                                              novalidate>
+                                            {% csrf_token %}
+                                            <div class="my-2 d-flex align-items-middle modify-phone-form">
+                                                <input type="tel" value="{{ phone.phone }}" name="phone"
+                                                       class="form-control" autocomplete="tel"
+                                                       pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$"
+                                                       required>
+                                                <div class="div invalid-feedback">Input cannot be blank.</div>
+                                                <input type="submit" class="btn edit-btn" value="Update">
+                                            </div>
+                                        </form>
                                         <!-- END: Form to modify phone number (display shown/hidden based on Modify email button)-->
                                     </div>
                                 {% endfor %}
@@ -221,20 +268,18 @@
                         <!-- END: Add Phone column-->
 
                         <!-- BEGIN: Add Email column -->
-                        <div class="add_info col-lg-6">
+                        <div class="add-email col-lg-6">
                             <!-- Add email form -->
                             <form action="/user/add_email" class="form needs-validation" method="post"
                                   enctype="multipart/form-data" novalidate>
                                 {% csrf_token %}
                                 <label for="add-email">Email</label>
-                                <div class="row align-items-center">
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-2">
-                                            <input type="email" name="email" class="form-control" id="add-email"
-                                                   autocomplete="email" required>
-                                            <div class="div invalid-feedback">
-                                                Please enter a valid email address.
-                                            </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="mx-2">
+                                        <input type="email" name="email" class="form-control" id="add-email"
+                                               autocomplete="email" required>
+                                        <div class="div invalid-feedback">
+                                            Please enter a valid email address.
                                         </div>
                                     </div>
                                     <div class="mx-2">
@@ -264,29 +309,20 @@
                                                 <input class="btn delete-btn" type="submit" value="Delete">
                                             </form>
                                         </div>
-                                        <!-- START: Form to modify email (display shown/hidden based on Modify email button)-->
-                                        <div class="container-fluid">
-                                            <form action="/user/modify_email/{{ email.id }}" id="{{ email.email }}"
-                                                  class="modify-form needs-validation"
-                                                  method="post" enctype="multipart/form-data" style="display: none;"
-                                                  novalidate>
-                                                {% csrf_token %}
-                                                <div class="row align-items-center">
-                                                    <div class="col form-group">
-                                                        <input type="email" value="{{ email.email }}" name="email"
-                                                               class="form-control" autocomplete="email" required>
-                                                        <div class="div invalid-feedback">
-                                                            Please enter a valid email address.
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <input type="submit" class="btn edit-btn" value="Update">
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <!-- END: Form to modify email (display shown/hidden based on Modify email button)-->
                                     </div>
+                                    <!-- START: Form to modify email (display shown/hidden based on Modify email button)-->
+                                    <form action="/user/modify_email/{{ email.id }}" id="{{ email.email }}"
+                                          class="modify-form needs-validation" method="post"
+                                          enctype="multipart/form-data" style="display: none;" novalidate>
+                                        {% csrf_token %}
+                                        <div class="my-2 d-flex align-items-middle modify-email-form">
+                                            <input type="email" value="{{ email.email }}" name="email"
+                                                   class="form-control" autocomplete="email" required>
+                                            <div class="div invalid-feedback">Please enter a valid email address.</div>
+                                            <input type="submit" class="btn edit-btn" value="Update">
+                                        </div>
+                                    </form>
+                                    <!-- END: Form to modify email (display shown/hidden based on Modify email button)-->
                                 {% endfor %}
                             </div>
                             <!-- END: Each email entry container-->
@@ -417,54 +453,46 @@
                         <!-- BEGIN: Document list container -->
                         <div class="container" id="documentList">
                             <!-- Document list header -->
-                            <div class="document-list-header row">
-                                <div class="col">
-                                    <span>Name</span>
-                                </div>
-                                <div class="col-lg-2">
-                                    <span>Expiration date</span>
-                                </div>
-                                <div class="col-lg-2">
-                                    <span>Last modified</span>
-                                </div>
-                                <div class="col-lg-2 center-text">
-                                    <span>Options</span>
-                                </div>
-                            </div>
-                            {% for document in documents %}
-                                <!-- BEGIN: Document entry per row -->
-                                <div class="document-item active-document row" data-id="{{ document.type }}">
-                                    <!-- Document title -->
-                                    <div class="document-detail col">
-                                        {% comment %} <span class="document-detail align-middle">{{ document.title }}</span> {% endcomment %}
-                                        <a target="_blank" rel="noopener" href="{{ document.document.url }}"
-                                           class="document-detail document-url align-middle">{{ document.title }}</a>
-                                    </div>
-                                    <!-- Document expiration date -->
-                                    <div class="document-detail col-lg-2">
-                                        <span class="document-detail align-middle expiration-date"
-                                              data-id="{{ document.expired_time }}">{{ document.expired_time|date:"M d, Y" }}</span>
-                                    </div>
-                                    <!-- Document last modified date -->
-                                    <div class="document-detail col-lg-2">
-                                        <span class="document-detail align-middle">{{ document.updated_time|date:"M d, Y" }}</span>
-                                    </div>
-                                    <!-- Modify and Delete document -->
-                                    <div class="document-detail d-flex col-lg-2.5">
-                                        <!-- Modify document -->
-                                        <a class="document-detail btn edit-btn mx-1"
-                                           href="/user/modify_document/{{ document.id }}">Modify</a>
-                                        <!-- Delete document -->
-                                        <form action="/user/delete_document/{{ document.id }}" method="post">
-                                            {% csrf_token %}
-                                            <input type="hidden" name="operation" value="delete">
-                                            <input class="document-detail btn delete-btn mx-1" type="submit"
-                                                   value="Delete">
-                                        </form>
-                                    </div>
-                                </div>
-                                <!-- END: Document entry per row -->
-                            {% endfor %}
+                            <table id="documentTable" class="table table-hover">
+                                <thead>
+                                <colgroup span="4"></colgroup>
+                                <tr id="#documentTableHeader">
+                                    <th class="document-table-header-item" scope="col">Name</th>
+                                    <th class="document-table-header-item" scope="col">Expires</th>
+                                    <th class="document-table-header-item" scope="col">Last modified</th>
+                                    <th class="document-table-header-item text-center" scope="col">Options</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for document in documents %}
+                                    <tr class="document-item active-document" data-id="{{ document.type }}">
+                                        <th scope="row">
+                                            <a target="_blank" rel="noopener" href="{{ document.document.url }}"
+                                               class="document-detail document-url align-middle">{{ document.title }}</a>
+                                        </th>
+                                        <td>
+                                            <span class="document-detail align-middle expiration-date"
+                                                  data-id="{{ document.expired_time }}">{{ document.expired_time|date:"M d, Y" }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="document-detail align-middle">{{ document.updated_time|date:"M d, Y" }}</span>
+                                        </td>
+                                        <td id="documentTableOptions">
+                                            <!-- Modify document -->
+                                            <a class="document-detail btn edit-btn my-1"
+                                               href="/user/modify_document/{{ document.id }}">Modify</a>
+                                            <!-- Delete document -->
+                                            <form action="/user/delete_document/{{ document.id }}" method="post">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="operation" value="delete">
+                                                <input class="document-detail btn delete-btn my-1" type="submit"
+                                                       value="Delete">
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
                         <!-- END: Document list container-->
                     </div>
@@ -525,7 +553,7 @@
             pinModal.close(pinInput.value);
         }
     }
-
+    // function to automatically update the user First and Last Name upon any input change
     $('#add-user-info input').on('change', function () {
         $(this).closest('form').submit();
     });
