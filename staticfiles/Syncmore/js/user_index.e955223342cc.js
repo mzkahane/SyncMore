@@ -4,6 +4,7 @@
 // select all 'button' elements with the class name="modify-form-btn"
 const buttons = document.querySelectorAll('button.modify-form-btn');
 
+// function for toggling the modify form of each phone and email on User Home Page (index.html)
 // loop through each button and add a click event listener
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -23,6 +24,7 @@ buttons.forEach((button) => {
 });
 
 
+// function for filtering documents by document type on User Personal Drive (index.html)
 function filterDocuments() {
   console.log("Filter function called");
   // var documentType = document.getElementById('documentTypeSelector').value;

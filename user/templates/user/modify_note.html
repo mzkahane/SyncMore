@@ -15,8 +15,10 @@
 <body class="gray-body">
 <!-- START: user navigation bar -->
 <nav class="navbar navbar-expand-md">
-    <!-- SyncMore clickable logo -->
-    <a class="navbar-brand" href="/"><img src="../../../static/Syncmore/SyncMore_Logo_Transparent_Cropped.png" id="navbar-logo" alt="SyncMore Logo"></a>
+    <!-- website logo -->
+    <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
+    <!-- website brand name -->
+    <a class="navbar-brand" href="/">SyncMore</a>
 
     <!-- START: toggle button for mobile navigation bar links -->
     <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
@@ -93,12 +95,11 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!-- JS for updating the <textarea> element size as note content changes -->
+
 <script>
-    // start the <textarea> element size based on the initial content size
     const content = document.getElementById("new-note-content");
     content.style.height = (25 + content.scrollHeight) + "px";
-    // update the <textarea> element size as content size changes
+
     function textAreaAdjust(element) {
         element.style.height = "1px";
         element.style.height = (25 + element.scrollHeight) + "px";

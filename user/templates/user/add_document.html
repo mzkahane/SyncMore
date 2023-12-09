@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!--
-        This HTML template displays the User Add Document page
-        This page allows the user to upload a document and enter information about it
-        as well as preview the file that is uploaded.
-        Document information that is required are: title, file, document type
-        Document information that is optional is: expiration date
-        All types of files uploads are supported, but file preview only supports PNG, JPEG/JPG, and PDF files.
-        PDF file view is not supported on mobile screens.
-    -->
     <meta charset="UTF-8">
     <title>Add document</title>
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -29,8 +20,10 @@
 <body class="gray-body">
 <!-- START: navigation bar -->
 <nav class="navbar navbar-expand-md">
-    <!-- SyncMore clickable logo -->
-    <a class="navbar-brand" href="/"><img src="../../../static/Syncmore/SyncMore_Logo_Transparent_Cropped.png" id="navbar-logo" alt="SyncMore Logo"></a>
+    <!-- website logo -->
+    <img src="../../../static/Syncmore/HomeMore_Logo_Blue_Cropped.jpg" id="navbar-logo" alt="HomeMore Logo">
+    <!-- website brand name -->
+    <a class="navbar-brand" href="/">SyncMore</a>
 
     <!-- START: toggle button for mobile navigation bar links -->
     <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
@@ -204,35 +197,31 @@
 
         const file = event.target.files[0];
         const para = document.createElement("p");
-        // if the file is an image type (PNG, JPG/JPEG)
         if (imageType(file)) {
-            // create an image preview
             const image = document.createElement("img");
             image.classList.add("fit-image");
             image.src = URL.createObjectURL(file);
             preview.appendChild(image);
-            // render the image preview
+
             var reader = new FileReader();
             reader.onload = function (e) {
                 $('.fit-image').attr('src', e.target.result);
             };
-        // if the file is a PDF type
         } else if (pdfType(file)) {
-            // create PDF preview
             const embed_element = document.createElement("embed");
             embed_element.classList.add("fit-pdf");
             embed_element.src = URL.createObjectURL(file);
             preview.appendChild(embed_element);
-            // render the PDF preview
+
             var reader = new FileReader();
             reader.onload = function (e) {
                 $('.fit-pdf').attr('src', e.target.result);
             };
-        // if the file type is something else that preview cannot support
         } else {
             para.textContent = `File name ${file.name}: Not a valid file type. Update your selection.`;
             preview.append(para);
         }
+
     }
 </script>
 </body>

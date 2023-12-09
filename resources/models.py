@@ -1,7 +1,7 @@
 from django.db import models
 
 
-# Model for Resource object
+# Create your models here.
 class Resource(models.Model):
     category = models.CharField('category', max_length=128, null=True)
     name = models.CharField('name', max_length=128)
