@@ -124,7 +124,7 @@
                         <label for="new-expiration-date" class="optional">Update the document's expiration date or skip
                             if not applicable.</label>
                         <input type="date" class="form-control" name="expiration-date" id="new-expiration-date"
-                               pattern="\d{4}-\d{2}-\d{2}"/>
+                               pattern="\d{4}-\d{2}-\d{2}" value="{{ document.expired_time|date:"Y-m-d" }}"/>
                         <span class="validity"></span>
                     </div>
                     <!-- View current document -->
@@ -312,6 +312,13 @@
             preview.append(para);
         }
     }
+</script>
+
+<script>
+    const dateControl = document.querySelector('input[type="date"]');
+    
+    console.log(dateControl.value); // prints "2017-06-01"
+    console.log(dateControl.valueAsNumber);
 </script>
 
 </body>

@@ -66,10 +66,20 @@
         font-size: 0.9125rem;
     }
     .user-info-row {
+        padding-top: 5px;
         padding-left: 10px;
         padding-right: 10px;
     }
     .living-area {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .add-email {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .modify-phone-form, .modify-email-form {
+        gap: 10px;
         padding-left: 20px;
         padding-right: 20px;
     }
@@ -171,7 +181,7 @@
                                 </div>
                             </div>
                             <!-- Last name -->
-                            <div class="user-info-row add_info col-lg-6">
+                            <div class="add_info col-lg-6">
                                 <label for="new-last-name" class="form-label optional">Last Name</label>
                                 <input type="text" name="new_last_name" id="new-last-name" class="form-control"
                                        maxlength="30" value={{ user.Last_Name|default_if_none:"&nbsp;" }}>
@@ -200,12 +210,12 @@
                     <div class="user-info-row row justify-content-lg-center">
 
                         <!-- BEGIN: Add Phone column -->
-                        <div class="add_info col-lg-6">
+                        <div class="add-phone col-lg-6">
                             <!-- Add phone number form -->
                             <form action="/user/add_phone" class="form needs-validation" method="post"
                                   enctype="multipart/form-data" novalidate>
                                 {% csrf_token %}
-                                <label for="add-phone">Phone</label>
+                                <label for="add-phone" class="ms-5">Phone</label>
                                 <div class="phone-items d-flex align-items-middle mb-2">
                                     <!-- Add align-items-center to vertically align elements -->
                                     <div class="mx-2">
@@ -226,7 +236,7 @@
                             <!-- BEGIN: Each phone entry container -->
                             <div class="phone-entry container">
                                 {% for phone in phones %}
-                                    <div class="phone-items d-flex align-items-middle">
+                                    <div class="phone-items d-flex flex-wrap align-items-middle">
                                         <!-- Display phone number -->
                                         <div class="mx-2 align-middle">
                                             <span>{{ phone.phone }}</span>
@@ -246,29 +256,20 @@
                                             </form>
                                         </div>
                                         <!-- START: Form to modify phone number (display shown/hidden based on Modify phone button)-->
-                                        <div class="modify-info container-fluid align-items-center">
-                                            <form action="/user/modify_phone/{{ phone.id }}" id="{{ phone.phone }}"
-                                                  class="modify-form needs-validation"
-                                                  method="post" enctype="multipart/form-data" style="display: none;"
-                                                  novalidate>
-                                                {% csrf_token %}
-                                                <div class="modify-info row d-flex flex-wrap align-items-middle">
-                                                    <div class="col form-group mx-2">
-                                                        <div class="col form-group">
-                                                            <input type="tel" value="{{ phone.phone }}" name="phone"
-                                                                   class="form-control" autocomplete="tel"
-                                                                   pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$"
-                                                                   required>
-                                                            <div class="div invalid-feedback">Input cannot be blank.
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col mx-2">
-                                                        <input type="submit" class="btn edit-btn" value="Update">
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
+                                        <form action="/user/modify_phone/{{ phone.id }}" id="{{ phone.phone }}"
+                                                    class="modify-form needs-validation"
+                                                    method="post" enctype="multipart/form-data" style="display: none;"
+                                                    novalidate>
+                                            {% csrf_token %}
+                                            <div class="my-2 d-flex align-items-middle modify-phone-form">
+                                                <input type="tel" value="{{ phone.phone }}" name="phone"
+                                                        class="form-control" autocomplete="tel"
+                                                        pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$"
+                                                        required>
+                                                <div class="div invalid-feedback">Input cannot be blank.</div>
+                                                <input type="submit" class="btn edit-btn" value="Update">
+                                            </div>
+                                        </form>
                                         <!-- END: Form to modify phone number (display shown/hidden based on Modify email button)-->
                                     </div>
                                 {% endfor %}
@@ -278,7 +279,7 @@
                         <!-- END: Add Phone column-->
 
                         <!-- BEGIN: Add Email column -->
-                        <div class="add_info col-lg-6">
+                        <div class="add-email col-lg-6">
                             <!-- Add email form -->
                             <form action="/user/add_email" class="form needs-validation" method="post"
                                   enctype="multipart/form-data" novalidate>
@@ -319,29 +320,19 @@
                                                 <input class="btn delete-btn" type="submit" value="Delete">
                                             </form>
                                         </div>
-                                        <!-- START: Form to modify email (display shown/hidden based on Modify email button)-->
-                                        <div class="container-fluid">
-                                            <form action="/user/modify_email/{{ email.id }}" id="{{ email.email }}"
-                                                  class="modify-form needs-validation"
-                                                  method="post" enctype="multipart/form-data" style="display: none;"
-                                                  novalidate>
-                                                {% csrf_token %}
-                                                <div class="row align-items-center">
-                                                    <div class="col form-group">
-                                                        <input type="email" value="{{ email.email }}" name="email"
-                                                               class="form-control" autocomplete="email" required>
-                                                        <div class="div invalid-feedback">
-                                                            Please enter a valid email address.
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <input type="submit" class="btn edit-btn" value="Update">
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <!-- END: Form to modify email (display shown/hidden based on Modify email button)-->
                                     </div>
+                                    <!-- START: Form to modify email (display shown/hidden based on Modify email button)-->
+                                    <form action="/user/modify_email/{{ email.id }}" id="{{ email.email }}"
+                                        class="modify-form needs-validation" method="post" enctype="multipart/form-data" style="display: none;" novalidate>
+                                        {% csrf_token %}
+                                        <div class="my-2 d-flex align-items-middle modify-email-form">
+                                            <input type="email" value="{{ email.email }}" name="email"
+                                                    class="form-control" autocomplete="email" required>
+                                            <div class="div invalid-feedback">Please enter a valid email address.</div>
+                                            <input type="submit" class="btn edit-btn" value="Update">
+                                        </div>
+                                    </form>
+                                        <!-- END: Form to modify email (display shown/hidden based on Modify email button)-->
                                 {% endfor %}
                             </div>
                             <!-- END: Each email entry container-->
@@ -472,22 +463,6 @@
                         <!-- BEGIN: Document list container -->
                         <div id="documentList">
                             <!-- Document list header -->
-                            {% comment %} <div class="document-list-header row">
-                                <div class="col">
-                                    <span>Name</span>
-                                </div>
-                                <div class="col">
-                                    <span>Expiration date</span>
-                                </div>
-                                <div class="col">
-                                    <span>Last modified</span>
-                                </div>
-                                <div class="col">
-                                    <span>Options</span>
-                                </div>
-                            </div> {% endcomment %}
-                            
-                            {% comment %} <div class="document-item active-document row" data-id="{{ document.type }}"> {% endcomment %}
                             <table id="documentTable" class="table table-hover">
                                 <thead>
                                     <colgroup span="4"></colgroup>
@@ -528,41 +503,6 @@
                                 {% endfor %}
                                 </tbody>
                             </table>
-                            {% comment %} {% for document in documents %} {% endcomment %}
-                            
-                                <!-- BEGIN: Document entry per row -->
-                                
-                                    
-                                    <!-- Document title -->
-                                    {% comment %} <div class="document-detail col">
-                                        <a target="_blank" rel="noopener" href="{{ document.document.url }}"
-                                           class="document-detail document-url align-middle">{{ document.title }}</a>
-                                    </div>
-                                    <!-- Document expiration date -->
-                                    <div class="document-detail col-lg-2">
-                                        <span class="document-detail align-middle expiration-date"
-                                              data-id="{{ document.expired_time }}">{{ document.expired_time|date:"M d, Y" }}</span>
-                                    </div>
-                                    <!-- Document last modified date -->
-                                    <div class="document-detail col-lg-2">
-                                        <span class="document-detail align-middle">{{ document.updated_time|date:"M d, Y" }}</span>
-                                    </div>
-                                    <!-- Modify and Delete document -->
-                                    <div class="document-detail d-flex col-lg-2.5">
-                                        <!-- Modify document -->
-                                        <a class="document-detail btn edit-btn mx-1"
-                                           href="/user/modify_document/{{ document.id }}">Modify</a>
-                                        <!-- Delete document -->
-                                        <form action="/user/delete_document/{{ document.id }}" method="post">
-                                            {% csrf_token %}
-                                            <input type="hidden" name="operation" value="delete">
-                                            <input class="document-detail btn delete-btn mx-1" type="submit"
-                                                   value="Delete">
-                                        </form>
-                                    </div>
-                                </div>
-                                <!-- END: Document entry per row -->
-                            {% endfor %} {% endcomment %}
                         </div>
                         <!-- END: Document list container-->
                     </div>
