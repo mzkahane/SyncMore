@@ -23,6 +23,8 @@ from django.conf.urls.static import static
 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import staticfiles
+from user.views import redirect_to_home
+from django.conf.urls import handler404
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -34,3 +36,4 @@ urlpatterns = [
 
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+handler404 = 'user.views.redirect_to_home'
