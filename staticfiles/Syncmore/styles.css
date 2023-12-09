@@ -452,7 +452,7 @@ p.note-content {
     /* max-width: 400px; */
     /* height: 240px; */
     margin: 0 auto;
-    display: block;
+    /*display: block;*/
     overflow-x: auto;
     border-spacing: 0;
     letter-spacing: 1px;
