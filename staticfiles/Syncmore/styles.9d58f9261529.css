@@ -1,0 +1,686 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
+/* color variables */
+:root {
+    --webpage-white: #F1F0E8;
+    --dark: #292929;
+    --neutral: #F7F7F7;
+    --carbon: #A9A9A9;
+    --light-gray: #E9EAF2;
+    --oxford-blue: #0C2137;
+    --oxford-blue-light: rgba(3, 42, 86, 0.714);
+    --oxford-blue-dark: #112035;
+    --timberwolf: #D2D3D3;
+    --turquoise: #0DCBAB;
+    --turquoise-hover: #16bea2;
+    --slate-blue: #6A5ACD;
+    --slate-blue-hover: #5348a5;
+    --slate-gray: #7C8C94;
+    --slate-gray-hover: #59646a;
+
+    --font-family-primary: -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    system-ui,
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji";
+    --font-family-monospace: ui-monospace,
+    Menlo,
+    Monaco,
+    "Cascadia Mono",
+    "Segoe UI Mono",
+    "Roboto Mono",
+    "Oxygen Mono",
+    "Ubuntu Monospace",
+    "Source Code Pro",
+    "Fira Mono",
+    "Droid Sans Mono",
+    "Courier New",
+    monospace,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji";
+}
+
+.form-text {
+    margin-top: 0.25rem;
+    font-size: .875em;
+    color: #6c757d;
+}
+
+body {
+    /* font-family: var(--font-family-monospace); */
+    margin: 0;
+    padding: 0;
+    /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+    background-color: var(--neutral);
+    font-size: 0.875rem;
+    font-family: var(--font-family-primary);
+    color: var(--body-fg);
+}
+
+/* navigation bar element */
+.navbar {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    background-color: var(--oxford-blue);
+}
+
+/* navigation bar image logo */
+#navbar-logo {
+    width: 80px;
+    height: auto;
+    margin-right: 10px;
+}
+
+/* navigation bar links */
+.navbar-brand, .nav-link {
+    /* font: 17px calibri, sans-serif; */
+    color: var(--webpage-white);
+    margin: 0 5px;
+}
+
+/* navigation bar links on hover */
+nav a:hover, .nav-link:hover {
+    color: var(--turquoise) !important;
+}
+
+/* jumbo header */
+.jumbo-header {
+    background: var(--timberwolf);
+    padding: 5em 15em;
+    text-align: center;
+}
+
+.jumbo-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.content {
+    padding: 2em;
+}
+
+/* register page create user account form  */
+#register {
+    background-color: white;
+    /* border-radius: 25px; */
+    opacity: 0.9;
+    padding-top: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-left: 100px;
+
+    width: 500px;
+    height: 500px;
+}
+
+/* footer at the bottom of the webpage */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+    margin-top: 2em;
+}
+
+/* user home page and personal drive page */
+.user_page {
+    background-color: var(--slate-gray-hover);
+    color: white;
+    font-size: 3vh;
+    font-family: inria sans, sans-serif;
+}
+
+/* adding user information containers (email and phone numebr) */
+.add_info {
+    min-height: 100%;
+    font-size: 2.5vh;
+    box-sizing: border-box;
+    min-height: 10vh;
+    padding: 25px;
+}
+
+div.phone-entry, div.email-entry {
+    padding: 0px;
+}
+
+div.phone-items, div.email-items {
+    align-items: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+div.modify-info {
+    padding: 10px;
+}
+
+/* HomeMore Team Contact information row container */
+.homemore_contact {
+    min-height: 10vh;
+    margin: 25px;
+}
+
+/* user images box */
+.image_box {
+    width: 200px;
+    height: 200px;
+    border: 3px solid var(--slate-gray-hover);
+    background-color: white;
+}
+
+/* user images uploaded to user personal drive */
+img.user_image {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+/* default button */
+.btn {
+    background-color: var(--turquoise);
+    color: white;
+    /* padding: top right bottom left */
+    padding: 3px 6px 3px 6px !important;
+    border-radius: 8%;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+/* turquoise add user information button */
+.add-btn {
+    background-color: var(--turquoise);
+}
+
+.add-btn:hover {
+    background-color: var(--turquoise-hover);
+    color: white;
+    text-decoration: none;
+}
+
+/* gray modify user information button */
+.edit-btn {
+    background-color: var(--slate-gray);
+}
+
+.edit-btn:hover {
+    background-color: var(--slate-gray-hover);
+    color: white;
+    text-decoration: none;
+}
+
+/* purple delete user information button */
+.delete-btn {
+    background-color: var(--slate-blue);
+}
+
+.delete-btn:hover {
+    background-color: var(--slate-blue-hover);
+    color: white;
+    text-decoration: none;
+}
+
+/* PIN MODAL DIALOG */
+
+/*   Open state of the PIN modal dialog  */
+#pinModal[open] {
+    opacity: 1;
+    transform: scaleY(1);
+    overflow: hidden;
+    margin: 250px auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+#pinModalContent {
+    display: flex;
+    align-items: center;
+    float: left;
+    width: 100%;
+    background-color: white;
+    padding: 10px;
+}
+
+/*   Closed state of the PIN modal dialog   */
+#pinModal {
+    opacity: 0;
+    transform: scaleY(0);
+}
+
+/* close button on PIN modal dialog */
+#closeModal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#closeModal:hover,
+#closeModal:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* USER MAIN CONTENT */
+
+.gray-body {
+    background-color: var(--light-gray);
+}
+
+#user-main {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#user-main-container {
+    border-radius: 4px;
+    overflow: hidden;
+    width: 50em;
+    min-width: 300px;
+    margin-top: 25px;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+#user-main-header {
+    padding: 15px 16px;
+    display: flex;
+    justify-content: center;
+    border-radius: 4px 4px 0px 0px;
+    background-color: var(--dark);
+    color: var(--webpage-white);
+}
+
+#user-main-header h5 {
+    font-weight: normal;
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+#user-main-content {
+    float: left;
+    width: 100%;
+    background-color: white;
+}
+
+#homeContent label,
+#homeContent input,
+#homeContent p {
+    font-size: 0.9rem;
+}
+
+.toggler-container {
+    width: 100%;
+    display: block;
+}
+
+.content-toggler {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 70px;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    background-color: var(--turquoise);
+    color: white;
+    display: flex;
+    justify-content: center;
+    z-index: 20;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 23px;
+    border: 0;
+    cursor: pointer;
+    font-size: 1.25rem;
+}
+
+#noteListToggler {
+    background-color: var(--oxford-blue-light);
+}
+
+#noteListToggler:hover {
+    background-color: var(--oxford-blue);
+    outline: none;
+}
+
+#documentListToggler {
+    background-color: var(--oxford-blue-light)
+}
+
+#documentListToggler:hover {
+    background-color: var(--oxford-blue);
+    outline: none;
+}
+
+#documentListContainer, #noteListContainer {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.list-header {
+    border-radius: 4px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: var(--light-gray);
+    width: 40em;
+    min-width: 300px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* NOTE LIST CONTENT */
+
+.note-entry {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 40em;
+    min-width: 300px;
+}
+
+.note-header {
+    padding: 3px;
+    border-radius: 5px 5px 0px 0px;
+    background-color: var(--oxford-blue-light);
+    display: grid;
+    border: 1px solid var(--dark);
+}
+
+.note-header-item span,
+.note-header-item .btn {
+    color: white;
+    font-size: 0.8125rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+div.note-content {
+    border-radius: 0px 0px 5px 5px;
+    background-color: white;
+    border-left: 1px solid var(--dark);
+    border-right: 1px solid var(--dark);
+    border-bottom: 1px solid var(--dark);
+}
+
+p.note-content {
+    white-space: pre-wrap;
+    padding: 10px;
+    font-size: 0.8125rem;
+}
+
+/* DOCUMENT LIST CONTENT */
+
+#documentList {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 40em;
+    min-width: 300px;
+}
+
+#documentTable {
+    width: 100%;
+    /* max-width: 400px; */
+    /* height: 240px; */
+    margin: 0 auto;
+    display: block;
+    overflow-x: auto;
+    border-spacing: 0;
+    letter-spacing: 1px;
+    font-family: sans-serif;
+    font-size: 0.8rem;
+}
+
+.document-table-header-item {
+    border: 1px solid rgb(190, 190, 190);
+    padding: 10px;
+    text-align: left;
+}
+td {
+    padding-top: 10px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 40px;
+}
+
+.table td, .table th {
+    padding: 0px !important;
+    vertical-align: middle !important;
+    border-top: 1px solid #dee2e6;
+}
+
+.document-list-header {
+    /* border-bottom: 2px solid var(--dark) !important; */
+    font-size: 0.9rem;
+}
+
+.hidden,
+.hidden > .document-detail,
+.hidden > * {
+    display: none !important;
+}
+
+a.document-url {
+    color: var(--turquoise);
+}
+
+a.document-url:hover {
+    color: var(--turquoise-hover);
+    text-decoration: none;
+}
+
+.active-document {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-size: 0.8125rem;
+    width: 100%;
+}
+
+.expired {
+    color: red;
+}
+
+/* USER FORM CONTENT */
+
+.user-form {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#user-form-container {
+    border-radius: 4px;
+    overflow: hidden;
+    width: 28em;
+    min-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    height: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+#user-form-header {
+    padding: 15px 16px;
+    display: flex;
+    justify-content: center;
+    border-radius: 4px 4px 0px 0px;
+    background-color: var(--oxford-blue);
+    color: var(--webpage-white);
+}
+
+#user-form-header h5 {
+    font-weight: normal;
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+.user-form-register {
+    background-color: var(--turquoise) !important;
+}
+
+.user-form-login {
+    background-color: var(--slate-blue) !important;
+}
+
+#user-form-content {
+    display: flex;
+    align-items: center;
+    float: left;
+    width: 100%;
+    background-color: white;
+    padding: 10px;
+}
+
+
+/* DOCUMENT PREVIEW */
+
+.preview {
+    display: flex;
+    justify-content: center;
+}
+
+.fit-image {
+    border: 1px solid var(--dark);
+    background: white;
+    max-width: 100%;
+}
+
+.fit-pdf {
+    width: 100%;
+    height: 400px;
+}
+
+.line-above {
+    border-top: 1px dashed var(--dark);
+    padding-top: 15px;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #000;
+}
+
+.separator:not(:empty)::before {
+    margin-right: .25em;
+    margin-left: 0px;
+}
+
+.separator:not(:empty)::after {
+    margin-left: .25em;
+    margin-right: 0px;
+}
+
+/* FORM SUBMISSION ERROR DIV */
+.form-submission-error-div {
+    display: none;
+}
+
+/* FORM SUBMISSION ERROR */
+.form-submission-error {
+    color: red;
+}
+
+/* OPTIONAL */
+.optional:after {
+    content: " (Optional)";
+    color: var(--turquoise);
+    font-size: 0.8125rem;
+}
+
+/* REQUIRED */
+.required:after {
+    content: " (Required)";
+    color: red;
+    font-size: 0.8125rem;
+}
+
+/* MOBILE SCREEN ADJUSTMENTS */
+
+@media (max-width: 767px) {
+    #user-main {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    #user-main-navigation {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    #user-main-header {
+        border-radius: 0px;
+    }
+
+    #user-main-container {
+        border-radius: 0px;
+        width: auto;
+        max-width: 480px;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 5px;
+        margin-bottom: 0px;
+    }
+
+    .note-entry {
+        width: auto;
+    }
+
+    /* .user-form {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    #user-form-navigation {
+        padding-left: 15px;
+        padding-right: 15px;
+    } */
+    #user-form-container {
+        width: auto;
+        max-width: 480px;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 5px;
+    }
+}
+
