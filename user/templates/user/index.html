@@ -1,25 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!--
-        This HTML template displays the User Home Page and Personal Drive page.
-        User Home Page includes user add, edit, and delete personal information functionalities:
-            First Name
-            Last Name
-            Description of current living area
-            Phone number
-            Email
-        User Home page also shows the user's respective HomeMore Team Contact member.
-        User Personal Drive includes user file functionalities:
-            Add/edit/delete Notes
-            Add/edit/delete Documents
-            View note expiration expiration dates
-            Filter files by file type
-        The User Personal Drive is not viewable without entering the correct 4-digit PIN.
-        After the 4-digit PIN has been entered, the user can freely switch back and forth between Home Page
-        and Personal Drive page without having to reenter the 4-digit PIN for a certain time frame.
-        This HTML template also links to the Account Settings page and Logout function in the navigation bar.
-    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>User Home Page</title>
@@ -35,62 +16,70 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<style>
-    {% comment %} documents table styling {% endcomment %}
-    .table td, .table th {
-        padding: 0px !important;
-        vertical-align: middle !important;
-        border-top: 1px solid #dee2e6;
-        text-align: center;
-    }
-    .active-document {
-        margin-top: 2px;
-        margin-bottom: 2px;
-        border: none !important;
-        display: table-row;
-        font-size: 0.8125rem;
-        width: 100%;
-    }
-    #documentTableOptions {
-        display: flex;
-        gap: 8px;
-        justify-content: center;
-    }
-    @media (min-width: 800px) {
-        #documentTableOption {
-            display: block;
-            gap: 0px;
+    <style>
+        {% comment %} documents table styling {% endcomment %}
+        .table td, .table th {
+            padding: 0px !important;
+            vertical-align: middle !important;
+            border-top: 1px solid #dee2e6;
+            text-align: center;
         }
-    }
-    .email-items, .phone-items {
-        font-size: 0.9125rem;
-    }
-    .user-info-row {
-        padding-top: 5px;
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-    .living-area {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-    .add-email {
-        padding-left: 0px;
-        padding-right: 0px;
-    }
-    .modify-phone-form, .modify-email-form {
-        gap: 10px;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-</style>
 
-        </head>
+        .active-document {
+            margin-top: 2px;
+            margin-bottom: 2px;
+            border: none !important;
+            display: table-row;
+            font-size: 0.8125rem;
+            width: 100%;
+        }
+
+        #documentTableOptions {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        @media (min-width: 800px) {
+            #documentTableOption {
+                display: block;
+                gap: 0px;
+            }
+        }
+
+        .email-items, .phone-items {
+            font-size: 0.9125rem;
+        }
+
+        .user-info-row {
+            padding-top: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .living-area {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .add-email {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        .modify-phone-form, .modify-email-form {
+            gap: 10px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+    </style>
+</head>
 <body class="gray-body">
 <!-- START: navigation bar -->
 <nav class="navbar navbar-expand-md">
     <!-- SyncMore clickable logo -->
-    <a class="navbar-brand" href="/"><img src="../../../static/Syncmore/SyncMore_Logo_Transparent_Cropped.png" id="navbar-logo" alt="SyncMore Logo"></a>
+    <a class="navbar-brand" href="/"><img src="../../../static/Syncmore/SyncMore_Logo_Transparent_Cropped.png"
+                                          id="navbar-logo" alt="SyncMore Logo"></a>
 
     <!-- START: toggle button for mobile navigation bar links -->
     <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-nav"
@@ -169,7 +158,7 @@
                     <form action="/user/add_user_info" id="add-user-info" class="form needs-validation" method="post"
                           enctype="multipart/form-data" novalidate>
                         <!-- BEGIN: Adding first name and last name -->
-                        <div class="user-info-row row justify-content-lg-center">
+                        <div class="row justify-content-lg-center">
                             {% csrf_token %}
                             <!-- First name -->
                             <div class="add_info col-lg-6">
@@ -192,7 +181,7 @@
                         </div>
                         <!-- END: Adding first name and last name row -->
                         <!-- BEGIN: Adding description of current living area row -->
-                        <div class="user-info-row row living-area">
+                        <div class="add_info row justify-content-lg-center">
                             <label for="new-living-area" class="form-label optional">Description of Current Living
                                 Area</label>
                             <textarea cols="10" rows="5" name="new_living_area" id="new-living-area"
@@ -207,7 +196,7 @@
                     <!-- END: Adding first name, last name, and description of current living area -->
 
                     <!-- BEGIN: Add Phone and Add Email row -->
-                    <div class="user-info-row row justify-content-lg-center">
+                    <div class="row justify-content-lg-center">
 
                         <!-- BEGIN: Add Phone column -->
                         <div class="add-phone col-lg-6">
@@ -238,8 +227,8 @@
                                 {% for phone in phones %}
                                     <div class="phone-items d-flex flex-wrap align-items-middle">
                                         <!-- Display phone number -->
-                                        <div class="mx-2 align-middle">
-                                            <span>{{ phone.phone }}</span>
+                                        <div class="mx-2">
+                                            <p>{{ phone.phone }}</p>
                                         </div>
                                         <!-- Modify phone number -->
                                         <div class="mx-2">
@@ -257,15 +246,15 @@
                                         </div>
                                         <!-- START: Form to modify phone number (display shown/hidden based on Modify phone button)-->
                                         <form action="/user/modify_phone/{{ phone.id }}" id="{{ phone.phone }}"
-                                                    class="modify-form needs-validation"
-                                                    method="post" enctype="multipart/form-data" style="display: none;"
-                                                    novalidate>
+                                              class="modify-form needs-validation"
+                                              method="post" enctype="multipart/form-data" style="display: none;"
+                                              novalidate>
                                             {% csrf_token %}
                                             <div class="my-2 d-flex align-items-middle modify-phone-form">
                                                 <input type="tel" value="{{ phone.phone }}" name="phone"
-                                                        class="form-control" autocomplete="tel"
-                                                        pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$"
-                                                        required>
+                                                       class="form-control" autocomplete="tel"
+                                                       pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$"
+                                                       required>
                                                 <div class="div invalid-feedback">Input cannot be blank.</div>
                                                 <input type="submit" class="btn edit-btn" value="Update">
                                             </div>
@@ -287,11 +276,11 @@
                                 <label for="add-email">Email</label>
                                 <div class="d-flex align-items-center mb-2">
                                     <div class="mx-2">
-                                            <input type="email" name="email" class="form-control" id="add-email"
-                                                   autocomplete="email" required>
-                                            <div class="div invalid-feedback">
-                                                Please enter a valid email address.
-                                            </div>
+                                        <input type="email" name="email" class="form-control" id="add-email"
+                                               autocomplete="email" required>
+                                        <div class="div invalid-feedback">
+                                            Please enter a valid email address.
+                                        </div>
                                     </div>
                                     <div class="mx-2">
                                         <input type="submit" class="btn add-btn" value="Add">
@@ -304,7 +293,7 @@
                                     <div class="email-items d-flex flex-wrap align-items-middle">
                                         <!-- Display email -->
                                         <div class="mx-2">
-                                            <span>{{ email.email }}</span>
+                                            <p>{{ email.email }}</p>
                                         </div>
                                         <!-- Modify email button -->
                                         <div class="mx-2">
@@ -323,16 +312,17 @@
                                     </div>
                                     <!-- START: Form to modify email (display shown/hidden based on Modify email button)-->
                                     <form action="/user/modify_email/{{ email.id }}" id="{{ email.email }}"
-                                        class="modify-form needs-validation" method="post" enctype="multipart/form-data" style="display: none;" novalidate>
+                                          class="modify-form needs-validation" method="post"
+                                          enctype="multipart/form-data" style="display: none;" novalidate>
                                         {% csrf_token %}
                                         <div class="my-2 d-flex align-items-middle modify-email-form">
                                             <input type="email" value="{{ email.email }}" name="email"
-                                                    class="form-control" autocomplete="email" required>
+                                                   class="form-control" autocomplete="email" required>
                                             <div class="div invalid-feedback">Please enter a valid email address.</div>
                                             <input type="submit" class="btn edit-btn" value="Update">
                                         </div>
                                     </form>
-                                        <!-- END: Form to modify email (display shown/hidden based on Modify email button)-->
+                                    <!-- END: Form to modify email (display shown/hidden based on Modify email button)-->
                                 {% endfor %}
                             </div>
                             <!-- END: Each email entry container-->
@@ -342,7 +332,7 @@
                     <!-- END: Add Phone and Add Email row -->
 
                     <!-- BEGIN: HomeMore Team Contact row -->
-                    <div class="homemore_contact user-info-row row justify-content-lg-center">
+                    <div class="homemore_contact row justify-content-lg-center">
                         <!-- BEGIN: HomeMore Team Contact container -->
                         <div class="container-fluid justify-content-lg-center">
                             <h3>HomeMore Team Contact</h3>
@@ -374,7 +364,7 @@
                         <!-- Note list container header -->
                         <div class="list-header">
                             <!-- Create a note -->
-                            <div class="list-header-option mb-2">
+                            <div class="list-header-option">
                                 <h6>Create a note:</h6>
                                 <a class="btn add-btn" id="add-note" href="/user/add_note">Create note</a>
                             </div>
@@ -395,11 +385,11 @@
                                         <div class="note-header-item">
                                             <div class="row row-cols-2">
                                                 <!-- Last updated -->
-                                                <div class="col my-auto">
+                                                <div class="col">
                                                     <span>Updated {{ note.updated_time|date:"M d, Y" }}</span>
                                                 </div>
                                                 <!-- Modify and Delete note -->
-                                                <div class="col d-flex justify-content-center">
+                                                <div class="d-flex align-items-center col">
                                                     <!-- Modify note -->
                                                     <a class="btn edit-btn mx-2" href="/user/modify_note/{{ note.id }}">Modify</a>
                                                     <!-- Delete note -->
@@ -437,7 +427,7 @@
                         <!-- BEGIN: Document list container header  -->
                         <div class="list-header">
                             <!-- Upload document -->
-                            <div class="list-header-option mb-2">
+                            <div class="list-header-option">
                                 <h6>Upload a document:</h6>
                                 <a class="btn add-btn" id="add-document" href="/user/add_document">Upload document</a>
                             </div>
@@ -461,28 +451,28 @@
                         </div>
 
                         <!-- BEGIN: Document list container -->
-                        <div id="documentList">
+                        <div class="container" id="documentList">
                             <!-- Document list header -->
                             <table id="documentTable" class="table table-hover">
                                 <thead>
-                                    <colgroup span="4"></colgroup>
-                                    <tr id="#documentTableHeader">
-                                        <th class="document-table-header-item" scope="col">Name</th>
-                                        <th class="document-table-header-item" scope="col">Expires</th>
-                                        <th class="document-table-header-item" scope="col">Last modified</th>
-                                        <th class="document-table-header-item text-center" scope="col">Options</th>
-                                    </tr>
+                                <colgroup span="4"></colgroup>
+                                <tr id="#documentTableHeader">
+                                    <th class="document-table-header-item" scope="col">Name</th>
+                                    <th class="document-table-header-item" scope="col">Expires</th>
+                                    <th class="document-table-header-item" scope="col">Last modified</th>
+                                    <th class="document-table-header-item text-center" scope="col">Options</th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    {% for document in documents %}
+                                {% for document in documents %}
                                     <tr class="document-item active-document" data-id="{{ document.type }}">
                                         <th scope="row">
                                             <a target="_blank" rel="noopener" href="{{ document.document.url }}"
-                                                class="document-detail document-url align-middle">{{ document.title }}</a>
+                                               class="document-detail document-url align-middle">{{ document.title }}</a>
                                         </th>
                                         <td>
                                             <span class="document-detail align-middle expiration-date"
-                                                data-id="{{ document.expired_time }}">{{ document.expired_time|date:"M d, Y" }}</span>
+                                                  data-id="{{ document.expired_time }}">{{ document.expired_time|date:"M d, Y" }}</span>
                                         </td>
                                         <td>
                                             <span class="document-detail align-middle">{{ document.updated_time|date:"M d, Y" }}</span>
@@ -490,13 +480,13 @@
                                         <td id="documentTableOptions">
                                             <!-- Modify document -->
                                             <a class="document-detail btn edit-btn my-1"
-                                                href="/user/modify_document/{{ document.id }}">Modify</a>
+                                               href="/user/modify_document/{{ document.id }}">Modify</a>
                                             <!-- Delete document -->
                                             <form action="/user/delete_document/{{ document.id }}" method="post">
                                                 {% csrf_token %}
                                                 <input type="hidden" name="operation" value="delete">
                                                 <input class="document-detail btn delete-btn my-1" type="submit"
-                                                    value="Delete">
+                                                       value="Delete">
                                             </form>
                                         </td>
                                     </tr>
@@ -556,9 +546,8 @@
 <!-- user_index javascript page -->
 <script src="../../../static/Syncmore/js/user_index.js"></script>
 
-<!-- Additional helper functions for PIN and updating user personal information -->
+<!-- Function to close the PIN modal when pressing enter key -->
 <script>
-    // function to close the PIN modal when pressing enter key
     function checkSubmit(e) {
         if (e && e.keyCode == 13) {
             pinModal.close(pinInput.value);
@@ -568,7 +557,6 @@
     $('#add-user-info input').on('change', function () {
         $(this).closest('form').submit();
     });
-    // function to automatically update the user Living Area Description upon any input change
     $('#add-user-info textarea').on('change', function () {
         $(this).closest('form').submit();
     });
