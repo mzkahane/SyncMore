@@ -1,6 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--
+        This HTML template displays the User Home Page and Personal Drive page.
+        User Home Page includes user add, edit, and delete personal information functionalities:
+            First Name
+            Last Name
+            Description of current living area
+            Phone number
+            Email
+        User Home page also shows the user's respective HomeMore Team Contact member.
+        User Personal Drive includes user file functionalities:
+            Add/edit/delete Notes
+            Add/edit/delete Documents
+            View note expiration expiration dates
+            Filter files by file type
+        The User Personal Drive is not viewable without entering the correct 4-digit PIN.
+        After the 4-digit PIN has been entered, the user can freely switch back and forth between Home Page
+        and Personal Drive page without having to reenter the 4-digit PIN for a certain time frame.
+        This HTML template also links to the Account Settings page and Logout function in the navigation bar.
+    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>User Home Page</title>
@@ -73,12 +92,6 @@
             display: flex;
             gap: 8px;
             justify-content: center;
-        }
-        @media (min-width: 800px) {
-            #documentTableOption {
-                display: block;
-                gap: 0px;
-            }
         }
 
         .active-document {
@@ -507,7 +520,7 @@
                         </div>
 
                         <!-- BEGIN: Document list container -->
-                        <div class="container" id="documentList">
+                        <div id="documentList">
                             <!-- Document list header -->
                             <table id="documentTable" class="table table-hover">
                                 <thead>

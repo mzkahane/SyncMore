@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!--
+    This HTML template displays the User Modify Note page.
+    This page allows the user to edit an existing note and add information to it.
+    Note information consists of the note title and note content.
+    The <textarea> element which houses the note content changes as the user types.
+-->
     <meta charset="UTF-8">
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Modify Note</title>
@@ -96,10 +102,12 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<!-- JS for updating the <textarea> element size as note content changes -->
 <script>
+    // start the <textarea> element size based on the initial content size
     const content = document.getElementById("new-note-content");
     content.style.height = (25 + content.scrollHeight) + "px";
-
+    // update the <textarea> element size as content size changes
     function textAreaAdjust(element) {
         element.style.height = "1px";
         element.style.height = (25 + element.scrollHeight) + "px";

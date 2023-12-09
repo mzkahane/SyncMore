@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--
+        This HTML template displays the User Sign Up page
+        This page allows the user to create an account by entering:
+        username, password, retyped password, and 4-digit PIN
+        Error messages are displayed from the backend views upon form submission
+    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Create User Account Page</title>
@@ -178,7 +184,7 @@
         })
     })()
 </script>
-
+<!-- JS for displaying error messages from the backend views -->
 <script>
     $(document).ready(function () {
         const errorMessage = document.querySelector(".form-submission-error")
