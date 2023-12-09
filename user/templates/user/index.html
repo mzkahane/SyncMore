@@ -1,25 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!--
-        This HTML template displays the User Home Page and Personal Drive page.
-        User Home Page includes user add, edit, and delete personal information functionalities:
-            First Name
-            Last Name
-            Description of current living area
-            Phone number
-            Email
-        User Home page also shows the user's respective HomeMore Team Contact member.
-        User Personal Drive includes user file functionalities:
-            Add/edit/delete Notes
-            Add/edit/delete Documents
-            View note expiration expiration dates
-            Filter files by file type
-        The User Personal Drive is not viewable without entering the correct 4-digit PIN.
-        After the 4-digit PIN has been entered, the user can freely switch back and forth between Home Page
-        and Personal Drive page without having to reenter the 4-digit PIN for a certain time frame.
-        This HTML template also links to the Account Settings page and Logout function in the navigation bar.
-    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>User Home Page</title>
@@ -92,7 +73,6 @@
             padding-right: 20px;
         }
     </style>
-
 </head>
 <body class="gray-body">
 <!-- START: navigation bar -->
@@ -178,7 +158,7 @@
                     <form action="/user/add_user_info" id="add-user-info" class="form needs-validation" method="post"
                           enctype="multipart/form-data" novalidate>
                         <!-- BEGIN: Adding first name and last name -->
-                        <div class="user-info-row row justify-content-lg-center">
+                        <div class="row justify-content-lg-center">
                             {% csrf_token %}
                             <!-- First name -->
                             <div class="add_info col-lg-6">
@@ -201,7 +181,7 @@
                         </div>
                         <!-- END: Adding first name and last name row -->
                         <!-- BEGIN: Adding description of current living area row -->
-                        <div class="user-info-row row living-area">
+                        <div class="add_info row justify-content-lg-center">
                             <label for="new-living-area" class="form-label optional">Description of Current Living
                                 Area</label>
                             <textarea cols="10" rows="5" name="new_living_area" id="new-living-area"
@@ -216,7 +196,7 @@
                     <!-- END: Adding first name, last name, and description of current living area -->
 
                     <!-- BEGIN: Add Phone and Add Email row -->
-                    <div class="user-info-row row justify-content-lg-center">
+                    <div class="row justify-content-lg-center">
 
                         <!-- BEGIN: Add Phone column -->
                         <div class="add-phone col-lg-6">
@@ -247,8 +227,8 @@
                                 {% for phone in phones %}
                                     <div class="phone-items d-flex flex-wrap align-items-middle">
                                         <!-- Display phone number -->
-                                        <div class="mx-2 align-middle">
-                                            <span>{{ phone.phone }}</span>
+                                        <div class="mx-2">
+                                            <p>{{ phone.phone }}</p>
                                         </div>
                                         <!-- Modify phone number -->
                                         <div class="mx-2">
@@ -313,7 +293,7 @@
                                     <div class="email-items d-flex flex-wrap align-items-middle">
                                         <!-- Display email -->
                                         <div class="mx-2">
-                                            <span>{{ email.email }}</span>
+                                            <p>{{ email.email }}</p>
                                         </div>
                                         <!-- Modify email button -->
                                         <div class="mx-2">
@@ -352,7 +332,7 @@
                     <!-- END: Add Phone and Add Email row -->
 
                     <!-- BEGIN: HomeMore Team Contact row -->
-                    <div class="homemore_contact user-info-row row justify-content-lg-center">
+                    <div class="homemore_contact row justify-content-lg-center">
                         <!-- BEGIN: HomeMore Team Contact container -->
                         <div class="container-fluid justify-content-lg-center">
                             <h3>HomeMore Team Contact</h3>
@@ -384,7 +364,7 @@
                         <!-- Note list container header -->
                         <div class="list-header">
                             <!-- Create a note -->
-                            <div class="list-header-option mb-2">
+                            <div class="list-header-option">
                                 <h6>Create a note:</h6>
                                 <a class="btn add-btn" id="add-note" href="/user/add_note">Create note</a>
                             </div>
@@ -405,11 +385,11 @@
                                         <div class="note-header-item">
                                             <div class="row row-cols-2">
                                                 <!-- Last updated -->
-                                                <div class="col my-auto">
+                                                <div class="col">
                                                     <span>Updated {{ note.updated_time|date:"M d, Y" }}</span>
                                                 </div>
                                                 <!-- Modify and Delete note -->
-                                                <div class="col d-flex justify-content-center">
+                                                <div class="d-flex align-items-center col">
                                                     <!-- Modify note -->
                                                     <a class="btn edit-btn mx-2" href="/user/modify_note/{{ note.id }}">Modify</a>
                                                     <!-- Delete note -->
@@ -447,7 +427,7 @@
                         <!-- BEGIN: Document list container header  -->
                         <div class="list-header">
                             <!-- Upload document -->
-                            <div class="list-header-option mb-2">
+                            <div class="list-header-option">
                                 <h6>Upload a document:</h6>
                                 <a class="btn add-btn" id="add-document" href="/user/add_document">Upload document</a>
                             </div>
@@ -471,7 +451,7 @@
                         </div>
 
                         <!-- BEGIN: Document list container -->
-                        <div id="documentList">
+                        <div class="container" id="documentList">
                             <!-- Document list header -->
                             <table id="documentTable" class="table table-hover">
                                 <thead>
@@ -566,20 +546,17 @@
 <!-- user_index javascript page -->
 <script src="../../../static/Syncmore/js/user_index.js"></script>
 
-<!-- Additional helper functions for PIN and updating user personal information -->
+<!-- Function to close the PIN modal when pressing enter key -->
 <script>
-    // function to close the PIN modal when pressing enter key
     function checkSubmit(e) {
         if (e && e.keyCode == 13) {
             pinModal.close(pinInput.value);
         }
     }
-
     // function to automatically update the user First and Last Name upon any input change
     $('#add-user-info input').on('change', function () {
         $(this).closest('form').submit();
     });
-    // function to automatically update the user Living Area Description upon any input change
     $('#add-user-info textarea').on('change', function () {
         $(this).closest('form').submit();
     });
