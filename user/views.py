@@ -448,7 +448,7 @@ def modify_document(request, document_id):
         else:
             # Add error message for invalid file type
             messages.error(request, 'Invalid file type. Allowed types are: PNG, JPG, JPEG, PDF.')
-            return HttpResponseRedirect('user/modify_document/' + document)
+            return HttpResponseRedirect('user/modify_document/' + document_id)
 
         document.title = title
         document.updated_time = datetime.now()
